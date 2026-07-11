@@ -1,0 +1,97 @@
+'use client'
+
+import * as React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
+import { SectionContainer } from '@/components/layout/section-container'
+import { SectionHeading } from '@/components/typography/heading'
+import { FadeIn } from '@/components/motion/reveal'
+import { expandCollapse } from '@/lib/animations'
+import { cn } from '@/lib/utils'
+
+const faqs = [
+  {
+    question: 'What is the minimum investment to work with Al Quba?',
+    answer:
+      'Minimum commitments vary by pool, typically starting at $50,000. Institutional and family office mandates are structured individually based on objectives and timeline.',
+  },
+  {
+    question: 'How is my capital protected within a pool?',
+    answer:
+      'Every pool is collateralized against a physical trade cycle — a purchase order, an offtake contract, or confirmed booking revenue — rather than a general business thesis. Details are outlined on each pool\'s dedicated page.',
+  },
+  {
+    question: 'How often will I receive reporting?',
+    answer:
+      'Pool participants receive quarterly capital statements, plus a report at the close of each trade cycle. Institutional mandates can request a custom reporting cadence.',
+  },
+  {
+    question: 'Are you regulated?',
+    answer:
+      'Al Quba Investment LLC is registered in the Dubai International Financial Centre (DIFC), with governance aligned to DFSA standards. Full regulatory disclosures are available to qualified investors on request.',
+  },
+  {
+    question: 'How long does onboarding take?',
+    answer:
+      'Standard AML/KYC onboarding typically completes within 3–5 business days once documentation is received, ahead of your first capital commitment.',
+  },
+]
+
+/**
+ * Contact / FAQ.
+ * A single-open accordion — the one accordion interaction on the entire
+ * site, using the expandCollapse variant already defined in
+ * lib/animations.ts rather than a new easing curve.
+ */
+export function ContactFAQ() {
+  const [openIndex, setOpenIndex] = React.useState<number | null>(0)
+
+  return (
+    <SectionContainer surface="muted" spacing="lg">
+      <SectionHeading eyebrow="Frequently Asked" title="Before you reach out" />
+
+      <FadeIn delay={0.05} className="mt-16">
+        <ul className="flex flex-col">
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i
+            return (
+              <li key={faq.question} className="border-t border-border-strong last:border-b">
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${i}`}
+                  className="flex w-full items-center justify-between gap-6 py-6 text-left focus-visible:outline-none focus-visible:shadow-focus"
+                >
+                  <span className="text-heading-sm font-semibold text-text-primary">{faq.question}</span>
+                  <ChevronDown
+                    className={cn(
+                      'size-5 shrink-0 text-text-tertiary transition-transform duration-200 ease-institutional',
+                      isOpen && 'rotate-180'
+                    )}
+                    aria-hidden
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`faq-panel-${i}`}
+                      role="region"
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                      variants={expandCollapse}
+                      className="overflow-hidden"
+                    >
+                      <p className="max-w-measure pb-6 text-body-md text-text-secondary">{faq.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
+            )
+          })}
+        </ul>
+      </FadeIn>
+    </SectionContainer>
+  )
+}

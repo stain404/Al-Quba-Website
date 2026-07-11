@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npx tsc --noEmit; try { \\(Invoke-WebRequest -Uri \"http://localhost:3000/insights\" -UseBasicParsing -TimeoutSec 15\\).StatusCode } catch { \"error: $_\" })"
+    ]
+  }
+}
