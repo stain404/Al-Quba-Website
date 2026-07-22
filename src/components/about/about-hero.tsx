@@ -65,7 +65,7 @@ export function AboutHero() {
           <Heading as="h1" size="display-lg" inverse>
             Built quietly, deployed deliberately.
           </Heading>
-          <p className="max-w-measure text-body-lg text-text-inverse-muted">
+          <p className="max-w-measure text-body-lg text-text-inverse">
             Al Quba Investment was founded in Dubai on a simple premise:
             capital compounds best when it is managed by people who answer
             for it personally. Fourteen years later, that premise still

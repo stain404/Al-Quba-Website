@@ -45,7 +45,7 @@ export function InsightsHero() {
           <Heading as="h1" size="display-lg" inverse>
             How we think, in writing.
           </Heading>
-          <p className="max-w-measure text-body-lg text-text-inverse-muted">
+          <p className="max-w-measure text-body-lg text-text-inverse">
             Commentary on trade finance, structured investing, and the
             markets we operate in — written by the people making the
             allocation decisions, not a content team.

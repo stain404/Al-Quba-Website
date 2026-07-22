@@ -35,11 +35,13 @@ function CountryList({
   items,
   activeIndex,
   align,
+  isDesktop,
   registerRef,
 }: {
   items: Office[]
   activeIndex: number
   align: 'left' | 'right'
+  isDesktop: boolean
   registerRef: (country: string, el: HTMLLIElement | null) => void
 }) {
   return (
@@ -50,7 +52,10 @@ function CountryList({
       )}
     >
       {items.map((office) => {
-        const isActive = offices[activeIndex]?.country === office.country
+        // The active/muted cycling is tied to the desktop scroll-jacked
+        // pin — without it (mobile), every office just reads as a plain,
+        // fully legible list rather than flashing through one at a time.
+        const isActive = isDesktop && offices[activeIndex]?.country === office.country
         return (
           <li
             key={office.country}
@@ -150,8 +155,14 @@ export function GlobalPresence() {
   }, [active, isDesktop])
 
   return (
-    <div ref={wrapperRef} className="relative h-[420vh]">
-      <section className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden bg-ink py-20 text-text-inverse md:py-28">
+    <div ref={wrapperRef} className="relative lg:h-[420vh]">
+      {/* The scroll-jacked sticky pin + single-dot cycling only makes
+          sense at the lg 3-column layout (list / map / list side by
+          side, compact enough to fit one screen). Below that, the grid
+          stacks to one column and a fixed h-screen + overflow-hidden
+          would clip the stacked content (including the map itself) —
+          so height/overflow/sticky are all lg-only. */}
+      <section className="flex flex-col justify-center overflow-visible bg-ink py-16 text-text-inverse md:py-20 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:py-28">
       <div className="container mx-auto max-w-container">
 
         {/* Header */}
@@ -176,6 +187,7 @@ export function GlobalPresence() {
             items={leftOffices}
             activeIndex={activeIndex}
             align="left"
+            isDesktop={isDesktop}
             registerRef={registerRef}
           />
 
@@ -196,25 +208,43 @@ export function GlobalPresence() {
                 priority={false}
               />
 
-              {/* Only the currently active country's dot is shown. */}
-              <AnimatePresence mode="wait">
-                {active && (
-                  <motion.span
-                    key={active.country}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25, ease: 'easeOut' }}
+              {isDesktop ? (
+                /* Desktop: only the currently active (scroll-cycled) dot is shown. */
+                <AnimatePresence mode="wait">
+                  {active && (
+                    <motion.span
+                      key={active.country}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                      className="absolute -translate-x-1/2 -translate-y-1/2"
+                      style={{ left: `${active.x}%`, top: `${active.y}%` }}
+                    >
+                      <span className="relative flex items-center justify-center">
+                        <span className="absolute size-5 animate-ping rounded-full bg-[#7A5C31] opacity-40" />
+                        <span className="relative size-3 rounded-full bg-[#7A5C31]" />
+                      </span>
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              ) : (
+                /* Mobile: no scroll-jacked pin to cycle through one dot at
+                   a time, so all eight offices are marked at once — a
+                   clearer, fully "visible" map instead of one flickering
+                   marker as the page scrolls past. */
+                offices.map((office) => (
+                  <span
+                    key={office.country}
                     className="absolute -translate-x-1/2 -translate-y-1/2"
-                    style={{ left: `${active.x}%`, top: `${active.y}%` }}
+                    style={{ left: `${office.x}%`, top: `${office.y}%` }}
                   >
                     <span className="relative flex items-center justify-center">
-                      <span className="absolute size-5 animate-ping rounded-full bg-[#7A5C31] opacity-40" />
-                      <span className="relative size-3 rounded-full bg-[#7A5C31]" />
+                      <span className="size-2.5 rounded-full bg-[#C9A96E] ring-2 ring-ink" />
                     </span>
-                  </motion.span>
-                )}
-              </AnimatePresence>
+                  </span>
+                ))
+              )}
             </div>
           </div>
 
@@ -222,6 +252,7 @@ export function GlobalPresence() {
             items={rightOffices}
             activeIndex={activeIndex}
             align="right"
+            isDesktop={isDesktop}
             registerRef={registerRef}
           />
 
