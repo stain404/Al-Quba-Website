@@ -40,27 +40,36 @@ export function AboutHero() {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative flex min-h-screen items-center overflow-hidden"
+      className="relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center"
     >
-      <video
-        ref={videoRef}
-        className="absolute inset-0 size-full object-cover"
-        src="/abstract.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
-      <VideoPauseToggle videoRef={videoRef} className="absolute bottom-6 right-6 z-20" />
-      {/* Warm near-black instead of the brand `ink` navy — ink stacked
-          on a photo/video reads as a flat blue block (see CTASection /
-          SectorHero / PoolHero / ContactHero, which all use this same
-          fix); a neutral dark tone blends into the footage instead and
-          still keeps the left-side text legible. */}
-      <div
-        className="absolute inset-0 bg-gradient-to-r from-[#1A140F]/80 via-[#1A140F]/50 to-[#1A140F]/15"
-        aria-hidden
-      />
+      {/* Below `sm`, a full-height (very tall/narrow) mobile viewport
+          forced this landscape video to cover it at ~4x zoom, leaving
+          only a sliver of width visible. Instead, the video now sits in
+          its own horizontal band (aspect-[3/2] — close to the footage's
+          own ratio, so only mild cropping) stacked above the text on
+          mobile, and switches back to the full-bleed absolute cover
+          from `sm` up, matching the desktop look exactly as before. */}
+      <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden bg-[#1A140F] sm:absolute sm:inset-0 sm:aspect-auto">
+        <video
+          ref={videoRef}
+          className="absolute inset-0 size-full object-cover"
+          src="/abstract.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <VideoPauseToggle videoRef={videoRef} className="absolute bottom-4 right-4 z-20 sm:bottom-6 sm:right-6" />
+        {/* Warm near-black instead of the brand `ink` navy — ink stacked
+            on a photo/video reads as a flat blue block (see CTASection /
+            SectorHero / PoolHero / ContactHero, which all use this same
+            fix); a neutral dark tone blends into the footage instead and
+            still keeps the left-side text legible. */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#1A140F]/80 via-[#1A140F]/50 to-[#1A140F]/15"
+          aria-hidden
+        />
+      </div>
 
       <div className="container relative z-10 mx-auto max-w-container">
         <motion.div

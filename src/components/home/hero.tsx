@@ -85,10 +85,19 @@ export function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-screen w-full items-end overflow-hidden bg-ink text-text-inverse"
+      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-ink text-text-inverse sm:items-end"
     >
-      {/* Animated background: full-bleed video with a gold aurora glow and a light scrim on top for legibility */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      {/* Below `sm`, a full-height (very tall/narrow) mobile viewport
+          forced this landscape video to cover it at ~4x zoom, leaving
+          only a sliver of width visible. Instead, the video now sits in
+          its own horizontal band (aspect-[3/2] — close to the footage's
+          own ratio, so only mild cropping) stacked above the text on
+          mobile, and switches back to the full-bleed absolute cover
+          from `sm` up, matching the desktop look exactly as before. */}
+      <div
+        className="pointer-events-none relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto"
+        aria-hidden="true"
+      >
         {/* Scaled up in both dimensions (preserving aspect ratio, so
             object-cover's own crop behavior is unchanged) and anchored to
             the top — the extra height spills off the bottom edge (clipped
@@ -119,11 +128,11 @@ export function Hero() {
             deep enough behind the text block (bottom-anchored content)
             to keep the headline and copy legible over bright footage */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 via-45% to-transparent" />
+
+        <VideoPauseToggle videoRef={videoRef} className="pointer-events-auto absolute bottom-4 right-4 z-20 sm:bottom-6 sm:right-6" />
       </div>
 
-      <VideoPauseToggle videoRef={videoRef} className="absolute bottom-6 right-6 z-20" />
-
-      <div className="container relative z-10 mx-auto max-w-container pb-20 pt-40 md:pb-28">
+      <div className="container relative z-10 mx-auto max-w-container pb-20 pt-8 sm:pt-40 md:pb-28">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

@@ -29,25 +29,26 @@ export function SectorHero({ sector }: { sector: Sector }) {
       as="header"
       contained={!hasImage}
       className={cn(
-        'relative flex min-h-screen w-full items-center overflow-hidden',
+        'relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center',
         hasImage && 'bg-[#1A140F]'
       )}
     >
       {sector.heroImage && (
-        <>
-          {/* Below `sm`, a landscape photo forced to cover a full-height
-              (very tall/narrow) mobile viewport has to zoom in so far
-              that only a sliver of its width stays visible — no
-              object-position can fix that, it's the aspect-ratio math.
-              Showing the whole photo (contain) on narrow screens and
-              only cropping to fill (cover) once the viewport is wide
-              enough keeps the image's actual content visible. */}
+        /* Below `sm`, a full-height (very tall/narrow) mobile viewport
+           forced a landscape photo to cover it at ~4x zoom, leaving only
+           a sliver of width visible. Instead, the photo now sits in its
+           own horizontal band (aspect-[3/2] — close to the source
+           photos' own ratio, so only mild cropping) stacked above the
+           text on mobile, and switches back to the full-bleed absolute
+           cover from `sm` up, matching the desktop look exactly as
+           before. */
+        <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto">
           <Image
             src={sector.heroImage}
             alt=""
             fill
             sizes="100vw"
-            className="object-contain sm:object-cover"
+            className="object-cover"
             style={{ objectPosition: sector.heroImagePosition ?? 'center' }}
             priority
           />
@@ -60,7 +61,7 @@ export function SectorHero({ sector }: { sector: Sector }) {
             className="absolute inset-0 bg-gradient-to-r from-[#1A140F]/70 via-[#1A140F]/40 to-[#1A140F]/10"
             aria-hidden
           />
-        </>
+        </div>
       )}
 
       <div className={cn(hasImage && 'container relative z-10 mx-auto max-w-container')}>
