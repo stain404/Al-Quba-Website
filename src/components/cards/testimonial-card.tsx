@@ -6,13 +6,13 @@ import { Card } from '@/components/cards/card'
 import type { TestimonialItem } from '@/types'
 
 /**
- * Individual investor testimonial — a left-accent pull-quote rather than
- * the old icon-top card, since it's now presented standalone (paired
- * with InstitutionalTestimonial) rather than in a uniform grid.
+ * Individual investor testimonial — a left-accent pull-quote, used in a
+ * grid alongside other individual testimonials beneath the institutional
+ * spotlight.
  */
 export function TestimonialCard({ quote, name, role, company, avatarSrc }: TestimonialItem) {
   return (
-    <Card surface="canvas" padding="lg" className="mx-auto flex w-full max-w-2xl flex-col gap-6 border-l-4 border-accent">
+    <Card surface="canvas" padding="lg" className="flex h-full flex-col gap-6 border-l-4 border-accent">
       <Quote className="size-7 text-accent" strokeWidth={1.5} aria-hidden />
       <p className="font-display text-display-sm leading-snug text-text-primary">
         &ldquo;{quote}&rdquo;
