@@ -1,14 +1,34 @@
-import { Mail, Phone, MapPin, Clock } from 'lucide-react'
+import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { ContactForm } from '@/components/forms/contact-form'
 import { FadeIn } from '@/components/motion/reveal'
 
 const details = [
-  { icon: MapPin, label: 'Headquarters', value: 'Level 14, Gate Building, DIFC, Dubai, UAE' },
-  { icon: Mail, label: 'Email', value: 'investors@alquba.com' },
-  { icon: Phone, label: 'Phone', value: '+971 4 000 0000' },
-  { icon: Clock, label: 'Response Time', value: 'Within one business day' },
+  {
+    icon: MapPin,
+    label: 'Address',
+    value: 'Office 306, Al Mezan Tower, Dubai, UAE',
+    href: 'https://www.google.com/maps/search/?api=1&query=Office+306,+Al+Mezan+Tower,+Dubai,+UAE',
+  },
+  {
+    icon: Mail,
+    label: 'E-Mail',
+    value: 'inbox@alqubainvestment.com',
+    href: 'mailto:inbox@alqubainvestment.com',
+  },
+  {
+    icon: Phone,
+    label: 'Enquiry',
+    value: '+971 52 669 7092',
+    href: 'tel:+971526697092',
+  },
+  {
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    value: '+971 52 669 7092',
+    href: 'https://wa.me/971526697092',
+  },
 ]
 
 /**
@@ -39,7 +59,16 @@ export function ContactFormSection() {
                 </span>
                 <div className="flex flex-col gap-0.5">
                   <dt className="text-caption uppercase tracking-wide text-text-tertiary">{detail.label}</dt>
-                  <dd className="text-body-md text-text-primary">{detail.value}</dd>
+                  <dd className="text-body-md text-text-primary">
+                    <a
+                      href={detail.href}
+                      target={detail.href.startsWith('http') ? '_blank' : undefined}
+                      rel={detail.href.startsWith('http') ? 'noreferrer' : undefined}
+                      className="transition-colors duration-150 hover:text-navy"
+                    >
+                      {detail.value}
+                    </a>
+                  </dd>
                 </div>
               </div>
             ))}

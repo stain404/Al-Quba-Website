@@ -1,6 +1,10 @@
+'use client'
+
+import * as React from 'react'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
 import { FadeIn } from '@/components/motion/reveal'
+import { VideoPauseToggle } from '@/components/motion/video-pause-toggle'
 
 /**
  * Insights / Hero.
@@ -10,6 +14,8 @@ import { FadeIn } from '@/components/motion/reveal'
  * video, same technique as About's.
  */
 export function InsightsHero() {
+  const videoRef = React.useRef<HTMLVideoElement>(null)
+
   return (
     <SectionContainer
       surface="ink"
@@ -19,6 +25,7 @@ export function InsightsHero() {
       className="relative flex min-h-screen w-full items-center overflow-hidden"
     >
       <video
+        ref={videoRef}
         className="absolute inset-0 size-full object-cover"
         src="/insights.mp4"
         autoPlay
@@ -26,6 +33,7 @@ export function InsightsHero() {
         loop
         playsInline
       />
+      <VideoPauseToggle videoRef={videoRef} className="absolute bottom-6 right-6 z-20" />
       {/* Left-to-right gradient (opaque on the left) keeps the
           left-aligned text legible against the photo while leaving the
           right side of the image visible */}

@@ -7,8 +7,8 @@ const offices = [
   {
     city: 'Dubai',
     label: 'Headquarters',
-    address: 'Al Mezan Tower, Office 306, Al Qusais, Dubai, UAE',
-    phone: '+971 4 000 0000',
+    address: 'Office 306, Al Mezan Tower, Dubai, UAE',
+    phone: '+971 52 669 7092',
   },
 ]
 
@@ -21,7 +21,7 @@ const offices = [
  */
 export function GlobalOffices() {
   return (
-    <SectionContainer surface="canvas" spacing="lg">
+    <SectionContainer id="offices" surface="canvas" spacing="lg">
       <SectionHeading eyebrow="Our Office" title="Where to find us" />
 
       <Stagger className="mt-16">

@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -69,12 +70,20 @@ export function Navbar({ logo, sections }: NavbarProps) {
         <Link
           href="/"
           className={cn(
-            'text-heading-md font-display transition-colors duration-300',
+            'flex items-center gap-2.5 text-[1.75rem] font-nav leading-none transition-colors duration-300',
             scrolled ? 'text-accent' : 'text-accent-ink'
           )}
           aria-label="Al Quba Investment home"
         >
-          {logo ?? 'Al Quba'}
+          <Image
+            src="/AQ logo.png"
+            alt="Al Quba logo"
+            width={52}
+            height={52}
+            className="shrink-0 object-contain"
+            priority
+          />
+          {logo ?? 'AL QUBA'}
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
@@ -113,7 +122,7 @@ export function Navbar({ logo, sections }: NavbarProps) {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Button variant="primary" size="sm" withArrow asChild className="group">
+          <Button variant="gold" size="sm" withArrow asChild className="group">
             <Link href="/contact">Speak with Us</Link>
           </Button>
         </div>
@@ -188,7 +197,7 @@ export function Navbar({ logo, sections }: NavbarProps) {
                 )
               })}
               <li className="flex flex-col gap-3 pt-4">
-                <Button variant="primary" withArrow asChild>
+                <Button variant="gold" withArrow asChild>
                   <Link href="/contact">Speak with Us</Link>
                 </Button>
               </li>

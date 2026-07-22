@@ -30,6 +30,7 @@ export function RelatedSectors({
       description: sector.description,
       metricLabel: sector.heroMetrics[0]?.label ?? '',
       metricValue: sector.heroMetrics[0]?.value ?? '',
+      imageSrc: sector.heroImage,
       href: `/sectors/${sector.slug}`,
     }))
 

@@ -14,7 +14,7 @@ interface Partner {
 const partners: Partner[] = [
   { name: 'Phew', logoSrc: '/phew.jpeg' },
   { name: 'Container Kart', logoSrc: '/containerkart.jpeg' },
-  { name: 'Noble Star', logoSrc: '/noblestar.jpeg' },
+  { name: 'Noble Star', logoSrc: '/noblestargrey.jpeg' },
   { name: 'Hebron', logoSrc: '/hebron.jpeg' },
   { name: 'Al Wahda', logoSrc: '/alwahda.jpeg' },
 ]

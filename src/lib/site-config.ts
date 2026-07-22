@@ -1,5 +1,4 @@
 import type { MegaMenuSection } from '@/types'
-import type { FooterColumn } from '@/components/layout/footer'
 
 export const siteConfig = {
   name: 'Al Quba Investment',
@@ -36,9 +35,9 @@ export const navSections: MegaMenuSection[] = [
       {
         heading: 'Investment Pools',
         links: [
-          { label: 'Frozen Pool', href: '/pools/frozen', description: 'Cold-chain commodity trade' },
-          { label: 'Cocoa Pool', href: '/pools/cocoa', description: 'Soft commodity structured returns' },
-          { label: 'Travel Pool', href: '/pools/travel', description: 'Hospitality and aviation capital' },
+          { label: 'Frost Capital Fund I', href: '/pools/frozen', description: 'Frozen meat trading fund' },
+          { label: 'Premium Cocoa Fund I', href: '/pools/cocoa', description: 'Branded chocolate trading fund' },
+          { label: 'Global Travel Fund I', href: '/pools/travel', description: 'Global travel investment fund' },
         ],
       },
     ],
@@ -49,38 +48,3 @@ export const navSections: MegaMenuSection[] = [
   },
 ]
 
-export const footerColumns: FooterColumn[] = [
-  {
-    heading: 'Sectors',
-    links: [
-      { label: 'Trading', href: '/sectors/trading' },
-      { label: 'Real Estate', href: '/sectors/real-estate' },
-      { label: 'Shipping', href: '/sectors/shipping' },
-      { label: 'Import & Export', href: '/sectors/import-export' },
-      { label: 'Technology', href: '/sectors/technology' },
-    ],
-  },
-  {
-    heading: 'Firm',
-    links: [
-      { label: 'About', href: '/about' },
-      { label: 'Leadership', href: '/about/leadership' },
-      { label: 'Careers', href: '/careers' },
-    ],
-  },
-  {
-    heading: 'Insights',
-    links: [
-      { label: 'Investor Education', href: '/insights/education' },
-      { label: 'Market Commentary', href: '/insights/commentary' },
-    ],
-  },
-  {
-    heading: 'Contact',
-    links: [
-      { label: 'Speak with Us', href: '/contact' },
-      { label: 'Client Login', href: '/login' },
-      { label: 'Dubai, DIFC', href: '/about/offices' },
-    ],
-  },
-]

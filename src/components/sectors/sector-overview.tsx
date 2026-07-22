@@ -32,12 +32,14 @@ export function SectorOverview({
             <p className="max-w-measure text-body-lg text-text-secondary">{overview.body}</p>
           </FadeIn>
 
-          <FadeIn delay={0.1}>
-            <div className="flex flex-col gap-1 border-t border-border-strong pt-6">
-              <span className="font-mono text-data-lg text-accent-ink">{overview.stat.value}</span>
-              <span className="text-body-sm text-text-secondary">{overview.stat.label}</span>
-            </div>
-          </FadeIn>
+          {overview.stat && (
+            <FadeIn delay={0.1}>
+              <div className="flex flex-col gap-1 border-t border-border-strong pt-6">
+                <span className="font-mono text-data-lg text-accent-ink">{overview.stat.value}</span>
+                <span className="text-body-sm text-text-secondary">{overview.stat.label}</span>
+              </div>
+            </FadeIn>
+          )}
         </div>
       </SplitContainer>
     </SectionContainer>

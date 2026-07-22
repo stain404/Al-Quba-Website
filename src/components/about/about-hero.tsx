@@ -1,8 +1,10 @@
 'use client'
 
+import * as React from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
+import { VideoPauseToggle } from '@/components/motion/video-pause-toggle'
 
 const OFFSET = 60
 /** Raw page-scroll distance (px) over which the hero fades/slides out —
@@ -27,6 +29,7 @@ const EXIT_DISTANCE = 420
 export function AboutHero() {
   const prefersReduced = useReducedMotion()
   const { scrollY } = useScroll()
+  const videoRef = React.useRef<HTMLVideoElement>(null)
 
   const y = useTransform(scrollY, [0, EXIT_DISTANCE], [0, -OFFSET])
   const opacity = useTransform(scrollY, [0, EXIT_DISTANCE], [1, 0])
@@ -37,9 +40,10 @@ export function AboutHero() {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative overflow-hidden"
+      className="relative flex min-h-screen items-center overflow-hidden"
     >
       <video
+        ref={videoRef}
         className="absolute inset-0 size-full object-cover"
         src="/abstract.mp4"
         autoPlay
@@ -47,6 +51,7 @@ export function AboutHero() {
         loop
         playsInline
       />
+      <VideoPauseToggle videoRef={videoRef} className="absolute bottom-6 right-6 z-20" />
       {/* Very light dark-blue scrim — just enough to keep text legible
           without flattening the video underneath */}
       <div className="absolute inset-0 bg-ink/35" aria-hidden />

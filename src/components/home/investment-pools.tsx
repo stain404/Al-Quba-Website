@@ -5,40 +5,24 @@ import { motion, useReducedMotion, useScroll, useTransform, useMotionTemplate } 
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { InvestmentCard, InvestmentGrid } from '@/components/cards/investment-card'
+import { pools as poolsData } from '@/lib/pools-data'
 import type { InvestmentItem } from '@/types'
 
-const pools: InvestmentItem[] = [
-  {
-    name: 'Frozen Pool',
-    category: 'Cold-Chain Commodities',
-    description:
-      'Structured trade financing for frozen protein and cold-chain logistics across Gulf import corridors.',
-    metricLabel: 'Target Return',
-    metricValue: '12–15% p.a.',
-    imageSrc: '/frozen.jpeg',
-    href: '/pools/frozen',
-  },
-  {
-    name: 'Cocoa Pool',
-    category: 'Soft Commodities',
-    description:
-      'Seasonal cocoa trade cycles from origin markets in West Africa to processors across Asia and Europe.',
-    metricLabel: 'Target Return',
-    metricValue: '14–18% p.a.',
-    imageSrc: '/cocoa.jpeg',
-    href: '/pools/cocoa',
-  },
-  {
-    name: 'Travel Pool',
-    category: 'Hospitality & Aviation',
-    description:
-      'Working-capital facilities for regional tour operators and charter aviation providers tied to Gulf tourism demand.',
-    metricLabel: 'Target Return',
-    metricValue: '10–13% p.a.',
-    imageSrc: '/travel.jpeg',
-    href: '/pools/travel',
-  },
-]
+/**
+ * Derived directly from src/lib/pools-data.ts (the same source the pool
+ * detail pages read from) rather than a second hardcoded copy — keeps
+ * Home's cards from silently drifting out of sync with the detail pages,
+ * the same fix applied to Home's sector accordion.
+ */
+const pools: InvestmentItem[] = poolsData.map((pool) => ({
+  name: pool.name,
+  category: pool.category,
+  description: pool.tagline,
+  metricLabel: pool.heroMetrics[0]?.label ?? '',
+  metricValue: pool.heroMetrics[0]?.value ?? '',
+  imageSrc: pool.heroImage,
+  href: `/pools/${pool.slug}`,
+}))
 
 /**
  * A single pool card, revealed with a wipe (a `clip-path` reveal, not a

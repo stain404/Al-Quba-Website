@@ -45,7 +45,7 @@ const leadershipJsonLd = {
  */
 export function Leadership() {
   return (
-    <SectionContainer surface="canvas" spacing="lg">
+    <SectionContainer id="leadership" surface="canvas" spacing="lg">
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -77,7 +77,7 @@ export function Leadership() {
                     <a
                       href={leader.linkedin}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       aria-label={`${leader.name} on LinkedIn`}
                       className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border-strong text-text-tertiary transition-colors duration-150 hover:border-navy hover:text-navy"
                     >

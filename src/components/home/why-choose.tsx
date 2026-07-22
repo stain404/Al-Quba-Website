@@ -23,28 +23,28 @@ const reasons: Reason[] = [
     title: 'Capital Discipline',
     description:
       'Every allocation passes a formal risk committee before deployment — capital preservation is the first mandate, growth the second.',
-    href: '/about/governance',
+    href: '/about',
   },
   {
     icon: <TrendingUp className="size-5" strokeWidth={1.5} aria-hidden />,
     title: 'Long-Term Horizon',
     description:
       'We structure pools and mandates around multi-year cycles, not quarterly performance theater.',
-    href: '/strategies',
+    href: '/#sectors',
   },
   {
     icon: <Users className="size-5" strokeWidth={1.5} aria-hidden />,
     title: 'Principal-Led',
     description:
       'Direct access to decision-makers. No layers of relationship management between you and the people allocating your capital.',
-    href: '/about/leadership',
+    href: '/about#leadership',
   },
   {
     icon: <Globe2 className="size-5" strokeWidth={1.5} aria-hidden />,
     title: 'Global Reach',
     description:
       'Operating presence across the Gulf, East Africa, South Asia, and Southeast Asia trade corridors.',
-    href: '/about/offices',
+    href: '/about#offices',
   },
 ]
 

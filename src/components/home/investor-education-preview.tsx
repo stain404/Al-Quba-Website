@@ -17,7 +17,7 @@ const articles: BlogPostItem[] = [
     date: 'May 2026',
     readTime: '6 min read',
     imageSrc: '/trade.jpg',
-    href: '/insights/education/structured-trade-pools',
+    href: '/insights',
   },
   {
     title: 'Reading a Trade Finance Term Sheet',
@@ -26,7 +26,7 @@ const articles: BlogPostItem[] = [
     date: 'April 2026',
     readTime: '8 min read',
     imageSrc: '/investment.jpg',
-    href: '/insights/education/term-sheet-guide',
+    href: '/insights',
   },
   {
     title: 'Diversifying Beyond Public Markets',
@@ -35,7 +35,7 @@ const articles: BlogPostItem[] = [
     date: 'March 2026',
     readTime: '5 min read',
     imageSrc: '/architecture.jpg',
-    href: '/insights/education/beyond-public-markets',
+    href: '/insights',
   },
 ]
 
@@ -88,7 +88,7 @@ export function InvestorEducationPreview() {
           className="md:max-w-xl"
         />
         <Link
-          href="/insights/education"
+          href="/insights"
           className="group inline-flex shrink-0 items-center gap-2 text-body-sm font-medium text-text-primary"
         >
           View all resources

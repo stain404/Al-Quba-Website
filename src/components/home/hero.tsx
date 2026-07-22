@@ -5,14 +5,15 @@ import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, PlayCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { VideoPauseToggle } from '@/components/motion/video-pause-toggle'
 import { transitionContent } from '@/lib/animations'
 
 /**
  * Section 1 — Hero.
- * Full-bleed background video with an animated gold aurora and ink scrim
- * on top, and a single decisive headline + CTA. This is the one place
- * on the page that gets an orchestrated load-in sequence (see design
- * system §6) rather than a scroll-triggered reveal.
+ * Full-bleed background video with an animated gold aurora, and a single
+ * decisive headline + CTA. This is the one place on the page that gets
+ * an orchestrated load-in sequence (see design system §6) rather than a
+ * scroll-triggered reveal.
  */
 export function Hero() {
   const prefersReduced = useReducedMotion()
@@ -30,7 +31,8 @@ export function Hero() {
     if (!video) return
 
     const tryPlay = () => {
-      video.play().catch(() => {})
+      if (video.dataset.userPaused === 'true') return
+      video.play().catch(() => { })
     }
     const onVisibility = () => {
       if (document.visibilityState === 'visible') tryPlay()
@@ -83,9 +85,9 @@ export function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-[92vh] w-full items-end overflow-hidden bg-ink text-text-inverse"
+      className="relative flex min-h-screen w-full items-end overflow-hidden bg-ink text-text-inverse"
     >
-      {/* Animated background: full-bleed video with gold aurora + ink scrim on top for legibility */}
+      {/* Animated background: full-bleed video with a gold aurora glow and a light scrim on top for legibility */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {/* Scaled up in both dimensions (preserving aspect ratio, so
             object-cover's own crop behavior is unchanged) and anchored to
@@ -97,7 +99,7 @@ export function Hero() {
         <video
           ref={videoRef}
           className="absolute left-1/2 top-0 h-[122%] w-[122%] -translate-x-1/2 object-cover"
-          src="/hero_bg.mp4"
+          src="/hero-banner-final-4k.mp4"
           autoPlay
           muted
           loop
@@ -113,8 +115,13 @@ export function Hero() {
           }
           transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/40" />
+        {/* Scrim — subtle at the top so the video reads clearly, but
+            deep enough behind the text block (bottom-anchored content)
+            to keep the headline and copy legible over bright footage */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 via-45% to-transparent" />
       </div>
+
+      <VideoPauseToggle videoRef={videoRef} className="absolute bottom-6 right-6 z-20" />
 
       <div className="container relative z-10 mx-auto max-w-container pb-20 pt-40 md:pb-28">
         <motion.div
@@ -123,16 +130,16 @@ export function Hero() {
           transition={{ ...transitionContent, delay: 0.1 }}
           className="flex max-w-4xl flex-col gap-8"
         >
-          <h1 className="font-display text-display-xl leading-[1.02] text-text-inverse">
-            Disciplined capital,
+          <h1 className="font-display text-display-sm leading-[1.1] text-text-inverse">
+            Global Investments.
             <br />
-            deployed with conviction.
+            Built on Transparency.
           </h1>
 
-          <p className="max-w-measure text-body-lg text-text-inverse-muted">
-            Al Quba Investment builds long-term partnerships with high net
-            worth individuals, family offices, and institutions — allocating
-            across trading, real estate, shipping, and global trade.
+          <p className="max-w-sm text-body-md text-text-inverse">
+            Structured, asset-backed investment pools with clearly defined
+            cycles, transparent reporting, and returns that are measured
+            — not promised.
           </p>
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">

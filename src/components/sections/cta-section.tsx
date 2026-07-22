@@ -84,11 +84,11 @@ export function CTASection({
           )}
         >
           <span className="text-eyebrow uppercase text-accent-ink">{eyebrow}</span>
-          <Heading as="h2" size="display-lg" inverse className={cn(hasBackground ? 'max-w-2xl' : 'max-w-3xl')}>
+          <Heading as="h2" size="display-md" inverse className={cn(hasBackground ? 'max-w-2xl' : 'max-w-3xl')}>
             {title}
           </Heading>
           {description && (
-            <p className="max-w-measure text-body-lg text-text-inverse-muted">{description}</p>
+            <p className="max-w-measure text-body-lg text-text-inverse">{description}</p>
           )}
           <div className="mt-2 flex flex-col gap-4 sm:flex-row">
             <Button variant="gold" size="lg" withArrow asChild className="group">

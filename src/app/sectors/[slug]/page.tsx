@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
@@ -10,7 +9,10 @@ import { SectorProcess } from '@/components/sectors/sector-process'
 import { SectorCaseStudy } from '@/components/sectors/sector-case-study'
 import { RelatedSectors } from '@/components/sectors/related-sectors'
 import { sectors, getSectorBySlug } from '@/lib/sectors-data'
-import { navSections, footerColumns } from '@/lib/site-config'
+import { navSections } from '@/lib/site-config'
+import { buildMetadata } from '@/lib/seo'
+import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
+import { ServiceJsonLd } from '@/components/seo/service-json-ld'
 
 interface SectorPageProps {
   params: { slug: string }
@@ -21,15 +23,15 @@ export function generateStaticParams() {
   return sectors.map((sector) => ({ slug: sector.slug }))
 }
 
-export function generateMetadata({ params }: SectorPageProps): Metadata {
+export function generateMetadata({ params }: SectorPageProps) {
   const sector = getSectorBySlug(params.slug)
   if (!sector) return {}
 
-  return {
+  return buildMetadata({
     title: sector.name,
     description: sector.description,
-    alternates: { canonical: `/sectors/${sector.slug}` },
-  }
+    path: `/sectors/${sector.slug}`,
+  })
 }
 
 /**
@@ -59,6 +61,19 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Sectors', path: '/#sectors' },
+          { name: sector.name, path: `/sectors/${sector.slug}` },
+        ]}
+      />
+      <ServiceJsonLd
+        name={sector.name}
+        description={sector.description}
+        path={`/sectors/${sector.slug}`}
+        serviceType="Investment Sector"
+      />
       <Navbar sections={navSections} />
       <main>
         <SectorHero sector={sector} />
@@ -88,7 +103,7 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
           secondaryHref="/#pools"
         />
       </main>
-      <Footer columns={footerColumns} />
+      <Footer />
     </>
   )
 }

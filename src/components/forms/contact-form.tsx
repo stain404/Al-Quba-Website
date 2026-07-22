@@ -73,16 +73,16 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
     <form onSubmit={handleSubmit(submit)} noValidate className="flex flex-col gap-6">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <FieldWrapper id="fullName" label="Full name" required error={errors.fullName?.message}>
-          <Input id="fullName" placeholder="Jane Al Rashid" {...register('fullName')} />
+          <Input id="fullName" placeholder="Enter your full name" {...register('fullName')} />
         </FieldWrapper>
         <FieldWrapper id="email" label="Email address" required error={errors.email?.message}>
-          <Input id="email" type="email" placeholder="jane@family-office.com" {...register('email')} />
+          <Input id="email" type="email" placeholder="Enter your email address" {...register('email')} />
         </FieldWrapper>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <FieldWrapper id="company" label="Company / Family office" required error={errors.company?.message}>
-          <Input id="company" placeholder="Al Rashid Family Office" {...register('company')} />
+          <Input id="company" placeholder="Enter your company name" {...register('company')} />
         </FieldWrapper>
         <FieldWrapper id="inquiryType" label="Inquiry type" required error={errors.inquiryType?.message}>
           <Select

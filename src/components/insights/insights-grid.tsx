@@ -12,13 +12,13 @@ const categories = ['All', 'Fundamentals', 'Strategy', 'Market Commentary', 'Pre
 type Category = (typeof categories)[number]
 
 const articles: BlogPostItem[] = [
-  { title: 'Understanding Structured Trade Pools', excerpt: 'How pool-based investing differs from traditional fund structures, and what it means for liquidity.', category: 'Fundamentals', date: 'May 2026', readTime: '6 min read', href: '/insights/education/structured-trade-pools' },
-  { title: 'Reading a Trade Finance Term Sheet', excerpt: 'A practical walkthrough of the terms that matter most before committing capital to a cycle.', category: 'Fundamentals', date: 'April 2026', readTime: '8 min read', href: '/insights/education/term-sheet-guide' },
-  { title: 'Diversifying Beyond Public Markets', excerpt: 'Why family offices are allocating a growing share of capital to real-asset and trade strategies.', category: 'Strategy', date: 'March 2026', readTime: '5 min read', href: '/insights/education/beyond-public-markets' },
-  { title: 'Gulf Cold-Chain Demand in 2026', excerpt: 'What rising frozen protein imports mean for trade financing volumes across the region.', category: 'Market Commentary', date: 'June 2026', readTime: '7 min read', href: '/insights/commentary/cold-chain-demand-2026' },
-  { title: 'Cocoa Prices and What They Mean for Origination', excerpt: 'A look at how volatile spot pricing affects fixed-offtake structured pools.', category: 'Market Commentary', date: 'May 2026', readTime: '6 min read', href: '/insights/commentary/cocoa-prices-origination' },
-  { title: 'Al Quba Crosses $480M in Assets Under Management', excerpt: 'A milestone update on portfolio growth and new institutional partnerships.', category: 'Press', date: 'June 2026', readTime: '3 min read', href: '/insights/press/480m-aum-milestone' },
-  { title: 'Why We Underwrite Trade Cycles, Not Companies', excerpt: 'Most private capital underwrites a business. We underwrite a single, physical trade cycle — here is why.', category: 'Strategy', date: 'June 2026', readTime: '9 min read', href: '/insights/commentary/underwriting-trade-cycles' },
+  { title: 'Understanding Structured Trade Pools', excerpt: 'How pool-based investing differs from traditional fund structures, and what it means for liquidity.', category: 'Fundamentals', date: 'May 2026', readTime: '6 min read', href: '/insights' },
+  { title: 'Reading a Trade Finance Term Sheet', excerpt: 'A practical walkthrough of the terms that matter most before committing capital to a cycle.', category: 'Fundamentals', date: 'April 2026', readTime: '8 min read', href: '/insights' },
+  { title: 'Diversifying Beyond Public Markets', excerpt: 'Why family offices are allocating a growing share of capital to real-asset and trade strategies.', category: 'Strategy', date: 'March 2026', readTime: '5 min read', href: '/insights' },
+  { title: 'Gulf Cold-Chain Demand in 2026', excerpt: 'What rising frozen protein imports mean for trade financing volumes across the region.', category: 'Market Commentary', date: 'June 2026', readTime: '7 min read', href: '/insights' },
+  { title: 'Cocoa Prices and What They Mean for Origination', excerpt: 'A look at how volatile spot pricing affects fixed-offtake structured pools.', category: 'Market Commentary', date: 'May 2026', readTime: '6 min read', href: '/insights' },
+  { title: 'Al Quba Reaches a New Assets Under Management Milestone', excerpt: 'A milestone update on portfolio growth and new institutional partnerships.', category: 'Press', date: 'June 2026', readTime: '3 min read', href: '/insights' },
+  { title: 'Why We Underwrite Trade Cycles, Not Companies', excerpt: 'Most private capital underwrites a business. We underwrite a single, physical trade cycle — here is why.', category: 'Strategy', date: 'June 2026', readTime: '9 min read', href: '/insights' },
 ]
 
 /**

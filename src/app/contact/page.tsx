@@ -1,17 +1,20 @@
-import type { Metadata } from 'next'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { ContactHero } from '@/components/contact/contact-hero'
 import { ContactFormSection } from '@/components/contact/contact-form-section'
 import { ContactFAQ } from '@/components/contact/contact-faq'
-import { navSections, footerColumns } from '@/lib/site-config'
+import { navSections } from '@/lib/site-config'
+import { faqs } from '@/lib/faq-data'
+import { buildMetadata } from '@/lib/seo'
+import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
+import { FaqJsonLd } from '@/components/seo/faq-json-ld'
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: 'Contact',
   description:
     'Get in touch with Al Quba Investment. Speak directly with our principals about institutional investment, family office partnerships, and private wealth mandates.',
-  alternates: { canonical: '/contact' },
-}
+  path: '/contact',
+})
 
 /**
  * Contact — composed from existing design system components plus
@@ -24,13 +27,15 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]} />
+      <FaqJsonLd items={faqs} />
       <Navbar sections={navSections} />
       <main>
         <ContactHero />
         <ContactFormSection />
         <ContactFAQ />
       </main>
-      <Footer columns={footerColumns} />
+      <Footer />
     </>
   )
 }

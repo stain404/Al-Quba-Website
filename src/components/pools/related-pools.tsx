@@ -17,8 +17,9 @@ export function RelatedPools({ currentSlug }: { currentSlug: string }) {
       name: p.name,
       category: p.category,
       description: p.tagline,
-      metricLabel: 'Target Return',
+      metricLabel: p.heroMetrics[0]?.label ?? '',
       metricValue: p.heroMetrics[0]?.value ?? '',
+      imageSrc: p.heroImage,
       href: `/pools/${p.slug}`,
     }))
 

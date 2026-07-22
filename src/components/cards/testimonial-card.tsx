@@ -16,7 +16,7 @@ export function TestimonialCard({ quote, name, role, company, avatarSrc }: Testi
         </p>
         <div className="flex items-center gap-4 border-t border-border pt-6">
           {avatarSrc ? (
-            <Image src={avatarSrc} alt="" width={48} height={48} className="size-12 rounded-full object-cover" />
+            <Image src={avatarSrc} alt={name} width={48} height={48} className="size-12 rounded-full object-cover" />
           ) : (
             <div className="flex size-12 items-center justify-center rounded-full bg-navy/8 text-body-sm font-semibold text-navy">
               {name.charAt(0)}

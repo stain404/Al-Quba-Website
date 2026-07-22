@@ -11,7 +11,7 @@ const featured = {
   category: 'Strategy',
   date: 'June 2026',
   readTime: '9 min read',
-  href: '/insights/commentary/underwriting-trade-cycles',
+  href: '/insights',
 }
 
 /**

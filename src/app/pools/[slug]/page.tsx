@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
@@ -9,7 +8,10 @@ import { PoolStructure } from '@/components/pools/pool-structure'
 import { PoolRisks } from '@/components/pools/pool-risks'
 import { RelatedPools } from '@/components/pools/related-pools'
 import { pools, getPoolBySlug } from '@/lib/pools-data'
-import { navSections, footerColumns } from '@/lib/site-config'
+import { navSections } from '@/lib/site-config'
+import { buildMetadata } from '@/lib/seo'
+import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
+import { ServiceJsonLd } from '@/components/seo/service-json-ld'
 
 interface PoolPageProps {
   params: { slug: string }
@@ -20,15 +22,15 @@ export function generateStaticParams() {
   return pools.map((pool) => ({ slug: pool.slug }))
 }
 
-export function generateMetadata({ params }: PoolPageProps): Metadata {
+export function generateMetadata({ params }: PoolPageProps) {
   const pool = getPoolBySlug(params.slug)
   if (!pool) return {}
 
-  return {
+  return buildMetadata({
     title: pool.name,
     description: pool.description,
-    alternates: { canonical: `/pools/${pool.slug}` },
-  }
+    path: `/pools/${pool.slug}`,
+  })
 }
 
 /**
@@ -44,6 +46,19 @@ export default function PoolDetailPage({ params }: PoolPageProps) {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Pools', path: '/#pools' },
+          { name: pool.name, path: `/pools/${pool.slug}` },
+        ]}
+      />
+      <ServiceJsonLd
+        name={pool.name}
+        description={pool.description}
+        path={`/pools/${pool.slug}`}
+        serviceType="Investment Pool"
+      />
       <Navbar sections={navSections} />
       <main>
         <PoolHero pool={pool} />
@@ -61,7 +76,7 @@ export default function PoolDetailPage({ params }: PoolPageProps) {
           secondaryHref="/#pools"
         />
       </main>
-      <Footer columns={footerColumns} />
+      <Footer />
     </>
   )
 }

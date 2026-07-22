@@ -29,7 +29,7 @@ export function BlogCard({
         {imageSrc && (
           <Image
             src={imageSrc}
-            alt=""
+            alt={title}
             fill
             className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
           />

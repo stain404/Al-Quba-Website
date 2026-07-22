@@ -57,10 +57,12 @@ export interface Sector {
   /** Big hero headline shown instead of `name`, for sectors with dedicated marketing copy. */
   heroHeadline?: string
   heroCta?: { label: string; href: string }
+  /** Full-bleed photo background for the sector hero, e.g. '/Trading.png'. Omit for the plain ink hero. */
+  heroImage?: string
   overview?: {
     heading: string
     body: string
-    stat: { value: string; label: string }
+    stat?: { value: string; label: string }
   }
   capabilities: SectorCapability[]
   /** Overrides the default "Capabilities" section heading. */
@@ -80,18 +82,17 @@ export const sectors: Sector[] = [
     slug: 'trading',
     name: 'Trading',
     icon: TrendingUp,
+    heroImage: '/Trading.png',
     tagline: 'Global commodity and structured trade desks, positioned across energy, metals, and soft commodities.',
     description:
       'Our trading desk originates and finances physical commodity trades across energy, metals, and soft commodities — always collateralized against the underlying shipment, never a speculative market position.',
     heroMetrics: [
-      { label: 'Sector AUM', value: '$140M' },
       { label: 'Active Trade Lines', value: '18' },
       { label: 'Avg. Cycle Length', value: '5 months' },
     ],
     overview: {
       heading: 'Trade finance built around the shipment, not the ticker.',
       body: 'Every position our trading desk takes is tied to a physical commodity in motion — a confirmed purchase order, a bill of lading, a delivery contract. We do not take outright directional bets on commodity prices; margin is earned from financing the trade cycle itself, which is why our return profile has stayed remarkably stable across commodity cycles that have otherwise been volatile.',
-      stat: { value: '96%', label: 'Of trade lines settled on schedule since 2018' },
     },
     capabilities: [
       { icon: Landmark, title: 'Structured Trade Finance', description: 'Financing tied to confirmed purchase orders and delivery contracts across energy, metals, and soft commodities.' },
@@ -110,9 +111,7 @@ export const sectors: Sector[] = [
       description:
         'A structured trade finance facility supporting the import of base metals from Indian smelters into UAE manufacturing distributors, executed across six trade cycles with zero settlement delays.',
       metrics: [
-        { label: 'Facility Size', value: '$22M' },
         { label: 'Trade Cycles', value: '6' },
-        { label: 'On-Time Settlement', value: '100%' },
       ],
     },
     companies: [],
@@ -121,11 +120,11 @@ export const sectors: Sector[] = [
     slug: 'real-estate',
     name: 'Real Estate',
     icon: Building2,
+    heroImage: '/realestate.webp',
     tagline: 'Direct ownership and development across prime residential and commercial assets in Dubai, London, and Southeast Asia.',
     description:
       'Our real estate desk acquires and develops income-producing and value-add assets directly — no fund-of-funds layer, no third-party operator taking a promote ahead of our investors.',
     heroMetrics: [
-      { label: 'Sector AUM', value: '$165M' },
       { label: 'Active Assets', value: '12' },
       { label: 'Avg. Hold Period', value: '4.1 years' },
     ],
@@ -149,10 +148,8 @@ export const sectors: Sector[] = [
     caseStudy: {
       title: 'Marina Heights Residential Repositioning',
       description:
-        'Acquisition and repositioning of a 96-unit residential tower in Dubai Marina — full interior renovation and re-leasing program lifted occupancy from 71% to 98% within fourteen months.',
+        'Acquisition and repositioning of a 96-unit residential tower in Dubai Marina — full interior renovation and re-leasing program delivered a substantial occupancy uplift within fourteen months.',
       metrics: [
-        { label: 'Acquisition Price', value: '$38M' },
-        { label: 'Occupancy Uplift', value: '71% → 98%' },
         { label: 'Reposition Timeline', value: '14 months' },
       ],
     },
@@ -162,12 +159,12 @@ export const sectors: Sector[] = [
     slug: 'shipping',
     name: 'Shipping',
     icon: Ship,
+    heroImage: '/shipping.webp',
     tagline:
       'Al Quba offers end-to-end shipping and logistics solutions designed to make the movement of goods faster, safer, and more predictable. Whether your cargo travels by land, sea, or air, we handle the planning, tracking, and coordination with care. Our technology-driven approach improves efficiency while our team ensures your shipments arrive on time and within budget, giving your business a dependable supply chain you can trust.',
     description:
       'End-to-end shipping and logistics solutions from Al Quba Investment — reliable freight by land, sea, and air, powered by our partnership with Noble Star.',
     heroMetrics: [
-      { label: 'Sector AUM', value: '$58M' },
       { label: 'Vessels Financed', value: '7' },
       { label: 'Avg. Charter Length', value: '11 months' },
     ],
@@ -195,7 +192,7 @@ export const sectors: Sector[] = [
         { label: 'Services', value: 'Road, Air & Sea Freight' },
         { label: 'Focus', value: 'Cargo & Customs Clearance' },
       ],
-      logoSrc: '/noblestar.jpeg',
+      logoSrc: '/NobleStar.jpg',
     },
     companies: ['Noble Star Shipping'],
   },
@@ -203,12 +200,12 @@ export const sectors: Sector[] = [
     slug: 'import-export',
     name: 'Import & Export',
     icon: PackageSearch,
+    heroImage: '/importexport.png',
     tagline:
       'At Al Quba, we simplify the entire export and import journey so businesses can trade across borders with ease. From sourcing products and coordinating shipments to handling customs, paperwork, and compliance, our team ensures every step is smooth and stress-free. We focus on reliability, transparency, and timely delivery, helping companies explore new markets and grow with confidence.',
     description:
       'Seamless import and export solutions from Al Quba Investment — sourcing, shipping, customs, and compliance handled end-to-end for global trade.',
     heroMetrics: [
-      { label: 'Sector AUM', value: '$47M' },
       { label: 'Active Corridors', value: '9' },
       { label: 'Avg. Facility Term', value: '4 months' },
     ],
@@ -268,12 +265,12 @@ export const sectors: Sector[] = [
     slug: 'technology',
     name: 'Technology',
     icon: Cpu,
+    heroImage: '/tech.png',
     tagline:
       'Technology is at the heart of progress, and Al Quba actively supports innovative digital solutions that help businesses and communities move forward. From software and automation to smart analytics and digital infrastructure, we back ideas that improve efficiency and create better ways of working. Our focus is on empowering organizations with tools that enhance productivity, strengthen connectivity, and open new possibilities in a digital-first world.',
     description:
       'Al Quba backs innovative digital solutions — from software and automation to smart analytics and digital infrastructure — that help businesses and communities move forward.',
     heroMetrics: [
-      { label: 'Sector AUM', value: '$6M' },
       { label: 'Active Positions', value: '1' },
       { label: 'Avg. Hold Period', value: 'Ongoing' },
     ],

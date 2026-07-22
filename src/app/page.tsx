@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
@@ -12,13 +11,15 @@ import { GlobalPresence } from '@/components/home/global-presence'
 import { OurEcosystem } from '@/components/home/our-ecosystem'
 import { Testimonials } from '@/components/home/testimonials'
 import { InvestorEducationPreview } from '@/components/home/investor-education-preview'
-import { navSections, footerColumns, siteConfig } from '@/lib/site-config'
+import { navSections, siteConfig } from '@/lib/site-config'
+import { buildMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Home',
+export const metadata = buildMetadata({
+  title: siteConfig.title,
   description: siteConfig.description,
-  alternates: { canonical: '/' },
-}
+  path: '/',
+  isHome: true,
+})
 
 /**
  * Home — composed entirely from the established design system.
@@ -55,7 +56,7 @@ export default function HomePage() {
         />
       </main>
       {/* 12 */}
-      <Footer columns={footerColumns} />
+      <Footer />
     </>
   )
 }

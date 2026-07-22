@@ -14,13 +14,13 @@ export function PoolStructure({ structure }: { structure: PoolStructureItem[] })
     <SectionContainer surface="muted" spacing="lg">
       <SplitContainer>
         <FadeIn>
-          <Eyebrow>Terms</Eyebrow>
+          <Eyebrow>Fund Details</Eyebrow>
         </FadeIn>
 
         <div className="flex flex-col gap-10">
           <FadeIn delay={0.05}>
             <Heading as="h2" size="display-sm" className="max-w-xl">
-              The structure behind this pool
+              The terms behind this fund
             </Heading>
           </FadeIn>
 

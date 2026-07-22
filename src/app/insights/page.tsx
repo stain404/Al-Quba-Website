@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
@@ -6,14 +5,16 @@ import { InsightsHero } from '@/components/insights/insights-hero'
 import { FeaturedArticle } from '@/components/insights/featured-article'
 import { InsightsGrid } from '@/components/insights/insights-grid'
 import { NewsletterSignup } from '@/components/insights/newsletter-signup'
-import { navSections, footerColumns } from '@/lib/site-config'
+import { navSections } from '@/lib/site-config'
+import { buildMetadata } from '@/lib/seo'
+import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: 'Insights',
   description:
     'Commentary on trade finance, structured investing, and the markets Al Quba Investment operates in — written by our investment team.',
-  alternates: { canonical: '/insights' },
-}
+  path: '/insights',
+})
 
 /**
  * Insights — composed from existing design system components plus
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 export default function InsightsPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: 'Home', path: '/' }, { name: 'Insights', path: '/insights' }]} />
       <Navbar sections={navSections} />
       <main>
         <InsightsHero />
@@ -41,7 +43,7 @@ export default function InsightsPage() {
           secondaryHref="/#pools"
         />
       </main>
-      <Footer columns={footerColumns} />
+      <Footer />
     </>
   )
 }

@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(npx tsc --noEmit; try { \\(Invoke-WebRequest -Uri \"http://localhost:3000/insights\" -UseBasicParsing -TimeoutSec 15\\).StatusCode } catch { \"error: $_\" })"
+      "PowerShell(npx tsc --noEmit; try { \\(Invoke-WebRequest -Uri \"http://localhost:3000/insights\" -UseBasicParsing -TimeoutSec 15\\).StatusCode } catch { \"error: $_\" })",
+      "Bash(sleep 3; cat /tmp/nextdev.log)",
+      "Read(//tmp/**)",
+      "Bash(python3 -c ' *)"
     ]
   }
 }
