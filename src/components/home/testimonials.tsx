@@ -7,6 +7,19 @@ import type { TestimonialItem } from '@/types'
 const testimonials: TestimonialItem[] = [
   {
     quote:
+      'Al Quba demonstrates a structured and transparent approach to investment management. The clarity in execution and consistency in communication reflect a strong operational framework.',
+    name: 'Banger Financial Labs',
+    role: 'Institutional Partner',
+    type: 'institutional',
+  },
+  {
+    quote:
+      'What we value most is the transparency. You always know where your money is going and how it’s working.',
+    name: 'Sidra Aydeed',
+    role: 'Investor',
+  },
+  {
+    quote:
       'Al Quba Investment has been an exceptional partner. Their discipline and transparency around every trade cycle gives our family office genuine confidence to deploy capital at scale.',
     name: 'Amara Reyes',
     role: 'Principal',
