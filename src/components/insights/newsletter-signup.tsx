@@ -1,5 +1,6 @@
 'use client'
 
+import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -9,6 +10,7 @@ import { Eyebrow, Heading } from '@/components/typography/heading'
 import { Input, FieldWrapper } from '@/components/ui/inputs'
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/motion/reveal'
+import { subscribeToNewsletter } from '@/lib/subscribe'
 
 const newsletterSchema = z.object({
   email: z.string().email('Enter a valid email address'),
@@ -23,14 +25,21 @@ type NewsletterValues = z.infer<typeof newsletterSchema>
  * subscribe action rather than a full inquiry.
  */
 export function NewsletterSignup() {
+  const [submitError, setSubmitError] = React.useState<string | null>(null)
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<NewsletterValues>({ resolver: zodResolver(newsletterSchema) })
 
-  const onSubmit = async (_values: NewsletterValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 600))
+  const onSubmit = async (values: NewsletterValues) => {
+    setSubmitError(null)
+    try {
+      await subscribeToNewsletter(values.email)
+    } catch {
+      setSubmitError('Something went wrong subscribing. Please try again.')
+      throw new Error('Subscription failed')
+    }
   }
 
   return (
@@ -51,20 +60,29 @@ export function NewsletterSignup() {
             You&rsquo;re subscribed. Look out for our next note.
           </div>
         ) : (
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            noValidate
-            className="flex w-full max-w-md flex-col gap-4 sm:flex-row sm:items-start"
-          >
-            <div className="flex-1">
-              <FieldWrapper id="newsletter-email" label="Email address" error={errors.email?.message} className="text-left">
-                <Input id="newsletter-email" type="email" placeholder="you@company.com" {...register('email')} />
-              </FieldWrapper>
-            </div>
-            <Button type="submit" size="lg" loading={isSubmitting} className="sm:mt-8">
-              Subscribe
-            </Button>
-          </form>
+          <div className="flex w-full max-w-md flex-col gap-2">
+            <form
+              onSubmit={(event) => {
+                handleSubmit(onSubmit)(event)?.catch(() => {})
+              }}
+              noValidate
+              className="flex flex-col gap-4 sm:flex-row sm:items-start"
+            >
+              <div className="flex-1">
+                <FieldWrapper id="newsletter-email" label="Email address" error={errors.email?.message} className="text-left">
+                  <Input id="newsletter-email" type="email" placeholder="you@company.com" {...register('email')} />
+                </FieldWrapper>
+              </div>
+              <Button type="submit" size="lg" loading={isSubmitting} className="sm:mt-8">
+                Subscribe
+              </Button>
+            </form>
+            {submitError && (
+              <p role="alert" className="text-caption text-error">
+                {submitError}
+              </p>
+            )}
+          </div>
         )}
       </FadeIn>
     </SectionContainer>

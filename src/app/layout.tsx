@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Fraunces, Inter, IBM_Plex_Mono, Cormorant_Garamond } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/lib/site-config'
+import { WhatsAppButton } from '@/components/layout/whatsapp-button'
 import './globals.css'
 
 const fraunces = Fraunces({
@@ -118,6 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         {children}
+        <WhatsAppButton />
       </body>
     </html>
   )

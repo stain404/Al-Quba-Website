@@ -1,5 +1,6 @@
 'use client'
 
+import * as React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
@@ -9,6 +10,7 @@ import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, CheckCircl
 import { Input } from '@/components/ui/inputs'
 import { Button } from '@/components/ui/button'
 import { FlagIcon, type FlagCode } from '@/components/ui/flag-icon'
+import { subscribeToNewsletter } from '@/lib/subscribe'
 
 const companyLinks = [
   { label: 'About us', href: '/about' },
@@ -51,14 +53,21 @@ const newsletterSchema = z.object({
 type NewsletterValues = z.infer<typeof newsletterSchema>
 
 function NewsletterForm() {
+  const [submitError, setSubmitError] = React.useState<string | null>(null)
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<NewsletterValues>({ resolver: zodResolver(newsletterSchema) })
 
-  const onSubmit = async (_values: NewsletterValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 600))
+  const onSubmit = async (values: NewsletterValues) => {
+    setSubmitError(null)
+    try {
+      await subscribeToNewsletter(values.email)
+    } catch {
+      setSubmitError('Something went wrong subscribing. Please try again.')
+      throw new Error('Subscription failed')
+    }
   }
 
   return (
@@ -73,7 +82,18 @@ function NewsletterForm() {
           You&rsquo;re subscribed — thanks for joining.
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-2">
+        <form
+          onSubmit={(event) => {
+            handleSubmit(onSubmit)(event)?.catch(() => {})
+          }}
+          noValidate
+          className="flex flex-col gap-2"
+        >
+          {submitError && (
+            <p role="alert" className="text-caption text-error">
+              {submitError}
+            </p>
+          )}
           <label htmlFor="footer-newsletter-email" className="text-body-sm text-text-inverse-muted">
             E-mail Address
           </label>

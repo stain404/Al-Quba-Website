@@ -30,3 +30,6 @@ next-env.d.ts
 # claude code local settings (project-shared settings.json is still tracked)
 .claude/settings.local.json
 
+# form submission data — contains PII (names, emails, messages), never commit
+/data/*.json
+

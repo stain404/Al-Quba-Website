@@ -44,6 +44,7 @@ export interface ContactFormProps {
  * form (e.g. investor onboarding, newsletter signup).
  */
 export function ContactForm({ onSubmit }: ContactFormProps) {
+  const [submitError, setSubmitError] = React.useState<string | null>(null)
   const {
     register,
     handleSubmit,
@@ -54,7 +55,21 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
   })
 
   const submit = async (values: ContactFormValues) => {
-    await onSubmit?.(values)
+    setSubmitError(null)
+    if (onSubmit) {
+      await onSubmit(values)
+    } else {
+      const { consent: _consent, ...payload } = values
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) {
+        setSubmitError('Something went wrong sending your message. Please try again, or email us directly.')
+        throw new Error('Submission failed')
+      }
+    }
     reset()
   }
 
@@ -71,7 +86,18 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)} noValidate className="flex flex-col gap-6">
+    <form
+      onSubmit={(event) => {
+        handleSubmit(submit)(event)?.catch(() => {})
+      }}
+      noValidate
+      className="flex flex-col gap-6"
+    >
+      {submitError && (
+        <p role="alert" className="text-caption text-error">
+          {submitError}
+        </p>
+      )}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <FieldWrapper id="fullName" label="Full name" required error={errors.fullName?.message}>
           <Input id="fullName" placeholder="Enter your full name" {...register('fullName')} />
