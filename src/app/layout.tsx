@@ -70,7 +70,7 @@ const organizationJsonLd = {
   description: siteConfig.description,
   areaServed: 'Global',
   email: 'inbox@alqubainvestment.com',
-  telephone: '+971526697092',
+  telephone: '+971505762203',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Office 306, Al Mezan Tower',

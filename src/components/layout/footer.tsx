@@ -214,10 +214,10 @@ export function Footer() {
                 Contact
               </span>
               <a
-                href="tel:+971526697092"
+                href="tel:+971505762203"
                 className="text-body-sm text-text-inverse-muted transition-colors duration-150 hover:text-text-inverse"
               >
-                +971 52 669 7092
+                +971 50 576 2203
               </a>
             </div>
 

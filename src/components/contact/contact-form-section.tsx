@@ -20,14 +20,14 @@ const details = [
   {
     icon: Phone,
     label: 'Enquiry',
-    value: '+971 52 669 7092',
-    href: 'tel:+971526697092',
+    value: '+971 50 576 2203',
+    href: 'tel:+971505762203',
   },
   {
     icon: MessageCircle,
     label: 'WhatsApp',
-    value: '+971 52 669 7092',
-    href: 'https://wa.me/971526697092',
+    value: '+971 50 576 2203',
+    href: 'https://wa.me/971505762203',
   },
 ]
 

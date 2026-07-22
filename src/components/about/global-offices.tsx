@@ -8,7 +8,7 @@ const offices = [
     city: 'Dubai',
     label: 'Headquarters',
     address: 'Office 306, Al Mezan Tower, Dubai, UAE',
-    phone: '+971 52 669 7092',
+    phone: '+971 50 576 2203',
   },
 ]
 

@@ -1,6 +1,6 @@
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
-const WHATSAPP_NUMBER = '971526697092'
+const WHATSAPP_NUMBER = '971505762203'
 const DEFAULT_MESSAGE = "Hi, I'd like to know more about Al Quba Investment."
 
 /**
