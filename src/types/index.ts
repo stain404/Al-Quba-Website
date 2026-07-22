@@ -72,6 +72,4 @@ export interface TestimonialItem {
   role: string
   company?: string
   avatarSrc?: string
-  /** 'institutional' renders a distinct badge/icon treatment for organization-attributed quotes. Defaults to 'individual'. */
-  type?: 'individual' | 'institutional'
 }
