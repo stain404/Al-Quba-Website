@@ -42,7 +42,7 @@ export function InsightsHero() {
       <div className="container relative z-10 mx-auto max-w-container">
         <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
           <Eyebrow inverse>Insights</Eyebrow>
-          <Heading as="h1" size="display-lg" inverse>
+          <Heading as="h1" size="display-lg" inverse className="font-nav">
             How we think, in writing.
           </Heading>
           <p className="max-w-measure text-body-lg text-text-inverse">

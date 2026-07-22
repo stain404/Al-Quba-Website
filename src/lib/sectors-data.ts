@@ -59,6 +59,8 @@ export interface Sector {
   heroCta?: { label: string; href: string }
   /** Full-bleed photo background for the sector hero, e.g. '/Trading.png'. Omit for the plain ink hero. */
   heroImage?: string
+  /** CSS object-position for heroImage, e.g. 'left center'. Defaults to 'center'. Use when the photo's focal point isn't centered, so it doesn't get cropped out on narrow (mobile) viewports. */
+  heroImagePosition?: string
   overview?: {
     heading: string
     body: string
@@ -83,6 +85,7 @@ export const sectors: Sector[] = [
     name: 'Trading',
     icon: TrendingUp,
     heroImage: '/Trading.png',
+    heroImagePosition: 'left center',
     tagline: 'Global commodity and structured trade desks, positioned across energy, metals, and soft commodities.',
     description:
       'Our trading desk originates and finances physical commodity trades across energy, metals, and soft commodities — always collateralized against the underlying shipment, never a speculative market position.',
@@ -266,6 +269,7 @@ export const sectors: Sector[] = [
     name: 'Technology',
     icon: Cpu,
     heroImage: '/tech.png',
+    heroImagePosition: '65% center',
     tagline:
       'Technology is at the heart of progress, and Al Quba actively supports innovative digital solutions that help businesses and communities move forward. From software and automation to smart analytics and digital infrastructure, we back ideas that improve efficiency and create better ways of working. Our focus is on empowering organizations with tools that enhance productivity, strengthen connectivity, and open new possibilities in a digital-first world.',
     description:

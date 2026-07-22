@@ -1,5 +1,38 @@
 import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { extendTailwindMerge } from 'tailwind-merge'
+
+/**
+ * Plain `twMerge` doesn't know this project's custom `fontSize` scale
+ * (display-lg, heading-md, body-sm, etc. — see tailwind.config.ts). Its
+ * default text-color matcher is permissive enough to swallow them too,
+ * so e.g. `cn('text-display-lg', 'text-text-inverse')` silently DROPS
+ * text-display-lg, thinking it conflicts with the color utility — every
+ * `<Heading inverse size="...">` (every hero H1, every CTA heading on a
+ * dark surface) was rendering with no font-size class at all. Extending
+ * the config to recognize these as their own 'font-size' group fixes it.
+ */
+const twMerge = extendTailwindMerge({
+  extend: {
+    classGroups: {
+      'font-size': [
+        'text-display-xl',
+        'text-display-lg',
+        'text-display-md',
+        'text-display-sm',
+        'text-heading-lg',
+        'text-heading-md',
+        'text-heading-sm',
+        'text-body-lg',
+        'text-body-md',
+        'text-body-sm',
+        'text-caption',
+        'text-eyebrow',
+        'text-data-lg',
+        'text-data-md',
+      ],
+    },
+  },
+})
 
 /**
  * Merge Tailwind class names safely, resolving conflicting utility

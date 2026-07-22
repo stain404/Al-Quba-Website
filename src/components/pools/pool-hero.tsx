@@ -72,7 +72,7 @@ export function PoolHero({ pool }: { pool: Pool }) {
             </span>
           </div>
 
-          <Heading as="h1" size="display-lg" inverse>
+          <Heading as="h1" size="display-lg" inverse className="font-nav">
             {pool.name}
           </Heading>
           <p className="max-w-measure text-body-lg text-text-inverse">{pool.tagline}</p>

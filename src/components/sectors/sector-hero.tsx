@@ -38,6 +38,7 @@ export function SectorHero({ sector }: { sector: Sector }) {
             fill
             sizes="100vw"
             className="object-cover"
+            style={{ objectPosition: sector.heroImagePosition ?? 'center' }}
             priority
           />
           {/* Warm near-black instead of the brand `ink` navy — ink
@@ -61,7 +62,7 @@ export function SectorHero({ sector }: { sector: Sector }) {
             <Eyebrow inverse>{sector.heroHeadline ? sector.name : 'Investment Sector'}</Eyebrow>
           </div>
 
-          <Heading as="h1" size="display-lg" inverse>
+          <Heading as="h1" size="display-lg" inverse className="font-nav">
             {sector.heroHeadline ?? sector.name}
           </Heading>
           <p className="max-w-measure text-body-lg text-text-inverse">{sector.tagline}</p>

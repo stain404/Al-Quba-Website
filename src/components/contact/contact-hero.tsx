@@ -38,7 +38,7 @@ export function ContactHero() {
       <div className="container relative z-10 mx-auto max-w-container">
         <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
           <Eyebrow inverse>Contact</Eyebrow>
-          <Heading as="h1" size="display-lg" inverse>
+          <Heading as="h1" size="display-lg" inverse className="font-nav">
             Speak with a principal, not a call center.
           </Heading>
           <p className="max-w-measure text-body-lg text-text-inverse">

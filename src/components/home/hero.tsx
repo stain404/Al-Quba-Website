@@ -130,7 +130,7 @@ export function Hero() {
           transition={{ ...transitionContent, delay: 0.1 }}
           className="flex max-w-4xl flex-col gap-8"
         >
-          <h1 className="font-display text-display-sm leading-[1.1] text-text-inverse">
+          <h1 className="font-nav text-display-sm leading-[1.1] text-text-inverse">
             Global Investments.
             <br />
             Built on Transparency.

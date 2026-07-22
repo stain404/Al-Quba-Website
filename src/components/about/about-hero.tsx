@@ -52,9 +52,11 @@ export function AboutHero() {
         playsInline
       />
       <VideoPauseToggle videoRef={videoRef} className="absolute bottom-6 right-6 z-20" />
-      {/* Very light dark-blue scrim — just enough to keep text legible
-          without flattening the video underneath */}
-      <div className="absolute inset-0 bg-ink/35" aria-hidden />
+      {/* Left-to-right scrim (matches Insights/Sector/Pool heroes) —
+          darkens the left side where the text sits without flattening
+          the video on the right. Previous flat bg-ink/35 was too weak
+          to reliably read text against bright frames of the footage. */}
+      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/20" aria-hidden />
 
       <div className="container relative z-10 mx-auto max-w-container">
         <motion.div
@@ -62,7 +64,7 @@ export function AboutHero() {
           className="flex max-w-3xl flex-col gap-8 pt-16"
         >
           <Eyebrow inverse>About Al Quba</Eyebrow>
-          <Heading as="h1" size="display-lg" inverse>
+          <Heading as="h1" size="display-lg" inverse className="font-nav">
             Built quietly, deployed deliberately.
           </Heading>
           <p className="max-w-measure text-body-lg text-text-inverse">
