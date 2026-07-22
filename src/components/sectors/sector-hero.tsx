@@ -28,16 +28,26 @@ export function SectorHero({ sector }: { sector: Sector }) {
       spacing="lg"
       as="header"
       contained={!hasImage}
-      className="relative flex min-h-screen w-full items-center overflow-hidden"
+      className={cn(
+        'relative flex min-h-screen w-full items-center overflow-hidden',
+        hasImage && 'bg-[#1A140F]'
+      )}
     >
       {sector.heroImage && (
         <>
+          {/* Below `sm`, a landscape photo forced to cover a full-height
+              (very tall/narrow) mobile viewport has to zoom in so far
+              that only a sliver of its width stays visible — no
+              object-position can fix that, it's the aspect-ratio math.
+              Showing the whole photo (contain) on narrow screens and
+              only cropping to fill (cover) once the viewport is wide
+              enough keeps the image's actual content visible. */}
           <Image
             src={sector.heroImage}
             alt=""
             fill
             sizes="100vw"
-            className="object-cover"
+            className="object-contain sm:object-cover"
             style={{ objectPosition: sector.heroImagePosition ?? 'center' }}
             priority
           />

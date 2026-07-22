@@ -52,11 +52,15 @@ export function AboutHero() {
         playsInline
       />
       <VideoPauseToggle videoRef={videoRef} className="absolute bottom-6 right-6 z-20" />
-      {/* Left-to-right scrim (matches Insights/Sector/Pool heroes) —
-          darkens the left side where the text sits without flattening
-          the video on the right. Previous flat bg-ink/35 was too weak
-          to reliably read text against bright frames of the footage. */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/20" aria-hidden />
+      {/* Warm near-black instead of the brand `ink` navy — ink stacked
+          on a photo/video reads as a flat blue block (see CTASection /
+          SectorHero / PoolHero / ContactHero, which all use this same
+          fix); a neutral dark tone blends into the footage instead and
+          still keeps the left-side text legible. */}
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-[#1A140F]/80 via-[#1A140F]/50 to-[#1A140F]/15"
+        aria-hidden
+      />
 
       <div className="container relative z-10 mx-auto max-w-container">
         <motion.div

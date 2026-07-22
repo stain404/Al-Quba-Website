@@ -17,14 +17,20 @@ export function ContactHero() {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative flex min-h-screen w-full items-center overflow-hidden"
+      className="relative flex min-h-screen w-full items-center overflow-hidden bg-[#1A140F]"
     >
+      {/* Below `sm`, a landscape photo forced to cover a full-height
+          (very tall/narrow) mobile viewport has to zoom in so far that
+          only a sliver of its width stays visible. Showing the whole
+          photo (contain) on narrow screens and only cropping to fill
+          (cover) once the viewport is wide enough keeps the image's
+          actual content visible. */}
       <Image
         src="/contact.png"
         alt=""
         fill
         sizes="100vw"
-        className="object-cover"
+        className="object-contain sm:object-cover"
         priority
       />
       {/* Warm near-black instead of the brand `ink` navy — ink stacked
