@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -104,7 +105,16 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
 
       <Checkbox
         id="consent"
-        label="I agree to be contacted by Al Quba Investment regarding this inquiry, in line with the Privacy Policy."
+        label={
+          <>
+            I agree to be contacted by Al Quba Investment regarding this inquiry, in line with
+            the{' '}
+            <Link href="/privacy" className="underline underline-offset-2 hover:text-text-primary">
+              Privacy Policy
+            </Link>
+            .
+          </>
+        }
         aria-invalid={!!errors.consent}
         {...register('consent')}
       />

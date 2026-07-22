@@ -8,6 +8,7 @@ import { z } from 'zod'
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, CheckCircle2, ArrowUpRight } from 'lucide-react'
 import { Input } from '@/components/ui/inputs'
 import { Button } from '@/components/ui/button'
+import { FlagIcon, type FlagCode } from '@/components/ui/flag-icon'
 
 const companyLinks = [
   { label: 'About us', href: '/about' },
@@ -20,15 +21,15 @@ const companyLinks = [
 /** Not linked yet — no page exists for this. Renders as plain text until real content is ready. */
 const pendingCompanyLinks = ['Career']
 
-const flags = [
-  { code: 'AE', name: 'United Arab Emirates', emoji: '🇦🇪' },
-  { code: 'BD', name: 'Bangladesh', emoji: '🇧🇩' },
-  { code: 'CN', name: 'China', emoji: '🇨🇳' },
-  { code: 'EG', name: 'Egypt', emoji: '🇪🇬' },
-  { code: 'GB', name: 'United Kingdom', emoji: '🇬🇧' },
-  { code: 'IN', name: 'India', emoji: '🇮🇳' },
-  { code: 'TR', name: 'Turkey', emoji: '🇹🇷' },
-  { code: 'ZA', name: 'South Africa', emoji: '🇿🇦' },
+const flags: { code: FlagCode; name: string }[] = [
+  { code: 'AE', name: 'United Arab Emirates' },
+  { code: 'BD', name: 'Bangladesh' },
+  { code: 'CN', name: 'China' },
+  { code: 'EG', name: 'Egypt' },
+  { code: 'GB', name: 'United Kingdom' },
+  { code: 'IN', name: 'India' },
+  { code: 'TR', name: 'Turkey' },
+  { code: 'ZA', name: 'South Africa' },
 ]
 
 const socials = [
@@ -39,7 +40,10 @@ const socials = [
 ]
 
 /** Not linked yet — no pages exist for these. Rendered as plain text until real content is ready. */
-const pendingLegalLinks = ['Terms & Conditions', 'Privacy Policy']
+const legalLinks = [
+  { label: 'Terms & Conditions', href: '/terms' },
+  { label: 'Privacy Policy', href: '/privacy' },
+]
 
 const newsletterSchema = z.object({
   email: z.string().email('Enter a valid email address'),
@@ -136,12 +140,11 @@ export function Footer() {
               {flags.map((flag) => (
                 <span
                   key={flag.code}
-                  role="img"
-                  aria-label={flag.name}
                   title={flag.name}
-                  className="flex size-8 items-center justify-center rounded-md bg-white/5 text-base"
+                  className="flex h-6 w-9 shrink-0 items-center justify-center overflow-hidden rounded-sm border border-white/10"
                 >
-                  {flag.emoji}
+                  <FlagIcon code={flag.code} className="size-full" />
+                  <span className="sr-only">{flag.name}</span>
                 </span>
               ))}
             </div>
@@ -169,9 +172,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Address + Get in touch */}
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-3">
+          {/* Get in touch */}
+          <div className="flex flex-col gap-6">
+            <h3 className="text-heading-sm font-semibold text-text-inverse">Get In Touch</h3>
+
+            <div className="flex flex-col gap-2">
               <span className="flex items-center gap-2 text-eyebrow uppercase text-text-inverse-muted">
                 <MapPin className="size-4" strokeWidth={1.5} aria-hidden />
                 Address
@@ -183,37 +188,33 @@ export function Footer() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <h3 className="text-heading-sm font-semibold text-text-inverse">Get In Touch!</h3>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <span className="flex items-center gap-2 text-eyebrow uppercase text-text-inverse-muted">
-                    <Phone className="size-4" strokeWidth={1.5} aria-hidden />
-                    Phone
-                  </span>
-                  <a
-                    href="tel:+971526697092"
-                    className="text-body-sm text-text-inverse-muted transition-colors duration-150 hover:text-text-inverse"
-                  >
-                    +971 52 669 7092
-                  </a>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <span className="flex items-center gap-2 text-eyebrow uppercase text-text-inverse-muted">
-                    <Mail className="size-4" strokeWidth={1.5} aria-hidden />
-                    E-Mail
-                  </span>
-                  <a
-                    href="mailto:inbox@alqubainvestment.com"
-                    className="break-all text-body-sm text-text-inverse-muted transition-colors duration-150 hover:text-text-inverse"
-                  >
-                    inbox@alqubainvestment.com
-                  </a>
-                </div>
-              </div>
+            <div className="flex flex-col gap-2">
+              <span className="flex items-center gap-2 text-eyebrow uppercase text-text-inverse-muted">
+                <Phone className="size-4" strokeWidth={1.5} aria-hidden />
+                Contact
+              </span>
+              <a
+                href="tel:+971526697092"
+                className="text-body-sm text-text-inverse-muted transition-colors duration-150 hover:text-text-inverse"
+              >
+                +971 52 669 7092
+              </a>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-2">
+              <span className="flex items-center gap-2 text-eyebrow uppercase text-text-inverse-muted">
+                <Mail className="size-4" strokeWidth={1.5} aria-hidden />
+                E-Mail
+              </span>
+              <a
+                href="mailto:inbox@alqubainvestment.com"
+                className="break-all text-body-sm text-text-inverse-muted transition-colors duration-150 hover:text-text-inverse"
+              >
+                inbox@alqubainvestment.com
+              </a>
+            </div>
+
+            <div className="flex items-center gap-3 pt-2">
               {socials.map((social) => (
                 <SocialIcon key={social.label} href={social.href} label={social.label}>
                   <social.icon className="size-4" strokeWidth={1.5} />
@@ -228,11 +229,14 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Al Quba Investment LLC. All rights reserved.
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
-            {pendingLegalLinks.map((label) => (
-              <li key={label}>
-                <span className="text-caption text-text-inverse-muted/60 underline decoration-text-inverse-muted/30 underline-offset-4">
-                  {label}
-                </span>
+            {legalLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-caption text-text-inverse-muted underline decoration-text-inverse-muted/30 underline-offset-4 transition-colors duration-150 hover:text-text-inverse"
+                >
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
