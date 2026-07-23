@@ -22,16 +22,16 @@ export function InsightsHero() {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative flex min-h-screen w-full flex-col overflow-hidden lg:items-center"
+      className="relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center"
     >
-      {/* A full-height (very tall/narrow) mobile viewport forced this
-          landscape video to cover it at ~4x zoom, leaving only a sliver
-          of width visible. Instead, the video now sits in a
-          fixed-height horizontal band (250px on phones, 500px on
-          tablets — a little cropping, not a lot), stacked above the
-          text, and switches to the full-bleed absolute cover from `lg`
-          up, matching the desktop look exactly as before. */}
-      <div className="relative h-[250px] w-full shrink-0 overflow-hidden bg-[#1A140F] md:h-[500px] lg:absolute lg:inset-0 lg:h-auto">
+      {/* Below `sm`, a full-height (very tall/narrow) mobile viewport
+          forced this landscape video to cover it at ~4x zoom, leaving
+          only a sliver of width visible. Instead, the video now sits in
+          its own horizontal band (aspect-[3/2] — close to the footage's
+          own ratio, so only mild cropping) stacked above the text on
+          mobile, and switches back to the full-bleed absolute cover
+          from `sm` up, matching the desktop look exactly as before. */}
+      <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden bg-[#1A140F] sm:absolute sm:inset-0 sm:aspect-auto">
         <video
           ref={videoRef}
           className="absolute inset-0 size-full object-cover"
@@ -41,7 +41,7 @@ export function InsightsHero() {
           loop
           playsInline
         />
-        <VideoPauseToggle videoRef={videoRef} className="absolute bottom-4 right-4 z-20 lg:bottom-6 lg:right-6" />
+        <VideoPauseToggle videoRef={videoRef} className="absolute bottom-4 right-4 z-20 sm:bottom-6 sm:right-6" />
         {/* Warm near-black instead of the brand `ink` navy (see
             About/CTASection/Sector/Pool/Contact heroes) — ink stacked on
             a video reads as a flat blue block; a warm dark tone blends

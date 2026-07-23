@@ -85,17 +85,17 @@ export function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-ink text-text-inverse lg:items-end"
+      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-ink text-text-inverse sm:items-end"
     >
-      {/* A full-height (very tall/narrow) mobile viewport forced this
-          landscape video to cover it at ~4x zoom, leaving only a sliver
-          of width visible. Instead, the video now sits in a
-          fixed-height horizontal band (250px on phones, 500px on
-          tablets — a little cropping, not a lot), stacked above the
-          text, and switches to the full-bleed absolute cover from `lg`
-          up, matching the desktop look exactly as before. */}
+      {/* Below `sm`, a full-height (very tall/narrow) mobile viewport
+          forced this landscape video to cover it at ~4x zoom, leaving
+          only a sliver of width visible. Instead, the video now sits in
+          its own horizontal band (aspect-[3/2] — close to the footage's
+          own ratio, so only mild cropping) stacked above the text on
+          mobile, and switches back to the full-bleed absolute cover
+          from `sm` up, matching the desktop look exactly as before. */}
       <div
-        className="pointer-events-none relative h-[250px] w-full shrink-0 overflow-hidden md:h-[500px] lg:absolute lg:inset-0 lg:h-auto"
+        className="pointer-events-none relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto"
         aria-hidden="true"
       >
         {/* Scaled up in both dimensions (preserving aspect ratio, so
@@ -129,10 +129,10 @@ export function Hero() {
             to keep the headline and copy legible over bright footage */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 via-45% to-transparent" />
 
-        <VideoPauseToggle videoRef={videoRef} className="pointer-events-auto absolute bottom-4 right-4 z-20 lg:bottom-6 lg:right-6" />
+        <VideoPauseToggle videoRef={videoRef} className="pointer-events-auto absolute bottom-4 right-4 z-20 sm:bottom-6 sm:right-6" />
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-container pb-20 pt-8 md:pb-28 lg:pt-40">
+      <div className="container relative z-10 mx-auto max-w-container pb-20 pt-8 sm:pt-40 md:pb-28">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
