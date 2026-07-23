@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { SectionContainer, SplitContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { FadeIn } from '@/components/motion/reveal'
+import { ResponsiveHeroImage } from '@/components/media/responsive-hero-image'
 
 /**
  * Section 3 — About Preview.
@@ -44,13 +44,10 @@ export function AboutPreview() {
 
           <FadeIn delay={0.1}>
             <div className="relative aspect-[21/9] w-full overflow-hidden rounded-lg bg-canvas-muted">
-              <Image
-                src="/office.jpeg"
+              <ResponsiveHeroImage
+                src="/office.png"
                 alt="Al Quba Investment leadership at the Dubai headquarters"
-                fill
                 sizes="(min-width: 1024px) 60vw, 100vw"
-                className="object-cover"
-                priority={false}
               />
             </div>
           </FadeIn>

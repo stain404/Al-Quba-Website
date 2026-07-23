@@ -16,27 +16,54 @@ export function InvestmentCard({
   href = '#',
   wrap = true,
 }: InvestmentItem & {
-  /** Set false when the caller supplies its own motion wrapper (e.g. a
-   *  custom scroll-linked animation) instead of the default stagger fade. */
   wrap?: boolean
 }) {
   const content = (
     <Link
       href={href}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-white/10 bg-ink shadow-sm transition-all duration-200 ease-institutional hover:shadow-md focus-visible:outline-none focus-visible:shadow-focus"
+      className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 shadow-sm transition-all duration-200 ease-institutional hover:shadow-md focus-visible:outline-none focus-visible:shadow-focus"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-canvas-muted">
+      {/* ── Image ────────────────────────────────────────────────────────
+          Mobile: fills the entire card (absolute inset-0, no aspect-ratio box)
+          Desktop: normal stacked aspect-ratio box                        */}
+      <div className="relative md:aspect-[4/3] md:w-full md:shrink-0">
+        {/* Mobile full-card image */}
+        {imageSrc && (
+          <div className="absolute inset-0 md:hidden">
+            <Image
+              src={imageSrc}
+              alt={name}
+              fill
+              className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
+            />
+          </div>
+        )}
+        {/* Desktop image (inside aspect-ratio wrapper) */}
         {imageSrc && (
           <Image
             src={imageSrc}
             alt={name}
             fill
-            className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
+            className="hidden object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03] md:block"
           />
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 p-7">
+      {/* ── Text content ─────────────────────────────────────────────────
+          Mobile: overlays the image with a frosted-glass scrim
+          Desktop: sits below the image on a solid ink background          */}
+      <div
+        className={[
+          // shared
+          'relative z-10 flex flex-1 flex-col gap-4 p-7',
+          // mobile: overlay with frosted glass — sits at the BOTTOM of the card
+          'mt-auto',
+          // frosted glass scrim (mobile only)
+          'bg-black/30 backdrop-blur-md md:backdrop-blur-none',
+          // desktop: solid dark background, no blur
+          'md:bg-ink',
+        ].join(' ')}
+      >
         <div className="flex flex-col gap-2">
           <h3 className="flex items-center justify-between gap-2 text-heading-md font-semibold text-white">
             {name}
@@ -45,7 +72,7 @@ export function InvestmentCard({
               aria-hidden
             />
           </h3>
-          <p className="text-body-sm text-white/70">{description}</p>
+          <p className="text-body-sm text-white/80">{description}</p>
         </div>
 
         {metricValue && (
@@ -62,5 +89,5 @@ export function InvestmentCard({
 }
 
 export function InvestmentGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">{children}</div>
+  return <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-h-[420px] md:[&>*]:min-h-0">{children}</div>
 }

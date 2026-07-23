@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { CheckCircle2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ResponsiveHeroImage } from '@/components/media/responsive-hero-image'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Button } from '@/components/ui/button'
@@ -35,23 +35,14 @@ export function PoolHero({ pool }: { pool: Pool }) {
       )}
     >
       {pool.heroImage && (
-        /* Below `sm`, a full-height (very tall/narrow) mobile viewport
-           forced a landscape photo to cover it at ~4x zoom, leaving only
-           a sliver of width visible. Instead, the photo now sits in its
-           own horizontal band (aspect-[3/2] — close to the source
-           photos' own ratio, so only mild cropping) stacked above the
-           text on mobile, and switches back to the full-bleed absolute
-           cover from `sm` up, matching the desktop look exactly as
-           before. */
+        /* Below `sm`, the photo sits in its own horizontal band
+           (aspect-[3/2]) stacked above the text, shown in full via
+           ResponsiveHeroImage's object-contain + blurred-backdrop
+           treatment — no cropping. Switches back to the full-bleed
+           absolute object-cover from `sm` up, matching the desktop look
+           exactly as before. */
         <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto">
-          <Image
-            src={pool.heroImage}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
+          <ResponsiveHeroImage src={pool.heroImage} priority />
           {/* Warm near-black instead of the brand `ink` navy — ink
               stacked on a photo reads as a flat blue block (see
               CTASection / SectorHero); a warm dark tone blends into

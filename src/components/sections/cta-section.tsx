@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Heading } from '@/components/typography/heading'
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/motion/reveal'
+import { ResponsiveHeroImage } from '@/components/media/responsive-hero-image'
 
 export interface CTASectionProps {
   eyebrow?: string
@@ -49,22 +49,23 @@ export function CTASection({
     >
       {hasBackground && (
         <>
-          <Image
-            src={backgroundImageSrc}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-[center_45%]"
-            priority={false}
-          />
+          {/* Below `sm`, the full photo is shown via ResponsiveHeroImage's
+              object-contain + blurred-backdrop treatment instead of the
+              hard object-cover crop this banner used to force at every
+              width. From `sm` up, unchanged plain object-cover fill. */}
+          <ResponsiveHeroImage src={backgroundImageSrc} objectPosition="center 45%" />
           {/* Right-to-left gradient (opaque on the left) keeps the
               left-aligned text legible against a busy photo without
               flattening the image entirely on the right. Uses a warm
               near-black instead of the brand `ink` navy — ink stacked on
               top of this photo's own deep-blue sky read as a flat blue
-              block; a warm dark tone blends into the sunset instead. */}
+              block; a warm dark tone blends into the sunset instead.
+              Lighter on mobile, where the blurred backdrop underneath
+              already softens the photo and the text sits on its own
+              frosted-glass panel below — the original (heavier, proven)
+              desktop values are untouched from `sm` up. */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-[#1A140F] via-[#1A140F]/60 to-[#1A140F]/10"
+            className="absolute inset-0 bg-gradient-to-r from-[#1A140F]/45 via-[#1A140F]/20 to-transparent sm:from-[#1A140F] sm:via-[#1A140F]/60 sm:to-[#1A140F]/10"
             aria-hidden
           />
         </>
@@ -80,7 +81,14 @@ export function CTASection({
         <FadeIn
           className={cn(
             'flex flex-col gap-8',
-            hasBackground ? 'items-start text-left' : 'items-center text-center'
+            hasBackground
+              ? // Mobile: a subtle frosted-glass panel behind the text —
+                // blurred, barely-there, so the photo still reads through
+                // it — since the photo now sits closer to full-strength
+                // behind it (lighter gradient above). Unstyled from `sm`
+                // up, matching the original design exactly.
+                'items-start rounded-2xl border border-white/10 bg-white/8 p-6 text-left backdrop-blur-md sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none'
+              : 'items-center text-center'
           )}
         >
           <span className="text-eyebrow uppercase text-accent-ink">{eyebrow}</span>

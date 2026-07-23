@@ -125,8 +125,11 @@ export function Hero() {
         />
         {/* Scrim — subtle at the top so the video reads clearly, but
             deep enough behind the text block (bottom-anchored content)
-            to keep the headline and copy legible over bright footage */}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 via-45% to-transparent" />
+            to keep the headline and copy legible over bright footage.
+            Lighter on mobile, where the text now sits on its own
+            frosted-glass panel below for readability instead of relying
+            on a heavy dark gradient alone; unchanged from `sm` up. */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/25 via-45% to-transparent sm:from-ink/90 sm:via-ink/50" />
 
         <VideoPauseToggle videoRef={videoRef} className="pointer-events-auto absolute bottom-4 right-4 z-20 sm:bottom-6 sm:right-6" />
       </div>
@@ -136,7 +139,12 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...transitionContent, delay: 0.1 }}
-          className="flex max-w-4xl flex-col gap-8"
+          // Mobile: a subtle frosted-glass panel behind the headline/copy
+          // — blurred, barely-there, so the video still reads through it
+          // — since it now carries more of the readability work than the
+          // lightened scrim above. Unstyled from `sm` up, matching the
+          // original design exactly.
+          className="flex max-w-4xl flex-col gap-8 rounded-2xl border border-white/10 bg-white/8 p-6 backdrop-blur-md sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none"
         >
           <h1 className="font-nav text-display-sm leading-[1.1] text-text-inverse">
             Global Investments.
