@@ -71,7 +71,7 @@ export function Navbar({ logo, sections }: NavbarProps) {
           href="/"
           className={cn(
             'flex items-center gap-2.5 text-[1.75rem] font-nav leading-none transition-colors duration-300',
-            scrolled ? 'text-accent' : 'text-accent-ink'
+            scrolled ? 'text-accent-ink' : 'text-accent-soft'
           )}
           aria-label="Al Quba Investment home"
         >
@@ -99,8 +99,8 @@ export function Navbar({ logo, sections }: NavbarProps) {
                   href={section.href ?? '#'}
                   className={cn(
                     'flex items-center gap-1 rounded-md px-4 py-2 text-body-sm font-medium transition-colors duration-150',
-                    scrolled ? 'text-accent hover:text-accent-ink' : 'text-accent-ink hover:text-accent-soft',
-                    activeSection === section.label && (scrolled ? 'text-accent-ink' : 'text-accent-soft')
+                    scrolled ? 'text-accent-ink hover:text-accent-soft' : 'text-accent-soft hover:text-text-inverse',
+                    activeSection === section.label && (scrolled ? 'text-accent-soft' : 'text-text-inverse')
                   )}
                   aria-haspopup={hasDropdown || undefined}
                   aria-expanded={hasDropdown ? activeSection === section.label : undefined}
@@ -131,7 +131,7 @@ export function Navbar({ logo, sections }: NavbarProps) {
           type="button"
           className={cn(
             'inline-flex size-11 items-center justify-center rounded-md transition-colors duration-300 lg:hidden',
-            scrolled ? 'text-accent' : 'text-accent-ink'
+            scrolled ? 'text-accent-ink' : 'text-accent-soft'
           )}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
