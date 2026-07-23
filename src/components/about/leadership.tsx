@@ -22,7 +22,7 @@ const leaders: Leader[] = [
       'Along the way, being recognized as the youngest Golden Visa recipient in the UAE was a humbling milestone, inspiring me to push boundaries further.',
       "Today, guiding Al Quba's diverse companies, my goal remains the same: to fuel success, create impact, and lead with integrity.",
     ],
-    linkedin: 'https://linkedin.com',
+    linkedin: 'https://linkedin.com/in/khasim-enoli-43211734',
   },
 ]
 
@@ -65,25 +65,23 @@ export function Leadership() {
                   sizes="220px"
                   className="object-cover"
                 />
+                {leader.linkedin && (
+                  <a
+                    href={leader.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${leader.name} on LinkedIn`}
+                    className="absolute right-2 top-2 inline-flex size-9 items-center justify-center rounded-full bg-canvas-raised/90 text-navy shadow-sm backdrop-blur transition-colors duration-150 hover:bg-canvas-raised hover:text-accent-ink"
+                  >
+                    <Linkedin className="size-4" aria-hidden />
+                  </a>
+                )}
               </div>
 
               <div className="flex flex-col gap-6">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex flex-col gap-1">
-                    <h3 className="text-heading-lg font-semibold text-text-primary">{leader.name}</h3>
-                    <span className="text-body-sm font-medium text-accent-ink">{leader.role}</span>
-                  </div>
-                  {leader.linkedin && (
-                    <a
-                      href={leader.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${leader.name} on LinkedIn`}
-                      className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border-strong text-text-tertiary transition-colors duration-150 hover:border-navy hover:text-navy"
-                    >
-                      <Linkedin className="size-4" aria-hidden />
-                    </a>
-                  )}
+                <div className="flex flex-col gap-1">
+                  <h3 className="text-heading-lg font-semibold text-text-primary">{leader.name}</h3>
+                  <span className="text-body-sm font-medium text-accent-ink">{leader.role}</span>
                 </div>
 
                 <blockquote className="border-l-2 border-accent pl-5">
