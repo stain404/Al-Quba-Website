@@ -21,6 +21,7 @@ import type { Sector } from '@/lib/sectors-data'
 export function SectorHero({ sector }: { sector: Sector }) {
   const Icon = sector.icon
   const hasImage = !!sector.heroImage
+  const hasLongTagline = sector.tagline.length > 200
 
   return (
     <SectionContainer
@@ -76,7 +77,9 @@ export function SectorHero({ sector }: { sector: Sector }) {
           <Heading as="h1" size="display-lg" inverse className="font-nav">
             {sector.heroHeadline ?? sector.name}
           </Heading>
-          <p className="max-w-measure text-body-lg text-text-inverse">{sector.tagline}</p>
+          <p className={cn('max-w-measure text-text-inverse', hasLongTagline ? 'text-body-sm' : 'text-body-lg')}>
+            {sector.tagline}
+          </p>
 
           {sector.heroCta && (
             <Button variant="gold" size="lg" withArrow asChild className="group w-fit">
