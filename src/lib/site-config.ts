@@ -27,7 +27,7 @@ export const navSections: MegaMenuSection[] = [
         links: [
           { label: 'Trading', href: '/sectors/trading', description: 'Global commodity and equity desks' },
           { label: 'Real Estate', href: '/sectors/real-estate', description: 'Prime assets across four continents' },
-          { label: 'Shipping', href: '/sectors/shipping', description: 'Marine logistics and freight capital' },
+          { label: 'Shipping and Logistics', href: '/sectors/shipping', description: 'Marine logistics and freight capital' },
           { label: 'Import & Export', href: '/sectors/import-export', description: 'Cross-border trade finance' },
           { label: 'Technology', href: '/sectors/technology', description: 'Equity in the infrastructure behind trade' },
         ],

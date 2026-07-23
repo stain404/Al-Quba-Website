@@ -31,7 +31,7 @@ const panels: SectorPanel[] = [
     image: '/realestate.webp',
   },
   {
-    label: 'Shipping',
+    label: 'Shipping and Logistics',
     description: 'Marine logistics and freight capital.',
     image: '/shipping.webp',
   },

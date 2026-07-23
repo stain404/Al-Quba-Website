@@ -160,11 +160,11 @@ export const sectors: Sector[] = [
   },
   {
     slug: 'shipping',
-    name: 'Shipping',
+    name: 'Shipping and Logistics',
     icon: Ship,
     heroImage: '/shipping.webp',
     tagline:
-      'Al Quba offers end-to-end shipping and logistics solutions designed to make the movement of goods faster, safer, and more predictable. Whether your cargo travels by land, sea, or air, we handle the planning, tracking, and coordination with care. Our technology-driven approach improves efficiency while our team ensures your shipments arrive on time and within budget, giving your business a dependable supply chain you can trust.',
+      'End-to-end shipping and logistics by land, sea, or air — planned, tracked, and delivered on time, so your supply chain stays dependable.',
     description:
       'End-to-end shipping and logistics solutions from Al Quba Investment — reliable freight by land, sea, and air, powered by our partnership with Noble Star.',
     heroMetrics: [
@@ -205,7 +205,7 @@ export const sectors: Sector[] = [
     icon: PackageSearch,
     heroImage: '/importexport.png',
     tagline:
-      'At Al Quba, we simplify the entire export and import journey so businesses can trade across borders with ease. From sourcing products and coordinating shipments to handling customs, paperwork, and compliance, our team ensures every step is smooth and stress-free. We focus on reliability, transparency, and timely delivery, helping companies explore new markets and grow with confidence.',
+      'We simplify import and export — sourcing, shipping, customs, and compliance — so businesses can trade across borders with confidence.',
     description:
       'Seamless import and export solutions from Al Quba Investment — sourcing, shipping, customs, and compliance handled end-to-end for global trade.',
     heroMetrics: [
@@ -271,7 +271,7 @@ export const sectors: Sector[] = [
     heroImage: '/tech.png',
     heroImagePosition: '65% center',
     tagline:
-      'Technology is at the heart of progress, and Al Quba actively supports innovative digital solutions that help businesses and communities move forward. From software and automation to smart analytics and digital infrastructure, we back ideas that improve efficiency and create better ways of working. Our focus is on empowering organizations with tools that enhance productivity, strengthen connectivity, and open new possibilities in a digital-first world.',
+      'We back innovative digital solutions — software, automation, and smart analytics — that help businesses move forward in a digital-first world.',
     description:
       'Al Quba backs innovative digital solutions — from software and automation to smart analytics and digital infrastructure — that help businesses and communities move forward.',
     heroMetrics: [
