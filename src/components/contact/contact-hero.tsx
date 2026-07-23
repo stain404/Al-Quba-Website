@@ -17,15 +17,12 @@ export function ContactHero() {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-[#1A140F] sm:items-center"
+      className="relative flex min-h-screen w-full items-center overflow-hidden bg-[#1A140F]"
     >
-      {/* Below `sm`, the photo sits in its own horizontal band
-          (aspect-[3/2]) stacked above the text, shown in full via
-          ResponsiveHeroImage's object-contain + blurred-backdrop
-          treatment — no cropping. Switches back to the full-bleed
-          absolute object-cover from `sm` up, matching the desktop look
-          exactly as before. */}
-      <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto">
+      {/* Full-bleed on every breakpoint — text overlays the photo
+          directly (scrim below keeps it legible) instead of sitting in
+          a separate stacked band beneath it, on mobile same as desktop. */}
+      <div className="absolute inset-0">
         <ResponsiveHeroImage src="/contact.png" priority />
         {/* Warm near-black instead of the brand `ink` navy — ink stacked
             on a photo reads as a flat blue block (see CTASection /
