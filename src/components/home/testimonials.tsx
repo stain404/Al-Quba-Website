@@ -10,6 +10,7 @@ const institutionalTestimonial = {
     'Al Quba demonstrates a structured and transparent approach to investment management. The clarity in execution and consistency in communication reflect a strong operational framework.',
   name: 'Banger Financial Labs',
   role: 'Institutional Partner',
+  logoSrc: '/banger-finlabs-logo.jpeg',
 }
 
 const individualTestimonials: TestimonialItem[] = [

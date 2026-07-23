@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Building2, Quote } from 'lucide-react'
 import { Card } from '@/components/cards/card'
 
@@ -13,10 +14,12 @@ export function InstitutionalTestimonial({
   quote,
   name,
   role,
+  logoSrc,
 }: {
   quote: string
   name: string
   role: string
+  logoSrc?: string
 }) {
   return (
     <Card
@@ -25,9 +28,15 @@ export function InstitutionalTestimonial({
       className="flex flex-col gap-8 border-accent/30 md:flex-row md:items-center md:gap-12"
     >
       <div className="flex flex-row items-center gap-4 md:w-64 md:shrink-0 md:flex-col md:items-start">
-        <span className="flex size-14 shrink-0 items-center justify-center rounded-md bg-navy/8 text-navy">
-          <Building2 className="size-6" strokeWidth={1.5} aria-hidden />
-        </span>
+        {logoSrc ? (
+          <span className="relative size-14 shrink-0 overflow-hidden rounded-md bg-ink">
+            <Image src={logoSrc} alt={`${name} logo`} fill className="object-contain p-1.5" />
+          </span>
+        ) : (
+          <span className="flex size-14 shrink-0 items-center justify-center rounded-md bg-navy/8 text-navy">
+            <Building2 className="size-6" strokeWidth={1.5} aria-hidden />
+          </span>
+        )}
         <div className="flex flex-col gap-1">
           <span className="text-caption font-semibold uppercase tracking-wide text-accent-ink">
             Institutional Testimonial
