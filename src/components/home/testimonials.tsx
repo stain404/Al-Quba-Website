@@ -1,8 +1,12 @@
+'use client'
+
+import { useReducedMotion } from 'framer-motion'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { TestimonialCard } from '@/components/cards/testimonial-card'
 import { InstitutionalTestimonial } from '@/components/cards/institutional-testimonial'
 import { FadeIn } from '@/components/motion/reveal'
+import { cn } from '@/lib/utils'
 import type { TestimonialItem } from '@/types'
 
 const institutionalTestimonial = {
@@ -33,13 +37,21 @@ const individualTestimonials: TestimonialItem[] = [
   },
 ]
 
+// Duplicated so the track can loop seamlessly from -50% back to 0%,
+// same technique as the TrustIndicators logo marquee.
+const testimonialTrack = [...individualTestimonials, ...individualTestimonials]
+
 /**
  * Section 9.5 — Testimonials.
- * One institutional quote (horizontal spotlight) followed by a grid of
- * individual investor quotes — the institutional spotlight stays a
- * distinct composition rather than folding into the same grid.
+ * One institutional quote (horizontal spotlight) followed by a
+ * continuously scrolling marquee of individual investor quotes — same
+ * constant-speed CSS transform technique as the TrustIndicators logo
+ * strip, rather than a static grid. Falls back to a plain wrapped row
+ * for reduced-motion preferences.
  */
 export function Testimonials() {
+  const prefersReduced = useReducedMotion()
+
   return (
     <SectionContainer surface="muted" spacing="lg">
       <SectionHeading
@@ -51,13 +63,25 @@ export function Testimonials() {
         <FadeIn>
           <InstitutionalTestimonial {...institutionalTestimonial} />
         </FadeIn>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {individualTestimonials.map((testimonial, i) => (
-            <FadeIn key={testimonial.name} delay={0.06 * (i + 1)}>
-              <TestimonialCard {...testimonial} />
-            </FadeIn>
-          ))}
-        </div>
+        <FadeIn>
+          {prefersReduced ? (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {individualTestimonials.map((testimonial) => (
+                <TestimonialCard key={testimonial.name} {...testimonial} />
+              ))}
+            </div>
+          ) : (
+            <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+              <div className={cn('flex w-max gap-6 will-change-transform', 'animate-marquee')}>
+                {testimonialTrack.map((testimonial, i) => (
+                  <div key={`${testimonial.name}-${i}`} className="w-[380px] shrink-0">
+                    <TestimonialCard {...testimonial} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </FadeIn>
       </div>
     </SectionContainer>
   )
