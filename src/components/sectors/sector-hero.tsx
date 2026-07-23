@@ -29,20 +29,19 @@ export function SectorHero({ sector }: { sector: Sector }) {
       as="header"
       contained={!hasImage}
       className={cn(
-        'relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center',
+        'relative flex min-h-screen w-full flex-col overflow-hidden lg:items-center',
         hasImage && 'bg-[#1A140F]'
       )}
     >
       {sector.heroImage && (
-        /* Below `sm`, a full-height (very tall/narrow) mobile viewport
-           forced a landscape photo to cover it at ~4x zoom, leaving only
-           a sliver of width visible. Instead, the photo now sits in its
-           own horizontal band (aspect-[3/2] — close to the source
-           photos' own ratio, so only mild cropping) stacked above the
-           text on mobile, and switches back to the full-bleed absolute
-           cover from `sm` up, matching the desktop look exactly as
-           before. */
-        <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto">
+        /* A full-height (very tall/narrow) mobile viewport forced a
+           landscape photo to cover it at ~4x zoom, leaving only a
+           sliver of width visible. Instead, the photo now sits in a
+           fixed-height horizontal band (250px on phones, 500px on
+           tablets — a little cropping, not a lot), stacked above the
+           text, and switches to the full-bleed absolute cover from
+           `lg` up, matching the desktop look exactly as before. */
+        <div className="relative h-[250px] w-full shrink-0 overflow-hidden md:h-[500px] lg:absolute lg:inset-0 lg:h-auto">
           <Image
             src={sector.heroImage}
             alt=""
