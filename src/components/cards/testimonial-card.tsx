@@ -12,7 +12,11 @@ import type { TestimonialItem } from '@/types'
  */
 export function TestimonialCard({ quote, name, role, company, avatarSrc }: TestimonialItem) {
   return (
-    <Card surface="canvas" padding="lg" className="flex h-full flex-col gap-6 border-l-4 border-accent">
+    <Card
+      surface="canvas"
+      padding="lg"
+      className="relative flex h-full flex-col gap-6 border-l-4 border-accent transition-all duration-300 hover:z-10 hover:-translate-y-1 hover:shadow-lg"
+    >
       <Quote className="size-7 text-accent" strokeWidth={1.5} aria-hidden />
       <p className="font-display text-display-sm leading-snug text-text-primary">
         &ldquo;{quote}&rdquo;

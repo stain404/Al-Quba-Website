@@ -144,10 +144,10 @@ export function Hero() {
             Built on Transparency.
           </h1>
 
-          <p className="max-w-sm text-body-md text-text-inverse">
-            Structured, asset-backed investment pools with clearly defined
-            cycles, transparent reporting, and returns that are measured
-            — not promised.
+          <p className="max-w-lg text-[1.25rem] leading-relaxed text-text-inverse">
+            We create long-term investment opportunities through
+            diversified businesses, strategic partnerships, and disciplined
+            capital management across global industries.
           </p>
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">

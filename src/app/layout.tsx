@@ -1,26 +1,20 @@
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, Inter, IBM_Plex_Mono, Cormorant_Garamond } from 'next/font/google'
+import { Manrope, Inter, IBM_Plex_Mono } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/lib/site-config'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
 import './globals.css'
 
-const fraunces = Fraunces({
+const manrope = Manrope({
   subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
   variable: '--font-display',
-  axes: ['opsz'],
 })
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
 const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['500'],
   variable: '--font-mono',
-})
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-nav',
 })
 
 export const viewport: Viewport = {
@@ -101,10 +95,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={cn(
         'overflow-x-clip',
-        fraunces.variable,
+        manrope.variable,
         inter.variable,
-        plexMono.variable,
-        cormorant.variable
+        plexMono.variable
       )}
     >
       <body className="overflow-x-clip bg-canvas font-body text-text-primary antialiased">

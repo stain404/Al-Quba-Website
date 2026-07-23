@@ -70,7 +70,7 @@ export function Navbar({ logo, sections }: NavbarProps) {
         <Link
           href="/"
           className={cn(
-            'flex items-center gap-2.5 text-[1.75rem] font-nav leading-none transition-colors duration-300',
+            'flex items-center gap-2.5 font-nav leading-none transition-colors duration-300',
             scrolled ? 'text-accent-ink' : 'text-accent-soft'
           )}
           aria-label="Al Quba Investment home"
@@ -83,7 +83,14 @@ export function Navbar({ logo, sections }: NavbarProps) {
             className="shrink-0 object-contain"
             priority
           />
-          {logo ?? 'AL QUBA'}
+          {logo ?? (
+            <span className="flex flex-col gap-0.5">
+              <span className="text-[1.75rem] font-bold leading-none tracking-tight">AL QUBA</span>
+              <span className="text-caption font-medium uppercase tracking-wide opacity-80">
+                Al Quba Investment LLC
+              </span>
+            </span>
+          )}
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

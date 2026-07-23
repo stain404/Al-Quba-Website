@@ -76,9 +76,15 @@ export function InvestmentCard({
         </div>
 
         {metricValue && (
-          <div className="mt-auto flex items-baseline justify-between border-t border-white/20 pt-4">
+          <div className="mt-auto flex items-center justify-between border-t border-white/20 pt-4">
             <span className="text-caption uppercase tracking-wide text-white/60">{metricLabel}</span>
-            <span className="font-mono text-data-md text-white">{metricValue}</span>
+            {/* Status shown as a small, understated pill rather than a
+                large stat figure — a subscription status isn't a metric
+                worth foregrounding the way a real number would be. */}
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-2.5 py-1 text-caption font-medium text-white/85">
+              <span className="size-1.5 rounded-full bg-accent-ink" aria-hidden />
+              {metricValue}
+            </span>
           </div>
         )}
       </div>

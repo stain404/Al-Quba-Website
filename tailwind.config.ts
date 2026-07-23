@@ -64,19 +64,23 @@ const config: Config = {
         nav: ['var(--font-nav)'],
       },
       fontSize: {
-        'display-xl': ['clamp(2.75rem, 5vw + 1rem, 5.5rem)', { lineHeight: '1.02', fontWeight: '400' }],
-        'display-lg': ['clamp(2.25rem, 3.5vw + 1rem, 4rem)', { lineHeight: '1.05', fontWeight: '400' }],
-        'display-md': ['clamp(1.875rem, 2.5vw + 1rem, 2.75rem)', { lineHeight: '1.1', fontWeight: '400' }],
+        // Weights bumped to 700 for the Manrope/sans display face (a
+        // grotesque sans reads thin at the old serif-era 400 weight) —
+        // display-sm is left untouched since it's the Home hero heading's
+        // size and that heading was explicitly kept as-is.
+        'display-xl': ['clamp(2.75rem, 5vw + 1rem, 5.5rem)', { lineHeight: '1.02', fontWeight: '700' }],
+        'display-lg': ['clamp(2.25rem, 3.5vw + 1rem, 4rem)', { lineHeight: '1.05', fontWeight: '700' }],
+        'display-md': ['clamp(1.875rem, 2.5vw + 1rem, 2.75rem)', { lineHeight: '1.1', fontWeight: '700' }],
         'display-sm': ['clamp(1.5rem, 1.5vw + 1rem, 2rem)', { lineHeight: '1.15', fontWeight: '450' }],
         'heading-lg': ['1.5rem', { lineHeight: '1.3', fontWeight: '600' }],
-        'heading-md': ['1.25rem', { lineHeight: '1.35', fontWeight: '600' }],
+        'heading-md': ['1.5rem', { lineHeight: '1.3', fontWeight: '600' }],
         'heading-sm': ['1.125rem', { lineHeight: '1.4', fontWeight: '600' }],
         'body-lg': ['1.125rem', { lineHeight: '1.6', fontWeight: '400' }],
         'body-md': ['1rem', { lineHeight: '1.65', fontWeight: '400' }],
         'body-sm': ['0.875rem', { lineHeight: '1.55', fontWeight: '400' }],
         caption: ['0.75rem', { lineHeight: '1.4', fontWeight: '500' }],
-        eyebrow: ['0.75rem', { lineHeight: '1', fontWeight: '600', letterSpacing: '0.14em' }],
-        'data-lg': ['2.5rem', { lineHeight: '1', fontWeight: '500' }],
+        eyebrow: ['0.875rem', { lineHeight: '1', fontWeight: '600', letterSpacing: '0.14em' }],
+        'data-lg': ['3.75rem', { lineHeight: '1', fontWeight: '700' }],
         'data-md': ['1.5rem', { lineHeight: '1.1', fontWeight: '500' }],
       },
       spacing: {

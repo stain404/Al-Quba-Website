@@ -53,11 +53,14 @@
     --shadow-lg: 0 16px 48px rgba(11, 14, 20, 0.10);
     --shadow-focus: 0 0 0 3px rgba(58, 95, 205, 0.35);
 
-    /* Fonts — populated by next/font in app/layout.tsx via CSS variables */
-    --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+    /* Fonts — populated by next/font in app/layout.tsx via CSS variables.
+       Primary: Manrope (display headings + nav/logo wordmark). Secondary:
+       Inter (body copy, UI). --font-nav reuses the same loaded Manrope
+       family rather than loading a second font. */
+    --font-display: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
     --font-body: 'Inter', -apple-system, 'Segoe UI', sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
-    --font-nav: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+    --font-nav: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
 
     --container-max: 1280px;
   }

@@ -22,19 +22,21 @@ export function AboutPreview() {
         <div className="flex flex-col gap-14">
           <FadeIn delay={0.05} className="flex flex-col gap-6">
             <Heading as="h2" size="display-md" className="max-w-2xl">
-              A private investment house built for generational capital.
+              Building Long-Term Value Through Strategic Investments
             </Heading>
             <p className="max-w-measure text-body-lg text-text-secondary">
-              Founded in Dubai, Al Quba Investment operates across five core
-              sectors and a family of structured investment pools. We are
-              deliberately small by design — every mandate is led directly
-              by our principals, not delegated to a call center.
+              Al Quba Investment LLC is a Dubai-based investment firm
+              focused on building sustainable value through strategic
+              investments across trading, real estate, logistics,
+              technology, and global commerce. We combine disciplined
+              capital management with a long-term vision to create
+              meaningful opportunities for our investors.
             </p>
             <Link
               href="/about"
               className="group inline-flex w-fit items-center gap-2 text-body-md font-medium text-text-primary"
             >
-              Read our story
+              Read Our Story
               <ArrowRight
                 className="size-4 transition-transform duration-200 ease-institutional group-hover:translate-x-1"
                 aria-hidden

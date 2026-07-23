@@ -19,7 +19,11 @@ export function FeatureCard({
   wrap?: boolean
 }) {
   const content = (
-    <Card surface="canvas" padding="lg" className="group flex h-full flex-col gap-6">
+    <Card
+      surface="canvas"
+      padding="lg"
+      className="group flex h-full flex-col gap-6 hover:-translate-y-1"
+    >
       <div className="flex size-12 items-center justify-center rounded-md bg-navy/6 text-navy">
         {icon}
       </div>

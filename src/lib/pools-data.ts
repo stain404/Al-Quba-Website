@@ -124,12 +124,14 @@ export const pools: Pool[] = [
     name: 'Global Travel Fund I',
     category: 'Global Travel Investment Fund',
     heroImage: '/boarding_plane.png',
-    status: 'Open to Subscription',
+    status: 'Applications Open',
     tagline:
       'Travel and tourism investment fund leveraging strategic partnerships, premium travel experiences, and asset-light business models to capture global travel growth.',
     description:
       'Travel and tourism investment fund leveraging strategic partnerships, premium travel experiences, and asset-light business models to capture global travel growth.',
-    heroMetrics: [],
+    heroMetrics: [
+      { label: 'Pool Status', value: 'Applications Open' },
+    ],
     highlights: [
       'Strategic partnerships with global travel brands.',
       'High-growth travel industry.',

@@ -2,7 +2,7 @@ import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
 import { Hero } from '@/components/home/hero'
-import { TrustIndicators } from '@/components/home/trust-indicators'
+import { TrustStats } from '@/components/home/trust-stats'
 import { AboutPreview } from '@/components/home/about-preview'
 import { WhyChooseAlQuba } from '@/components/home/why-choose'
 import { InvestmentSectors } from '@/components/home/investment-sectors'
@@ -34,7 +34,7 @@ export default function HomePage() {
       <Navbar sections={navSections} />
       <main>
         {/* 1 */} <Hero />
-        {/* 2 */} <TrustIndicators />
+        {/* 2 */} <TrustStats />
         {/* 3 */} <AboutPreview />
         {/* 4 */} <WhyChooseAlQuba />
         {/* 5 */} <InvestmentSectors />

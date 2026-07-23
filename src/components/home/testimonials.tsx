@@ -37,17 +37,16 @@ const individualTestimonials: TestimonialItem[] = [
   },
 ]
 
-// Duplicated so the track can loop seamlessly from -50% back to 0%,
-// same technique as the TrustIndicators logo marquee.
+// Duplicated so the track can loop seamlessly from -50% back to 0%.
 const testimonialTrack = [...individualTestimonials, ...individualTestimonials]
 
 /**
  * Section 9.5 — Testimonials.
  * One institutional quote (horizontal spotlight) followed by a
- * continuously scrolling marquee of individual investor quotes — same
- * constant-speed CSS transform technique as the TrustIndicators logo
- * strip, rather than a static grid. Falls back to a plain wrapped row
- * for reduced-motion preferences.
+ * continuously scrolling marquee of individual investor quotes, rather
+ * than a static grid. Pauses on hover so a testimonial can actually be
+ * read, and each card lifts slightly with a soft shadow while hovered.
+ * Falls back to a plain wrapped row for reduced-motion preferences.
  */
 export function Testimonials() {
   const prefersReduced = useReducedMotion()
@@ -71,8 +70,13 @@ export function Testimonials() {
               ))}
             </div>
           ) : (
-            <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-              <div className={cn('flex w-max gap-6 will-change-transform', 'animate-marquee')}>
+            <div className="group overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+              <div
+                className={cn(
+                  'flex w-max gap-6 will-change-transform animate-marquee',
+                  'group-hover:[animation-play-state:paused]'
+                )}
+              >
                 {testimonialTrack.map((testimonial, i) => (
                   <div key={`${testimonial.name}-${i}`} className="w-[380px] shrink-0">
                     <TestimonialCard {...testimonial} />
