@@ -79,10 +79,10 @@ const organizationJsonLd = {
     addressCountry: 'AE',
   },
   sameAs: [
-    'https://facebook.com',
+    'https://www.facebook.com/profile.php?id=61564526213607',
     'https://twitter.com',
-    'https://linkedin.com',
-    'https://instagram.com',
+    'https://www.linkedin.com/company/alquba-investment-llc/posts/?feedView=all',
+    'https://www.instagram.com/alquba_investment/',
   ],
 }
 

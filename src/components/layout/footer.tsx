@@ -35,10 +35,10 @@ const flags: { code: FlagCode; name: string }[] = [
 ]
 
 const socials = [
-  { href: 'https://facebook.com', label: 'Facebook', icon: Facebook },
+  { href: 'https://www.facebook.com/profile.php?id=61564526213607', label: 'Facebook', icon: Facebook },
   { href: 'https://twitter.com', label: 'X (Twitter)', icon: Twitter },
-  { href: 'https://linkedin.com', label: 'LinkedIn', icon: Linkedin },
-  { href: 'https://instagram.com', label: 'Instagram', icon: Instagram },
+  { href: 'https://www.linkedin.com/company/alquba-investment-llc/posts/?feedView=all', label: 'LinkedIn', icon: Linkedin },
+  { href: 'https://www.instagram.com/alquba_investment/', label: 'Instagram', icon: Instagram },
 ]
 
 /** Not linked yet — no pages exist for these. Rendered as plain text until real content is ready. */
