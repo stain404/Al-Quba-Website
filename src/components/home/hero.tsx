@@ -85,17 +85,14 @@ export function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-ink text-text-inverse sm:items-end"
+      className="relative flex min-h-screen w-full items-end overflow-hidden bg-ink text-text-inverse"
     >
-      {/* Below `sm`, a full-height (very tall/narrow) mobile viewport
-          forced this landscape video to cover it at ~4x zoom, leaving
-          only a sliver of width visible. Instead, the video now sits in
-          its own horizontal band (aspect-[3/2] — close to the footage's
-          own ratio, so only mild cropping) stacked above the text on
-          mobile, and switches back to the full-bleed absolute cover
-          from `sm` up, matching the desktop look exactly as before. */}
+      {/* Full-bleed background on every breakpoint — same absolute
+          inset-0 treatment on mobile as on desktop, just with a lighter
+          zoom (see the <video> below) so the crop isn't as tight on
+          narrow screens. */}
       <div
-        className="pointer-events-none relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden="true"
       >
         {/* Scaled up in both dimensions (preserving aspect ratio, so
@@ -104,10 +101,12 @@ export function Hero() {
             by the wrapper's overflow-hidden), hiding the Runway export
             watermark. Horizontally re-centered so the same percentage is
             trimmed off each side as an unavoidable side effect of the
-            zoom. */}
+            zoom. Mobile uses a lighter 110% zoom than desktop's 122% —
+            still enough to clip the watermark, without cropping in as
+            tight on narrow screens. */}
         <video
           ref={videoRef}
-          className="absolute left-1/2 top-0 h-[122%] w-[122%] -translate-x-1/2 object-cover"
+          className="absolute left-1/2 top-0 h-[110%] w-[110%] -translate-x-1/2 object-cover sm:h-[122%] sm:w-[122%]"
           src="/hero-banner-final-4k.mp4"
           autoPlay
           muted
@@ -132,7 +131,7 @@ export function Hero() {
         <VideoPauseToggle videoRef={videoRef} className="pointer-events-auto absolute bottom-4 right-4 z-20 sm:bottom-6 sm:right-6" />
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-container pb-20 pt-8 sm:pt-40 md:pb-28">
+      <div className="container relative z-10 mx-auto max-w-container pb-20 pt-40 md:pb-28">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
