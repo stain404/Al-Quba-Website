@@ -85,15 +85,14 @@ export function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative flex w-full flex-col overflow-hidden bg-ink text-text-inverse sm:min-h-screen sm:items-end"
+      className="relative flex min-h-screen w-full items-end overflow-hidden bg-ink text-text-inverse"
     >
-      {/* Mobile: the video sits in its own band above the text (same
-          stacked treatment SectorHero uses for its photos) instead of
-          being cropped hard and overlaid behind the copy. From `sm` up,
-          it reverts to the original full-bleed background with the text
-          overlaid at the bottom. */}
+      {/* Full-bleed background on every breakpoint — same absolute
+          inset-0 treatment on mobile as on desktop, just with a lighter
+          zoom (see the <video> below) so the crop isn't as tight on
+          narrow screens. */}
       <div
-        className="relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden="true"
       >
         {/* Scaled up in both dimensions (preserving aspect ratio, so
@@ -115,7 +114,7 @@ export function Hero() {
           playsInline
         />
         <motion.div
-          className="absolute -top-1/3 left-1/2 hidden h-[900px] w-[900px] -translate-x-1/2 rounded-full opacity-[0.16] blur-[120px] sm:block"
+          className="absolute -top-1/3 left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full opacity-[0.16] blur-[120px]"
           style={{ background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)' }}
           animate={
             prefersReduced
@@ -125,17 +124,14 @@ export function Hero() {
           transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
         />
         {/* Scrim — subtle at the top so the video reads clearly, but
-            deep enough behind the text block (bottom-anchored content
-            on desktop) to keep the headline and copy legible over
-            bright footage. Kept even in the mobile stacked band, purely
-            for the same branded look SectorHero applies to its own
-            stacked photo band. */}
+            deep enough behind the text block (bottom-anchored content)
+            to keep the headline and copy legible over bright footage */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 via-45% to-transparent" />
 
         <VideoPauseToggle videoRef={videoRef} className="pointer-events-auto absolute bottom-4 right-4 z-20 sm:bottom-6 sm:right-6" />
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-container pb-16 pt-10 sm:pb-20 sm:pt-40 md:pb-28">
+      <div className="container relative z-10 mx-auto max-w-container pb-20 pt-40 md:pb-28">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
