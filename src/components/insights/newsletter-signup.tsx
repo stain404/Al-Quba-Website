@@ -47,11 +47,12 @@ export function NewsletterSignup() {
       <FadeIn className="mx-auto flex max-w-2xl flex-col items-center gap-8 text-center">
         <Eyebrow>Stay Informed</Eyebrow>
         <Heading as="h2" size="display-sm">
-          Market commentary, delivered monthly.
+          Stay Ahead with Exclusive Market Insights
         </Heading>
         <p className="max-w-measure text-body-md text-text-secondary">
-          No noise, no daily digest — one considered note from our
-          investment team, once a month.
+          Receive carefully curated investment perspectives, market
+          analysis, and strategic insights from the Al Quba Investment
+          team — delivered directly to your inbox.
         </p>
 
         {isSubmitSuccessful ? (

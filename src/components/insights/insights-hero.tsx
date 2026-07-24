@@ -1,10 +1,20 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
 import { FadeIn } from '@/components/motion/reveal'
 import { VideoPauseToggle } from '@/components/motion/video-pause-toggle'
+
+const topics = [
+  'Market Insights',
+  'Global Trade',
+  'Trade Finance',
+  'Investment Strategy',
+  'Commodities',
+  'Economic Outlook',
+]
 
 /**
  * Insights / Hero.
@@ -57,13 +67,26 @@ export function InsightsHero() {
         <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
           <Eyebrow inverse>Insights</Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
-            How we think, in writing.
+            Insights That Drive Smarter Investment Decisions
           </Heading>
           <p className="max-w-measure text-body-lg text-text-inverse">
-            Commentary on trade finance, structured investing, and the
-            markets we operate in — written by the people making the
-            allocation decisions, not a content team.
+            Explore expert perspectives on global markets, investment
+            strategies, trade finance, economic trends, and emerging
+            opportunities. Our insights are designed to help investors make
+            informed decisions with confidence.
           </p>
+          <ul className="flex flex-wrap gap-2.5">
+            {topics.map((topic) => (
+              <li key={topic}>
+                <Link
+                  href="/insights#articles"
+                  className="inline-flex items-center rounded-full border border-white/15 px-4 py-1.5 text-caption text-text-inverse-muted transition-colors duration-150 ease-institutional hover:border-accent/40 hover:text-accent-ink"
+                >
+                  {topic}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </FadeIn>
       </div>
     </SectionContainer>

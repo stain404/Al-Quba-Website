@@ -35,8 +35,8 @@ export default function InsightsPage() {
         <NewsletterSignup />
         <CTASection
           eyebrow="Have a Question"
-          title="Want a specific market covered?"
-          description="If there's a sector, region, or structure you'd like our team's view on, let us know."
+          title="Looking for Insights on a Specific Market or Sector?"
+          description="If there's a market, industry, or investment topic you'd like us to cover, our team welcomes your suggestions. We continuously publish research designed to help investors navigate evolving global opportunities."
           primaryLabel="Contact Our Team"
           primaryHref="/contact"
           secondaryLabel="View Investment Pools"

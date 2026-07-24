@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Badge } from '@/components/ui/badge'
@@ -12,6 +13,7 @@ const featured = {
   date: 'June 2026',
   readTime: '9 min read',
   href: '/insights',
+  imageSrc: '/Trading.png',
 }
 
 /**
@@ -29,8 +31,16 @@ export function FeaturedArticle() {
           href={featured.href}
           className="group relative flex min-h-[480px] flex-col justify-end overflow-hidden rounded-lg bg-navy p-10 focus-visible:outline-none focus-visible:shadow-focus md:p-16"
         >
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(176,141,87,0.16),transparent_60%)] transition-transform duration-500 ease-institutional group-hover:scale-[1.02]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
+          <Image
+            src={featured.imageSrc}
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.02]"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(176,141,87,0.16),transparent_60%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-navy/10" />
 
           <div className="relative z-10 flex max-w-2xl flex-col gap-6">
             <Badge variant="gold" className="w-fit">
