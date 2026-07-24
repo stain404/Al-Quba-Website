@@ -18,6 +18,8 @@ import {
   Globe2,
   Repeat,
   Award,
+  Truck,
+  Package,
 } from 'lucide-react'
 
 export interface PoolStep {
@@ -180,12 +182,13 @@ export const pools: Pool[] = [
     slug: 'cocoa',
     name: 'Premium Cocoa Fund I',
     category: 'Branded Chocolate Trading Fund',
+    poolNumber: 2,
     heroImage: '/cocoa_beans.png',
-    status: 'Currently not accepting new investments',
+    status: 'Fully Subscribed',
     tagline:
-      'Branded chocolate trading and distribution fund leveraging premium supplier partnerships, high-demand FMCG cycles, and efficient retail distribution to generate stable, scalable returns.',
+      'Premium Cocoa Fund I is a professionally managed branded chocolate trading investment pool designed to capitalize on consistent global FMCG demand. Through strategic supplier partnerships, efficient distribution networks, and disciplined capital deployment, the fund focuses on creating sustainable long-term value while maintaining operational efficiency and controlled risk.',
     description:
-      'Branded chocolate trading and distribution fund leveraging premium supplier partnerships, high-demand FMCG cycles, and efficient retail distribution to generate stable, scalable returns.',
+      'Premium Cocoa Fund I is a branded chocolate trading and distribution investment pool focused on sourcing internationally recognised premium chocolate brands and supplying high-demand retail and wholesale markets. By combining strong supplier relationships, efficient inventory management, and an established distribution network, the fund is structured to maximise capital efficiency while delivering sustainable long-term growth.',
     heroMetrics: [
       { label: 'Pool Status', value: 'Fully Subscribed' },
     ],
@@ -195,6 +198,53 @@ export const pools: Pool[] = [
       'Efficient retail and distribution network.',
       'Margin optimization through bulk procurement.',
     ],
+    snapshot: [
+      { icon: PieChart, label: 'Profit Split', value: '50% / 50%', detail: 'Al Quba / Investors' },
+      { icon: Lock, label: 'Lock-in Period', value: '1 Year' },
+      { icon: Clock, label: 'Cool-off Period', value: '20 Days' },
+      { icon: History, label: 'Pool Age', value: '3 Years' },
+      {
+        icon: TrendingUp,
+        label: 'Projected Monthly Returns',
+        value: 'Up to 2%',
+        disclaimer: 'Projected returns are indicative only and do not guarantee future performance.',
+      },
+      { icon: Target, label: 'Target Capital', value: 'AED 2 Million' },
+      { icon: Wallet, label: 'Minimum Investment', value: 'AED 50,000' },
+      { icon: Percent, label: 'Management Fee', value: '2%' },
+      { icon: BadgeCheck, label: 'Pool Status', value: 'Fully Subscribed', isStatus: true },
+    ],
+    investmentHighlights: [
+      {
+        icon: Globe2,
+        title: 'Strong Global Chocolate Brand Sourcing',
+        description:
+          'The fund partners with internationally recognised premium chocolate manufacturers and suppliers, ensuring consistent access to high-quality branded products with strong consumer demand.',
+      },
+      {
+        icon: TrendingUp,
+        title: 'High-Demand FMCG Category',
+        description:
+          'Branded chocolate remains one of the world’s most resilient fast-moving consumer goods categories, benefiting from repeat purchases, broad consumer appeal, and stable year-round demand.',
+      },
+      {
+        icon: Truck,
+        title: 'Efficient Retail & Distribution Network',
+        description:
+          'An established distribution infrastructure enables efficient product movement across retail, wholesale, and export markets while maintaining consistent inventory availability.',
+      },
+      {
+        icon: Package,
+        title: 'Margin Optimisation Through Bulk Procurement',
+        description:
+          'Strategic purchasing, supplier negotiations, and disciplined inventory planning help improve procurement efficiency, optimise operating margins, and enhance overall profitability.',
+      },
+    ],
+    faq: {
+      question: 'What happens after I submit my investment enquiry?',
+      answer:
+        'Once your enquiry has been received, our investment team will review your information and contact you to discuss the investment structure, eligibility requirements, and available opportunities. As Premium Cocoa Fund I is currently fully subscribed, interested investors may also be informed about future investment pools or waiting list opportunities.',
+    },
     steps: [
       { title: 'Offtake Agreement', description: 'A processor commits to a fixed-price offtake contract ahead of the harvest season.' },
       { title: 'Cooperative Financing', description: 'Pool capital advances working capital to smallholder cooperatives to fund the harvest.' },
