@@ -48,12 +48,13 @@ export function ContactHero() {
         <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
           <Eyebrow inverse>Contact</Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
-            Speak with a principal, not a call center.
+            Connect Directly With Our Investment Team
           </Heading>
           <p className="max-w-measure text-body-lg text-text-inverse">
-            Every inquiry is reviewed personally by our investment team. Tell
-            us about your objectives and we&rsquo;ll respond within one
-            business day.
+            Whether you&rsquo;re an institutional investor, family office,
+            strategic partner, or prospective client, our investment team is
+            here to understand your objectives and provide tailored guidance
+            with professionalism and discretion.
           </p>
         </FadeIn>
       </div>

@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/footer'
 import { ContactHero } from '@/components/contact/contact-hero'
 import { ContactFormSection } from '@/components/contact/contact-form-section'
 import { ContactFAQ } from '@/components/contact/contact-faq'
+import { OfficeMap } from '@/components/contact/office-map'
 import { navSections } from '@/lib/site-config'
 import { faqs } from '@/lib/faq-data'
 import { buildMetadata } from '@/lib/seo'
@@ -21,8 +22,10 @@ export const metadata = buildMetadata({
  * page-specific sections (src/components/contact/). Deliberately omits
  * the closing CTASection used on every other page: this page is already
  * the destination that CTA points to, so repeating it here would be
- * redundant. Surface order (ink → canvas → muted) keeps the alternation
- * rule intact even at three sections.
+ * redundant. OfficeMap closes the page on the same canvas surface as
+ * the form section — a quiet trust signal, not a fourth distinct
+ * "surface" beat, so it deliberately breaks the strict alternation
+ * rule used elsewhere.
  */
 export default function ContactPage() {
   return (
@@ -34,6 +37,7 @@ export default function ContactPage() {
         <ContactHero />
         <ContactFormSection />
         <ContactFAQ />
+        <OfficeMap />
       </main>
       <Footer />
     </>

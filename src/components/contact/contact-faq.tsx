@@ -21,7 +21,7 @@ export function ContactFAQ() {
 
   return (
     <SectionContainer surface="muted" spacing="lg">
-      <SectionHeading eyebrow="Frequently Asked" title="Before you reach out" />
+      <SectionHeading eyebrow="Frequently Asked" title="Common Investor Questions" />
 
       <FadeIn delay={0.05} className="mt-16">
         <ul className="flex flex-col">

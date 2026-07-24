@@ -1,8 +1,12 @@
-import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, MessageCircle, Clock } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
+import { Card } from '@/components/cards/card'
+import { Button } from '@/components/ui/button'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { ContactForm } from '@/components/forms/contact-form'
 import { FadeIn } from '@/components/motion/reveal'
+import { WHATSAPP_NUMBER } from '@/components/layout/whatsapp-button'
 
 const details = [
   {
@@ -51,28 +55,51 @@ export function ContactFormSection() {
             </Heading>
           </div>
 
-          <dl className="flex flex-col gap-8">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {details.map((detail) => (
-              <div key={detail.label} className="flex items-start gap-4">
-                <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-navy/6 text-navy">
-                  <detail.icon className="size-5" strokeWidth={1.5} aria-hidden />
-                </span>
-                <div className="flex flex-col gap-0.5">
-                  <dt className="text-caption uppercase tracking-wide text-text-tertiary">{detail.label}</dt>
-                  <dd className="text-body-md text-text-primary">
-                    <a
-                      href={detail.href}
-                      target={detail.href.startsWith('http') ? '_blank' : undefined}
-                      rel={detail.href.startsWith('http') ? 'noreferrer' : undefined}
-                      className="transition-colors duration-150 hover:text-navy"
-                    >
-                      {detail.value}
-                    </a>
-                  </dd>
-                </div>
-              </div>
+              <a
+                key={detail.label}
+                href={detail.href}
+                target={detail.href.startsWith('http') ? '_blank' : undefined}
+                rel={detail.href.startsWith('http') ? 'noreferrer' : undefined}
+                className="block h-full focus-visible:outline-none focus-visible:shadow-focus rounded-lg"
+              >
+                <Card
+                  surface="canvas"
+                  padding="sm"
+                  className="flex h-full flex-col gap-3 transition-all duration-200 ease-institutional hover:-translate-y-1 hover:shadow-md"
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-navy/6 text-navy">
+                    <detail.icon className="size-5" strokeWidth={1.5} aria-hidden />
+                  </span>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-caption uppercase tracking-wide text-text-tertiary">{detail.label}</span>
+                    <span className="text-body-sm text-text-primary">{detail.value}</span>
+                  </div>
+                </Card>
+              </a>
             ))}
-          </dl>
+          </div>
+
+          <div className="flex items-start gap-3 border-t border-border pt-8">
+            <Clock className="mt-0.5 size-4 shrink-0 text-text-tertiary" strokeWidth={1.5} aria-hidden />
+            <div className="flex flex-col gap-0.5">
+              <span className="text-caption uppercase tracking-wide text-text-tertiary">Office Hours</span>
+              <span className="text-body-sm text-text-secondary">Monday – Friday, 9:00 AM – 6:00 PM GST</span>
+            </div>
+          </div>
+
+          <Button variant="outline" size="lg" asChild className="w-fit">
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5"
+            >
+              <WhatsAppIcon className="size-5 text-[#25D366]" />
+              Chat with Us on WhatsApp
+            </a>
+          </Button>
         </FadeIn>
 
         <FadeIn delay={0.08}>

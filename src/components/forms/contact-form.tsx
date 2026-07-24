@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { CheckCircle2 } from 'lucide-react'
+import { Check, CheckCircle2 } from 'lucide-react'
 import { Input, Textarea, Select, Checkbox, FieldWrapper } from '@/components/ui/inputs'
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/motion/reveal'
@@ -77,9 +77,12 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
     return (
       <FadeIn className="flex flex-col items-center gap-4 rounded-lg border border-border bg-canvas-muted p-12 text-center">
         <CheckCircle2 className="size-10 text-success" strokeWidth={1.5} aria-hidden />
-        <h3 className="text-heading-lg font-semibold text-text-primary">Thank you for reaching out</h3>
+        <h3 className="text-heading-lg font-semibold text-text-primary">
+          Thank you for contacting Al Quba Investment.
+        </h3>
         <p className="max-w-measure text-body-md text-text-secondary">
-          A member of our team will respond within one business day.
+          Our investment team has received your enquiry and will respond
+          within one business day.
         </p>
       </FadeIn>
     )
@@ -111,7 +114,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         <FieldWrapper id="company" label="Company / Family office" required error={errors.company?.message}>
           <Input id="company" placeholder="Enter your company name" {...register('company')} />
         </FieldWrapper>
-        <FieldWrapper id="inquiryType" label="Inquiry type" required error={errors.inquiryType?.message}>
+        <FieldWrapper id="inquiryType" label="How can we help you?" required error={errors.inquiryType?.message}>
           <Select
             id="inquiryType"
             placeholder="Select an inquiry type"
@@ -153,6 +156,17 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <Button type="submit" size="lg" loading={isSubmitting} withArrow className="group mt-2 self-start">
         Submit Inquiry
       </Button>
+
+      <ul className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
+        {['Confidential & Secure', 'Response within 1 Business Day', 'Your information will never be shared'].map(
+          (item) => (
+            <li key={item} className="flex items-center gap-1.5 text-caption text-text-tertiary">
+              <Check className="size-3.5 text-success" strokeWidth={2} aria-hidden />
+              {item}
+            </li>
+          )
+        )}
+      </ul>
     </form>
   )
 }
