@@ -70,7 +70,7 @@ function Panel({
       onClick={onActivate}
       className={cn(
         'group relative flex cursor-pointer flex-col overflow-hidden rounded-lg transition-[flex-grow] duration-500 ease-in-out lg:flex-row',
-        isActive ? 'flex-1 lg:flex-[3.5]' : 'flex-[0.2] lg:w-16 lg:flex-[0.55]'
+        isActive ? 'flex-1 lg:flex-[3.5]' : 'flex-[0.4] lg:w-16 lg:flex-[0.55]'
       )}
     >
       <Image
@@ -93,7 +93,12 @@ function Panel({
 
       <div className="relative z-10 flex h-full w-full flex-row lg:flex-col">
         {!isActive && (
-          <div className="flex h-full items-center justify-center px-4 py-8 transition-all duration-500 lg:px-4 lg:py-10 lg:[writing-mode:vertical-lr]">
+          /* py-8 (tuned for the vertical rotated text on desktop, where
+             padding runs along the column's length) left collapsed mobile
+             strips with almost no room for a single horizontal text line —
+             at ~47px tall (5 panels sharing a 420px column) that reads as
+             visibly clipped. Mobile gets much lighter padding instead. */
+          <div className="flex h-full items-center justify-center px-4 py-2 transition-all duration-500 lg:px-4 lg:py-10 lg:[writing-mode:vertical-lr]">
             <h3 className="whitespace-nowrap font-semibold text-body-md text-white/75 lg:rotate-180">{panel.label}</h3>
           </div>
         )}
@@ -130,7 +135,7 @@ export function InvestmentSectors() {
     >
       <SectionHeading eyebrow="Where We Invest" title="Five sectors, one disciplined thesis" align="left" inverse />
 
-      <div className="mt-10 flex h-[420px] flex-col gap-2 lg:h-[320px] lg:flex-row xl:gap-2.5">
+      <div className="mt-10 flex h-[440px] flex-col gap-2 lg:h-[320px] lg:flex-row xl:gap-2.5">
         {panels.map((panel, index) => (
           <Panel
             key={panel.label}
