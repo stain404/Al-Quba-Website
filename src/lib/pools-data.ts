@@ -15,9 +15,6 @@ import {
   Wallet,
   Percent,
   BadgeCheck,
-  Globe2,
-  Truck,
-  Package,
 } from 'lucide-react'
 
 export interface PoolStep {
@@ -177,48 +174,13 @@ export const pools: Pool[] = [
       { icon: Percent, label: 'Management Fee', value: '2%' },
       { icon: BadgeCheck, label: 'Pool Status', value: 'Fully Subscribed', isStatus: true },
     ],
-    investmentHighlights: [
-      {
-        icon: Globe2,
-        title: 'Strong Global Chocolate Brand Sourcing',
-        description:
-          'The fund partners with internationally recognised premium chocolate manufacturers and suppliers, ensuring consistent access to high-quality branded products with strong consumer demand.',
-      },
-      {
-        icon: TrendingUp,
-        title: 'High-Demand FMCG Category',
-        description:
-          'Branded chocolate remains one of the world’s most resilient fast-moving consumer goods categories, benefiting from repeat purchases, broad consumer appeal, and stable year-round demand.',
-      },
-      {
-        icon: Truck,
-        title: 'Efficient Retail & Distribution Network',
-        description:
-          'An established distribution infrastructure enables efficient product movement across retail, wholesale, and export markets while maintaining consistent inventory availability.',
-      },
-      {
-        icon: Package,
-        title: 'Margin Optimisation Through Bulk Procurement',
-        description:
-          'Strategic purchasing, supplier negotiations, and disciplined inventory planning help improve procurement efficiency, optimise operating margins, and enhance overall profitability.',
-      },
-    ],
-    faq: {
-      question: 'What happens after I submit my investment enquiry?',
-      answer:
-        'Once your enquiry has been received, our investment team will review your information and contact you to discuss the investment structure, eligibility requirements, and available opportunities. As Premium Cocoa Fund I is currently fully subscribed, interested investors may also be informed about future investment pools or waiting list opportunities.',
-    },
     steps: [
       { title: 'Offtake Agreement', description: 'A processor commits to a fixed-price offtake contract ahead of the harvest season.' },
       { title: 'Cooperative Financing', description: 'Pool capital advances working capital to smallholder cooperatives to fund the harvest.' },
       { title: 'Aggregation & Export', description: 'Cocoa is aggregated, quality-graded, and exported under the offtake agreement.' },
       { title: 'Delivery & Repayment', description: 'Delivery to the processor triggers repayment at the pre-agreed contract price.' },
     ],
-    structure: [
-      { term: 'Lock-in Period', detail: '1 Year' },
-      { term: 'Cooling Period', detail: '20 Days' },
-      { term: 'Pool Age', detail: '3 Years' },
-    ],
+    structure: [],
     risks: [
       { icon: ShieldCheck, title: 'Fixed-Price Offtake', description: 'Contract pricing is locked in before capital is deployed, removing spot-price exposure from the pool.' },
       { icon: Landmark, title: 'Cooperative Vetting', description: 'Every financed cooperative has a multi-season delivery track record before onboarding.' },
