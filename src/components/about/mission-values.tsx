@@ -1,13 +1,10 @@
 'use client'
 
-import { ShieldCheck, Compass, HandCoins, Handshake } from 'lucide-react'
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { SectionContainer, SplitContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { Card } from '@/components/cards/card'
-import { FeatureCard, FeatureGrid } from '@/components/cards/feature-card'
 import { FadeIn } from '@/components/motion/reveal'
-import type { FeatureItem } from '@/types'
 
 const visionMission = [
   {
@@ -20,77 +17,32 @@ const visionMission = [
   },
 ]
 
-const values: FeatureItem[] = [
-  {
-    icon: <ShieldCheck className="size-6" strokeWidth={1.5} aria-hidden />,
-    title: 'Stewardship',
-    description: 'We treat every mandate as if it were our own family capital, because in most cases, it is invested alongside it.',
-  },
-  {
-    icon: <Compass className="size-6" strokeWidth={1.5} aria-hidden />,
-    title: 'Discipline',
-    description: 'A formal risk committee reviews every allocation before deployment, regardless of relationship or size.',
-  },
-  {
-    icon: <HandCoins className="size-6" strokeWidth={1.5} aria-hidden />,
-    title: 'Transparency',
-    description: 'Investors receive full visibility into the physical trade cycles their capital is collateralized against.',
-  },
-  {
-    icon: <Handshake className="size-6" strokeWidth={1.5} aria-hidden />,
-    title: 'Partnership',
-    description: 'We structure terms around multi-year relationships, not one-off placements.',
-  },
-]
-
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 60, transition: { duration: 0.6, ease: 'easeInOut' } },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
 /**
- * Each value card reveals from below as it scrolls into view and retreats
- * back down when it scrolls out (`viewport.once: false`, so it's fully
- * reversible). Uses a viewport-intersection trigger rather than a
- * continuously-scrubbed transform — this section sits close enough to
- * the top of the page that a pixel-offset-based scroll transform can
- * already be past its own "hidden" range on load, which is what made it
- * not animate at all.
- */
-function AnimatedValueCard({ value }: { value: FeatureItem }) {
-  const prefersReduced = useReducedMotion()
-
-  return (
-    <motion.div
-      initial={prefersReduced ? undefined : 'hidden'}
-      whileInView={prefersReduced ? undefined : 'visible'}
-      viewport={prefersReduced ? undefined : { once: false, amount: 0.3 }}
-      variants={prefersReduced ? undefined : cardVariants}
-      className="h-full"
-    >
-      <FeatureCard {...value} wrap={false} />
-    </motion.div>
-  )
-}
-
-/**
- * About / Who We Are, Vision & Mission, Core Values.
+ * About / Who We Are, Vision & Mission.
  * Editorial split (label column + content), same pattern used on the
- * Home "About Preview" section for continuity: an intro statement, the
- * vision/mission pairing as two equal cards, then the FeatureCard grid
- * of values.
+ * Home "About Preview" section for continuity: an intro statement
+ * followed by the vision/mission pairing as two equal cards. Tighter
+ * bottom padding than the section's usual `lg` spacing (via the pb-*
+ * override below) — this is now a short, two-part block rather than
+ * the longer intro+cards+values-grid stack it used to close out, so
+ * the full `lg` bottom gap read as leftover empty space.
  */
 export function MissionValues() {
   const prefersReduced = useReducedMotion()
 
   return (
-    <SectionContainer surface="canvas" spacing="lg">
+    <SectionContainer surface="canvas" spacing="lg" className="pb-10 md:pb-14">
       <SplitContainer>
         <FadeIn>
           <Eyebrow>Who We Are</Eyebrow>
         </FadeIn>
 
-        <div className="flex flex-col gap-14">
+        <div className="flex flex-col gap-8">
           <motion.div
             initial={prefersReduced ? undefined : 'hidden'}
             whileInView={prefersReduced ? undefined : 'visible'}
@@ -114,19 +66,13 @@ export function MissionValues() {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {visionMission.map((item) => (
-              <Card key={item.label} surface="canvas" padding="lg" className="flex flex-col gap-4">
+              <Card key={item.label} surface="canvas" padding="md" className="flex flex-col gap-3">
                 <span className="h-px w-8 bg-accent" aria-hidden />
                 <h3 className="text-heading-md font-display font-semibold text-text-primary">{item.label}</h3>
                 <p className="text-body-md text-text-secondary">{item.body}</p>
               </Card>
             ))}
           </div>
-
-          <FeatureGrid>
-            {values.map((value) => (
-              <AnimatedValueCard key={value.title} value={value} />
-            ))}
-          </FeatureGrid>
         </div>
       </SplitContainer>
     </SectionContainer>
