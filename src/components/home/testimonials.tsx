@@ -1,12 +1,8 @@
-'use client'
-
-import { useReducedMotion } from 'framer-motion'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { TestimonialCard } from '@/components/cards/testimonial-card'
 import { InstitutionalTestimonial } from '@/components/cards/institutional-testimonial'
 import { FadeIn } from '@/components/motion/reveal'
-import { cn } from '@/lib/utils'
 import type { TestimonialItem } from '@/types'
 
 const institutionalTestimonial = {
@@ -37,20 +33,16 @@ const individualTestimonials: TestimonialItem[] = [
   },
 ]
 
-// Duplicated so the track can loop seamlessly from -50% back to 0%.
-const testimonialTrack = [...individualTestimonials, ...individualTestimonials]
-
 /**
  * Section 9.5 — Testimonials.
- * One institutional quote (horizontal spotlight) followed by a
- * continuously scrolling marquee of individual investor quotes, rather
- * than a static grid. Pauses on hover so a testimonial can actually be
- * read, and each card lifts slightly with a soft shadow while hovered.
- * Falls back to a plain wrapped row for reduced-motion preferences.
+ * The institutional quote stays a full-width spotlight — logo left,
+ * quote right — exactly as before. Below it, individual investor
+ * testimonials are a plain 3-column grid on desktop rather than the
+ * auto-scrolling marquee this replaced; on mobile they become a
+ * horizontal, swipeable one-card-at-a-time carousel (native scroll-snap,
+ * no JS), each card lifting slightly on hover.
  */
 export function Testimonials() {
-  const prefersReduced = useReducedMotion()
-
   return (
     <SectionContainer surface="muted" spacing="lg">
       <SectionHeading
@@ -62,29 +54,15 @@ export function Testimonials() {
         <FadeIn>
           <InstitutionalTestimonial {...institutionalTestimonial} />
         </FadeIn>
+
         <FadeIn>
-          {prefersReduced ? (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {individualTestimonials.map((testimonial) => (
-                <TestimonialCard key={testimonial.name} {...testimonial} />
-              ))}
-            </div>
-          ) : (
-            <div className="group overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-              <div
-                className={cn(
-                  'flex w-max gap-6 will-change-transform animate-marquee',
-                  'group-hover:[animation-play-state:paused]'
-                )}
-              >
-                {testimonialTrack.map((testimonial, i) => (
-                  <div key={`${testimonial.name}-${i}`} className="w-[380px] shrink-0">
-                    <TestimonialCard {...testimonial} />
-                  </div>
-                ))}
+          <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
+            {individualTestimonials.map((testimonial) => (
+              <div key={testimonial.name} className="w-full shrink-0 snap-center sm:w-auto">
+                <TestimonialCard {...testimonial} />
               </div>
-            </div>
-          )}
+            ))}
+          </div>
         </FadeIn>
       </div>
     </SectionContainer>

@@ -1,41 +1,46 @@
-'use client'
-
 import Image from 'next/image'
 import { Quote } from 'lucide-react'
-import { Card } from '@/components/cards/card'
 import type { TestimonialItem } from '@/types'
 
+function getInitials(name: string) {
+  const parts = name.trim().split(/\s+/)
+  const first = parts[0]?.[0] ?? ''
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : ''
+  return (first + last).toUpperCase()
+}
+
 /**
- * Individual investor testimonial — a left-accent pull-quote, used in a
- * grid alongside other individual testimonials beneath the institutional
- * spotlight.
+ * Compact investor testimonial card — three per row on desktop, a
+ * swipeable single-column carousel on mobile (see Testimonials).
+ * Deliberately plain (white, thin neutral border, subtle shadow) rather
+ * than reusing the site's Card component variants — a specific, minimal
+ * premium-investment-firm spec, distinct from the pull-quote card this
+ * replaced.
  */
 export function TestimonialCard({ quote, name, role, company, avatarSrc }: TestimonialItem) {
   return (
-    <Card
-      surface="canvas"
-      padding="lg"
-      className="relative flex h-full flex-col gap-6 border-l-4 border-accent transition-all duration-300 hover:z-10 hover:-translate-y-1 hover:shadow-lg"
-    >
-      <Quote className="size-7 text-accent" strokeWidth={1.5} aria-hidden />
-      <p className="font-display text-display-sm leading-snug text-text-primary">
+    <div className="flex h-full min-h-[260px] flex-col gap-4 rounded-2xl border border-[#E8E8E8] bg-white p-6 shadow-sm transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-md">
+      <Quote className="size-6 shrink-0 text-accent" strokeWidth={2} aria-hidden />
+
+      <p className="line-clamp-4 flex-1 text-[1.25rem] font-medium leading-[1.6] text-text-primary">
         &ldquo;{quote}&rdquo;
       </p>
-      <div className="flex items-center gap-3 border-t border-border pt-6">
+
+      <div className="flex items-center gap-3 border-t border-[#E8E8E8] pt-4">
         {avatarSrc ? (
-          <Image src={avatarSrc} alt={name} width={44} height={44} className="size-11 rounded-full object-cover" />
+          <Image src={avatarSrc} alt={name} width={44} height={44} className="size-11 shrink-0 rounded-full object-cover" />
         ) : (
-          <div className="flex size-11 items-center justify-center rounded-full bg-navy/8 text-body-sm font-semibold text-navy">
-            {name.charAt(0)}
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-navy/8 text-body-sm font-semibold text-navy">
+            {getInitials(name)}
           </div>
         )}
         <div className="flex flex-col">
-          <span className="text-body-sm font-semibold text-text-primary">{name}</span>
+          <span className="text-body-md font-semibold text-text-primary">{name}</span>
           <span className="text-caption text-text-tertiary">
             {company ? `${role}, ${company}` : role}
           </span>
         </div>
       </div>
-    </Card>
+    </div>
   )
 }
