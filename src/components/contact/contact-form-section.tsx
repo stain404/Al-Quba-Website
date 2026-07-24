@@ -47,7 +47,7 @@ export function ContactFormSection() {
   return (
     <SectionContainer surface="canvas" spacing="lg">
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.3fr]">
-        <FadeIn className="flex flex-col gap-10">
+        <FadeIn className="flex flex-col gap-12">
           <div className="flex flex-col gap-4">
             <Eyebrow>Get in Touch</Eyebrow>
             <Heading as="h2" size="display-sm" className="max-w-sm">
@@ -55,7 +55,7 @@ export function ContactFormSection() {
             </Heading>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
             {details.map((detail) => (
               <a
                 key={detail.label}
@@ -81,7 +81,7 @@ export function ContactFormSection() {
             ))}
           </div>
 
-          <div className="flex items-start gap-3 border-t border-border pt-8">
+          <div className="flex items-start gap-3 border-t border-border pt-10">
             <Clock className="mt-0.5 size-4 shrink-0 text-text-tertiary" strokeWidth={1.5} aria-hidden />
             <div className="flex flex-col gap-0.5">
               <span className="text-caption uppercase tracking-wide text-text-tertiary">Office Hours</span>
@@ -102,9 +102,23 @@ export function ContactFormSection() {
           </Button>
         </FadeIn>
 
-        <FadeIn delay={0.08}>
-          <ContactForm />
-        </FadeIn>
+        <div className="flex flex-col gap-12">
+          {/* Invisible mirror of the left column's heading block, sized
+              identically so the form below starts at the same visual
+              level as the first row of contact cards rather than the
+              very top of the column. Hidden below `lg`, where the two
+              columns stack and this alignment no longer applies. */}
+          <div className="hidden flex-col gap-4 lg:flex" aria-hidden="true">
+            <Eyebrow className="invisible">Get in Touch</Eyebrow>
+            <Heading as="h2" size="display-sm" className="invisible max-w-sm">
+              Reach us directly
+            </Heading>
+          </div>
+
+          <FadeIn delay={0.08}>
+            <ContactForm />
+          </FadeIn>
+        </div>
       </div>
     </SectionContainer>
   )

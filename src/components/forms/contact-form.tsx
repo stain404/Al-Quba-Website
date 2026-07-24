@@ -127,46 +127,57 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <FieldWrapper id="message" label="Message" required error={errors.message?.message}>
         <Textarea
           id="message"
+          rows={7}
           placeholder="Tell us about your objectives and investment horizon."
           {...register('message')}
         />
       </FieldWrapper>
 
-      <Checkbox
-        id="consent"
-        label={
-          <>
-            I agree to be contacted by Al Quba Investment regarding this inquiry, in line with
-            the{' '}
-            <Link href="/privacy" className="underline underline-offset-2 hover:text-text-primary">
-              Privacy Policy
-            </Link>
-            .
-          </>
-        }
-        aria-invalid={!!errors.consent}
-        {...register('consent')}
-      />
-      {errors.consent && (
-        <p role="alert" className="-mt-3 text-caption text-error">
-          {errors.consent.message}
-        </p>
-      )}
-
-      <Button type="submit" size="lg" loading={isSubmitting} withArrow className="group mt-2 self-start">
-        Submit Inquiry
-      </Button>
-
-      <ul className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
-        {['Confidential & Secure', 'Response within 1 Business Day', 'Your information will never be shared'].map(
-          (item) => (
-            <li key={item} className="flex items-center gap-1.5 text-caption text-text-tertiary">
-              <Check className="size-3.5 text-success" strokeWidth={2} aria-hidden />
-              {item}
-            </li>
-          )
+      <div className="mt-4">
+        <Checkbox
+          id="consent"
+          label={
+            <>
+              I agree to be contacted by Al Quba Investment regarding this inquiry, in line with
+              the{' '}
+              <Link href="/privacy" className="underline underline-offset-2 hover:text-text-primary">
+                Privacy Policy
+              </Link>
+              .
+            </>
+          }
+          aria-invalid={!!errors.consent}
+          {...register('consent')}
+        />
+        {errors.consent && (
+          <p role="alert" className="mt-2 text-caption text-error">
+            {errors.consent.message}
+          </p>
         )}
-      </ul>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <Button
+          type="submit"
+          size="lg"
+          loading={isSubmitting}
+          withArrow
+          className="group mt-2 min-w-[240px] self-start"
+        >
+          Submit Inquiry
+        </Button>
+
+        <ul className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
+          {['Confidential & Secure', 'Response within 1 Business Day', 'Your information will never be shared'].map(
+            (item) => (
+              <li key={item} className="flex items-center gap-1.5 text-caption text-text-tertiary">
+                <Check className="size-3.5 text-success" strokeWidth={2} aria-hidden />
+                {item}
+              </li>
+            )
+          )}
+        </ul>
+      </div>
     </form>
   )
 }
