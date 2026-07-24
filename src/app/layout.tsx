@@ -94,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={cn(
-        'overflow-x-clip',
+        'overflow-x-clip scroll-smooth',
         manrope.variable,
         inter.variable,
         plexMono.variable

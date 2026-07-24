@@ -11,12 +11,20 @@ import type { Sector } from '@/lib/sectors-data'
  * Sector Detail / Hero.
  * Ink surface with a sector icon badge — the same composition as
  * PoolHero, reused deliberately since both are "detail page opens on a
- * dark surface with an icon + inline metrics" moments. When a sector
- * supplies its own `heroHeadline`, that replaces `name` as the H1 (with
- * `name` moving to the eyebrow), and an optional `heroCta` adds a button.
+ * dark surface" moments. When a sector supplies its own `heroHeadline`,
+ * that replaces `name` as the H1 (with `name` moving to the eyebrow).
  * When a sector supplies `heroImage`, it's used as a full-bleed photo
  * background (same left-to-right scrim technique as Insights' hero)
  * instead of the plain ink surface.
+ *
+ * CTAs are standardized across every sector rather than sourced from
+ * data: "Discuss Opportunities" always goes to Contact, "Explore the
+ * Division" always smooth-scrolls to the About-the-Division section
+ * (`#about-division`, see SectorOverview) — no per-sector variation,
+ * by design. The old KPI strip (heroMetrics — "Active Trade Lines"
+ * etc.) has been removed entirely to let the hero breathe; that data
+ * still exists on `Sector` for the small metric pill shown on other
+ * pages' Related Sectors cards, it just isn't rendered here anymore.
  */
 export function SectorHero({ sector }: { sector: Sector }) {
   const Icon = sector.icon
@@ -84,29 +92,14 @@ export function SectorHero({ sector }: { sector: Sector }) {
             {sector.tagline}
           </p>
 
-          {(sector.heroCta || sector.heroSecondaryCta) && (
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              {sector.heroCta && (
-                <Button variant="gold" size="lg" withArrow asChild className="group w-fit">
-                  <Link href={sector.heroCta.href}>{sector.heroCta.label}</Link>
-                </Button>
-              )}
-              {sector.heroSecondaryCta && (
-                <Button variant="ghost-inverse" size="lg" asChild className="w-fit">
-                  <Link href={sector.heroSecondaryCta.href}>{sector.heroSecondaryCta.label}</Link>
-                </Button>
-              )}
-            </div>
-          )}
-
-          <dl className="mt-4 flex flex-wrap gap-x-10 gap-y-4 border-t border-border-ink pt-8">
-            {sector.heroMetrics.map((metric) => (
-              <div key={metric.label} className="flex flex-col gap-1">
-                <dt className="text-caption uppercase tracking-wide text-text-inverse-muted">{metric.label}</dt>
-                <dd className="font-mono text-data-md text-accent-ink">{metric.value}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Button variant="gold" size="lg" withArrow asChild className="group w-full sm:w-fit">
+              <Link href="/contact">Discuss Opportunities</Link>
+            </Button>
+            <Button variant="ghost-inverse" size="lg" asChild className="w-full sm:w-fit">
+              <Link href="#about-division">Explore the Division</Link>
+            </Button>
+          </div>
         </FadeIn>
       </div>
     </SectionContainer>

@@ -80,7 +80,14 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
       <Navbar sections={navSections} />
       <main>
         <SectorHero sector={sector} />
-        {sector.overview && <SectorOverview overview={sector.overview} surface={nextSectionSurface()} />}
+        {sector.overview && (
+          <SectorOverview
+            id="about-division"
+            eyebrow="About the Division"
+            overview={sector.overview}
+            surface={nextSectionSurface()}
+          />
+        )}
         <SectorCaseStudy
           id="featured-company"
           caseStudy={sector.caseStudy}
@@ -93,7 +100,9 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
           heading={sector.capabilitiesHeading}
           surface={nextSectionSurface()}
         />
-        {sector.whyItMatters && <SectorOverview overview={sector.whyItMatters} surface={nextSectionSurface()} />}
+        {sector.whyItMatters && (
+          <SectorOverview eyebrow="Why It Matters" overview={sector.whyItMatters} surface={nextSectionSurface()} />
+        )}
         {sector.process && sector.process.length > 0 && (
           <SectorProcess steps={sector.process} heading={sector.processHeading} surface={nextSectionSurface()} />
         )}

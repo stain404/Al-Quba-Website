@@ -1,7 +1,8 @@
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
-import { FeatureCard, FeatureGrid } from '@/components/cards/feature-card'
+import { FeatureCard } from '@/components/cards/feature-card'
 import { Stagger } from '@/components/motion/reveal'
+import { cn } from '@/lib/utils'
 import type { SectorCapability, SectionHeadingOverride } from '@/lib/sectors-data'
 
 /**
@@ -37,7 +38,15 @@ export function SectorCapabilities({
         }
       />
       <Stagger className="mt-16">
-        <FeatureGrid>
+        {/* Column count adapts to item count so a grid never leaves a
+            single card orphaned on its own row (e.g. four items reads
+            far better as a balanced 2x2 than a 3+1). */}
+        <div
+          className={cn(
+            'grid grid-cols-1 gap-6',
+            capabilities.length % 3 === 0 ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2'
+          )}
+        >
           {capabilities.map((capability) => (
             <FeatureCard
               key={capability.title}
@@ -46,7 +55,7 @@ export function SectorCapabilities({
               description={capability.description}
             />
           ))}
-        </FeatureGrid>
+        </div>
       </Stagger>
 
       {companies && companies.length > 0 && (

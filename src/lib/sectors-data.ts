@@ -69,14 +69,13 @@ export interface Sector {
   icon: LucideIcon
   tagline: string
   description: string
+  /** Small metric pill shown only on this sector's card in other pages'
+   *  Related Sectors grids — no longer rendered in the hero itself. */
   heroMetrics: { label: string; value: string }[]
   /** Big hero headline shown instead of `name`, for sectors with dedicated marketing copy. */
   heroHeadline?: string
   /** Short line between the headline and the tagline paragraph, e.g. 'Expanding International Trade Through Trusted Partnerships'. */
   heroSubtitle?: string
-  heroCta?: { label: string; href: string }
-  /** Second hero CTA, e.g. { label: 'Meet Hebron General Trading LLC', href: '#featured-company' }. */
-  heroSecondaryCta?: { label: string; href: string }
   /** Full-bleed photo background for the sector hero, e.g. '/Trading.png'. Omit for the plain ink hero. */
   heroImage?: string
   /** CSS object-position for heroImage, e.g. 'left center'. Defaults to 'center'. Use when the photo's focal point isn't centered, so it doesn't get cropped out on narrow (mobile) viewports. */
@@ -127,12 +126,10 @@ export const sectors: Sector[] = [
       { label: 'Active Trade Lines', value: '18' },
       { label: 'Avg. Cycle Length', value: '5 months' },
     ],
-    heroCta: { label: 'Explore Our Export Solutions', href: '/contact' },
-    heroSecondaryCta: { label: 'Meet Hebron General Trading LLC', href: '#featured-company' },
     overview: {
       heading: 'Driving Global Trade with Confidence',
       body: [
-        "Al Quba Investment's Global Exports Division brings together international trade expertise, cross-border commerce capability, and long-term commercial partnerships to help businesses move products confidently across global markets.",
+        "Al Quba Investment's Global Exports Division brings together international trade expertise, cross-border commerce capability, and durable buyer-supplier relationships to help businesses move products confidently across global markets.",
         'Through reliable export operations and disciplined supply chain efficiency, the division supports market expansion for manufacturers, suppliers, and distributors — creating dependable trade corridors rather than one-off transactions.',
       ],
     },
@@ -157,7 +154,6 @@ export const sectors: Sector[] = [
         { label: 'Focus', value: 'Grocery & FMCG Products' },
       ],
       logoSrc: '/hebron-logo.svg',
-      cta: { label: 'Learn More', href: '/contact' },
     },
     capabilitiesHeading: {
       eyebrow: 'Core Capabilities',
@@ -217,8 +213,6 @@ export const sectors: Sector[] = [
     description:
       "Discover Al Quba Investment's Infrastructure, Contracting & Built Environments Division and Bright Hurst Contracting, delivering commercial construction, contracting, engineering support, and infrastructure development solutions.",
     heroMetrics: [],
-    heroCta: { label: 'Explore Our Contracting Solutions', href: '/contact' },
-    heroSecondaryCta: { label: 'Meet Bright Hurst Contracting', href: '#featured-company' },
     overview: {
       heading: 'Building the Future with Confidence',
       body: [
@@ -243,7 +237,6 @@ export const sectors: Sector[] = [
         'Quality Execution',
       ],
       metrics: [],
-      cta: { label: 'Learn More About Bright Hurst Contracting', href: '/contact' },
     },
     capabilitiesHeading: {
       eyebrow: 'Division Capabilities',
@@ -255,12 +248,12 @@ export const sectors: Sector[] = [
       { icon: ClipboardCheck, title: 'Project Management', description: 'Coordinating projects from planning through successful completion.' },
       { icon: HardHat, title: 'Engineering Support', description: 'Providing technical expertise to ensure quality project delivery.' },
       { icon: Hammer, title: 'Contracting Solutions', description: 'Managing construction activities with efficiency and professionalism.' },
-      { icon: Globe2, title: 'Sustainable Development', description: 'Supporting long-term infrastructure growth through responsible project execution.' },
+      { icon: Globe2, title: 'Responsible Project Execution', description: 'Delivering every project with a consistent focus on safety, compliance, and community impact.' },
     ],
     whyItMatters: {
       heading: 'Why This Division Matters',
       body: [
-        "Modern economies depend on reliable infrastructure and high-quality construction to support business growth and community development. Al Quba Investment's Infrastructure, Contracting & Built Environments Division contributes to this progress by investing in companies that deliver dependable construction expertise and operational excellence.",
+        "Modern economies depend on reliable infrastructure and high-quality construction to support business growth and community development. Al Quba Investment's Infrastructure, Contracting & Built Environments Division contributes to this progress by investing in companies that deliver dependable construction expertise and consistent project discipline.",
         'Through Bright Hurst Contracting, the division supports commercial and infrastructure projects that create lasting value while maintaining a commitment to quality, safety, and sustainable development.',
       ],
     },
@@ -318,8 +311,6 @@ export const sectors: Sector[] = [
       { label: 'Vessels Financed', value: '7' },
       { label: 'Avg. Charter Length', value: '11 months' },
     ],
-    heroCta: { label: 'Explore Our Logistics Solutions', href: '/contact' },
-    heroSecondaryCta: { label: 'Meet NobleStar Shipping Services', href: '#featured-company' },
     overview: {
       heading: 'Connecting Global Supply Chains',
       body: [
@@ -349,7 +340,6 @@ export const sectors: Sector[] = [
         { label: 'Focus', value: 'Cargo & Customs Clearance' },
       ],
       logoSrc: '/NobleStar.jpg',
-      cta: { label: 'Learn More About NobleStar', href: '/contact' },
     },
     capabilitiesHeading: {
       eyebrow: 'Division Capabilities',
@@ -424,8 +414,6 @@ export const sectors: Sector[] = [
       { label: 'Active Corridors', value: '9' },
       { label: 'Avg. Facility Term', value: '4 months' },
     ],
-    heroCta: { label: 'Explore Our Trade Network', href: '/contact' },
-    heroSecondaryCta: { label: 'Discover Our Companies', href: '#featured-company' },
     overview: {
       heading: 'Enabling Smarter Global Commerce',
       body: [
@@ -456,7 +444,6 @@ export const sectors: Sector[] = [
           { label: 'Focus', value: 'FMCG & Non-Food Bulk Trade' },
         ],
         logoSrc: '/containerkart-logo.png',
-        cta: { label: 'Explore ContainerKart', href: '/contact' },
       },
       {
         title: 'Al Wahda Trading',
@@ -476,7 +463,6 @@ export const sectors: Sector[] = [
           { label: 'Focus', value: 'Import & Distribution' },
         ],
         logoSrc: '/alwahda-logo.jpg',
-        cta: { label: 'Learn About Al Wahda Trading', href: '/contact' },
       },
     ],
     capabilitiesHeading: {
@@ -541,8 +527,6 @@ export const sectors: Sector[] = [
       { label: 'Active Positions', value: '1' },
       { label: 'Avg. Hold Period', value: 'Ongoing' },
     ],
-    heroCta: { label: 'Explore Our Creative Solutions', href: '/contact' },
-    heroSecondaryCta: { label: 'Meet Phew Interactive', href: '#featured-company' },
     overview: {
       heading: 'Creating Stronger Brands Through Innovation',
       body: [
@@ -572,7 +556,6 @@ export const sectors: Sector[] = [
         { label: 'Focus', value: 'Branding, Web & App Development' },
       ],
       logoSrc: '/phew-logo.png',
-      cta: { label: 'Explore Phew Interactive', href: '/contact' },
     },
     capabilitiesHeading: {
       eyebrow: 'Division Capabilities',

@@ -12,16 +12,23 @@ import type { Sector } from '@/lib/sectors-data'
  */
 export function SectorOverview({
   overview,
+  eyebrow = 'Overview',
   surface = 'canvas',
+  id,
 }: {
   overview: NonNullable<Sector['overview']>
+  /** Distinguishes this from the page's other SectorOverview instance —
+   *  e.g. "About the Division" vs "Why This Division Matters" — so the
+   *  two don't both read as a generic, identical "Overview" label. */
+  eyebrow?: string
   surface?: 'canvas' | 'muted'
+  id?: string
 }) {
   return (
-    <SectionContainer surface={surface} spacing="lg">
+    <SectionContainer id={id} surface={surface} spacing="lg" className={id ? 'scroll-mt-24' : undefined}>
       <SplitContainer>
         <FadeIn>
-          <Eyebrow>Overview</Eyebrow>
+          <Eyebrow>{eyebrow}</Eyebrow>
         </FadeIn>
 
         <div className="flex flex-col gap-10">

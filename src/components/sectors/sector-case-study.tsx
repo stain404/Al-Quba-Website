@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
@@ -8,7 +7,6 @@ import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { Card } from '@/components/cards/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { fadeSide, fadeOnly, defaultViewport, transitionContent } from '@/lib/animations'
 import type { SectorCaseStudy as SectorCaseStudyType, SectionHeadingOverride } from '@/lib/sectors-data'
 
@@ -61,13 +59,13 @@ export function SectorCaseStudy({
                   viewport={defaultViewport}
                   transition={{ ...transitionContent, delay: 0.15 }}
                   whileHover={prefersReduced ? undefined : { scale: 1.03 }}
-                  className="relative aspect-[196/202] w-full max-w-[180px]"
+                  className="relative aspect-[196/202] w-full max-w-[216px]"
                 >
                   <Image
                     src={item.logoSrc}
                     alt={`${item.title} logo`}
                     fill
-                    sizes="180px"
+                    sizes="216px"
                     className="object-contain"
                   />
                 </motion.div>
@@ -101,12 +99,6 @@ export function SectorCaseStudy({
                     </div>
                   ))}
                 </dl>
-              )}
-
-              {item.cta && (
-                <Button variant="outline" size="md" withArrow asChild className="group w-fit">
-                  <Link href={item.cta.href}>{item.cta.label}</Link>
-                </Button>
               )}
             </Card>
           </motion.div>
