@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
@@ -69,16 +69,23 @@ export function PoolHero({ pool }: { pool: Pool }) {
             <span className="flex size-14 items-center justify-center rounded-md bg-accent/12 text-accent-ink">
               <Icon className="size-6" strokeWidth={1.5} aria-hidden />
             </span>
-            <Eyebrow inverse>{pool.category}</Eyebrow>
+            <div className="flex flex-col gap-1">
+              {pool.poolNumber && (
+                <span className="font-mono text-caption uppercase tracking-wide text-text-inverse-muted">
+                  Pool {String(pool.poolNumber).padStart(2, '0')}
+                </span>
+              )}
+              <Eyebrow inverse>{pool.category}</Eyebrow>
+            </div>
             <span
               className={cn(
-                'inline-flex items-center gap-2 rounded-full border px-3 py-1 text-caption uppercase tracking-wide',
+                'inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-body-sm font-medium uppercase tracking-wide',
                 isOpen
-                  ? 'border-accent/40 text-accent-ink'
-                  : 'border-border-ink text-text-inverse-muted'
+                  ? 'border-accent/40 bg-accent/10 text-accent-ink'
+                  : 'border-white/15 bg-white/8 text-text-inverse'
               )}
             >
-              <span className={cn('size-1.5 rounded-full', isOpen ? 'bg-accent-ink' : 'bg-text-inverse-muted')} aria-hidden />
+              <span className={cn('size-1.5 rounded-full', isOpen ? 'bg-accent-ink' : 'bg-text-inverse')} aria-hidden />
               {pool.status}
             </span>
           </div>
@@ -116,7 +123,7 @@ export function PoolHero({ pool }: { pool: Pool }) {
           <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Button variant="gold" size="lg" withArrow className="group" asChild>
               <Link href={isOpen ? '/contact' : '/#pools'}>
-                {isOpen ? 'Invest Now' : 'Invest in Other Funds'}
+                {isOpen ? 'Invest Now' : 'Explore Other Investment Pools'}
               </Link>
             </Button>
             <Button variant="ghost-inverse" size="lg" asChild>
@@ -125,11 +132,15 @@ export function PoolHero({ pool }: { pool: Pool }) {
             {pool.brochureUrl && (
               <Button variant="ghost-inverse" size="lg" asChild>
                 {pool.brochureUrl.startsWith('http') || pool.brochureUrl.endsWith('.pdf') ? (
-                  <a href={pool.brochureUrl} target="_blank" rel="noopener noreferrer">
-                    Download Brochure
+                  <a href={pool.brochureUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
+                    <Download className="size-4" strokeWidth={1.5} aria-hidden />
+                    Download Investment Brochure
                   </a>
                 ) : (
-                  <Link href={pool.brochureUrl}>Download Brochure</Link>
+                  <Link href={pool.brochureUrl} className="inline-flex items-center gap-2">
+                    <Download className="size-4" strokeWidth={1.5} aria-hidden />
+                    Download Investment Brochure
+                  </Link>
                 )}
               </Button>
             )}

@@ -1,5 +1,24 @@
 import type { LucideIcon } from 'lucide-react'
-import { Snowflake, Sprout, Plane, ShieldCheck, FileCheck, Landmark, Clock } from 'lucide-react'
+import {
+  Snowflake,
+  Sprout,
+  Plane,
+  ShieldCheck,
+  FileCheck,
+  Landmark,
+  Clock,
+  PieChart,
+  Lock,
+  History,
+  TrendingUp,
+  Target,
+  Wallet,
+  Percent,
+  BadgeCheck,
+  Globe2,
+  Repeat,
+  Award,
+} from 'lucide-react'
 
 export interface PoolStep {
   title: string
@@ -17,10 +36,31 @@ export interface PoolRisk {
   description: string
 }
 
+/** One tile in the Investment Snapshot grid. */
+export interface PoolSnapshotItem {
+  icon: LucideIcon
+  label: string
+  value: string
+  /** Secondary line under the value, e.g. a split breakdown. */
+  detail?: string
+  /** Small disclaimer specific to this figure (e.g. projected returns). */
+  disclaimer?: string
+  /** Renders `value` as a status pill instead of plain text. */
+  isStatus?: boolean
+}
+
+export interface PoolHighlight {
+  icon: LucideIcon
+  title: string
+  description: string
+}
+
 export interface Pool {
   slug: string
   name: string
   category: string
+  /** Pool number shown as a small "Pool 01" tag near the hero eyebrow. */
+  poolNumber?: number
   tagline: string
   description: string
   /** Full-bleed photo background for the pool hero, e.g. '/frozen_food.png'. */
@@ -31,6 +71,12 @@ export interface Pool {
   heroMetrics: { label: string; value: string }[]
   /** "Right Side Highlights" — short bullet points rendered in the hero. */
   highlights: string[]
+  /** Investment Snapshot — icon-grid quick-glance metrics below the hero. */
+  snapshot?: PoolSnapshotItem[]
+  /** Investment Highlights — richer title+description cards. */
+  investmentHighlights?: PoolHighlight[]
+  /** A single supplementary FAQ entry specific to this pool. */
+  faq?: { question: string; answer: string }
   steps: PoolStep[]
   /** "Fund Details" — rendered by PoolStructure as a definition list. */
   structure: PoolStructureItem[]
@@ -49,12 +95,13 @@ export const pools: Pool[] = [
     slug: 'frozen',
     name: 'Frost Capital Fund I',
     category: 'Frozen Meat Trading Fund',
+    poolNumber: 1,
     heroImage: '/frozen_food.png',
-    status: 'Currently not accepting new investments',
+    status: 'Fully Subscribed',
     tagline:
-      'Short-term frozen meat trading fund leveraging cold-chain logistics, bulk procurement, and established distribution networks to generate consistent returns.',
+      'Frost Capital Fund I is a professionally managed frozen meat trading investment pool designed to capitalize on high-volume international trade opportunities. Leveraging established supplier relationships, efficient cold-chain logistics, and disciplined capital deployment, the fund focuses on delivering sustainable value through structured trading cycles.',
     description:
-      'Short-term frozen meat trading fund leveraging cold-chain logistics, bulk procurement, and established distribution networks to generate consistent returns.',
+      'Frost Capital Fund I is a short-term frozen meat trading investment pool focused on sourcing, importing, and distributing premium frozen meat products across established international trade corridors. By combining strong supplier relationships, efficient cold-chain logistics, and disciplined inventory management, the fund is structured to optimize capital deployment while maintaining operational efficiency and controlled risk.',
     heroMetrics: [
       { label: 'Pool Status', value: 'Fully Subscribed' },
     ],
@@ -64,6 +111,53 @@ export const pools: Pool[] = [
       'Fast inventory turnover with controlled logistics.',
       'Experienced team in perishable goods handling.',
     ],
+    snapshot: [
+      { icon: PieChart, label: 'Profit Split', value: '45% / 55%', detail: 'Al Quba / Investors' },
+      { icon: Lock, label: 'Lock-in Period', value: '1 Year' },
+      { icon: Clock, label: 'Cool-off Period', value: '20 Days' },
+      { icon: History, label: 'Pool Age', value: '3 Years' },
+      {
+        icon: TrendingUp,
+        label: 'Projected Monthly Returns',
+        value: 'Up to 2%',
+        disclaimer: 'Projected returns are indicative only and are not guaranteed.',
+      },
+      { icon: Target, label: 'Target Capital', value: 'AED 1.8 Million' },
+      { icon: Wallet, label: 'Minimum Investment', value: 'AED 50,000' },
+      { icon: Percent, label: 'Management Fee', value: '2%' },
+      { icon: BadgeCheck, label: 'Pool Status', value: 'Fully Subscribed', isStatus: true },
+    ],
+    investmentHighlights: [
+      {
+        icon: Snowflake,
+        title: 'Established Cold-Chain Network',
+        description:
+          'Strategically located cold storage facilities and reliable logistics partners ensure consistent product quality, inventory preservation, and efficient distribution throughout the trading cycle.',
+      },
+      {
+        icon: Globe2,
+        title: 'Global Supplier Partnerships',
+        description:
+          'Long-standing relationships with trusted international suppliers enable reliable procurement, competitive pricing, and uninterrupted product availability.',
+      },
+      {
+        icon: Repeat,
+        title: 'Efficient Inventory Turnover',
+        description:
+          'Structured procurement and demand-driven inventory planning help accelerate stock movement, improve liquidity, and maintain healthy cash flow throughout each trading cycle.',
+      },
+      {
+        icon: Award,
+        title: 'Experienced Industry Management',
+        description:
+          'The fund is supported by experienced professionals with extensive expertise in frozen food trading, supply chain management, procurement, and international distribution.',
+      },
+    ],
+    faq: {
+      question: 'What happens after I submit my investment enquiry?',
+      answer:
+        'Once your enquiry is submitted, our investment team will review your information and contact you to discuss the opportunity, explain the investment structure, answer any questions, and guide you through the onboarding process. As Frost Capital Fund I is currently fully subscribed, interested investors may also be informed about future investment opportunities or waiting list availability.',
+    },
     steps: [
       { title: 'Origination', description: 'Our trade desk secures a confirmed purchase order from a Gulf distributor and identifies a verified origin supplier.' },
       { title: 'Capital Deployment', description: 'Pool capital finances the shipment at the point of origin, secured against the purchase order and bill of lading.' },

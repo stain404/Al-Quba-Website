@@ -3,9 +3,12 @@ import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
 import { PoolHero } from '@/components/pools/pool-hero'
+import { PoolInvestmentSnapshot } from '@/components/pools/pool-investment-snapshot'
+import { PoolHighlights } from '@/components/pools/pool-highlights'
 import { PoolHowItWorks } from '@/components/pools/pool-how-it-works'
 import { PoolStructure } from '@/components/pools/pool-structure'
 import { PoolRisks } from '@/components/pools/pool-risks'
+import { PoolFAQ } from '@/components/pools/pool-faq'
 import { RelatedPools } from '@/components/pools/related-pools'
 import { pools, getPoolBySlug } from '@/lib/pools-data'
 import { navSections } from '@/lib/site-config'
@@ -35,10 +38,13 @@ export function generateMetadata({ params }: PoolPageProps) {
 
 /**
  * Pool Detail — one template shared by Frozen, Cocoa, and Travel pools,
- * populated from src/lib/pools-data.ts. Layout pattern (hero → numbered
- * steps → definition list → feature grid → related card grid) alternates
- * surfaces ink → canvas → muted → canvas → muted, none repeating back to
- * back, and each section uses a pattern distinct from its neighbors.
+ * populated from src/lib/pools-data.ts. Investment Snapshot, Investment
+ * Highlights, and the single-question FAQ are all optional and only
+ * render when a pool actually supplies that data (currently just Frost
+ * Capital Fund I) — Cocoa and Travel fall back to the original, shorter
+ * template unchanged. Surface order alternates ink → canvas → muted →
+ * canvas → muted → canvas → ink → muted → ink at full length, never
+ * repeating back to back.
  */
 export default function PoolDetailPage({ params }: PoolPageProps) {
   const pool = getPoolBySlug(params.slug)
@@ -62,9 +68,16 @@ export default function PoolDetailPage({ params }: PoolPageProps) {
       <Navbar sections={navSections} />
       <main>
         <PoolHero pool={pool} />
+        {pool.snapshot && pool.snapshot.length > 0 && (
+          <PoolInvestmentSnapshot overview={pool.description} snapshot={pool.snapshot} />
+        )}
+        {pool.investmentHighlights && pool.investmentHighlights.length > 0 && (
+          <PoolHighlights highlights={pool.investmentHighlights} />
+        )}
         <PoolHowItWorks steps={pool.steps} />
         <PoolStructure structure={pool.structure} />
         <PoolRisks risks={pool.risks} />
+        {pool.faq && <PoolFAQ question={pool.faq.question} answer={pool.faq.answer} />}
         <RelatedPools currentSlug={pool.slug} />
         <CTASection
           eyebrow="Join This Pool"

@@ -25,7 +25,11 @@ export function RelatedPools({ currentSlug }: { currentSlug: string }) {
 
   return (
     <SectionContainer surface="muted" spacing="lg">
-      <SectionHeading eyebrow="Explore Further" title="Other structured pools" />
+      <SectionHeading
+        eyebrow="Explore Further"
+        title="Explore Other Investment Opportunities"
+        description="Discover additional professionally managed investment pools designed to provide diversified exposure across high-growth industries."
+      />
       <Stagger className="mt-16">
         <InvestmentGrid>
           {others.map((pool) => (
