@@ -44,6 +44,12 @@ export interface TimelineEntry {
   year: string
   title: string
   description: string
+  /** Small decorative marker icon, e.g. inside the timeline's dot.
+   *  Pre-instantiated JSX (e.g. `<Handshake />`), not a bare component
+   *  reference — a raw function isn't serializable across the
+   *  server-to-client boundary when this data is defined in a Server
+   *  Component and consumed by the client-side Timeline component. */
+  icon?: React.ReactNode
 }
 
 export interface InvestmentItem {

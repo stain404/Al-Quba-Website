@@ -6,7 +6,6 @@ import { MissionValues } from '@/components/about/mission-values'
 import { HistoryTimeline } from '@/components/about/history-timeline'
 import { Leadership } from '@/components/about/leadership'
 import { InvestmentProcess } from '@/components/about/investment-process'
-import { GlobalOffices } from '@/components/about/global-offices'
 import { navSections } from '@/lib/site-config'
 import { buildMetadata } from '@/lib/seo'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
@@ -21,10 +20,11 @@ export const metadata = buildMetadata({
 /**
  * About — composed from existing design system components plus a small
  * set of page-specific sections (src/components/about/). Surface order
- * (ink → canvas → muted → canvas → muted → canvas) and layout pattern
- * (hero → split+grid → timeline → profile rows → step tracker →
- * address ledger) are both fully alternated, matching the Home page's
- * no-two-adjacent-sections-alike rule.
+ * (ink → canvas → muted → canvas → ink) and layout pattern (hero →
+ * split+grid → timeline → profile rows → step tracker) are both fully
+ * alternated, matching the Home page's no-two-adjacent-sections-alike
+ * rule. No standalone office/address section — that's covered by the
+ * footer on every page already.
  */
 export default function AboutPage() {
   return (
@@ -37,11 +37,10 @@ export default function AboutPage() {
         <HistoryTimeline />
         <Leadership />
         <InvestmentProcess />
-        <GlobalOffices />
         <CTASection
           eyebrow="Work With Us"
-          title="Ready to talk about your capital?"
-          description="Whether you're a family office, an institution, or an individual investor, our principals are the first people you'll speak with."
+          title="Ready to Build Long-Term Value Together?"
+          description="Whether you're an institutional investor, family office, or individual investor, our team is ready to help you explore strategic investment opportunities with confidence."
           primaryLabel="Request a Consultation"
           primaryHref="/contact"
           secondaryLabel="View Our Strategies"

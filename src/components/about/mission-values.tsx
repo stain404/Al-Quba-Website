@@ -4,9 +4,21 @@ import { ShieldCheck, Compass, HandCoins, Handshake } from 'lucide-react'
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { SectionContainer, SplitContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
+import { Card } from '@/components/cards/card'
 import { FeatureCard, FeatureGrid } from '@/components/cards/feature-card'
 import { FadeIn } from '@/components/motion/reveal'
 import type { FeatureItem } from '@/types'
+
+const visionMission = [
+  {
+    label: 'Vision',
+    body: 'To be the catalyst for transformative investments, shaping prosperous futures for our investors and the communities we serve.',
+  },
+  {
+    label: 'Mission',
+    body: 'Empowering investors to unlock their full potential. We seize growth opportunities across diverse sectors, driving exceptional returns while creating lasting value for investors and communities.',
+  },
+]
 
 const values: FeatureItem[] = [
   {
@@ -62,10 +74,11 @@ function AnimatedValueCard({ value }: { value: FeatureItem }) {
 }
 
 /**
- * About / Mission & Values.
+ * About / Who We Are, Vision & Mission, Core Values.
  * Editorial split (label column + content), same pattern used on the
- * Home "About Preview" section for continuity, but here it introduces
- * the FeatureCard grid rather than a photograph.
+ * Home "About Preview" section for continuity: an intro statement, the
+ * vision/mission pairing as two equal cards, then the FeatureCard grid
+ * of values.
  */
 export function MissionValues() {
   const prefersReduced = useReducedMotion()
@@ -74,7 +87,7 @@ export function MissionValues() {
     <SectionContainer surface="canvas" spacing="lg">
       <SplitContainer>
         <FadeIn>
-          <Eyebrow>Our Mission</Eyebrow>
+          <Eyebrow>Who We Are</Eyebrow>
         </FadeIn>
 
         <div className="flex flex-col gap-14">
@@ -86,13 +99,28 @@ export function MissionValues() {
             className="flex flex-col gap-6"
           >
             <Heading as="h2" size="display-md" className="max-w-2xl">
-              To be the investment partner institutions call before anyone else.
+              Building Sustainable Value Through Strategic Investments
             </Heading>
             <p className="max-w-measure text-body-lg text-text-secondary">
-              We measure success across decades, not quarters. Four values
-              govern how that mission gets executed day to day.
+              Al Quba Investment LLC is a diversified investment company
+              headquartered in Dubai, focused on identifying and managing
+              opportunities across trading, logistics, real estate,
+              technology, and global commerce. We combine strategic
+              thinking, disciplined capital management, and responsible
+              governance to deliver sustainable long-term value for our
+              investors and partners.
             </p>
           </motion.div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {visionMission.map((item) => (
+              <Card key={item.label} surface="canvas" padding="lg" className="flex flex-col gap-4">
+                <span className="h-px w-8 bg-accent" aria-hidden />
+                <h3 className="text-heading-md font-display font-semibold text-text-primary">{item.label}</h3>
+                <p className="text-body-md text-text-secondary">{item.body}</p>
+              </Card>
+            ))}
+          </div>
 
           <FeatureGrid>
             {values.map((value) => (

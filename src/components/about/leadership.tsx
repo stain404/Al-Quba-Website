@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Linkedin } from 'lucide-react'
+import { Linkedin, Quote } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { FadeIn } from '@/components/motion/reveal'
@@ -18,8 +18,7 @@ const leaders: Leader[] = [
     role: 'Founder & CEO',
     quote: 'Invest with Confidence, Backed by Trust.',
     message: [
-      'From designing ships as a Naval Architect, to navigating the complexities of the Oil & Gas industry, and finally leading businesses with vision and strategy, the journey has always been about growth, innovation, and making a difference.',
-      'Along the way, being recognized as the youngest Golden Visa recipient in the UAE was a humbling milestone, inspiring me to push boundaries further.',
+      'From designing ships as a Naval Architect to navigating the complexities of the Oil & Gas industry, my path has always been driven by growth, innovation, and the discipline to build things that last — a journey recognized early on with the UAE’s youngest Golden Visa award.',
       "Today, guiding Al Quba's diverse companies, my goal remains the same: to fuel success, create impact, and lead with integrity.",
     ],
     linkedin: 'https://linkedin.com/in/khasim-enoli-43211734',
@@ -85,14 +84,18 @@ export function Leadership() {
                 </div>
 
                 <blockquote className="border-l-2 border-accent pl-5">
-                  <p className="font-display text-heading-md text-text-primary">&ldquo;{leader.quote}&rdquo;</p>
-                  <cite className="mt-4 block max-w-measure text-body-md not-italic text-text-secondary">
+                  <Quote className="mb-3 size-7 text-accent" strokeWidth={1.5} aria-hidden />
+                  <p className="font-display text-display-sm leading-snug text-text-primary">
+                    &ldquo;{leader.quote}&rdquo;
+                  </p>
+                  <cite className="mt-5 block max-w-measure text-body-md not-italic text-text-secondary">
                     {leader.message.map((paragraph) => (
                       <p key={paragraph} className="mt-4 first:mt-0">
                         {paragraph}
                       </p>
                     ))}
                   </cite>
+                  <p className="mt-6 font-display text-heading-sm italic text-accent-ink">— {leader.name}</p>
                 </blockquote>
               </div>
             </div>

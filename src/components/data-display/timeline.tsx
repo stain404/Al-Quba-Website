@@ -41,7 +41,7 @@ export function Timeline({ entries, className }: TimelineProps) {
   })
 
   return (
-    <ol ref={ref} className={cn('relative flex flex-col gap-14 overflow-x-hidden', className)}>
+    <ol ref={ref} className={cn('relative flex flex-col gap-16 overflow-x-hidden', className)}>
       <span className="absolute left-[7px] top-2 hidden h-[calc(100%-1rem)] w-px bg-border md:block" aria-hidden />
       {entries.map((entry, i) => {
         const revealed = i < revealedCount
@@ -49,11 +49,13 @@ export function Timeline({ entries, className }: TimelineProps) {
           <li
             key={entry.year}
             className={cn(
-              'relative grid grid-cols-1 gap-4 transition-all duration-500 ease-out md:grid-cols-[220px_1fr] md:gap-10 md:pl-10',
+              'relative grid grid-cols-1 gap-5 transition-all duration-700 ease-institutional md:grid-cols-[220px_1fr] md:gap-10 md:pl-10',
               revealed ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
             )}
           >
-            <span className="absolute left-0 top-2 hidden size-[15px] rounded-full border-2 border-accent bg-canvas md:block" aria-hidden />
+            <span className="absolute left-0 top-2 hidden size-[15px] items-center justify-center rounded-full border-2 border-accent bg-canvas md:flex" aria-hidden>
+              {entry.icon}
+            </span>
             <span className="font-mono text-data-md text-text-primary">{entry.year}</span>
             <div className="flex flex-col gap-2">
               <h3 className="text-heading-md font-semibold text-text-primary">{entry.title}</h3>

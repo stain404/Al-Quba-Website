@@ -6,6 +6,8 @@ import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
 import { VideoPauseToggle } from '@/components/motion/video-pause-toggle'
 
+const trustIndicators = ['Dubai, UAE', 'Investment Management', 'Global Investments', 'Long-Term Growth']
+
 const OFFSET = 60
 /** Raw page-scroll distance (px) over which the hero fades/slides out —
  *  since this is the very first section on the page, there's no scroll
@@ -78,14 +80,24 @@ export function AboutHero() {
         >
           <Eyebrow inverse>About Al Quba</Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
-            Built quietly, deployed deliberately.
+            Building Long-Term Value Through Strategic Investments
           </Heading>
           <p className="max-w-measure text-body-lg text-text-inverse">
-            Al Quba Investment was founded in Dubai on a simple premise:
-            capital compounds best when it is managed by people who answer
-            for it personally. Fourteen years later, that premise still
-            governs every mandate we accept.
+            Al Quba Investment LLC is a Dubai-based investment and asset
+            management firm committed to creating sustainable value through
+            strategic investments across global industries. Through
+            disciplined capital management, strategic partnerships, and
+            diversified businesses, we help investors participate in
+            long-term growth opportunities.
           </p>
+          <ul className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
+            {trustIndicators.map((item, i) => (
+              <li key={item} className="flex items-center gap-2.5">
+                {i > 0 && <span className="size-1 rounded-full bg-text-inverse-muted" aria-hidden />}
+                <span className="text-caption uppercase tracking-wide text-text-inverse-muted">{item}</span>
+              </li>
+            ))}
+          </ul>
         </motion.div>
       </div>
     </SectionContainer>
