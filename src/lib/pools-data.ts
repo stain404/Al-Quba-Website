@@ -15,6 +15,8 @@ import {
   Wallet,
   Percent,
   BadgeCheck,
+  Handshake,
+  Layers,
 } from 'lucide-react'
 
 export interface PoolStep {
@@ -72,6 +74,18 @@ export interface Pool {
   snapshot?: PoolSnapshotItem[]
   /** Investment Highlights — richer title+description cards. */
   investmentHighlights?: PoolHighlight[]
+  /**
+   * Dashboard metrics rendered inside the two-column PoolDashboardHero
+   * (used instead of the classic PoolHero when present). Same shape as
+   * `snapshot`, but a distinct field so a pool can show these figures in
+   * the hero itself without the separate Investment Snapshot section
+   * further down the page rendering the same data twice.
+   */
+  heroDashboard?: PoolSnapshotItem[]
+  /** Right-column feature panel for PoolDashboardHero — same shape as
+   *  `investmentHighlights`, kept distinct for the same reason as
+   *  `heroDashboard` above. */
+  heroFeatures?: PoolHighlight[]
   /** A single supplementary FAQ entry specific to this pool. */
   faq?: { question: string; answer: string }
   steps: PoolStep[]
@@ -192,20 +206,59 @@ export const pools: Pool[] = [
     slug: 'travel',
     name: 'Global Travel Fund I',
     category: 'Global Travel Investment Fund',
+    poolNumber: 3,
     heroImage: '/boarding_plane.png',
-    status: 'Applications Open',
+    status: 'Open to Subscription',
     tagline:
-      'Travel and tourism investment fund leveraging strategic partnerships, premium travel experiences, and asset-light business models to capture global travel growth.',
+      'Global Travel Fund I is a professionally managed travel and tourism investment pool focused on capitalising on the continued growth of the global travel industry. Through strategic partnerships with hospitality providers, travel operators, and tourism-focused businesses, the fund aims to create sustainable long-term value through diversified, asset-light investment opportunities.',
     description:
       'Travel and tourism investment fund leveraging strategic partnerships, premium travel experiences, and asset-light business models to capture global travel growth.',
     heroMetrics: [
-      { label: 'Pool Status', value: 'Applications Open' },
+      { label: 'Pool Status', value: 'Open to Subscription' },
     ],
     highlights: [
       'Strategic partnerships with global travel brands.',
       'High-growth travel industry.',
       'Asset-light business model.',
       'Operational efficiency with risk-managed approach.',
+    ],
+    heroDashboard: [
+      { icon: PieChart, label: 'Profit Split', value: '50% / 50%', detail: 'Al Quba / Investors' },
+      { icon: Lock, label: 'Lock-in Period', value: '1 Year' },
+      { icon: Clock, label: 'Cool-off Period', value: '20 Days' },
+      { icon: History, label: 'Pool Age', value: '3 Years' },
+      {
+        icon: TrendingUp,
+        label: 'Projected Monthly Returns',
+        value: 'Up to 2%',
+        disclaimer: 'Projected returns are indicative only and do not guarantee future performance.',
+      },
+      { icon: Target, label: 'Target Capital', value: 'AED 2 Million' },
+      { icon: Wallet, label: 'Minimum Investment', value: 'AED 50,000' },
+      { icon: Percent, label: 'Management Fee', value: '2%' },
+      { icon: BadgeCheck, label: 'Pool Status', value: 'Open to Subscription', isStatus: true },
+    ],
+    heroFeatures: [
+      {
+        icon: Handshake,
+        title: 'Strategic Partnerships with Global Travel Brands',
+        description: 'Strong alliances with leading airlines, hospitality providers, travel operators, and tourism businesses across international markets.',
+      },
+      {
+        icon: TrendingUp,
+        title: 'High-Growth Global Travel Industry',
+        description: 'Benefit from continued recovery and expansion driven by international tourism, business travel, leisure experiences, and increasing global mobility.',
+      },
+      {
+        icon: Layers,
+        title: 'Asset-Light Investment Strategy',
+        description: 'Diversified exposure across hospitality, travel services, tourism infrastructure, and experience-driven businesses without significant capital-intensive operations.',
+      },
+      {
+        icon: ShieldCheck,
+        title: 'Disciplined Capital Deployment & Risk Management',
+        description: 'Professional portfolio management supported by strategic partnerships, operational efficiency, ongoing performance monitoring, and comprehensive risk controls.',
+      },
     ],
     steps: [
       { title: 'Operator Review', description: 'Operators are assessed on booking volume, revenue history, and confirmed forward reservations.' },
@@ -215,7 +268,7 @@ export const pools: Pool[] = [
     ],
     structure: [
       { term: 'Lock-in Period', detail: '1 Year' },
-      { term: 'Cooling Period', detail: '180 Days' },
+      { term: 'Cooling Period', detail: '20 Days' },
       { term: 'Pool Age', detail: '3 Years' },
     ],
     risks: [

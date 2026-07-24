@@ -3,6 +3,7 @@ import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
 import { PoolHero } from '@/components/pools/pool-hero'
+import { PoolDashboardHero } from '@/components/pools/pool-dashboard-hero'
 import { PoolInvestmentSnapshot } from '@/components/pools/pool-investment-snapshot'
 import { PoolHighlights } from '@/components/pools/pool-highlights'
 import { PoolHowItWorks } from '@/components/pools/pool-how-it-works'
@@ -45,10 +46,14 @@ export function generateMetadata({ params }: PoolPageProps) {
  * Details, and the FAQ — that content duplicated the Hero, Investment
  * Snapshot, and How It Works sections, so the page was shortened to
  * Hero → Snapshot → How It Works → Risk & Safeguards → Related →
- * CTA. Cocoa and Travel are unaffected. Surface order alternates,
- * never repeating back to back — PoolHowItWorks takes a `surface`
- * override (defaults to its usual `canvas`) specifically so skipping
- * Fund Details doesn't leave two `canvas` sections adjacent.
+ * CTA. Travel Fund uses PoolDashboardHero instead of the classic
+ * PoolHero (triggered by the presence of `heroDashboard`) — its own
+ * two-column executive dashboard absorbs what would otherwise be the
+ * Investment Snapshot and Investment Highlights sections, so those
+ * stay unpopulated for Travel to avoid showing the same figures twice.
+ * Both hero variants share the `ink` surface, so the downstream surface
+ * alternation (PoolHowItWorks' `surface` override for when Fund Details
+ * is skipped) works unchanged regardless of which hero renders.
  */
 export default function PoolDetailPage({ params }: PoolPageProps) {
   const pool = getPoolBySlug(params.slug)
@@ -73,7 +78,11 @@ export default function PoolDetailPage({ params }: PoolPageProps) {
       />
       <Navbar sections={navSections} />
       <main>
-        <PoolHero pool={pool} />
+        {pool.heroDashboard && pool.heroDashboard.length > 0 ? (
+          <PoolDashboardHero pool={pool} />
+        ) : (
+          <PoolHero pool={pool} />
+        )}
         {pool.snapshot && pool.snapshot.length > 0 && (
           <PoolInvestmentSnapshot overview={pool.description} snapshot={pool.snapshot} />
         )}
