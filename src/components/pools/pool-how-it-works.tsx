@@ -10,9 +10,17 @@ import type { PoolStep } from '@/lib/pools-data'
  * on the site (Investment Sectors' rows, About's Timeline, Governance's
  * definition list).
  */
-export function PoolHowItWorks({ steps }: { steps: PoolStep[] }) {
+export function PoolHowItWorks({
+  steps,
+  surface = 'canvas',
+}: {
+  steps: PoolStep[]
+  /** Override the default surface — e.g. when a neighboring section that
+   *  usually breaks up the canvas/canvas run (Fund Details) is skipped. */
+  surface?: 'canvas' | 'muted'
+}) {
   return (
-    <SectionContainer surface="canvas" spacing="lg">
+    <SectionContainer surface={surface} spacing="lg">
       <SectionHeading eyebrow="How It Works" title="One trade cycle, start to finish" />
 
       <Stagger className="mt-16">

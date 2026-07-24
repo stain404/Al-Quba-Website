@@ -39,16 +39,22 @@ export function generateMetadata({ params }: PoolPageProps) {
 /**
  * Pool Detail — one template shared by Frozen, Cocoa, and Travel pools,
  * populated from src/lib/pools-data.ts. Investment Snapshot, Investment
- * Highlights, and the single-question FAQ are all optional and only
- * render when a pool actually supplies that data (currently just Frost
- * Capital Fund I) — Cocoa and Travel fall back to the original, shorter
- * template unchanged. Surface order alternates ink → canvas → muted →
- * canvas → muted → canvas → ink → muted → ink at full length, never
- * repeating back to back.
+ * Highlights, Fund Details, and the single-question FAQ are all
+ * optional and only render when a pool actually supplies that data.
+ * Frost Capital Fund I deliberately omits Investment Highlights, Fund
+ * Details, and the FAQ — that content duplicated the Hero, Investment
+ * Snapshot, and How It Works sections, so the page was shortened to
+ * Hero → Snapshot → How It Works → Risk & Safeguards → Related →
+ * CTA. Cocoa and Travel are unaffected. Surface order alternates,
+ * never repeating back to back — PoolHowItWorks takes a `surface`
+ * override (defaults to its usual `canvas`) specifically so skipping
+ * Fund Details doesn't leave two `canvas` sections adjacent.
  */
 export default function PoolDetailPage({ params }: PoolPageProps) {
   const pool = getPoolBySlug(params.slug)
   if (!pool) notFound()
+
+  const hasFundDetails = pool.structure.length > 0
 
   return (
     <>
@@ -74,8 +80,8 @@ export default function PoolDetailPage({ params }: PoolPageProps) {
         {pool.investmentHighlights && pool.investmentHighlights.length > 0 && (
           <PoolHighlights highlights={pool.investmentHighlights} />
         )}
-        <PoolHowItWorks steps={pool.steps} />
-        <PoolStructure structure={pool.structure} />
+        <PoolHowItWorks steps={pool.steps} surface={hasFundDetails ? 'canvas' : 'muted'} />
+        {hasFundDetails && <PoolStructure structure={pool.structure} />}
         <PoolRisks risks={pool.risks} />
         {pool.faq && <PoolFAQ question={pool.faq.question} answer={pool.faq.answer} />}
         <RelatedPools currentSlug={pool.slug} />

@@ -24,16 +24,16 @@ export function RelatedPools({ currentSlug }: { currentSlug: string }) {
     }))
 
   return (
-    <SectionContainer surface="muted" spacing="lg">
+    <SectionContainer surface="muted" spacing="md">
       <SectionHeading
         eyebrow="Explore Further"
         title="Explore Other Investment Opportunities"
         description="Discover additional professionally managed investment pools designed to provide diversified exposure across high-growth industries."
       />
       <Stagger className="mt-16">
-        <InvestmentGrid>
+        <InvestmentGrid compact>
           {others.map((pool) => (
-            <InvestmentCard key={pool.name} {...pool} />
+            <InvestmentCard key={pool.name} {...pool} compact />
           ))}
         </InvestmentGrid>
       </Stagger>

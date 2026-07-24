@@ -16,8 +16,6 @@ import {
   Percent,
   BadgeCheck,
   Globe2,
-  Repeat,
-  Award,
   Truck,
   Package,
 } from 'lucide-react'
@@ -129,48 +127,13 @@ export const pools: Pool[] = [
       { icon: Percent, label: 'Management Fee', value: '2%' },
       { icon: BadgeCheck, label: 'Pool Status', value: 'Fully Subscribed', isStatus: true },
     ],
-    investmentHighlights: [
-      {
-        icon: Snowflake,
-        title: 'Established Cold-Chain Network',
-        description:
-          'Strategically located cold storage facilities and reliable logistics partners ensure consistent product quality, inventory preservation, and efficient distribution throughout the trading cycle.',
-      },
-      {
-        icon: Globe2,
-        title: 'Global Supplier Partnerships',
-        description:
-          'Long-standing relationships with trusted international suppliers enable reliable procurement, competitive pricing, and uninterrupted product availability.',
-      },
-      {
-        icon: Repeat,
-        title: 'Efficient Inventory Turnover',
-        description:
-          'Structured procurement and demand-driven inventory planning help accelerate stock movement, improve liquidity, and maintain healthy cash flow throughout each trading cycle.',
-      },
-      {
-        icon: Award,
-        title: 'Experienced Industry Management',
-        description:
-          'The fund is supported by experienced professionals with extensive expertise in frozen food trading, supply chain management, procurement, and international distribution.',
-      },
-    ],
-    faq: {
-      question: 'What happens after I submit my investment enquiry?',
-      answer:
-        'Once your enquiry is submitted, our investment team will review your information and contact you to discuss the opportunity, explain the investment structure, answer any questions, and guide you through the onboarding process. As Frost Capital Fund I is currently fully subscribed, interested investors may also be informed about future investment opportunities or waiting list availability.',
-    },
     steps: [
       { title: 'Origination', description: 'Our trade desk secures a confirmed purchase order from a Gulf distributor and identifies a verified origin supplier.' },
       { title: 'Capital Deployment', description: 'Pool capital finances the shipment at the point of origin, secured against the purchase order and bill of lading.' },
       { title: 'Transit & Cold Storage', description: 'Goods move through monitored cold-chain logistics into bonded storage in Dubai or Jebel Ali.' },
       { title: 'Delivery & Repayment', description: 'On delivery to the distributor, the facility is repaid with the agreed margin, closing the cycle.' },
     ],
-    structure: [
-      { term: 'Lock-in Period', detail: '1 Year' },
-      { term: 'Cooling Period', detail: '20 Days' },
-      { term: 'Pool Age', detail: '3 Years' },
-    ],
+    structure: [],
     risks: [
       { icon: ShieldCheck, title: 'Collateralized Structure', description: 'Every advance is secured against a confirmed purchase order and physical goods in transit.' },
       { icon: FileCheck, title: 'Verified Counterparties', description: 'All distributors and suppliers undergo a formal credit and compliance review before onboarding.' },

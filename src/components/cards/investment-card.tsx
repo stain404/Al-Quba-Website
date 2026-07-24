@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { StaggerItem } from '@/components/motion/reveal'
+import { cn } from '@/lib/utils'
 import type { InvestmentItem } from '@/types'
 
 export function InvestmentCard({
@@ -15,8 +16,13 @@ export function InvestmentCard({
   imageSrc,
   href = '#',
   wrap = true,
+  /** Shorter image, tighter padding, and a clamped description — used
+   *  by RelatedPools, where these cards are a closing aside rather than
+   *  the page's main content. */
+  compact = false,
 }: InvestmentItem & {
   wrap?: boolean
+  compact?: boolean
 }) {
   const content = (
     <Link
@@ -26,7 +32,7 @@ export function InvestmentCard({
       {/* ── Image ────────────────────────────────────────────────────────
           Mobile: fills the entire card (absolute inset-0, no aspect-ratio box)
           Desktop: normal stacked aspect-ratio box                        */}
-      <div className="relative md:aspect-[4/3] md:w-full md:shrink-0">
+      <div className={cn('relative md:w-full md:shrink-0', compact ? 'md:aspect-[5/3]' : 'md:aspect-[4/3]')}>
         {/* Mobile full-card image */}
         {imageSrc && (
           <div className="absolute inset-0 md:hidden">
@@ -53,18 +59,18 @@ export function InvestmentCard({
           Mobile: overlays the image with a frosted-glass scrim
           Desktop: sits below the image on a solid ink background          */}
       <div
-        className={[
-          // shared
-          'relative z-10 flex flex-1 flex-col gap-4 p-7',
+        className={cn(
+          'relative z-10 flex flex-1 flex-col p-7',
+          compact ? 'gap-3 md:p-6' : 'gap-4',
           // mobile: overlay with frosted glass — sits at the BOTTOM of the card
           'mt-auto',
           // frosted glass scrim (mobile only)
           'bg-black/30 backdrop-blur-md md:backdrop-blur-none',
           // desktop: solid dark background, no blur
-          'md:bg-ink',
-        ].join(' ')}
+          'md:bg-ink'
+        )}
       >
-        <div className="flex flex-col gap-2">
+        <div className={cn('flex flex-col', compact ? 'gap-1.5' : 'gap-2')}>
           <h3 className="flex items-center justify-between gap-2 text-heading-md font-semibold text-white">
             {name}
             <ArrowUpRight
@@ -72,11 +78,11 @@ export function InvestmentCard({
               aria-hidden
             />
           </h3>
-          <p className="text-body-sm text-white/80">{description}</p>
+          <p className={cn('text-body-sm text-white/80', compact && 'line-clamp-3')}>{description}</p>
         </div>
 
         {metricValue && (
-          <div className="mt-auto flex items-center justify-between border-t border-white/20 pt-4">
+          <div className={cn('mt-auto flex items-center justify-between border-t border-white/20', compact ? 'pt-3' : 'pt-4')}>
             <span className="text-caption uppercase tracking-wide text-white/60">{metricLabel}</span>
             {/* Status shown as a small, understated pill rather than a
                 large stat figure — a subscription status isn't a metric
@@ -94,6 +100,21 @@ export function InvestmentCard({
   return wrap ? <StaggerItem>{content}</StaggerItem> : content
 }
 
-export function InvestmentGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 [&>*]:min-h-[420px] md:[&>*]:min-h-0">{children}</div>
+export function InvestmentGrid({
+  children,
+  compact = false,
+}: {
+  children: React.ReactNode
+  compact?: boolean
+}) {
+  return (
+    <div
+      className={cn(
+        'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 md:[&>*]:min-h-0',
+        compact ? '[&>*]:min-h-[340px]' : '[&>*]:min-h-[420px]'
+      )}
+    >
+      {children}
+    </div>
+  )
 }
