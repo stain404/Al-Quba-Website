@@ -29,7 +29,13 @@ export function SectorOverview({
             <Heading as="h2" size="display-sm" className="max-w-2xl">
               {overview.heading}
             </Heading>
-            <p className="max-w-measure text-body-lg text-text-secondary">{overview.body}</p>
+            <div className="flex max-w-measure flex-col gap-4">
+              {(Array.isArray(overview.body) ? overview.body : [overview.body]).map((paragraph) => (
+                <p key={paragraph} className="text-body-lg text-text-secondary">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </FadeIn>
 
           {overview.stat && (

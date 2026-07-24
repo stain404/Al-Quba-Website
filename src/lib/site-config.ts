@@ -5,7 +5,7 @@ export const siteConfig = {
   legalName: 'Al Quba Investment LLC',
   title: 'Al Quba Investment LLC — Global Investment & Asset Management, Dubai',
   description:
-    'Al Quba Investment is a Dubai-headquartered investment and asset management firm deploying long-term capital across trading, real estate, shipping, import-export, and technology sectors on behalf of institutional investors and family offices.',
+    'Al Quba Investment is a Dubai-headquartered investment and asset management firm deploying long-term capital across global exports, infrastructure and contracting, logistics and supply chain, import-export, and brand strategy divisions on behalf of institutional investors and family offices.',
   url: 'https://www.alquba.com',
 }
 
@@ -25,11 +25,11 @@ export const navSections: MegaMenuSection[] = [
       {
         heading: 'Our Ecosystem',
         links: [
-          { label: 'Trading', href: '/sectors/trading', description: 'Global commodity and equity desks' },
-          { label: 'Real Estate', href: '/sectors/real-estate', description: 'Prime assets across four continents' },
-          { label: 'Shipping and Logistics', href: '/sectors/shipping', description: 'Marine logistics and freight capital' },
-          { label: 'Import & Export', href: '/sectors/import-export', description: 'Cross-border trade finance' },
-          { label: 'Technology', href: '/sectors/technology', description: 'Equity in the infrastructure behind trade' },
+          { label: 'Global Exports Division', href: '/sectors/global-exports', description: 'International trade led by Hebron General Trading LLC' },
+          { label: 'Infrastructure, Contracting & Built Environments', href: '/sectors/infrastructure-contracting', description: 'Construction and contracting led by Bright Hurst' },
+          { label: 'Logistics & Supply Chain', href: '/sectors/logistics-supply-chain', description: 'Freight and logistics led by NobleStar Shipping' },
+          { label: 'Import & Export', href: '/sectors/import-export', description: 'Global sourcing led by ContainerKart and Al Wahda Trading' },
+          { label: 'Brand Strategy', href: '/sectors/brand-strategy', description: 'Creative and digital solutions led by Phew Interactive' },
         ],
       },
       {

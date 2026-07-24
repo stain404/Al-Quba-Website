@@ -34,6 +34,17 @@ const nextConfig = {
       },
     ]
   },
+  async redirects() {
+    // Four sector pages were renamed/repositioned as investment divisions;
+    // permanent redirects preserve any existing bookmarks/inbound links
+    // and pass on SEO equity from the old URLs rather than 404ing.
+    return [
+      { source: '/sectors/trading', destination: '/sectors/global-exports', permanent: true },
+      { source: '/sectors/shipping', destination: '/sectors/logistics-supply-chain', permanent: true },
+      { source: '/sectors/technology', destination: '/sectors/brand-strategy', permanent: true },
+      { source: '/sectors/real-estate', destination: '/sectors/infrastructure-contracting', permanent: true },
+    ]
+  },
 }
 
 module.exports = nextConfig

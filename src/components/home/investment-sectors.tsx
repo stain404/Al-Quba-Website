@@ -21,28 +21,31 @@ interface SectorPanel {
  */
 const panels: SectorPanel[] = [
   {
-    label: 'Trading',
-    description: 'Global commodity and equity desks.',
+    label: 'Global Exports Division',
+    description: 'International trade led by Hebron General Trading LLC.',
     image: '/Trading.png',
   },
   {
-    label: 'Real Estate',
-    description: 'Prime assets across four continents.',
+    // Shortened for this collapsed vertical strip specifically — the
+    // sector page itself uses the full "Infrastructure, Contracting &
+    // Built Environments" name.
+    label: 'Infrastructure & Contracting',
+    description: 'Construction and contracting led by Bright Hurst.',
     image: '/realestate.webp',
   },
   {
-    label: 'Shipping and Logistics',
-    description: 'Marine logistics and freight capital.',
+    label: 'Logistics & Supply Chain',
+    description: 'Freight and logistics led by NobleStar Shipping.',
     image: '/shipping.webp',
   },
   {
     label: 'Import & Export',
-    description: 'Cross-border trade finance.',
+    description: 'Global sourcing led by ContainerKart and Al Wahda Trading.',
     image: '/importexport.png',
   },
   {
-    label: 'Technology',
-    description: 'Equity in the infrastructure behind trade.',
+    label: 'Brand Strategy',
+    description: 'Creative and digital solutions led by Phew Interactive.',
     image: '/tech.png',
   },
 ]

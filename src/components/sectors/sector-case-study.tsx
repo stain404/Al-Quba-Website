@@ -1,11 +1,14 @@
 'use client'
 
+import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
+import { CheckCircle2 } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { Card } from '@/components/cards/card'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { fadeSide, fadeOnly, defaultViewport, transitionContent } from '@/lib/animations'
 import type { SectorCaseStudy as SectorCaseStudyType, SectionHeadingOverride } from '@/lib/sectors-data'
 
@@ -23,16 +26,18 @@ export function SectorCaseStudy({
   caseStudy,
   heading,
   surface = 'muted',
+  id,
 }: {
   caseStudy: SectorCaseStudyType | SectorCaseStudyType[]
   heading?: SectionHeadingOverride
   surface?: 'canvas' | 'muted'
+  id?: string
 }) {
   const prefersReduced = useReducedMotion()
   const items = Array.isArray(caseStudy) ? caseStudy : [caseStudy]
 
   return (
-    <SectionContainer surface={surface} spacing="lg" className="overflow-x-hidden">
+    <SectionContainer id={id} surface={surface} spacing="lg" className="overflow-x-hidden">
       <SectionHeading
         eyebrow={heading?.eyebrow ?? 'Case Study'}
         title={heading?.title ?? 'A recent example of this sector at work'}
@@ -75,14 +80,34 @@ export function SectorCaseStudy({
                 <h3 className="font-display text-display-sm text-text-primary">{item.title}</h3>
                 <p className="max-w-measure text-body-md text-text-secondary">{item.description}</p>
               </div>
-              <dl className="flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-6">
-                {item.metrics.map((metric) => (
-                  <div key={metric.label} className="flex flex-col gap-1">
-                    <dt className="text-caption uppercase tracking-wide text-text-tertiary">{metric.label}</dt>
-                    <dd className="font-mono text-data-md text-text-primary">{metric.value}</dd>
-                  </div>
-                ))}
-              </dl>
+
+              {item.highlights && item.highlights.length > 0 && (
+                <ul className="grid grid-cols-1 gap-x-8 gap-y-3 border-t border-border pt-6 sm:grid-cols-2">
+                  {item.highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-2.5 text-body-sm text-text-secondary">
+                      <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {item.metrics.length > 0 && (
+                <dl className="flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-6">
+                  {item.metrics.map((metric) => (
+                    <div key={metric.label} className="flex flex-col gap-1">
+                      <dt className="text-caption uppercase tracking-wide text-text-tertiary">{metric.label}</dt>
+                      <dd className="font-mono text-data-md text-text-primary">{metric.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
+              {item.cta && (
+                <Button variant="outline" size="md" withArrow asChild className="group w-fit">
+                  <Link href={item.cta.href}>{item.cta.label}</Link>
+                </Button>
+              )}
             </Card>
           </motion.div>
         ))}

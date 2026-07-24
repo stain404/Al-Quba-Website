@@ -77,14 +77,26 @@ export function SectorHero({ sector }: { sector: Sector }) {
           <Heading as="h1" size="display-lg" inverse className="font-nav">
             {sector.heroHeadline ?? sector.name}
           </Heading>
+          {sector.heroSubtitle && (
+            <p className="text-heading-sm font-medium text-accent-ink">{sector.heroSubtitle}</p>
+          )}
           <p className={cn('max-w-measure text-text-inverse', hasLongTagline ? 'text-body-sm' : 'text-body-lg')}>
             {sector.tagline}
           </p>
 
-          {sector.heroCta && (
-            <Button variant="gold" size="lg" withArrow asChild className="group w-fit">
-              <Link href={sector.heroCta.href}>{sector.heroCta.label}</Link>
-            </Button>
+          {(sector.heroCta || sector.heroSecondaryCta) && (
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              {sector.heroCta && (
+                <Button variant="gold" size="lg" withArrow asChild className="group w-fit">
+                  <Link href={sector.heroCta.href}>{sector.heroCta.label}</Link>
+                </Button>
+              )}
+              {sector.heroSecondaryCta && (
+                <Button variant="ghost-inverse" size="lg" asChild className="w-fit">
+                  <Link href={sector.heroSecondaryCta.href}>{sector.heroSecondaryCta.label}</Link>
+                </Button>
+              )}
+            </div>
           )}
 
           <dl className="mt-4 flex flex-wrap gap-x-10 gap-y-4 border-t border-border-ink pt-8">

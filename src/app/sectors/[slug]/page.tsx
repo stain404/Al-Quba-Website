@@ -18,7 +18,7 @@ interface SectorPageProps {
   params: { slug: string }
 }
 
-/** Pre-render all four sector pages at build time. */
+/** Pre-render all five sector pages at build time. */
 export function generateStaticParams() {
   return sectors.map((sector) => ({ slug: sector.slug }))
 }
@@ -35,13 +35,16 @@ export function generateMetadata({ params }: SectorPageProps) {
 }
 
 /**
- * Sector Detail — one template shared by Trading, Real Estate, Shipping,
- * Import & Export, and Technology, populated from src/lib/sectors-data.ts.
- * Overview and Process are optional per sector (Technology's page is
- * deliberately leaner — hero, capabilities, partner spotlight only), so
- * surfaces are alternated dynamically rather than hardcoded, guaranteeing
- * no two adjacent sections share a surface regardless of which optional
- * sections a given sector includes.
+ * Sector Detail — one template shared by all five investment divisions,
+ * populated from src/lib/sectors-data.ts. Every optional block (overview,
+ * whyItMatters, process, industryOutlook, whyChoose) renders only when a
+ * sector actually supplies it, so surfaces are alternated dynamically
+ * rather than hardcoded — no two adjacent sections ever share a surface,
+ * regardless of which optional sections a given sector includes. Full
+ * flow when every optional section is present: Hero -> About (overview)
+ * -> Featured Company (case study) -> Division Capabilities -> Why This
+ * Division Matters (whyItMatters) -> Process/Journey -> Industry Outlook
+ * -> Why Choose [Company] -> Related Sectors -> Closing CTA.
  */
 export default function SectorDetailPage({ params }: SectorPageProps) {
   const sector = getSectorBySlug(params.slug)
@@ -54,10 +57,10 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
     return current
   }
 
-  // Sectors with a named Featured Partner spotlight already showcase that
-  // company in full below — the plain companies chip strip would just
-  // repeat it, so it's skipped here.
-  const hasPartnerSpotlight = sector.caseStudyHeading?.eyebrow === 'Partners'
+  // Sectors with a named company spotlight (a custom case-study heading)
+  // already showcase that company in full below — the plain companies
+  // chip strip would just repeat it, so it's skipped here.
+  const hasPartnerSpotlight = !!sector.caseStudyHeading
 
   return (
     <>
@@ -78,20 +81,36 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
       <main>
         <SectorHero sector={sector} />
         {sector.overview && <SectorOverview overview={sector.overview} surface={nextSectionSurface()} />}
+        <SectorCaseStudy
+          id="featured-company"
+          caseStudy={sector.caseStudy}
+          heading={sector.caseStudyHeading}
+          surface={nextSectionSurface()}
+        />
         <SectorCapabilities
           capabilities={sector.capabilities}
           companies={hasPartnerSpotlight ? undefined : sector.companies}
           heading={sector.capabilitiesHeading}
           surface={nextSectionSurface()}
         />
+        {sector.whyItMatters && <SectorOverview overview={sector.whyItMatters} surface={nextSectionSurface()} />}
         {sector.process && sector.process.length > 0 && (
-          <SectorProcess steps={sector.process} surface={nextSectionSurface()} />
+          <SectorProcess steps={sector.process} heading={sector.processHeading} surface={nextSectionSurface()} />
         )}
-        <SectorCaseStudy
-          caseStudy={sector.caseStudy}
-          heading={sector.caseStudyHeading}
-          surface={nextSectionSurface()}
-        />
+        {sector.industryOutlook && (
+          <SectorCapabilities
+            capabilities={sector.industryOutlook.items}
+            heading={sector.industryOutlook.heading}
+            surface={nextSectionSurface()}
+          />
+        )}
+        {sector.whyChoose && (
+          <SectorCapabilities
+            capabilities={sector.whyChoose.items}
+            heading={sector.whyChoose.heading}
+            surface={nextSectionSurface()}
+          />
+        )}
         <RelatedSectors currentSlug={sector.slug} surface={nextSectionSurface()} />
         <CTASection
           eyebrow="Explore This Sector"
