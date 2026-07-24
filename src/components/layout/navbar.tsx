@@ -78,15 +78,15 @@ export function Navbar({ logo, sections }: NavbarProps) {
           <Image
             src="/AQ logo.png"
             alt="Al Quba logo"
-            width={52}
-            height={52}
+            width={68}
+            height={68}
             className="shrink-0 object-contain"
             priority
           />
           {logo ?? (
             <span className="flex flex-col gap-0.5">
               <span className="text-[1.75rem] font-bold leading-none tracking-tight">AL QUBA</span>
-              <span className="text-caption font-medium uppercase tracking-wide opacity-80">
+              <span className="text-[0.625rem] font-medium uppercase tracking-wide opacity-80">
                 Al Quba Investment LLC
               </span>
             </span>
