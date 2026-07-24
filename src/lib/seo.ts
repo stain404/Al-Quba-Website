@@ -15,15 +15,20 @@ export function buildMetadata({
   path,
   keywords,
   isHome = false,
+  image,
 }: {
   title: string
   description: string
   path: string
   keywords?: string[]
   isHome?: boolean
+  /** Overrides the default site Open Graph image — e.g. an article's own
+   *  hero photo — while keeping every other metadata field consistent. */
+  image?: string
 }): Metadata {
   const fullTitle = isHome ? title : `${title} — ${siteConfig.name}`
   const url = `${siteConfig.url}${path}`
+  const ogImage = image ?? '/opengraph-image'
 
   return {
     // `isHome` bypasses the root layout's title.template (which would
@@ -40,13 +45,13 @@ export function buildMetadata({
       siteName: siteConfig.name,
       type: 'website',
       locale: 'en_AE',
-      images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: fullTitle }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: fullTitle }],
     },
     twitter: {
       card: 'summary_large_image',
       title: fullTitle,
       description,
-      images: ['/opengraph-image'],
+      images: [ogImage],
     },
   }
 }

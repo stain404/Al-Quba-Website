@@ -4,17 +4,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Badge } from '@/components/ui/badge'
 import { FadeIn } from '@/components/motion/reveal'
-
-const featured = {
-  title: 'Why We Underwrite Trade Cycles, Not Companies',
-  excerpt:
-    'Most private capital underwrites a business. We underwrite a single, physical trade cycle — a shipment, a harvest, a season. Here is why that distinction changes everything about how risk gets managed.',
-  category: 'Strategy',
-  date: 'June 2026',
-  readTime: '9 min read',
-  href: '/insights',
-  imageSrc: '/Trading.png',
-}
+import { featuredArticle as featured } from '@/lib/insights-data'
 
 /**
  * Insights / Featured Article.

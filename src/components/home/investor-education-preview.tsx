@@ -8,35 +8,12 @@ import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { BlogCard, BlogGrid } from '@/components/cards/blog-card'
 import type { BlogPostItem } from '@/types'
+import { featuredArticle, articles as insightArticles } from '@/lib/insights-data'
 
 const articles: BlogPostItem[] = [
-  {
-    title: 'Understanding Structured Trade Pools',
-    excerpt: 'How pool-based investing differs from traditional fund structures, and what it means for liquidity.',
-    category: 'Fundamentals',
-    date: 'May 2026',
-    readTime: '6 min read',
-    imageSrc: '/trade.jpg',
-    href: '/insights',
-  },
-  {
-    title: 'Reading a Trade Finance Term Sheet',
-    excerpt: 'A practical walkthrough of the terms that matter most before committing capital to a cycle.',
-    category: 'Fundamentals',
-    date: 'April 2026',
-    readTime: '8 min read',
-    imageSrc: '/investment.jpg',
-    href: '/insights',
-  },
-  {
-    title: 'Diversifying Beyond Public Markets',
-    excerpt: 'Why family offices are allocating a growing share of capital to real-asset and trade strategies.',
-    category: 'Strategy',
-    date: 'March 2026',
-    readTime: '5 min read',
-    imageSrc: '/architecture.jpg',
-    href: '/insights',
-  },
+  featuredArticle,
+  insightArticles.find((article) => article.slug === 'dubai-leads-global-trade-logistics')!,
+  insightArticles.find((article) => article.slug === 'resilient-portfolios-alternative-investments')!,
 ]
 
 const OFFSET = 90

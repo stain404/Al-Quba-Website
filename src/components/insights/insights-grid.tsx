@@ -7,76 +7,10 @@ import { SectionHeading } from '@/components/typography/heading'
 import { BlogCard, BlogGrid } from '@/components/cards/blog-card'
 import { Stagger } from '@/components/motion/reveal'
 import { cn } from '@/lib/utils'
-import type { BlogPostItem } from '@/types'
+import { articles, categories as articleCategories } from '@/lib/insights-data'
 
-const categories = ['All', 'Fundamentals', 'Strategy', 'Market Commentary', 'Press'] as const
+const categories = ['All', ...articleCategories] as const
 type Category = (typeof categories)[number]
-
-const articles: BlogPostItem[] = [
-  {
-    title: 'Understanding Structured Trade Pools',
-    excerpt:
-      'How pool-based investing differs from traditional fund structures — and what that distinction means for liquidity, transparency, and risk within a diversified investment portfolio.',
-    category: 'Fundamentals',
-    date: 'May 2026',
-    readTime: '6 min read',
-    href: '/insights',
-  },
-  {
-    title: 'Reading a Trade Finance Term Sheet',
-    excerpt:
-      'A practical walkthrough of the terms every investor should scrutinize before committing capital to a trade finance cycle.',
-    category: 'Fundamentals',
-    date: 'April 2026',
-    readTime: '8 min read',
-    href: '/insights',
-  },
-  {
-    title: 'Diversifying Beyond Public Markets',
-    excerpt:
-      'Why family offices and institutional investors are allocating a growing share of capital to real-asset and trade finance strategies as part of a disciplined diversification approach.',
-    category: 'Strategy',
-    date: 'March 2026',
-    readTime: '5 min read',
-    href: '/insights',
-  },
-  {
-    title: 'Gulf Cold-Chain Demand in 2026',
-    excerpt:
-      'What rising frozen protein imports mean for trade finance volumes and capital deployment across Gulf markets.',
-    category: 'Market Commentary',
-    date: 'June 2026',
-    readTime: '7 min read',
-    href: '/insights',
-  },
-  {
-    title: 'Cocoa Prices and What They Mean for Origination',
-    excerpt:
-      'How volatile spot pricing shapes origination economics for fixed-offtake structured pools, and what it signals for commodities-linked investment strategy.',
-    category: 'Market Commentary',
-    date: 'May 2026',
-    readTime: '6 min read',
-    href: '/insights',
-  },
-  {
-    title: 'Al Quba Reaches a New Assets Under Management Milestone',
-    excerpt:
-      'A milestone update on portfolio growth, new institutional partnerships, and what it signals about investor confidence in our approach to capital management.',
-    category: 'Press',
-    date: 'June 2026',
-    readTime: '3 min read',
-    href: '/insights',
-  },
-  {
-    title: 'Why We Underwrite Trade Cycles, Not Companies',
-    excerpt:
-      'Most private capital underwrites a business. We underwrite a single, physical trade cycle — here is why that distinction changes how risk gets managed.',
-    category: 'Strategy',
-    date: 'June 2026',
-    readTime: '9 min read',
-    href: '/insights',
-  },
-]
 
 /**
  * Insights / Category Grid.
