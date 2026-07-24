@@ -9,11 +9,11 @@ import { FadeIn } from '@/components/motion/reveal'
 const visionMission = [
   {
     label: 'Vision',
-    body: 'To be the catalyst for transformative investments, shaping prosperous futures for our investors and the communities we serve.',
+    body: 'To be recognized as a disciplined, diversified investment house — one whose capital allocation decisions are judged not by market cycles, but by the durability of the value they create for investors, partners, and the economies we operate within, across every sector and market we enter.',
   },
   {
     label: 'Mission',
-    body: 'Empowering investors to unlock their full potential. We seize growth opportunities across diverse sectors, driving exceptional returns while creating lasting value for investors and communities.',
+    body: 'We commit capital with discipline: rigorous underwriting, diversified exposure, and governance that holds regardless of market conditions. Our role is to identify real economic opportunity, structure it responsibly, and manage it with the same transparency and accountability our investors expect of their own capital.',
   },
 ]
 
