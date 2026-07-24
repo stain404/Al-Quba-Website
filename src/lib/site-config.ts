@@ -9,11 +9,9 @@ export const siteConfig = {
   url: 'https://www.alquba.com',
 }
 
+export const investorDashboardUrl = 'https://alquba-investor.workpoint001.info/login'
+
 export const navSections: MegaMenuSection[] = [
-  {
-    label: 'Home',
-    href: '/',
-  },
   {
     label: 'About Us',
     href: '/about',

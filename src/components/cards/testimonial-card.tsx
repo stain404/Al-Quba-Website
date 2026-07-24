@@ -19,10 +19,10 @@ function getInitials(name: string) {
  */
 export function TestimonialCard({ quote, name, role, company, avatarSrc }: TestimonialItem) {
   return (
-    <div className="flex h-full min-h-[260px] flex-col gap-4 rounded-2xl border border-[#E8E8E8] bg-white p-6 shadow-sm transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-md">
+    <div className="flex aspect-[4/5] w-full flex-col gap-4 rounded-2xl border border-[#E8E8E8] bg-white p-6 shadow-sm transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-md sm:p-8">
       <Quote className="size-6 shrink-0 text-accent" strokeWidth={2} aria-hidden />
 
-      <p className="line-clamp-4 flex-1 text-[1.25rem] font-medium leading-[1.6] text-text-primary">
+      <p className="line-clamp-6 flex-1 text-[1.25rem] font-medium leading-[1.6] text-text-primary">
         &ldquo;{quote}&rdquo;
       </p>
 

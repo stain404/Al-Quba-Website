@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { expandCollapse } from '@/lib/animations'
 import { Button } from '@/components/ui/button'
 import { MegaMenu } from '@/components/layout/mega-menu'
+import { investorDashboardUrl } from '@/lib/site-config'
 import type { MegaMenuSection } from '@/types'
 
 export interface NavbarProps {
@@ -129,6 +130,21 @@ export function Navbar({ logo, sections }: NavbarProps) {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <Button
+            variant="ghost"
+            size="sm"
+            asChild
+            className={cn(
+              'border',
+              scrolled
+                ? 'border-border-strong text-accent-ink hover:bg-canvas-muted'
+                : 'border-white/25 text-accent-soft hover:bg-white/10'
+            )}
+          >
+            <a href={investorDashboardUrl} target="_blank" rel="noopener noreferrer">
+              Access Dashboard
+            </a>
+          </Button>
           <Button variant="gold" size="sm" withArrow asChild className="group">
             <Link href="/contact">Speak with Us</Link>
           </Button>
@@ -206,6 +222,11 @@ export function Navbar({ logo, sections }: NavbarProps) {
               <li className="flex flex-col gap-3 pt-4">
                 <Button variant="gold" withArrow asChild>
                   <Link href="/contact">Speak with Us</Link>
+                </Button>
+                <Button variant="outline" asChild>
+                  <a href={investorDashboardUrl} target="_blank" rel="noopener noreferrer">
+                    Access Dashboard
+                  </a>
                 </Button>
               </li>
             </ul>

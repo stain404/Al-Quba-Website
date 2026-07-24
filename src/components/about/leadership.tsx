@@ -55,32 +55,36 @@ export function Leadership() {
       <div className="mt-16 flex flex-col">
         {leaders.map((leader) => (
           <FadeIn key={leader.name}>
-            <div className="grid grid-cols-1 items-start gap-8 border-b border-t border-border py-12 md:grid-cols-[220px_1fr] md:gap-16">
-              <div className="relative aspect-[3/4] w-full max-w-[220px] overflow-hidden rounded-lg bg-canvas-muted">
-                <Image
-                  src="/ceo.jpeg"
-                  alt="Khasim Enoli, Founder & CEO of Al Quba Investment"
-                  fill
-                  sizes="220px"
-                  className="object-cover"
-                />
-                {leader.linkedin && (
-                  <a
-                    href={leader.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${leader.name} on LinkedIn`}
-                    className="absolute right-2 top-2 inline-flex size-9 items-center justify-center rounded-full bg-canvas-raised/90 text-navy shadow-sm backdrop-blur transition-colors duration-150 hover:bg-canvas-raised hover:text-accent-ink"
-                  >
-                    <Linkedin className="size-4" aria-hidden />
-                  </a>
-                )}
+            <div className="border-b border-t border-border py-12">
+              <div className="mb-8 flex flex-col gap-1">
+                <h3 className="text-heading-lg font-semibold text-text-primary">{leader.name}</h3>
+                <span className="text-body-sm font-medium text-accent-ink">{leader.role}</span>
               </div>
 
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-heading-lg font-semibold text-text-primary">{leader.name}</h3>
-                  <span className="text-body-sm font-medium text-accent-ink">{leader.role}</span>
+              {/* Name/role now sits above this row rather than sharing
+                  the image's column, so the photo's top edge lines up
+                  with the quote mark and headline instead of floating
+                  higher than it. */}
+              <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[220px_1fr] md:gap-16">
+                <div className="relative aspect-[3/4] w-full max-w-[220px] overflow-hidden rounded-lg bg-canvas-muted">
+                  <Image
+                    src="/ceo.jpeg"
+                    alt="Khasim Enoli, Founder & CEO of Al Quba Investment"
+                    fill
+                    sizes="220px"
+                    className="object-cover"
+                  />
+                  {leader.linkedin && (
+                    <a
+                      href={leader.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${leader.name} on LinkedIn`}
+                      className="absolute right-2 top-2 inline-flex size-9 items-center justify-center rounded-full bg-canvas-raised/90 text-navy shadow-sm backdrop-blur transition-colors duration-150 hover:bg-canvas-raised hover:text-accent-ink"
+                    >
+                      <Linkedin className="size-4" aria-hidden />
+                    </a>
+                  )}
                 </div>
 
                 <blockquote className="border-l-2 border-accent pl-5">
