@@ -124,7 +124,7 @@ export function Hero() {
         <video
           ref={videoRef}
           className="absolute left-1/2 top-0 h-[110%] w-[110%] -translate-x-1/2 object-cover sm:h-[122%] sm:w-[122%]"
-          src="/hero-banner-final-4k.mp4"
+          src="/hero-banner-final-4k-mobile.mp4"
           autoPlay
           muted
           loop
