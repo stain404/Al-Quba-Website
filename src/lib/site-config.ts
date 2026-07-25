@@ -47,7 +47,6 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
         ],
       },
       { label: 'رؤى المستثمرين', href: '/insights' },
-      { label: 'وظائف', href: '/careers' },
     ]
   }
 
@@ -78,7 +77,6 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
       ],
     },
     { label: 'Investor Insights', href: '/insights' },
-    { label: 'Careers', href: '/careers' },
   ]
 }
 
