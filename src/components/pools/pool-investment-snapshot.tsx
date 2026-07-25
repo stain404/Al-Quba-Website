@@ -1,9 +1,15 @@
+import { getLocale } from 'next-intl/server'
 import { SectionContainer, SplitContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { Card } from '@/components/cards/card'
 import { Badge } from '@/components/ui/badge'
 import { Stagger, StaggerItem, FadeIn } from '@/components/motion/reveal'
 import type { PoolSnapshotItem } from '@/lib/pools-data'
+
+const copy = {
+  en: { eyebrow: 'Fund Overview', title: 'Investment Snapshot' },
+  ar: { eyebrow: 'نظرة عامة على الصندوق', title: 'لمحة استثمارية' },
+} as const
 
 /**
  * Pool Detail / Investment Snapshot.
@@ -13,24 +19,27 @@ import type { PoolSnapshotItem } from '@/lib/pools-data'
  * pool-age terms in more deliberate, one-at-a-time detail. This section
  * is the fast read; Fund Details is the fine print.
  */
-export function PoolInvestmentSnapshot({
+export async function PoolInvestmentSnapshot({
   overview,
   snapshot,
 }: {
   overview: string
   snapshot: PoolSnapshotItem[]
 }) {
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
+
   return (
     <SectionContainer surface="canvas" spacing="lg">
       <SplitContainer>
         <FadeIn>
-          <Eyebrow>Fund Overview</Eyebrow>
+          <Eyebrow>{c.eyebrow}</Eyebrow>
         </FadeIn>
 
         <div className="flex flex-col gap-10">
           <FadeIn delay={0.05} className="flex flex-col gap-6">
             <Heading as="h2" size="display-sm" className="max-w-xl">
-              Investment Snapshot
+              {c.title}
             </Heading>
             <p className="max-w-measure text-body-lg text-text-secondary">{overview}</p>
           </FadeIn>

@@ -1,3 +1,4 @@
+import { getLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { CheckCircle2, Download } from 'lucide-react'
@@ -9,6 +10,25 @@ import { FadeIn } from '@/components/motion/reveal'
 import type { Pool } from '@/lib/pools-data'
 import { getPoolIcon } from '@/lib/pools-data'
 
+const copy = {
+  en: {
+    pool: 'Pool',
+    investmentDetails: 'Investment Details',
+    investNow: 'Invest Now',
+    exploreOtherPools: 'Explore Other Investment Pools',
+    enquireNow: 'Enquire Now',
+    downloadBrochure: 'Download Investment Brochure',
+  },
+  ar: {
+    pool: 'الصندوق',
+    investmentDetails: 'تفاصيل الاستثمار',
+    investNow: 'استثمر الآن',
+    exploreOtherPools: 'استعرض صناديق استثمارية أخرى',
+    enquireNow: 'استفسر الآن',
+    downloadBrochure: 'تحميل كتيب الاستثمار',
+  },
+} as const
+
 /**
  * Pool Detail / Hero.
  * Ink surface with a sector icon badge in place of the skyline motif used
@@ -18,10 +38,12 @@ import { getPoolIcon } from '@/lib/pools-data'
  * background (same left-to-right scrim technique as SectorHero) instead
  * of the plain ink surface.
  */
-export function PoolHero({ pool }: { pool: Pool }) {
+export async function PoolHero({ pool }: { pool: Pool }) {
   const Icon = getPoolIcon(pool.slug)
   const hasImage = !!pool.heroImage
-  const isOpen = pool.status.toLowerCase().includes('open')
+  const isOpen = pool.isOpen
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
 
   return (
     <SectionContainer
@@ -72,7 +94,7 @@ export function PoolHero({ pool }: { pool: Pool }) {
             <div className="flex flex-col gap-1">
               {pool.poolNumber && (
                 <span className="font-mono text-caption uppercase tracking-wide text-text-inverse-muted">
-                  Pool {String(pool.poolNumber).padStart(2, '0')}
+                  {c.pool} {String(pool.poolNumber).padStart(2, '0')}
                 </span>
               )}
               <Eyebrow inverse>{pool.category}</Eyebrow>
@@ -97,7 +119,7 @@ export function PoolHero({ pool }: { pool: Pool }) {
 
           {pool.heroMetrics.length > 0 && (
             <div className="flex flex-col gap-3 border-t border-border-ink pt-8">
-              <span className="text-caption uppercase tracking-wide text-text-inverse-muted">Investment Details</span>
+              <span className="text-caption uppercase tracking-wide text-text-inverse-muted">{c.investmentDetails}</span>
               <dl className="flex flex-wrap gap-x-10 gap-y-4">
                 {pool.heroMetrics.map((metric) => (
                   <div key={metric.label} className="flex flex-col gap-1">
@@ -123,23 +145,23 @@ export function PoolHero({ pool }: { pool: Pool }) {
           <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Button variant="gold" size="lg" withArrow className="group" asChild>
               <Link href={isOpen ? '/contact' : '/#pools'}>
-                {isOpen ? 'Invest Now' : 'Explore Other Investment Pools'}
+                {isOpen ? c.investNow : c.exploreOtherPools}
               </Link>
             </Button>
             <Button variant="ghost-inverse" size="lg" asChild>
-              <Link href="/contact">Enquire Now</Link>
+              <Link href="/contact">{c.enquireNow}</Link>
             </Button>
             {pool.brochureUrl && (
               <Button variant="ghost-inverse" size="lg" asChild>
                 {pool.brochureUrl.startsWith('http') || pool.brochureUrl.endsWith('.pdf') ? (
                   <a href={pool.brochureUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
                     <Download className="size-4" strokeWidth={1.5} aria-hidden />
-                    Download Investment Brochure
+                    {c.downloadBrochure}
                   </a>
                 ) : (
                   <Link href={pool.brochureUrl} className="inline-flex items-center gap-2">
                     <Download className="size-4" strokeWidth={1.5} aria-hidden />
-                    Download Investment Brochure
+                    {c.downloadBrochure}
                   </Link>
                 )}
               </Button>

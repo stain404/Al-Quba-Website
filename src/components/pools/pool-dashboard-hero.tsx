@@ -1,3 +1,4 @@
+import { getLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -8,6 +9,23 @@ import { Badge } from '@/components/ui/badge'
 import { FadeIn } from '@/components/motion/reveal'
 import type { Pool } from '@/lib/pools-data'
 import { getPoolIcon } from '@/lib/pools-data'
+
+const copy = {
+  en: {
+    pool: 'Pool',
+    investNow: 'Invest Now',
+    exploreOtherPools: 'Explore Other Investment Pools',
+    enquireNow: 'Enquire Now',
+    downloadBrochure: 'Download Investment Brochure',
+  },
+  ar: {
+    pool: 'الصندوق',
+    investNow: 'استثمر الآن',
+    exploreOtherPools: 'استعرض صناديق استثمارية أخرى',
+    enquireNow: 'استفسر الآن',
+    downloadBrochure: 'تحميل كتيب الاستثمار',
+  },
+} as const
 
 /**
  * Pool Detail / Dashboard Hero.
@@ -21,11 +39,13 @@ import { getPoolIcon } from '@/lib/pools-data'
  * transparent-over-hero Navbar — styled for a dark first section on
  * every other page — still reads correctly here.
  */
-export function PoolDashboardHero({ pool }: { pool: Pool }) {
+export async function PoolDashboardHero({ pool }: { pool: Pool }) {
   const Icon = getPoolIcon(pool.slug)
-  const isOpen = pool.status.toLowerCase().includes('open')
+  const isOpen = pool.isOpen
   const dashboard = pool.heroDashboard ?? []
   const features = pool.heroFeatures ?? []
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
 
   return (
     <SectionContainer
@@ -39,7 +59,7 @@ export function PoolDashboardHero({ pool }: { pool: Pool }) {
         <FadeIn className="flex flex-col gap-8">
           {pool.poolNumber && (
             <span className="inline-flex w-fit items-center rounded-full border border-border-ink px-3.5 py-1.5 text-caption font-mono uppercase tracking-wide text-text-inverse-muted">
-              Pool {String(pool.poolNumber).padStart(2, '0')}
+              {c.pool} {String(pool.poolNumber).padStart(2, '0')}
             </span>
           )}
 
@@ -97,23 +117,23 @@ export function PoolDashboardHero({ pool }: { pool: Pool }) {
           <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <Button variant="gold" size="lg" withArrow asChild className="group">
               <Link href={isOpen ? '/contact' : '/#pools'}>
-                {isOpen ? 'Invest Now' : 'Explore Other Investment Pools'}
+                {isOpen ? c.investNow : c.exploreOtherPools}
               </Link>
             </Button>
             <Button variant="ghost-inverse" size="lg" asChild>
-              <Link href="/contact">Enquire Now</Link>
+              <Link href="/contact">{c.enquireNow}</Link>
             </Button>
             {pool.brochureUrl && (
               <Button variant="ghost-inverse" size="lg" asChild>
                 {pool.brochureUrl.startsWith('http') || pool.brochureUrl.endsWith('.pdf') ? (
                   <a href={pool.brochureUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
                     <Download className="size-4" strokeWidth={1.5} aria-hidden />
-                    Download Investment Brochure
+                    {c.downloadBrochure}
                   </a>
                 ) : (
                   <Link href={pool.brochureUrl} className="inline-flex items-center gap-2">
                     <Download className="size-4" strokeWidth={1.5} aria-hidden />
-                    Download Investment Brochure
+                    {c.downloadBrochure}
                   </Link>
                 )}
               </Button>

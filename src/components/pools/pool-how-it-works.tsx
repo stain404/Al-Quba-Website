@@ -1,7 +1,13 @@
+import { getLocale } from 'next-intl/server'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { Stagger, StaggerItem } from '@/components/motion/reveal'
 import type { PoolStep } from '@/lib/pools-data'
+
+const copy = {
+  en: { eyebrow: 'How It Works', title: 'One trade cycle, start to finish' },
+  ar: { eyebrow: 'كيف تسير العملية', title: 'دورة تجارية واحدة، من البداية إلى النهاية' },
+} as const
 
 /**
  * Pool Detail / How It Works.
@@ -10,7 +16,7 @@ import type { PoolStep } from '@/lib/pools-data'
  * on the site (Investment Sectors' rows, About's Timeline, Governance's
  * definition list).
  */
-export function PoolHowItWorks({
+export async function PoolHowItWorks({
   steps,
   surface = 'canvas',
 }: {
@@ -19,9 +25,12 @@ export function PoolHowItWorks({
    *  usually breaks up the canvas/canvas run (Fund Details) is skipped. */
   surface?: 'canvas' | 'muted'
 }) {
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
+
   return (
     <SectionContainer surface={surface} spacing="lg">
-      <SectionHeading eyebrow="How It Works" title="One trade cycle, start to finish" />
+      <SectionHeading eyebrow={c.eyebrow} title={c.title} />
 
       <Stagger className="mt-16">
         <ol className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">

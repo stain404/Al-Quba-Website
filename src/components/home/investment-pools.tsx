@@ -6,7 +6,7 @@ import { useLocale } from 'next-intl'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { InvestmentCard, InvestmentGrid } from '@/components/cards/investment-card'
-import { pools as poolsData } from '@/lib/pools-data'
+import { getPools } from '@/lib/pools-data'
 import type { InvestmentItem } from '@/types'
 
 const headingCopy = {
@@ -26,17 +26,20 @@ const headingCopy = {
  * Derived directly from src/lib/pools-data.ts (the same source the pool
  * detail pages read from) rather than a second hardcoded copy — keeps
  * Home's cards from silently drifting out of sync with the detail pages,
- * the same fix applied to Home's sector accordion.
+ * the same fix applied to Home's sector accordion. getPools(locale)
+ * returns the already-localized pool objects.
  */
-const pools: InvestmentItem[] = poolsData.map((pool) => ({
-  name: pool.name,
-  category: pool.category,
-  description: pool.tagline,
-  metricLabel: pool.heroMetrics[0]?.label ?? '',
-  metricValue: pool.heroMetrics[0]?.value ?? '',
-  imageSrc: pool.heroImage,
-  href: `/pools/${pool.slug}`,
-}))
+function toInvestmentItems(locale: string): InvestmentItem[] {
+  return getPools(locale).map((pool) => ({
+    name: pool.name,
+    category: pool.category,
+    description: pool.tagline,
+    metricLabel: pool.heroMetrics[0]?.label ?? '',
+    metricValue: pool.heroMetrics[0]?.value ?? '',
+    imageSrc: pool.heroImage,
+    href: `/pools/${pool.slug}`,
+  }))
+}
 
 /**
  * A single pool card, revealed with a wipe (a `clip-path` reveal, not a
@@ -70,6 +73,7 @@ function AnimatedPoolCard({ pool }: { pool: InvestmentItem }) {
 export function InvestmentPools() {
   const locale = useLocale() as keyof typeof headingCopy
   const heading = headingCopy[locale]
+  const pools = toInvestmentItems(locale)
 
   return (
     <SectionContainer id="pools" surface="muted" spacing="lg">

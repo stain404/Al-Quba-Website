@@ -28,7 +28,7 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: PoolPageProps) {
-  const pool = getPoolBySlug(params.slug)
+  const pool = getPoolBySlug(params.slug, params.locale)
   if (!pool) return {}
 
   return buildMetadata({
@@ -37,6 +37,23 @@ export function generateMetadata({ params }: PoolPageProps) {
     path: localizedPath(params.locale, `/pools/${pool.slug}`),
   })
 }
+
+const ctaCopy = {
+  en: {
+    eyebrow: 'Join This Pool',
+    title: (name: string) => `Ready to allocate into the ${name}?`,
+    description: 'Our team will walk you through current cycle availability, minimum commitment, and onboarding requirements.',
+    primaryLabel: 'Request a Consultation',
+    secondaryLabel: 'View All Pools',
+  },
+  ar: {
+    eyebrow: 'انضم إلى هذا الصندوق',
+    title: (name: string) => `هل أنت مستعد للاستثمار في ${name}؟`,
+    description: 'سيوجهك فريقنا حول توفر الدورة الحالية، والحد الأدنى للالتزام، ومتطلبات الانضمام.',
+    primaryLabel: 'اطلب استشارة',
+    secondaryLabel: 'استعرض جميع الصناديق',
+  },
+} as const
 
 /**
  * Pool Detail — one template shared by Frozen, Cocoa, and Travel pools,
@@ -58,8 +75,10 @@ export function generateMetadata({ params }: PoolPageProps) {
  */
 export default function PoolDetailPage({ params }: PoolPageProps) {
   setRequestLocale(params.locale)
-  const pool = getPoolBySlug(params.slug)
+  const pool = getPoolBySlug(params.slug, params.locale)
   if (!pool) notFound()
+  const locale = params.locale as keyof typeof ctaCopy
+  const cta = ctaCopy[locale] ?? ctaCopy.en
 
   const hasFundDetails = pool.structure.length > 0
 
@@ -95,14 +114,14 @@ export default function PoolDetailPage({ params }: PoolPageProps) {
         {hasFundDetails && <PoolStructure structure={pool.structure} />}
         <PoolRisks risks={pool.risks} />
         {pool.faq && <PoolFAQ question={pool.faq.question} answer={pool.faq.answer} />}
-        <RelatedPools currentSlug={pool.slug} />
+        <RelatedPools currentSlug={pool.slug} locale={params.locale} />
         <CTASection
-          eyebrow="Join This Pool"
-          title={`Ready to allocate into the ${pool.name}?`}
-          description="Our team will walk you through current cycle availability, minimum commitment, and onboarding requirements."
-          primaryLabel="Request a Consultation"
+          eyebrow={cta.eyebrow}
+          title={cta.title(pool.name)}
+          description={cta.description}
+          primaryLabel={cta.primaryLabel}
           primaryHref="/contact"
-          secondaryLabel="View All Pools"
+          secondaryLabel={cta.secondaryLabel}
           secondaryHref="/#pools"
         />
       </main>

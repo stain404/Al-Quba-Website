@@ -1,7 +1,13 @@
+import { getLocale } from 'next-intl/server'
 import { SectionContainer, SplitContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { FadeIn } from '@/components/motion/reveal'
 import type { PoolStructureItem } from '@/lib/pools-data'
+
+const copy = {
+  en: { eyebrow: 'Fund Details', title: 'The terms behind this fund' },
+  ar: { eyebrow: 'تفاصيل الصندوق', title: 'الشروط التي يقوم عليها هذا الصندوق' },
+} as const
 
 /**
  * Pool Detail / Structure.
@@ -9,18 +15,21 @@ import type { PoolStructureItem } from '@/lib/pools-data'
  * "the facts, plainly stated" moments) but scoped to this pool's specific
  * commercial terms rather than firm-wide governance.
  */
-export function PoolStructure({ structure }: { structure: PoolStructureItem[] }) {
+export async function PoolStructure({ structure }: { structure: PoolStructureItem[] }) {
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
+
   return (
     <SectionContainer surface="muted" spacing="lg">
       <SplitContainer>
         <FadeIn>
-          <Eyebrow>Fund Details</Eyebrow>
+          <Eyebrow>{c.eyebrow}</Eyebrow>
         </FadeIn>
 
         <div className="flex flex-col gap-10">
           <FadeIn delay={0.05}>
             <Heading as="h2" size="display-sm" className="max-w-xl">
-              The terms behind this fund
+              {c.title}
             </Heading>
           </FadeIn>
 
