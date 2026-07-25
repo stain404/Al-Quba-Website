@@ -1,32 +1,36 @@
 import { SectionContainer } from '@/components/layout/section-container'
-import { Heading } from '@/components/typography/heading'
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/motion/reveal'
 
+/**
+ * Open Application — minimal closing section.
+ * Muted canvas surface to visually separate it from the job listings above.
+ * No icon, no imagery, no statistics — just the message and a CTA.
+ */
 export function OpenApplication() {
   return (
-    <SectionContainer surface="canvas" spacing="lg">
-      <FadeIn className="flex flex-col items-center gap-8 text-center">
-        <div className="flex flex-col items-center gap-4">
-          <span className="h-px w-10 bg-accent" aria-hidden />
+    <SectionContainer surface="muted" spacing="md" className="border-t border-border">
+      <FadeIn className="flex flex-col items-center gap-6 text-center">
+        <div className="flex flex-col items-center gap-3">
+          <span className="h-px w-8 bg-accent" aria-hidden />
           <span className="text-eyebrow uppercase tracking-[0.22em] text-text-tertiary">
             Open Application
           </span>
         </div>
 
-        <Heading as="h2" size="display-md" className="max-w-2xl text-text-primary">
-          We're Always Looking for Exceptional Talent
-        </Heading>
+        <h2 className="font-display text-display-sm font-bold text-text-primary max-w-xl">
+          Didn't Find the Right Role?
+        </h2>
 
-        <p className="max-w-measure text-body-lg leading-relaxed text-text-secondary">
-          Even if you don't see a suitable opportunity today, we'd love to hear from
-          professionals who share our commitment to excellence, integrity, and long-term
-          growth.
+        <p className="max-w-[520px] text-body-md leading-relaxed text-text-secondary">
+          We're always interested in meeting talented professionals who share our
+          long-term vision. Submit your CV and we'll be in touch when a suitable
+          opportunity arises.
         </p>
 
-        <Button variant="gold" size="lg" withArrow asChild className="group mt-2">
-          <a href="mailto:careers@alqubainvestment.com?subject=Open Application">
-            Submit Your Resume
+        <Button variant="outline" size="md" withArrow asChild className="group mt-1">
+          <a href="mailto:careers@alqubainvestment.com?subject=Open Application — CV Submission">
+            Submit Your CV
           </a>
         </Button>
       </FadeIn>

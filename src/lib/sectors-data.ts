@@ -206,7 +206,7 @@ export const sectors: Sector[] = [
     slug: 'infrastructure-contracting',
     name: 'Infrastructure, Contracting & Built Environments',
     icon: Building2,
-    heroImage: '/realestate.webp',
+    heroImage: '/realestate.jpeg',
     heroSubtitle: 'Building Strong Foundations for Sustainable Growth',
     tagline:
       "Al Quba Investment's Infrastructure, Contracting & Built Environments Division delivers reliable construction and contracting solutions that support commercial, industrial, and infrastructure development. Through quality workmanship, engineering expertise, and efficient project execution, the division contributes to creating modern spaces that support economic growth and long-term value.",
@@ -301,7 +301,7 @@ export const sectors: Sector[] = [
     slug: 'logistics-supply-chain',
     name: 'Logistics & Supply Chain',
     icon: Ship,
-    heroImage: '/shipping.webp',
+    heroImage: '/shipping.jpeg',
     heroSubtitle: 'Delivering Global Connectivity Through Integrated Logistics',
     tagline:
       "Al Quba Investment's Logistics & Supply Chain Division delivers reliable logistics solutions that enable businesses to move goods efficiently across domestic and international markets. Through integrated shipping, freight coordination, and supply chain expertise, the division supports seamless trade while strengthening global business connectivity.",
@@ -404,7 +404,7 @@ export const sectors: Sector[] = [
     slug: 'import-export',
     name: 'Import & Export',
     icon: PackageSearch,
-    heroImage: '/importexport.png',
+    heroImage: '/importexport.jpeg',
     heroSubtitle: 'Connecting Businesses Through Global Trade',
     tagline:
       "The Import & Export Division of Al Quba Investment facilitates seamless international trade by connecting businesses with trusted sourcing, procurement, and distribution solutions. Through strategic partnerships and technology-driven commerce, the division enables efficient cross-border trade while helping businesses expand into regional and international markets.",
@@ -516,8 +516,7 @@ export const sectors: Sector[] = [
     slug: 'brand-strategy',
     name: 'Brand Strategy',
     icon: Palette,
-    heroImage: '/tech.png',
-    heroImagePosition: '65% center',
+    heroImage: '/brandandstrategy.png',
     heroSubtitle: 'Building Brands That Inspire Growth',
     tagline:
       "Al Quba Investment's Brand Strategy Division empowers businesses through creative branding, digital innovation, and strategic marketing solutions. By combining technology, creativity, and business insight, the division helps organizations strengthen their market presence, connect with audiences, and achieve sustainable growth.",

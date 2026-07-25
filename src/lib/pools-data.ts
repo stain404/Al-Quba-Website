@@ -214,7 +214,7 @@ export const pools: Pool[] = [
     name: 'Global Travel Fund I',
     category: 'Global Travel Investment Fund',
     poolNumber: 3,
-    heroImage: '/boarding_plane.png',
+    heroImage: '/travel.jpeg',
     status: 'Open to Subscription',
     isOpen: true,
     tagline:

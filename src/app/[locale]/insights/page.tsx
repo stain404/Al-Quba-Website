@@ -14,11 +14,45 @@ interface InsightsPageProps {
   params: { locale: string }
 }
 
-export function generateMetadata({ params }: InsightsPageProps) {
-  return buildMetadata({
+const metadataCopy = {
+  en: {
     title: 'Insights',
     description:
       'Commentary on trade finance, structured investing, and the markets Al Quba Investment operates in — written by our investment team.',
+  },
+  ar: {
+    title: 'الرؤى الاستثمارية',
+    description:
+      'تعليقات حول التمويل التجاري، والاستثمار المهيكل، والأسواق التي تعمل فيها القبا للاستثمار — بقلم فريق الاستثمار لدينا.',
+  },
+} as const
+
+const ctaCopy = {
+  en: {
+    eyebrow: 'Have a Question',
+    title: 'Looking for Insights on a Specific Market or Sector?',
+    description:
+      "If there's a market, industry, or investment topic you'd like us to cover, our team welcomes your suggestions. We continuously publish research designed to help investors navigate evolving global opportunities.",
+    primaryLabel: 'Contact Our Team',
+    secondaryLabel: 'View Investment Pools',
+  },
+  ar: {
+    eyebrow: 'هل لديك سؤال',
+    title: 'هل تبحث عن رؤى حول سوق أو قطاع معين؟',
+    description:
+      'إذا كان هناك سوق أو قطاع أو موضوع استثماري ترغب في أن نتناوله، يسعد فريقنا بتلقي اقتراحاتك. نواصل نشر أبحاث مصممة لمساعدة المستثمرين على التعامل مع الفرص العالمية المتطورة.',
+    primaryLabel: 'تواصل مع فريقنا',
+    secondaryLabel: 'استعرض مجمعات الاستثمار',
+  },
+} as const
+
+export function generateMetadata({ params }: InsightsPageProps) {
+  const locale = params.locale as keyof typeof metadataCopy
+  const m = metadataCopy[locale] ?? metadataCopy.en
+
+  return buildMetadata({
+    title: m.title,
+    description: m.description,
     path: localizedPath(params.locale, '/insights'),
   })
 }
@@ -32,6 +66,8 @@ export function generateMetadata({ params }: InsightsPageProps) {
  */
 export default function InsightsPage({ params }: InsightsPageProps) {
   setRequestLocale(params.locale)
+  const locale = params.locale as keyof typeof ctaCopy
+  const cta = ctaCopy[locale] ?? ctaCopy.en
 
   return (
     <>
@@ -43,12 +79,12 @@ export default function InsightsPage({ params }: InsightsPageProps) {
         <InsightsGrid />
         <NewsletterSignup />
         <CTASection
-          eyebrow="Have a Question"
-          title="Looking for Insights on a Specific Market or Sector?"
-          description="If there's a market, industry, or investment topic you'd like us to cover, our team welcomes your suggestions. We continuously publish research designed to help investors navigate evolving global opportunities."
-          primaryLabel="Contact Our Team"
+          eyebrow={cta.eyebrow}
+          title={cta.title}
+          description={cta.description}
+          primaryLabel={cta.primaryLabel}
           primaryHref="/contact"
-          secondaryLabel="View Investment Pools"
+          secondaryLabel={cta.secondaryLabel}
           secondaryHref="/#pools"
         />
       </main>

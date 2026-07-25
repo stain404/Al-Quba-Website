@@ -2,14 +2,11 @@ import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CareersHero } from '@/components/careers/careers-hero'
-import { WhyJoin } from '@/components/careers/why-join'
-import { LifeAtAlQuba } from '@/components/careers/life-at-al-quba'
 import { CurrentOpenings } from '@/components/careers/current-openings'
-import { RecruitmentProcess } from '@/components/careers/recruitment-process'
 import { OpenApplication } from '@/components/careers/open-application'
-import { CTASection } from '@/components/sections/cta-section'
 import { buildMetadata } from '@/lib/seo'
 import { localizedPath } from '@/i18n/routing'
+import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 
 interface CareersPageProps {
   params: { locale: string }
@@ -24,29 +21,27 @@ export function generateMetadata({ params }: CareersPageProps) {
   })
 }
 
+/**
+ * Careers — intentionally minimal institutional layout.
+ * Hero (photo banner) → Current Openings (with search + filter) → Open
+ * Application. No marketing sections, no statistics.
+ */
 export default function CareersPage({ params }: CareersPageProps) {
   setRequestLocale(params.locale)
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Careers', path: '/careers' },
+        ]}
+      />
       <Navbar />
       <main>
         <CareersHero />
-        <WhyJoin />
-        <LifeAtAlQuba />
         <CurrentOpenings />
-        <RecruitmentProcess />
         <OpenApplication />
-        <CTASection
-          eyebrow="Join Our Team"
-          title="Ready to Build Something Meaningful?"
-          description="Join a team that's creating long-term value across global industries."
-          primaryLabel="Apply Today"
-          primaryHref="mailto:careers@alqubainvestment.com"
-          secondaryLabel="Contact HR"
-          secondaryHref="/contact"
-          backgroundImageSrc="/footer-bg.png"
-        />
       </main>
       <Footer />
     </>

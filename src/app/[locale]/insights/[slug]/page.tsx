@@ -17,13 +17,26 @@ interface ArticlePageProps {
   params: { locale: string; slug: string }
 }
 
+const ctaCopy = {
+  en: {
+    title: 'Looking for Long-Term Investment Opportunities?',
+    description: "Explore Al Quba Investment's perspectives on trade, real estate, private markets, and global economic trends.",
+    primaryLabel: 'Explore Investment Opportunities',
+  },
+  ar: {
+    title: 'تبحث عن فرص استثمارية طويلة الأمد؟',
+    description: 'استكشف رؤى القبا للاستثمار حول التجارة، والعقارات، والأسواق الخاصة، والاتجاهات الاقتصادية العالمية.',
+    primaryLabel: 'استكشف الفرص الاستثمارية',
+  },
+} as const
+
 /** Pre-render every article page (featured + all category pieces) at build time. */
 export function generateStaticParams() {
   return getAllArticles().map((article) => ({ slug: article.slug }))
 }
 
 export function generateMetadata({ params }: ArticlePageProps) {
-  const article = getArticleBySlug(params.slug)
+  const article = getArticleBySlug(params.slug, params.locale)
   if (!article) return {}
 
   return buildMetadata({
@@ -42,8 +55,10 @@ export function generateMetadata({ params }: ArticlePageProps) {
  */
 export default function ArticlePage({ params }: ArticlePageProps) {
   setRequestLocale(params.locale)
-  const article = getArticleBySlug(params.slug)
+  const article = getArticleBySlug(params.slug, params.locale)
   if (!article) notFound()
+  const locale = params.locale as keyof typeof ctaCopy
+  const cta = ctaCopy[locale] ?? ctaCopy.en
 
   return (
     <>
@@ -59,11 +74,11 @@ export default function ArticlePage({ params }: ArticlePageProps) {
         <ArticleHero article={article} />
         <ArticleBody body={article.body} />
         <ArticleKeyTakeaways items={article.keyTakeaways} />
-        <RelatedArticles currentSlug={article.slug} surface="canvas" />
+        <RelatedArticles currentSlug={article.slug} surface="canvas" locale={params.locale} />
         <CTASection
-          title="Looking for Long-Term Investment Opportunities?"
-          description="Explore Al Quba Investment's perspectives on trade, real estate, private markets, and global economic trends."
-          primaryLabel="Explore Investment Opportunities"
+          title={cta.title}
+          description={cta.description}
+          primaryLabel={cta.primaryLabel}
           primaryHref="/#sectors"
         />
         <NewsletterSignup />

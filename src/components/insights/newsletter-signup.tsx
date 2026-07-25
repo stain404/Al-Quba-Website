@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useLocale } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -12,11 +13,32 @@ import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/motion/reveal'
 import { subscribeToNewsletter } from '@/lib/subscribe'
 
-const newsletterSchema = z.object({
-  email: z.string().email('Enter a valid email address'),
-})
+const copy = {
+  en: {
+    eyebrow: 'Stay Informed',
+    heading: 'Stay Ahead of Market Trends',
+    body: 'Subscribe to receive the latest market insights, economic updates, and investment perspectives.',
+    emailInvalid: 'Enter a valid email address',
+    success: "You're subscribed. Look out for our next note.",
+    label: 'Email address',
+    placeholder: 'you@company.com',
+    submit: 'Subscribe',
+    error: 'Something went wrong subscribing. Please try again.',
+  },
+  ar: {
+    eyebrow: 'ابقَ على اطلاع',
+    heading: 'ابقَ في صدارة اتجاهات السوق',
+    body: 'اشترك لتصلك أحدث رؤى السوق، والمستجدات الاقتصادية، ووجهات نظرنا الاستثمارية.',
+    emailInvalid: 'أدخل بريدًا إلكترونيًا صحيحًا',
+    success: 'تم اشتراكك بنجاح. ترقّب رسالتنا القادمة.',
+    label: 'البريد الإلكتروني',
+    placeholder: 'you@company.com',
+    submit: 'اشترك',
+    error: 'حدث خطأ أثناء الاشتراك. يرجى المحاولة مرة أخرى.',
+  },
+} as const
 
-type NewsletterValues = z.infer<typeof newsletterSchema>
+type NewsletterValues = { email: string }
 
 /**
  * Insights / Newsletter Signup.
@@ -25,7 +47,13 @@ type NewsletterValues = z.infer<typeof newsletterSchema>
  * subscribe action rather than a full inquiry.
  */
 export function NewsletterSignup() {
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
   const [submitError, setSubmitError] = React.useState<string | null>(null)
+  const newsletterSchema = React.useMemo(
+    () => z.object({ email: z.string().email(c.emailInvalid) }),
+    [c.emailInvalid]
+  )
   const {
     register,
     handleSubmit,
@@ -37,7 +65,7 @@ export function NewsletterSignup() {
     try {
       await subscribeToNewsletter(values.email)
     } catch {
-      setSubmitError('Something went wrong subscribing. Please try again.')
+      setSubmitError(c.error)
       throw new Error('Subscription failed')
     }
   }
@@ -45,19 +73,16 @@ export function NewsletterSignup() {
   return (
     <SectionContainer surface="canvas" spacing="lg">
       <FadeIn className="mx-auto flex max-w-2xl flex-col items-center gap-8 text-center">
-        <Eyebrow>Stay Informed</Eyebrow>
+        <Eyebrow>{c.eyebrow}</Eyebrow>
         <Heading as="h2" size="display-sm">
-          Stay Ahead of Market Trends
+          {c.heading}
         </Heading>
-        <p className="max-w-measure text-body-md text-text-secondary">
-          Subscribe to receive the latest market insights, economic
-          updates, and investment perspectives.
-        </p>
+        <p className="max-w-measure text-body-md text-text-secondary">{c.body}</p>
 
         {isSubmitSuccessful ? (
           <div className="flex items-center gap-2 text-body-md font-medium text-success">
             <CheckCircle2 className="size-5" strokeWidth={1.5} aria-hidden />
-            You&rsquo;re subscribed. Look out for our next note.
+            {c.success}
           </div>
         ) : (
           <div className="flex w-full max-w-md flex-col gap-2">
@@ -69,12 +94,12 @@ export function NewsletterSignup() {
               className="flex flex-col gap-4 sm:flex-row sm:items-start"
             >
               <div className="flex-1">
-                <FieldWrapper id="newsletter-email" label="Email address" error={errors.email?.message} className="text-left">
-                  <Input id="newsletter-email" type="email" placeholder="you@company.com" {...register('email')} />
+                <FieldWrapper id="newsletter-email" label={c.label} error={errors.email?.message} className="text-left">
+                  <Input id="newsletter-email" type="email" placeholder={c.placeholder} {...register('email')} />
                 </FieldWrapper>
               </div>
               <Button type="submit" size="lg" loading={isSubmitting} className="sm:mt-8">
-                Subscribe
+                {c.submit}
               </Button>
             </form>
             {submitError && (

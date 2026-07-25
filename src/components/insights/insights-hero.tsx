@@ -1,20 +1,27 @@
 'use client'
 
 import * as React from 'react'
+import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
 import { FadeIn } from '@/components/motion/reveal'
 import { VideoPauseToggle } from '@/components/motion/video-pause-toggle'
 
-const topics = [
-  'Market Insights',
-  'Global Trade',
-  'Trade Finance',
-  'Investment Strategy',
-  'Commodities',
-  'Economic Outlook',
-]
+const copy = {
+  en: {
+    eyebrow: 'Insights',
+    heading: 'Insights That Drive Smarter Investment Decisions',
+    body: 'Explore expert perspectives on global markets, investment strategies, trade finance, economic trends, and emerging opportunities. Our insights are designed to help investors make informed decisions with confidence.',
+    topics: ['Market Insights', 'Global Trade', 'Trade Finance', 'Investment Strategy', 'Commodities', 'Economic Outlook'],
+  },
+  ar: {
+    eyebrow: 'رؤى',
+    heading: 'رؤى تقود قرارات استثمارية أكثر ذكاءً',
+    body: 'استكشف وجهات نظر متخصصة حول الأسواق العالمية، واستراتيجيات الاستثمار، والتمويل التجاري، والاتجاهات الاقتصادية، والفرص الناشئة. صُممت رؤانا لمساعدة المستثمرين على اتخاذ قرارات مدروسة بثقة.',
+    topics: ['رؤى السوق', 'التجارة العالمية', 'التمويل التجاري', 'استراتيجية الاستثمار', 'السلع الأساسية', 'التوقعات الاقتصادية'],
+  },
+} as const
 
 /**
  * Insights / Hero.
@@ -25,6 +32,8 @@ const topics = [
  */
 export function InsightsHero() {
   const videoRef = React.useRef<HTMLVideoElement>(null)
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
 
   return (
     <SectionContainer
@@ -65,18 +74,13 @@ export function InsightsHero() {
 
       <div className="container relative z-10 mx-auto max-w-container">
         <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
-          <Eyebrow inverse>Insights</Eyebrow>
+          <Eyebrow inverse>{c.eyebrow}</Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
-            Insights That Drive Smarter Investment Decisions
+            {c.heading}
           </Heading>
-          <p className="max-w-measure text-body-lg text-text-inverse">
-            Explore expert perspectives on global markets, investment
-            strategies, trade finance, economic trends, and emerging
-            opportunities. Our insights are designed to help investors make
-            informed decisions with confidence.
-          </p>
+          <p className="max-w-measure text-body-lg text-text-inverse">{c.body}</p>
           <ul className="flex flex-wrap gap-2.5">
-            {topics.map((topic) => (
+            {c.topics.map((topic) => (
               <li key={topic}>
                 <Link
                   href="/insights#articles"

@@ -12,8 +12,8 @@ const details = [
   {
     icon: MapPin,
     label: 'Address',
-    value: 'Office 306, Al Mezan Tower, Dubai, UAE',
-    href: 'https://www.google.com/maps/search/?api=1&query=Office+306,+Al+Mezan+Tower,+Dubai,+UAE',
+    value: 'Office 306, Al Mezan Tower, Al Qusais, Muhaisnah 4, Dubai, UAE',
+    href: 'https://www.google.com/maps/search/?api=1&query=Office+306,+Al+Mezan+Tower,+Al+Qusais,+Muhaisnah+4,+Dubai,+UAE',
   },
   {
     icon: Mail,

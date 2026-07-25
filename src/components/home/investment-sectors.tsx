@@ -33,22 +33,22 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
       // Built Environments" name.
       label: 'Infrastructure & Contracting',
       description: 'Construction and contracting led by Bright Hurst.',
-      image: '/realestate.webp',
+      image: '/realestate.jpeg',
     },
     {
       label: 'Logistics & Supply Chain',
       description: 'Freight and logistics led by NobleStar Shipping.',
-      image: '/shipping.webp',
+      image: '/shipping.jpeg',
     },
     {
       label: 'Import & Export',
       description: 'Global sourcing led by ContainerKart and Al Wahda Trading.',
-      image: '/importexport.png',
+      image: '/importexport.jpeg',
     },
     {
       label: 'Brand Strategy',
       description: 'Creative and digital solutions led by Phew Interactive.',
-      image: '/tech.png',
+      image: '/brandandstrategy.png',
     },
   ],
   ar: [
@@ -60,22 +60,22 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
     {
       label: 'البنية التحتية والمقاولات',
       description: 'بناء ومقاولات بقيادة برايت هيرست.',
-      image: '/realestate.webp',
+      image: '/realestate.jpeg',
     },
     {
       label: 'الخدمات اللوجستية وسلاسل الإمداد',
       description: 'شحن وخدمات لوجستية بقيادة نوبل ستار للشحن.',
-      image: '/shipping.webp',
+      image: '/shipping.jpeg',
     },
     {
       label: 'الاستيراد والتصدير',
       description: 'توريد عالمي بقيادة كونتينر كارت والوحدة للتجارة.',
-      image: '/importexport.png',
+      image: '/importexport.jpeg',
     },
     {
       label: 'استراتيجية العلامة التجارية',
       description: 'حلول إبداعية ورقمية بقيادة فيو إنتراكتيف.',
-      image: '/tech.png',
+      image: '/brandandstrategy.png',
     },
   ],
 }

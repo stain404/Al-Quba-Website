@@ -94,7 +94,7 @@ const organizationJsonLd = {
   telephone: '+971505762203',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Office 306, Al Mezan Tower',
+    streetAddress: 'Office 306, Al Mezan Tower, Al Qusais, Muhaisnah 4',
     addressLocality: 'Dubai',
     addressRegion: 'DIFC',
     addressCountry: 'AE',

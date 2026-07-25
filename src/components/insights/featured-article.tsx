@@ -1,10 +1,16 @@
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
+import { getLocale } from 'next-intl/server'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Badge } from '@/components/ui/badge'
 import { FadeIn } from '@/components/motion/reveal'
-import { featuredArticle as featured } from '@/lib/insights-data'
+import { getFeaturedArticle } from '@/lib/insights-data'
+
+const copy = {
+  en: { badge: 'Featured', cta: 'Read the full piece' },
+  ar: { badge: 'مقال مميز', cta: 'اقرأ المقال كاملاً' },
+} as const
 
 /**
  * Insights / Featured Article.
@@ -13,7 +19,11 @@ import { featuredArticle as featured } from '@/lib/insights-data'
  * Home page's spotlight-plus-list Featured Portfolio pattern and from
  * Portfolio's alternating case-study rows: this is one piece, full focus.
  */
-export function FeaturedArticle() {
+export async function FeaturedArticle() {
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
+  const featured = getFeaturedArticle(locale)
+
   return (
     <SectionContainer surface="canvas" spacing="lg">
       <FadeIn>
@@ -34,7 +44,7 @@ export function FeaturedArticle() {
 
           <div className="relative z-10 flex max-w-2xl flex-col gap-6">
             <Badge variant="gold" className="w-fit">
-              Featured
+              {c.badge}
             </Badge>
             <h2 className="text-display-md font-display leading-tight text-text-inverse">{featured.title}</h2>
             <p className="text-body-lg text-text-inverse-muted">{featured.excerpt}</p>
@@ -46,7 +56,7 @@ export function FeaturedArticle() {
               <span>{featured.readTime}</span>
             </div>
             <span className="inline-flex w-fit items-center gap-2 text-body-md font-medium text-accent-ink">
-              Read the full piece
+              {c.cta}
               <ArrowUpRight
                 className="size-4 transition-transform duration-200 ease-institutional group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 aria-hidden
