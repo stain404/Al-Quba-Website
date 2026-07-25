@@ -47,24 +47,10 @@ export function Hero() {
     const video = videoRef.current
     if (!video) return
 
-    // Decide the source in JS rather than via <source media="...">
-    // children — real-world browser support for `media`-based source
-    // selection on <video> is unreliable (it reliably works for
-    // <picture>/<img>, not consistently for <video>), so phones/tablets
-    // would sometimes still fetch the 4K desktop clip. Setting `src`
-    // directly guarantees the right file is requested.
-    const isMobileOrTablet = window.matchMedia('(max-width: 1023px)').matches
-    video.src = isMobileOrTablet ? '/hero-banner-mobile.mp4' : '/hero-banner-final-4k.mp4'
-    video.load()
-
     const tryPlay = () => {
       if (video.dataset.userPaused === 'true') return
       video.play().catch(() => { })
     }
-    // Browsers don't reliably honor the `autoplay` attribute after `src`
-    // is assigned dynamically (as opposed to being present at parse
-    // time), so kick playback explicitly once the new source is set.
-    tryPlay()
     const onVisibility = () => {
       if (document.visibilityState === 'visible') tryPlay()
     }
@@ -135,11 +121,10 @@ export function Hero() {
             zoom. Mobile uses a lighter 110% zoom than desktop's 122% —
             still enough to clip the watermark, without cropping in as
             tight on narrow screens. */}
-        {/* `src` is assigned in the effect above (mobile vs. desktop
-            clip), not here — see the comment there for why. */}
         <video
           ref={videoRef}
           className="absolute left-1/2 top-0 h-[110%] w-[110%] -translate-x-1/2 object-cover sm:h-[122%] sm:w-[122%]"
+          src="/hero-banner-final-4k.mp4"
           autoPlay
           muted
           loop
