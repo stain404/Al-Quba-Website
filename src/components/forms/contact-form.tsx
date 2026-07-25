@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -10,32 +11,78 @@ import { Input, Textarea, Select, Checkbox, FieldWrapper } from '@/components/ui
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/motion/reveal'
 
-const inquiryTypes = [
-  { label: 'Institutional Investment', value: 'institutional' },
-  { label: 'Family Office Partnership', value: 'family-office' },
-  { label: 'Private Wealth', value: 'private-wealth' },
-  { label: 'Media & Press', value: 'media' },
-  { label: 'Careers', value: 'careers' },
-] as const
+const inquiryTypesByLocale = {
+  en: [
+    { label: 'Institutional Investment', value: 'institutional' },
+    { label: 'Family Office Partnership', value: 'family-office' },
+    { label: 'Private Wealth', value: 'private-wealth' },
+    { label: 'Media & Press', value: 'media' },
+    { label: 'Careers', value: 'careers' },
+  ],
+  ar: [
+    { label: 'استثمار مؤسسي', value: 'institutional' },
+    { label: 'شراكة مكتب عائلة', value: 'family-office' },
+    { label: 'ثروات خاصة', value: 'private-wealth' },
+    { label: 'إعلام وصحافة', value: 'media' },
+    { label: 'وظائف', value: 'careers' },
+  ],
+} as const
 
-const contactSchema = z.object({
-  fullName: z.string().min(2, 'Enter your full name'),
-  email: z.string().email('Enter a valid email address'),
-  company: z.string().min(2, 'Enter your company or family office name'),
-  inquiryType: z.enum(
-    inquiryTypes.map((t) => t.value) as [string, ...string[]],
-    { errorMap: () => ({ message: 'Select an inquiry type' }) }
-  ),
-  message: z.string().min(20, 'Please provide at least 20 characters of context'),
-  consent: z.literal(true, {
-    errorMap: () => ({ message: 'Please confirm you agree to be contacted' }),
-  }),
-})
-
-export type ContactFormValues = z.infer<typeof contactSchema>
+const copy = {
+  en: {
+    fullNameLabel: 'Full name',
+    fullNamePlaceholder: 'Enter your full name',
+    fullNameError: 'Enter your full name',
+    emailLabel: 'Email address',
+    emailPlaceholder: 'Enter your email address',
+    emailError: 'Enter a valid email address',
+    companyLabel: 'Company / Family office',
+    companyPlaceholder: 'Enter your company name',
+    companyError: 'Enter your company or family office name',
+    inquiryLabel: 'How can we help you?',
+    inquiryPlaceholder: 'Select an inquiry type',
+    inquiryError: 'Select an inquiry type',
+    messageLabel: 'Message',
+    messagePlaceholder: 'Tell us about your objectives and investment horizon.',
+    messageError: 'Please provide at least 20 characters of context',
+    consentPrefix: 'I agree to be contacted by Al Quba Investment regarding this inquiry, in line with the',
+    consentLink: 'Privacy Policy',
+    consentError: 'Please confirm you agree to be contacted',
+    submit: 'Submit Inquiry',
+    trustBadges: ['Confidential & Secure', 'Response within 1 Business Day', 'Your information will never be shared'],
+    submitErrorFallback: 'Something went wrong sending your message. Please try again, or email us directly.',
+    successHeading: 'Thank you for contacting Al Quba Investment.',
+    successBody: 'Our investment team has received your enquiry and will respond within one business day.',
+  },
+  ar: {
+    fullNameLabel: 'الاسم الكامل',
+    fullNamePlaceholder: 'أدخل اسمك الكامل',
+    fullNameError: 'أدخل اسمك الكامل',
+    emailLabel: 'البريد الإلكتروني',
+    emailPlaceholder: 'أدخل بريدك الإلكتروني',
+    emailError: 'أدخل بريدًا إلكترونيًا صحيحًا',
+    companyLabel: 'الشركة / مكتب العائلة',
+    companyPlaceholder: 'أدخل اسم شركتك',
+    companyError: 'أدخل اسم شركتك أو مكتب عائلتك',
+    inquiryLabel: 'كيف يمكننا مساعدتك؟',
+    inquiryPlaceholder: 'اختر نوع الاستفسار',
+    inquiryError: 'اختر نوع الاستفسار',
+    messageLabel: 'الرسالة',
+    messagePlaceholder: 'أخبرنا عن أهدافك وأفقك الاستثماري.',
+    messageError: 'يرجى تقديم 20 حرفًا على الأقل من التفاصيل',
+    consentPrefix: 'أوافق على أن تتواصل معي القبا للاستثمار بخصوص هذا الاستفسار، وفقًا لـ',
+    consentLink: 'سياسة الخصوصية',
+    consentError: 'يرجى تأكيد موافقتك على التواصل معك',
+    submit: 'إرسال الاستفسار',
+    trustBadges: ['سرية وأمان تام', 'الرد خلال يوم عمل واحد', 'لن تتم مشاركة بياناتك أبدًا'],
+    submitErrorFallback: 'حدث خطأ أثناء إرسال رسالتك. يرجى المحاولة مرة أخرى، أو مراسلتنا مباشرة عبر البريد الإلكتروني.',
+    successHeading: 'شكرًا لتواصلك مع القبا للاستثمار.',
+    successBody: 'استلم فريق الاستثمار لدينا استفسارك وسيقوم بالرد خلال يوم عمل واحد.',
+  },
+} as const
 
 export interface ContactFormProps {
-  onSubmit?: (values: ContactFormValues) => Promise<void> | void
+  onSubmit?: (values: Record<string, unknown>) => Promise<void> | void
 }
 
 /**
@@ -44,7 +91,31 @@ export interface ContactFormProps {
  * form (e.g. investor onboarding, newsletter signup).
  */
 export function ContactForm({ onSubmit }: ContactFormProps) {
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
+  const inquiryTypes = inquiryTypesByLocale[locale]
   const [submitError, setSubmitError] = React.useState<string | null>(null)
+
+  const contactSchema = React.useMemo(
+    () =>
+      z.object({
+        fullName: z.string().min(2, c.fullNameError),
+        email: z.string().email(c.emailError),
+        company: z.string().min(2, c.companyError),
+        inquiryType: z.enum(
+          inquiryTypes.map((t) => t.value) as [string, ...string[]],
+          { errorMap: () => ({ message: c.inquiryError }) }
+        ),
+        message: z.string().min(20, c.messageError),
+        consent: z.literal(true, {
+          errorMap: () => ({ message: c.consentError }),
+        }),
+      }),
+    [c, inquiryTypes]
+  )
+
+  type ContactFormValues = z.infer<typeof contactSchema>
+
   const {
     register,
     handleSubmit,
@@ -66,7 +137,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         body: JSON.stringify(payload),
       })
       if (!res.ok) {
-        setSubmitError('Something went wrong sending your message. Please try again, or email us directly.')
+        setSubmitError(c.submitErrorFallback)
         throw new Error('Submission failed')
       }
     }
@@ -78,11 +149,10 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <FadeIn className="flex flex-col items-center gap-4 rounded-lg border border-border bg-canvas-muted p-12 text-center">
         <CheckCircle2 className="size-10 text-success" strokeWidth={1.5} aria-hidden />
         <h3 className="text-heading-lg font-semibold text-text-primary">
-          Thank you for contacting Al Quba Investment.
+          {c.successHeading}
         </h3>
         <p className="max-w-measure text-body-md text-text-secondary">
-          Our investment team has received your enquiry and will respond
-          within one business day.
+          {c.successBody}
         </p>
       </FadeIn>
     )
@@ -102,33 +172,33 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         </p>
       )}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <FieldWrapper id="fullName" label="Full name" required error={errors.fullName?.message}>
-          <Input id="fullName" placeholder="Enter your full name" {...register('fullName')} />
+        <FieldWrapper id="fullName" label={c.fullNameLabel} required error={errors.fullName?.message}>
+          <Input id="fullName" placeholder={c.fullNamePlaceholder} {...register('fullName')} />
         </FieldWrapper>
-        <FieldWrapper id="email" label="Email address" required error={errors.email?.message}>
-          <Input id="email" type="email" placeholder="Enter your email address" {...register('email')} />
+        <FieldWrapper id="email" label={c.emailLabel} required error={errors.email?.message}>
+          <Input id="email" type="email" placeholder={c.emailPlaceholder} {...register('email')} />
         </FieldWrapper>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <FieldWrapper id="company" label="Company / Family office" required error={errors.company?.message}>
-          <Input id="company" placeholder="Enter your company name" {...register('company')} />
+        <FieldWrapper id="company" label={c.companyLabel} required error={errors.company?.message}>
+          <Input id="company" placeholder={c.companyPlaceholder} {...register('company')} />
         </FieldWrapper>
-        <FieldWrapper id="inquiryType" label="How can we help you?" required error={errors.inquiryType?.message}>
+        <FieldWrapper id="inquiryType" label={c.inquiryLabel} required error={errors.inquiryType?.message}>
           <Select
             id="inquiryType"
-            placeholder="Select an inquiry type"
+            placeholder={c.inquiryPlaceholder}
             options={inquiryTypes as unknown as { label: string; value: string }[]}
             {...register('inquiryType')}
           />
         </FieldWrapper>
       </div>
 
-      <FieldWrapper id="message" label="Message" required error={errors.message?.message}>
+      <FieldWrapper id="message" label={c.messageLabel} required error={errors.message?.message}>
         <Textarea
           id="message"
           rows={7}
-          placeholder="Tell us about your objectives and investment horizon."
+          placeholder={c.messagePlaceholder}
           {...register('message')}
         />
       </FieldWrapper>
@@ -138,10 +208,9 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
           id="consent"
           label={
             <>
-              I agree to be contacted by Al Quba Investment regarding this inquiry, in line with
-              the{' '}
+              {c.consentPrefix}{' '}
               <Link href="/privacy" className="underline underline-offset-2 hover:text-text-primary">
-                Privacy Policy
+                {c.consentLink}
               </Link>
               .
             </>
@@ -164,18 +233,16 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
           withArrow
           className="group mt-2 min-w-[240px] self-start"
         >
-          Submit Inquiry
+          {c.submit}
         </Button>
 
         <ul className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
-          {['Confidential & Secure', 'Response within 1 Business Day', 'Your information will never be shared'].map(
-            (item) => (
-              <li key={item} className="flex items-center gap-1.5 text-caption text-text-tertiary">
-                <Check className="size-3.5 text-success" strokeWidth={2} aria-hidden />
-                {item}
-              </li>
-            )
-          )}
+          {c.trustBadges.map((item) => (
+            <li key={item} className="flex items-center gap-1.5 text-caption text-text-tertiary">
+              <Check className="size-3.5 text-success" strokeWidth={2} aria-hidden />
+              {item}
+            </li>
+          ))}
         </ul>
       </div>
     </form>

@@ -30,3 +30,38 @@ export const faqs: Faq[] = [
       'Standard AML/KYC onboarding typically completes within 3–5 business days once documentation is received, ahead of your first capital commitment.',
   },
 ]
+
+/** Arabic translations, same order as `faqs` above, merged in by index. */
+const faqTranslationsAr: Faq[] = [
+  {
+    question: 'ما هو الحد الأدنى للاستثمار للعمل مع القبا؟',
+    answer:
+      'تختلف الالتزامات الدنيا حسب الصندوق. تُهيكَل تفويضات المؤسسات ومكاتب العائلات بشكل فردي بناءً على الأهداف والجدول الزمني.',
+  },
+  {
+    question: 'كيف يتم حماية رأس مالي داخل الصندوق؟',
+    answer:
+      'كل صندوق مضمون مقابل دورة تجارية فعلية — أمر شراء، أو عقد شراء آجل، أو إيرادات حجز مؤكدة — بدلًا من فرضية عمل عامة. التفاصيل موضحة في الصفحة المخصصة لكل صندوق.',
+  },
+  {
+    question: 'كم مرة سأتلقى التقارير؟',
+    answer:
+      'يتلقى المشاركون في الصناديق بيانات رأس مال ربع سنوية، بالإضافة إلى تقرير عند إغلاق كل دورة تجارية. يمكن لتفويضات المؤسسات طلب وتيرة تقارير مخصصة.',
+  },
+  {
+    question: 'هل أنتم جهة منظّمة ومرخّصة؟',
+    answer:
+      'شركة القبا للاستثمار ذ.م.م مسجلة في مركز دبي المالي العالمي (DIFC)، بحوكمة متوافقة مع معايير سلطة دبي للخدمات المالية (DFSA). الإفصاحات التنظيمية الكاملة متاحة للمستثمرين المؤهلين عند الطلب.',
+  },
+  {
+    question: 'كم يستغرق التأهيل؟',
+    answer:
+      'يكتمل التأهيل القياسي لمكافحة غسل الأموال ومعرفة العميل (AML/KYC) عادةً خلال 3–5 أيام عمل بعد استلام المستندات، وقبل التزامك الأول برأس المال.',
+  },
+]
+
+/** Locale-aware FAQ list, same pattern as insights/pools/sectors overlays. */
+export function getFaqs(locale: string): Faq[] {
+  if (locale !== 'ar') return faqs
+  return faqs.map((faq, i) => faqTranslationsAr[i] ?? faq)
+}

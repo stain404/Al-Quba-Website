@@ -5,7 +5,7 @@ import { ContactHero } from '@/components/contact/contact-hero'
 import { ContactFormSection } from '@/components/contact/contact-form-section'
 import { ContactFAQ } from '@/components/contact/contact-faq'
 import { OfficeMap } from '@/components/contact/office-map'
-import { faqs } from '@/lib/faq-data'
+import { getFaqs } from '@/lib/faq-data'
 import { buildMetadata } from '@/lib/seo'
 import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
@@ -15,11 +15,26 @@ interface ContactPageProps {
   params: { locale: string }
 }
 
-export function generateMetadata({ params }: ContactPageProps) {
-  return buildMetadata({
+const metadataCopy = {
+  en: {
     title: 'Contact',
     description:
       'Get in touch with Al Quba Investment. Speak directly with our principals about institutional investment, family office partnerships, and private wealth mandates.',
+  },
+  ar: {
+    title: 'تواصل معنا',
+    description:
+      'تواصل مع القبا للاستثمار. تحدث مباشرة مع مسؤولينا حول الاستثمار المؤسسي، وشراكات مكاتب العائلات، وتفويضات الثروات الخاصة.',
+  },
+} as const
+
+export function generateMetadata({ params }: ContactPageProps) {
+  const locale = params.locale as keyof typeof metadataCopy
+  const m = metadataCopy[locale] ?? metadataCopy.en
+
+  return buildMetadata({
+    title: m.title,
+    description: m.description,
     path: localizedPath(params.locale, '/contact'),
   })
 }
@@ -40,7 +55,7 @@ export default function ContactPage({ params }: ContactPageProps) {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]} />
-      <FaqJsonLd items={faqs} />
+      <FaqJsonLd items={getFaqs(params.locale)} />
       <Navbar />
       <main>
         <ContactHero />

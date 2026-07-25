@@ -68,7 +68,7 @@ export const featuredArticle: Article = {
   date: 'July 2026',
   readTime: '9 min read',
   author: AUTHOR,
-  imageSrc: '/footer-bg.png',
+  imageSrc: '/uaeflag.jpg',
   href: '/insights/uae-investment-landscape-2026',
   body: [
     {
@@ -125,7 +125,7 @@ export const articles: Article[] = [
     date: 'July 2026',
     readTime: '6 min read',
     author: AUTHOR,
-    imageSrc: '/architecture.jpg',
+    imageSrc: '/key_trends.jpg',
     href: '/insights/dubai-market-outlook-2026',
     body: [
       {
@@ -161,7 +161,7 @@ export const articles: Article[] = [
     date: 'June 2026',
     readTime: '7 min read',
     author: AUTHOR,
-    imageSrc: '/GCC ECONOMIC OUTLOOK.png',
+    imageSrc: '/market_insights.jpg',
     href: '/insights/gcc-economic-outlook-global-investors',
     body: [
       {
@@ -197,7 +197,7 @@ export const articles: Article[] = [
     date: 'June 2026',
     readTime: '6 min read',
     author: AUTHOR,
-    imageSrc: '/trade.jpg',
+    imageSrc: '/imp exp.jpg.jpeg',
     href: '/insights/dubai-leads-global-trade-logistics',
     body: [
       {
@@ -269,7 +269,7 @@ export const articles: Article[] = [
     date: 'May 2026',
     readTime: '7 min read',
     author: AUTHOR,
-    imageSrc: '/realestate.webp',
+    imageSrc: '/construction.jpg',
     href: '/insights/dubai-real-estate-2026-growth-drivers',
     body: [
       {
@@ -305,7 +305,7 @@ export const articles: Article[] = [
     date: 'April 2026',
     readTime: '6 min read',
     author: AUTHOR,
-    imageSrc: '/RESIDENTIAL AND COMMERCIAL REALESTATE.png',
+    imageSrc: '/property.jpg',
     href: '/insights/residential-vs-commercial-property-portfolio',
     body: [
       {
@@ -341,7 +341,7 @@ export const articles: Article[] = [
     date: 'April 2026',
     readTime: '7 min read',
     author: AUTHOR,
-    imageSrc: '/Building Resilient Portfolios Through Alternative Investments.png',
+    imageSrc: '/diversify.jpg',
     href: '/insights/resilient-portfolios-alternative-investments',
     body: [
       {
@@ -377,7 +377,7 @@ export const articles: Article[] = [
     date: 'March 2026',
     readTime: '6 min read',
     author: AUTHOR,
-    imageSrc: '/Understanding Risk, Return & Long-Term Wealth Creation.png',
+    imageSrc: '/goldbars.jpg',
     href: '/insights/risk-return-long-term-wealth-creation',
     body: [
       {
@@ -546,7 +546,7 @@ export const articles: Article[] = [
     date: 'February 2026',
     readTime: '6 min read',
     author: AUTHOR,
-    imageSrc: '/The Rise of Family Offices A New Era of Private Capital.png',
+    imageSrc: '/family office.jpg',
     href: '/insights/family-offices-private-capital-uae',
     body: [
       {

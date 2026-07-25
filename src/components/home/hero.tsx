@@ -121,15 +121,21 @@ export function Hero() {
             zoom. Mobile uses a lighter 110% zoom than desktop's 122% —
             still enough to clip the watermark, without cropping in as
             tight on narrow screens. */}
+        {/* Separate <source> elements (rather than a single `src`) so
+            phones and tablets load the lighter mobile-optimized clip
+            instead of the 4K desktop export — the browser picks the
+            first matching `media` query at load time. */}
         <video
           ref={videoRef}
           className="absolute left-1/2 top-0 h-[110%] w-[110%] -translate-x-1/2 object-cover sm:h-[122%] sm:w-[122%]"
-          src="/hero-banner-final-4k.mp4"
           autoPlay
           muted
           loop
           playsInline
-        />
+        >
+          <source src="/hero-banner-mobile.mp4" media="(max-width: 1023px)" />
+          <source src="/hero-banner-final-4k.mp4" />
+        </video>
         <motion.div
           className="absolute -top-1/3 left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full opacity-[0.16] blur-[120px]"
           style={{ background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)' }}

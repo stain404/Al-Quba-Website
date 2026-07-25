@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useLocale } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Briefcase, Clock, ChevronDown, Users, Search, X } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
@@ -84,35 +85,162 @@ const positions: Position[] = [
   },
 ]
 
+/** Arabic overlay, same slug-keyed merge pattern as insights/pools/sectors. */
+const positionTranslations: Record<string, Omit<Position, 'id'>> = {
+  bdm: {
+    title: 'مدير تطوير الأعمال',
+    department: 'تطوير الأعمال',
+    quantity: 'وظيفتان',
+    location: 'دبي، الإمارات',
+    employment: 'دوام كامل',
+    experience: '2–5 سنوات',
+    summary: 'دفع النمو الاستراتيجي من خلال تحديد الفرص وبناء الشراكات عبر منظومة القبا متعددة القطاعات.',
+    about:
+      'دفع نمو الأعمال الاستراتيجي من خلال تحديد فرص جديدة، وبناء علاقات مع العملاء والشركاء، ودعم توسع منظومة أعمال القبا عبر قطاعات متعددة.',
+    responsibilities: [
+      'توليد فرص عمل مؤهلة',
+      'تطوير شراكات استراتيجية',
+      'إجراء أبحاث السوق',
+      'إعداد العروض والمقترحات',
+      'تحقيق أهداف تطوير الأعمال',
+      'تمثيل الشركة باحترافية',
+      'الحفاظ على علاقات قوية مع العملاء',
+    ],
+    requirements: [
+      'شهادة بكالوريوس',
+      'مهارات تواصل ممتازة',
+      'مهارات تفاوض قوية',
+      'خبرة في مبيعات B2B أو تطوير الأعمال',
+      'يُفضّل الخبرة في دولة الإمارات',
+      'إجادة اللغة الإنجليزية',
+    ],
+  },
+  receptionist: {
+    title: 'موظف استقبال',
+    department: 'الإدارة',
+    quantity: 'وظيفة واحدة',
+    location: 'دبي، الإمارات',
+    employment: 'دوام كامل',
+    experience: '1–3 سنوات',
+    summary: 'العمل كأول نقطة تواصل مع الزوار مع دعم العمليات الإدارية اليومية.',
+    about:
+      'العمل كأول نقطة تواصل مع الزوار مع دعم العمليات الإدارية اليومية والحفاظ على بيئة ترحيبية واحترافية.',
+    responsibilities: [
+      'استقبال الضيوف والزوار',
+      'إدارة المكالمات الواردة',
+      'جدولة الاجتماعات والمواعيد',
+      'تنسيق المراسلات',
+      'الحفاظ على منطقة الاستقبال',
+      'تقديم الدعم الإداري',
+    ],
+    requirements: [
+      'دبلوم أو شهادة بكالوريوس',
+      'مهارات تواصل احترافية',
+      'مهارات تنظيمية قوية',
+      'إجادة برامج MS Office',
+      'عقلية خدمة العملاء',
+    ],
+  },
+}
+
+function localizePosition(position: Position, locale: string): Position {
+  if (locale !== 'ar') return position
+  const t = positionTranslations[position.id]
+  return t ? { ...position, ...t } : position
+}
+
 /* ── Filter option builders ────────────────────────────────────────────── */
 
 function unique(arr: string[]): string[] {
   return Array.from(new Set(arr))
 }
 
-const departmentOptions = [
-  { value: '', label: 'All Departments' },
-  ...unique(positions.map((p) => p.department)).map((d) => ({ value: d, label: d })),
-]
+function buildFilterOptions(list: Position[], allLabel: string, key: keyof Pick<Position, 'department' | 'location' | 'employment' | 'experience'>) {
+  return [{ value: '', label: allLabel }, ...unique(list.map((p) => p[key])).map((v) => ({ value: v, label: v }))]
+}
 
-const locationOptions = [
-  { value: '', label: 'All Locations' },
-  ...unique(positions.map((p) => p.location)).map((l) => ({ value: l, label: l })),
-]
+interface Copy {
+  eyebrow: string
+  heading: string
+  description: string
+  searchPlaceholder: string
+  searchAriaLabel: string
+  departmentAriaLabel: string
+  locationAriaLabel: string
+  employmentAriaLabel: string
+  experienceAriaLabel: string
+  allDepartments: string
+  allLocations: string
+  employmentType: string
+  experienceLevel: string
+  resultCount: (n: number) => string
+  clearFilters: string
+  responsibilities: string
+  requirements: string
+  applyNow: string
+  applySubject: (title: string) => string
+  emptyHeading: string
+  emptyBody: string
+  emptyCta: string
+  emptyMailSubject: string
+}
 
-const employmentOptions = [
-  { value: '', label: 'Employment Type' },
-  ...unique(positions.map((p) => p.employment)).map((e) => ({ value: e, label: e })),
-]
-
-const experienceOptions = [
-  { value: '', label: 'Experience Level' },
-  ...unique(positions.map((p) => p.experience)).map((ex) => ({ value: ex, label: ex })),
-]
+const copy: Record<'en' | 'ar', Copy> = {
+  en: {
+    eyebrow: 'Current Opportunities',
+    heading: 'Current Openings',
+    description: 'Explore opportunities across Al Quba Investment LLC and our portfolio companies.',
+    searchPlaceholder: 'Search positions…',
+    searchAriaLabel: 'Search positions',
+    departmentAriaLabel: 'Filter by department',
+    locationAriaLabel: 'Filter by location',
+    employmentAriaLabel: 'Filter by employment type',
+    experienceAriaLabel: 'Filter by experience level',
+    allDepartments: 'All Departments',
+    allLocations: 'All Locations',
+    employmentType: 'Employment Type',
+    experienceLevel: 'Experience Level',
+    resultCount: (n: number) => `${n} result${n !== 1 ? 's' : ''}`,
+    clearFilters: 'Clear filters',
+    responsibilities: 'Responsibilities',
+    requirements: 'Requirements',
+    applyNow: 'Apply Now',
+    applySubject: (title: string) => `Application: ${title}`,
+    emptyHeading: 'No Current Openings',
+    emptyBody: "We're always interested in exceptional talent. Submit your CV and we'll contact you when suitable opportunities become available.",
+    emptyCta: 'Submit Your CV',
+    emptyMailSubject: 'Open Application — CV Submission',
+  },
+  ar: {
+    eyebrow: 'الفرص المتاحة حاليًا',
+    heading: 'الوظائف الشاغرة',
+    description: 'استكشف الفرص المتاحة في شركة القبا للاستثمار وشركات محفظتنا.',
+    searchPlaceholder: 'ابحث عن الوظائف...',
+    searchAriaLabel: 'ابحث عن الوظائف',
+    departmentAriaLabel: 'تصفية حسب القسم',
+    locationAriaLabel: 'تصفية حسب الموقع',
+    employmentAriaLabel: 'تصفية حسب نوع الدوام',
+    experienceAriaLabel: 'تصفية حسب مستوى الخبرة',
+    allDepartments: 'كل الأقسام',
+    allLocations: 'كل المواقع',
+    employmentType: 'نوع الدوام',
+    experienceLevel: 'مستوى الخبرة',
+    resultCount: (n: number) => (n === 1 ? 'نتيجة واحدة' : `${n} نتائج`),
+    clearFilters: 'مسح الفلاتر',
+    responsibilities: 'المسؤوليات',
+    requirements: 'المتطلبات',
+    applyNow: 'قدّم الآن',
+    applySubject: (title: string) => `طلب توظيف: ${title}`,
+    emptyHeading: 'لا توجد وظائف شاغرة حاليًا',
+    emptyBody: 'نحن دائمًا مهتمون بالكفاءات المتميزة. أرسل سيرتك الذاتية وسنتواصل معك عند توفر فرص مناسبة.',
+    emptyCta: 'أرسل سيرتك الذاتية',
+    emptyMailSubject: 'طلب توظيف مفتوح — إرسال السيرة الذاتية',
+  },
+}
 
 /* ── Position card ─────────────────────────────────────────────────────── */
 
-function PositionCard({ position }: { position: Position }) {
+function PositionCard({ position, c }: { position: Position; c: Copy }) {
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -190,7 +318,7 @@ function PositionCard({ position }: { position: Position }) {
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                   <div className="flex flex-col gap-3">
                     <h4 className="text-body-sm font-semibold uppercase tracking-[0.08em] text-text-primary">
-                      Responsibilities
+                      {c.responsibilities}
                     </h4>
                     <ul className="flex flex-col gap-2">
                       {position.responsibilities.map((r) => (
@@ -203,7 +331,7 @@ function PositionCard({ position }: { position: Position }) {
                   </div>
                   <div className="flex flex-col gap-3">
                     <h4 className="text-body-sm font-semibold uppercase tracking-[0.08em] text-text-primary">
-                      Requirements
+                      {c.requirements}
                     </h4>
                     <ul className="flex flex-col gap-2">
                       {position.requirements.map((r) => (
@@ -219,9 +347,9 @@ function PositionCard({ position }: { position: Position }) {
                 <div className="pt-2">
                   <Button variant="gold" size="sm" withArrow asChild className="group">
                     <a
-                      href={`mailto:careers@alqubainvestment.com?subject=Application: ${position.title}`}
+                      href={`mailto:careers@alqubainvestment.com?subject=${encodeURIComponent(c.applySubject(position.title))}`}
                     >
-                      Apply Now
+                      {c.applyNow}
                     </a>
                   </Button>
                 </div>
@@ -236,22 +364,21 @@ function PositionCard({ position }: { position: Position }) {
 
 /* ── Empty state ───────────────────────────────────────────────────────── */
 
-function EmptyState() {
+function EmptyState({ c }: { c: Copy }) {
   return (
     <div className="flex flex-col items-center gap-5 py-20 text-center">
       <div className="flex size-12 items-center justify-center rounded-full border border-border">
         <Briefcase className="size-5 text-text-tertiary" strokeWidth={1.5} />
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-heading-sm font-semibold text-text-primary">No Current Openings</p>
+        <p className="text-heading-sm font-semibold text-text-primary">{c.emptyHeading}</p>
         <p className="max-w-xs text-body-sm text-text-secondary">
-          We're always interested in exceptional talent. Submit your CV and we'll contact
-          you when suitable opportunities become available.
+          {c.emptyBody}
         </p>
       </div>
       <Button variant="outline" size="sm" withArrow asChild className="group mt-1">
-        <a href="mailto:careers@alqubainvestment.com?subject=Open Application — CV Submission">
-          Submit Your CV
+        <a href={`mailto:careers@alqubainvestment.com?subject=${encodeURIComponent(c.emptyMailSubject)}`}>
+          {c.emptyCta}
         </a>
       </Button>
     </div>
@@ -261,6 +388,15 @@ function EmptyState() {
 /* ── Main section ──────────────────────────────────────────────────────── */
 
 export function CurrentOpenings() {
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
+  const localizedPositions = React.useMemo(() => positions.map((p) => localizePosition(p, locale)), [locale])
+
+  const departmentOptions = React.useMemo(() => buildFilterOptions(localizedPositions, c.allDepartments, 'department'), [localizedPositions, c.allDepartments])
+  const locationOptions = React.useMemo(() => buildFilterOptions(localizedPositions, c.allLocations, 'location'), [localizedPositions, c.allLocations])
+  const employmentOptions = React.useMemo(() => buildFilterOptions(localizedPositions, c.employmentType, 'employment'), [localizedPositions, c.employmentType])
+  const experienceOptions = React.useMemo(() => buildFilterOptions(localizedPositions, c.experienceLevel, 'experience'), [localizedPositions, c.experienceLevel])
+
   const [query, setQuery] = React.useState('')
   const [department, setDepartment] = React.useState('')
   const [location, setLocation] = React.useState('')
@@ -271,7 +407,7 @@ export function CurrentOpenings() {
 
   const filtered = React.useMemo(() => {
     const q = query.toLowerCase()
-    return positions.filter((p) => {
+    return localizedPositions.filter((p) => {
       if (q && !p.title.toLowerCase().includes(q) && !p.department.toLowerCase().includes(q) && !p.summary.toLowerCase().includes(q)) return false
       if (department && p.department !== department) return false
       if (location && p.location !== location) return false
@@ -279,7 +415,7 @@ export function CurrentOpenings() {
       if (experience && p.experience !== experience) return false
       return true
     })
-  }, [query, department, location, employment, experience])
+  }, [localizedPositions, query, department, location, employment, experience])
 
   function clearFilters() {
     setQuery('')
@@ -298,12 +434,12 @@ export function CurrentOpenings() {
     >
       {/* Section header */}
       <div className="flex flex-col gap-4 mb-10">
-        <Eyebrow>Current Opportunities</Eyebrow>
+        <Eyebrow>{c.eyebrow}</Eyebrow>
         <h2 className="font-display text-display-md font-bold text-text-primary">
-          Current Openings
+          {c.heading}
         </h2>
         <p className="max-w-measure text-body-lg text-text-secondary">
-          Explore opportunities across Al Quba Investment LLC and our portfolio companies.
+          {c.description}
         </p>
       </div>
 
@@ -312,17 +448,17 @@ export function CurrentOpenings() {
         {/* Search bar */}
         <div className="relative">
           <Search
-            className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-text-tertiary"
+            className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-text-tertiary rtl:left-auto rtl:right-3.5"
             strokeWidth={1.5}
             aria-hidden
           />
           <Input
             type="search"
-            placeholder="Search positions…"
+            placeholder={c.searchPlaceholder}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="pl-10"
-            aria-label="Search positions"
+            className="pl-10 rtl:pl-4 rtl:pr-10"
+            aria-label={c.searchAriaLabel}
           />
         </div>
 
@@ -332,25 +468,25 @@ export function CurrentOpenings() {
             options={departmentOptions}
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-            aria-label="Filter by department"
+            aria-label={c.departmentAriaLabel}
           />
           <Select
             options={locationOptions}
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            aria-label="Filter by location"
+            aria-label={c.locationAriaLabel}
           />
           <Select
             options={employmentOptions}
             value={employment}
             onChange={(e) => setEmployment(e.target.value)}
-            aria-label="Filter by employment type"
+            aria-label={c.employmentAriaLabel}
           />
           <Select
             options={experienceOptions}
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
-            aria-label="Filter by experience level"
+            aria-label={c.experienceAriaLabel}
           />
         </div>
 
@@ -358,7 +494,7 @@ export function CurrentOpenings() {
         {hasActiveFilters && (
           <div className="flex items-center justify-between border-t border-border pt-3">
             <span className="text-body-sm text-text-secondary">
-              {filtered.length} result{filtered.length !== 1 ? 's' : ''}
+              {c.resultCount(filtered.length)}
             </span>
             <button
               type="button"
@@ -366,7 +502,7 @@ export function CurrentOpenings() {
               className="inline-flex items-center gap-1.5 text-body-sm text-text-tertiary transition-colors duration-150 hover:text-text-primary"
             >
               <X className="size-3.5" aria-hidden />
-              Clear filters
+              {c.clearFilters}
             </button>
           </div>
         )}
@@ -384,7 +520,7 @@ export function CurrentOpenings() {
             transition={{ duration: 0.2 }}
           >
             {filtered.map((position) => (
-              <PositionCard key={position.id} position={position} />
+              <PositionCard key={position.id} position={position} c={c} />
             ))}
           </motion.div>
         ) : (
@@ -395,7 +531,7 @@ export function CurrentOpenings() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <EmptyState />
+            <EmptyState c={c} />
           </motion.div>
         )}
       </AnimatePresence>

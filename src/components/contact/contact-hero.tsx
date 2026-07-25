@@ -1,7 +1,21 @@
 import Image from 'next/image'
+import { getLocale } from 'next-intl/server'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
 import { FadeIn } from '@/components/motion/reveal'
+
+const copy = {
+  en: {
+    eyebrow: 'Contact',
+    heading: 'Connect Directly With Our Investment Team',
+    body: 'Whether you’re an institutional investor, family office, strategic partner, or prospective client, our investment team is here to understand your objectives and provide tailored guidance with professionalism and discretion.',
+  },
+  ar: {
+    eyebrow: 'تواصل معنا',
+    heading: 'تواصل مباشرة مع فريق الاستثمار لدينا',
+    body: 'سواء كنت مستثمرًا مؤسسيًا، أو مكتب عائلة، أو شريكًا استراتيجيًا، أو عميلًا محتملًا، فريق الاستثمار لدينا مستعد لفهم أهدافك وتقديم إرشاد مخصص باحترافية وسرية تامة.',
+  },
+} as const
 
 /**
  * Contact / Hero.
@@ -10,7 +24,10 @@ import { FadeIn } from '@/components/motion/reveal'
  * Full-bleed photo background (same left-to-right scrim technique as
  * SectorHero/PoolHero) instead of the plain ink surface.
  */
-export function ContactHero() {
+export async function ContactHero() {
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
+
   return (
     <SectionContainer
       surface="ink"
@@ -46,16 +63,11 @@ export function ContactHero() {
 
       <div className="container relative z-10 mx-auto max-w-container">
         <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
-          <Eyebrow inverse>Contact</Eyebrow>
+          <Eyebrow inverse>{c.eyebrow}</Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
-            Connect Directly With Our Investment Team
+            {c.heading}
           </Heading>
-          <p className="max-w-measure text-body-lg text-text-inverse">
-            Whether you&rsquo;re an institutional investor, family office,
-            strategic partner, or prospective client, our investment team is
-            here to understand your objectives and provide tailored guidance
-            with professionalism and discretion.
-          </p>
+          <p className="max-w-measure text-body-lg text-text-inverse">{c.body}</p>
         </FadeIn>
       </div>
     </SectionContainer>

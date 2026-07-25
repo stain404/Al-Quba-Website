@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useLocale } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
@@ -8,7 +9,12 @@ import { SectionHeading } from '@/components/typography/heading'
 import { FadeIn } from '@/components/motion/reveal'
 import { expandCollapse } from '@/lib/animations'
 import { cn } from '@/lib/utils'
-import { faqs } from '@/lib/faq-data'
+import { getFaqs } from '@/lib/faq-data'
+
+const copy = {
+  en: { eyebrow: 'Frequently Asked', title: 'Common Investor Questions' },
+  ar: { eyebrow: 'الأسئلة الشائعة', title: 'أسئلة المستثمرين الشائعة' },
+} as const
 
 /**
  * Contact / FAQ.
@@ -18,10 +24,13 @@ import { faqs } from '@/lib/faq-data'
  */
 export function ContactFAQ() {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0)
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
+  const faqs = getFaqs(locale)
 
   return (
     <SectionContainer surface="muted" spacing="lg">
-      <SectionHeading eyebrow="Frequently Asked" title="Common Investor Questions" />
+      <SectionHeading eyebrow={c.eyebrow} title={c.title} />
 
       <FadeIn delay={0.05} className="mt-16">
         <ul className="flex flex-col">
