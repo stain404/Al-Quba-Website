@@ -231,7 +231,7 @@ export function Footer() {
               <a
                 href="mailto:inbox@alqubainvestment.com"
                 dir="ltr"
-                className="break-all text-end text-body-sm text-text-inverse-muted transition-colors duration-150 hover:text-text-inverse"
+                className="break-all text-body-sm text-text-inverse-muted transition-colors duration-150 hover:text-text-inverse"
               >
                 inbox@alqubainvestment.com
               </a>
