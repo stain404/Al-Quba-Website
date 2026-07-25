@@ -1,9 +1,25 @@
+import { getLocale } from 'next-intl/server'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { FeatureCard } from '@/components/cards/feature-card'
 import { Stagger } from '@/components/motion/reveal'
 import { cn } from '@/lib/utils'
 import type { SectorCapability, SectionHeadingOverride } from '@/lib/sectors-data'
+
+const copy = {
+  en: {
+    eyebrow: 'Capabilities',
+    title: 'What this sector is built to do',
+    description: 'The specific functions our team performs to originate, structure, and manage every position in this sector.',
+    portfolioCompanies: 'Portfolio Companies',
+  },
+  ar: {
+    eyebrow: 'القدرات',
+    title: 'ما بُني هذا القطاع لتحقيقه',
+    description: 'الوظائف المحددة التي يؤديها فريقنا لاستحداث وهيكلة وإدارة كل مركز استثماري في هذا القطاع.',
+    portfolioCompanies: 'الشركات التابعة',
+  },
+} as const
 
 /**
  * Sector Detail / Capabilities.
@@ -16,7 +32,7 @@ import type { SectorCapability, SectionHeadingOverride } from '@/lib/sectors-dat
  * muted → canvas surface alternation intact even when a sector has no
  * companies to show yet.
  */
-export function SectorCapabilities({
+export async function SectorCapabilities({
   capabilities,
   companies,
   heading,
@@ -27,15 +43,15 @@ export function SectorCapabilities({
   heading?: SectionHeadingOverride
   surface?: 'canvas' | 'muted'
 }) {
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
+
   return (
     <SectionContainer surface={surface} spacing="lg">
       <SectionHeading
-        eyebrow={heading?.eyebrow ?? 'Capabilities'}
-        title={heading?.title ?? 'What this sector is built to do'}
-        description={
-          heading?.description ??
-          'The specific functions our team performs to originate, structure, and manage every position in this sector.'
-        }
+        eyebrow={heading?.eyebrow ?? c.eyebrow}
+        title={heading?.title ?? c.title}
+        description={heading?.description ?? c.description}
       />
       <Stagger className="mt-16">
         {/* Column count adapts to item count so a grid never leaves a
@@ -60,7 +76,7 @@ export function SectorCapabilities({
 
       {companies && companies.length > 0 && (
         <div className="mt-16 flex flex-wrap items-center gap-4 border-t border-border-strong pt-10">
-          <span className="text-caption uppercase tracking-wide text-text-tertiary">Portfolio Companies</span>
+          <span className="text-caption uppercase tracking-wide text-text-tertiary">{c.portfolioCompanies}</span>
           {companies.map((company) => (
             <span
               key={company}

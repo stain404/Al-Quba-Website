@@ -1,3 +1,4 @@
+import { getLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
@@ -6,6 +7,11 @@ import { SectionContainer } from '@/components/layout/section-container'
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/motion/reveal'
 import type { Sector } from '@/lib/sectors-data'
+
+const copy = {
+  en: { investmentSector: 'Investment Sector', discussOpportunities: 'Discuss Opportunities', exploreDivision: 'Explore the Division' },
+  ar: { investmentSector: 'قطاع استثماري', discussOpportunities: 'ناقش الفرص الاستثمارية', exploreDivision: 'استكشف القطاع' },
+} as const
 
 /**
  * Sector Detail / Hero.
@@ -26,10 +32,12 @@ import type { Sector } from '@/lib/sectors-data'
  * still exists on `Sector` for the small metric pill shown on other
  * pages' Related Sectors cards, it just isn't rendered here anymore.
  */
-export function SectorHero({ sector }: { sector: Sector }) {
+export async function SectorHero({ sector }: { sector: Sector }) {
   const Icon = sector.icon
   const hasImage = !!sector.heroImage
   const hasLongTagline = sector.tagline.length > 200
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
 
   return (
     <SectionContainer
@@ -79,7 +87,7 @@ export function SectorHero({ sector }: { sector: Sector }) {
             <span className="flex size-14 items-center justify-center rounded-md bg-accent/12 text-accent-ink">
               <Icon className="size-6" strokeWidth={1.5} aria-hidden />
             </span>
-            <Eyebrow inverse>{sector.heroHeadline ? sector.name : 'Investment Sector'}</Eyebrow>
+            <Eyebrow inverse>{sector.heroHeadline ? sector.name : c.investmentSector}</Eyebrow>
           </div>
 
           <Heading as="h1" size="display-lg" inverse className="font-nav">
@@ -94,10 +102,10 @@ export function SectorHero({ sector }: { sector: Sector }) {
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Button variant="gold" size="lg" withArrow asChild className="group w-full sm:w-fit">
-              <Link href="/contact">Discuss Opportunities</Link>
+              <Link href="/contact">{c.discussOpportunities}</Link>
             </Button>
             <Button variant="ghost-inverse" size="lg" asChild className="w-full sm:w-fit">
-              <Link href="#about-division">Explore the Division</Link>
+              <Link href="#about-division">{c.exploreDivision}</Link>
             </Button>
           </div>
         </FadeIn>

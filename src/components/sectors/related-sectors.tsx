@@ -2,8 +2,13 @@ import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { InvestmentCard, InvestmentGrid } from '@/components/cards/investment-card'
 import { Stagger } from '@/components/motion/reveal'
-import { sectors, upcomingSectors, sectorIconFallback } from '@/lib/sectors-data'
+import { getSectors, upcomingSectors, sectorIconFallback } from '@/lib/sectors-data'
 import type { InvestmentItem } from '@/types'
+
+const copy = {
+  en: { eyebrow: 'Explore Further', title: 'Other investment sectors', comingSoon: 'Coming Soon' },
+  ar: { eyebrow: 'استكشف المزيد', title: 'قطاعات استثمارية أخرى', comingSoon: 'قريبًا' },
+} as const
 
 /**
  * Sector Detail / Related Sectors.
@@ -17,12 +22,15 @@ import type { InvestmentItem } from '@/types'
  */
 export function RelatedSectors({
   currentSlug,
+  locale = 'en',
   surface = 'canvas',
 }: {
   currentSlug: string
+  locale?: string
   surface?: 'canvas' | 'muted'
 }) {
-  const others: InvestmentItem[] = sectors
+  const c = copy[locale as keyof typeof copy] ?? copy.en
+  const others: InvestmentItem[] = getSectors(locale)
     .filter((sector) => sector.slug !== currentSlug)
     .map((sector) => ({
       name: sector.name,
@@ -38,7 +46,7 @@ export function RelatedSectors({
 
   return (
     <SectionContainer surface={surface} spacing="lg">
-      <SectionHeading eyebrow="Explore Further" title="Other investment sectors" />
+      <SectionHeading eyebrow={c.eyebrow} title={c.title} />
       <Stagger className="mt-16">
         <InvestmentGrid>
           {others.map((sector) => (
@@ -49,7 +57,7 @@ export function RelatedSectors({
 
       {upcomingSectors.length > 0 && (
         <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-border pt-8">
-          <span className="text-caption uppercase tracking-wide text-text-tertiary">Coming Soon</span>
+          <span className="text-caption uppercase tracking-wide text-text-tertiary">{c.comingSoon}</span>
           {upcomingSectors.map((sector) => {
             const Icon = sector.icon ?? FallbackIcon
             return (

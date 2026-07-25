@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
+import { useLocale } from 'next-intl'
 import { CheckCircle2 } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
@@ -9,6 +10,11 @@ import { Card } from '@/components/cards/card'
 import { Badge } from '@/components/ui/badge'
 import { fadeSide, fadeOnly, defaultViewport, transitionContent } from '@/lib/animations'
 import type { SectorCaseStudy as SectorCaseStudyType, SectionHeadingOverride } from '@/lib/sectors-data'
+
+const copy = {
+  en: { eyebrow: 'Case Study', title: 'A recent example of this sector at work', featuredPartner: 'Featured Partner' },
+  ar: { eyebrow: 'دراسة حالة', title: 'مثال حديث على عمل هذا القطاع', featuredPartner: 'شريك مميز' },
+} as const
 
 /**
  * Sector Detail / Case Study.
@@ -33,13 +39,12 @@ export function SectorCaseStudy({
 }) {
   const prefersReduced = useReducedMotion()
   const items = Array.isArray(caseStudy) ? caseStudy : [caseStudy]
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
 
   return (
     <SectionContainer id={id} surface={surface} spacing="lg" className="overflow-x-hidden">
-      <SectionHeading
-        eyebrow={heading?.eyebrow ?? 'Case Study'}
-        title={heading?.title ?? 'A recent example of this sector at work'}
-      />
+      <SectionHeading eyebrow={heading?.eyebrow ?? c.eyebrow} title={heading?.title ?? c.title} />
 
       <div className="mt-16 flex flex-col gap-8">
         {items.map((item, index) => (
@@ -73,7 +78,7 @@ export function SectorCaseStudy({
 
               <div className="flex flex-col gap-4">
                 <Badge variant="gold" className="w-fit">
-                  Featured Partner
+                  {c.featuredPartner}
                 </Badge>
                 <h3 className="font-display text-display-sm text-text-primary">{item.title}</h3>
                 <p className="max-w-measure text-body-md text-text-secondary">{item.description}</p>

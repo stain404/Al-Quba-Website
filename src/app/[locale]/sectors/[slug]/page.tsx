@@ -25,7 +25,7 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: SectorPageProps) {
-  const sector = getSectorBySlug(params.slug)
+  const sector = getSectorBySlug(params.slug, params.locale)
   if (!sector) return {}
 
   return buildMetadata({
@@ -34,6 +34,27 @@ export function generateMetadata({ params }: SectorPageProps) {
     path: localizedPath(params.locale, `/sectors/${sector.slug}`),
   })
 }
+
+const pageCopy = {
+  en: {
+    aboutDivision: 'About the Division',
+    whyItMatters: 'Why It Matters',
+    ctaEyebrow: 'Explore This Sector',
+    ctaTitle: (name: string) => `Ready to allocate into ${name}?`,
+    ctaDescription: 'Our team will walk you through current allocation capacity, minimum commitment, and how this sector fits alongside our structured pools.',
+    primaryLabel: 'Request a Consultation',
+    secondaryLabel: 'View Investment Pools',
+  },
+  ar: {
+    aboutDivision: 'عن القطاع',
+    whyItMatters: 'لماذا يهم هذا القطاع',
+    ctaEyebrow: 'استكشف هذا القطاع',
+    ctaTitle: (name: string) => `هل أنت مستعد للاستثمار في ${name}؟`,
+    ctaDescription: 'سيوجهك فريقنا حول سعة التخصيص الحالية، والحد الأدنى للالتزام، وكيف يتناسب هذا القطاع مع صناديقنا المنظمة.',
+    primaryLabel: 'اطلب استشارة',
+    secondaryLabel: 'استعرض صناديق الاستثمار',
+  },
+} as const
 
 /**
  * Sector Detail — one template shared by all five investment divisions,
@@ -49,8 +70,10 @@ export function generateMetadata({ params }: SectorPageProps) {
  */
 export default function SectorDetailPage({ params }: SectorPageProps) {
   setRequestLocale(params.locale)
-  const sector = getSectorBySlug(params.slug)
+  const sector = getSectorBySlug(params.slug, params.locale)
   if (!sector) notFound()
+  const locale = params.locale as keyof typeof pageCopy
+  const t = pageCopy[locale] ?? pageCopy.en
 
   let nextSurface: 'canvas' | 'muted' = 'canvas'
   const nextSectionSurface = () => {
@@ -85,7 +108,7 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
         {sector.overview && (
           <SectorOverview
             id="about-division"
-            eyebrow="About the Division"
+            eyebrow={t.aboutDivision}
             overview={sector.overview}
             surface={nextSectionSurface()}
           />
@@ -103,7 +126,7 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
           surface={nextSectionSurface()}
         />
         {sector.whyItMatters && (
-          <SectorOverview eyebrow="Why It Matters" overview={sector.whyItMatters} surface={nextSectionSurface()} />
+          <SectorOverview eyebrow={t.whyItMatters} overview={sector.whyItMatters} surface={nextSectionSurface()} />
         )}
         {sector.process && sector.process.length > 0 && (
           <SectorProcess steps={sector.process} heading={sector.processHeading} surface={nextSectionSurface()} />
@@ -122,14 +145,14 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
             surface={nextSectionSurface()}
           />
         )}
-        <RelatedSectors currentSlug={sector.slug} surface={nextSectionSurface()} />
+        <RelatedSectors currentSlug={sector.slug} locale={params.locale} surface={nextSectionSurface()} />
         <CTASection
-          eyebrow="Explore This Sector"
-          title={`Ready to allocate into ${sector.name}?`}
-          description="Our team will walk you through current allocation capacity, minimum commitment, and how this sector fits alongside our structured pools."
-          primaryLabel="Request a Consultation"
+          eyebrow={t.ctaEyebrow}
+          title={t.ctaTitle(sector.name)}
+          description={t.ctaDescription}
+          primaryLabel={t.primaryLabel}
           primaryHref="/contact"
-          secondaryLabel="View Investment Pools"
+          secondaryLabel={t.secondaryLabel}
           secondaryHref="/#pools"
         />
       </main>
