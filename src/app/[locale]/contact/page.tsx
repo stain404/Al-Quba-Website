@@ -1,21 +1,28 @@
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { ContactHero } from '@/components/contact/contact-hero'
 import { ContactFormSection } from '@/components/contact/contact-form-section'
 import { ContactFAQ } from '@/components/contact/contact-faq'
 import { OfficeMap } from '@/components/contact/office-map'
-import { navSections } from '@/lib/site-config'
 import { faqs } from '@/lib/faq-data'
 import { buildMetadata } from '@/lib/seo'
+import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 import { FaqJsonLd } from '@/components/seo/faq-json-ld'
 
-export const metadata = buildMetadata({
-  title: 'Contact',
-  description:
-    'Get in touch with Al Quba Investment. Speak directly with our principals about institutional investment, family office partnerships, and private wealth mandates.',
-  path: '/contact',
-})
+interface ContactPageProps {
+  params: { locale: string }
+}
+
+export function generateMetadata({ params }: ContactPageProps) {
+  return buildMetadata({
+    title: 'Contact',
+    description:
+      'Get in touch with Al Quba Investment. Speak directly with our principals about institutional investment, family office partnerships, and private wealth mandates.',
+    path: localizedPath(params.locale, '/contact'),
+  })
+}
 
 /**
  * Contact — composed from existing design system components plus
@@ -27,12 +34,14 @@ export const metadata = buildMetadata({
  * "surface" beat, so it deliberately breaks the strict alternation
  * rule used elsewhere.
  */
-export default function ContactPage() {
+export default function ContactPage({ params }: ContactPageProps) {
+  setRequestLocale(params.locale)
+
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]} />
       <FaqJsonLd items={faqs} />
-      <Navbar sections={navSections} />
+      <Navbar />
       <main>
         <ContactHero />
         <ContactFormSection />

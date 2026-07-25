@@ -1,3 +1,4 @@
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
@@ -5,16 +6,22 @@ import { InsightsHero } from '@/components/insights/insights-hero'
 import { FeaturedArticle } from '@/components/insights/featured-article'
 import { InsightsGrid } from '@/components/insights/insights-grid'
 import { NewsletterSignup } from '@/components/insights/newsletter-signup'
-import { navSections } from '@/lib/site-config'
 import { buildMetadata } from '@/lib/seo'
+import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 
-export const metadata = buildMetadata({
-  title: 'Insights',
-  description:
-    'Commentary on trade finance, structured investing, and the markets Al Quba Investment operates in — written by our investment team.',
-  path: '/insights',
-})
+interface InsightsPageProps {
+  params: { locale: string }
+}
+
+export function generateMetadata({ params }: InsightsPageProps) {
+  return buildMetadata({
+    title: 'Insights',
+    description:
+      'Commentary on trade finance, structured investing, and the markets Al Quba Investment operates in — written by our investment team.',
+    path: localizedPath(params.locale, '/insights'),
+  })
+}
 
 /**
  * Insights — composed from existing design system components plus
@@ -23,11 +30,13 @@ export const metadata = buildMetadata({
  * hero → single large spotlight → filterable grid → centered form) are
  * fully alternated, consistent with every other page built so far.
  */
-export default function InsightsPage() {
+export default function InsightsPage({ params }: InsightsPageProps) {
+  setRequestLocale(params.locale)
+
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: 'Home', path: '/' }, { name: 'Insights', path: '/insights' }]} />
-      <Navbar sections={navSections} />
+      <Navbar />
       <main>
         <InsightsHero />
         <FeaturedArticle />

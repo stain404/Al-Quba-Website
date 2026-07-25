@@ -68,7 +68,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <Slottable>{children}</Slottable>
         {withArrow && !loading && (
           <ArrowUpRight
-            className="size-4 transition-transform duration-200 ease-institutional group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            className="size-4 rtl:-scale-x-100 transition-transform duration-200 ease-institutional group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             aria-hidden
           />
         )}

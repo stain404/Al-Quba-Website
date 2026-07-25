@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
+import { useLocale } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
@@ -19,36 +20,70 @@ interface SectorPanel {
  * (src/lib/site-config.ts) — same 5 sectors, same taglines, same order —
  * so Home and the nav never disagree about what the firm invests in.
  */
-const panels: SectorPanel[] = [
-  {
-    label: 'Global Exports Division',
-    description: 'International trade led by Hebron General Trading LLC.',
-    image: '/Trading.png',
-  },
-  {
-    // Shortened for this collapsed vertical strip specifically — the
-    // sector page itself uses the full "Infrastructure, Contracting &
-    // Built Environments" name.
-    label: 'Infrastructure & Contracting',
-    description: 'Construction and contracting led by Bright Hurst.',
-    image: '/realestate.webp',
-  },
-  {
-    label: 'Logistics & Supply Chain',
-    description: 'Freight and logistics led by NobleStar Shipping.',
-    image: '/shipping.webp',
-  },
-  {
-    label: 'Import & Export',
-    description: 'Global sourcing led by ContainerKart and Al Wahda Trading.',
-    image: '/importexport.png',
-  },
-  {
-    label: 'Brand Strategy',
-    description: 'Creative and digital solutions led by Phew Interactive.',
-    image: '/tech.png',
-  },
-]
+const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
+  en: [
+    {
+      label: 'Global Exports Division',
+      description: 'International trade led by Hebron General Trading LLC.',
+      image: '/Trading.png',
+    },
+    {
+      // Shortened for this collapsed vertical strip specifically — the
+      // sector page itself uses the full "Infrastructure, Contracting &
+      // Built Environments" name.
+      label: 'Infrastructure & Contracting',
+      description: 'Construction and contracting led by Bright Hurst.',
+      image: '/realestate.webp',
+    },
+    {
+      label: 'Logistics & Supply Chain',
+      description: 'Freight and logistics led by NobleStar Shipping.',
+      image: '/shipping.webp',
+    },
+    {
+      label: 'Import & Export',
+      description: 'Global sourcing led by ContainerKart and Al Wahda Trading.',
+      image: '/importexport.png',
+    },
+    {
+      label: 'Brand Strategy',
+      description: 'Creative and digital solutions led by Phew Interactive.',
+      image: '/tech.png',
+    },
+  ],
+  ar: [
+    {
+      label: 'قطاع التصدير العالمي',
+      description: 'تجارة دولية بقيادة شركة حبرون للتجارة العامة.',
+      image: '/Trading.png',
+    },
+    {
+      label: 'البنية التحتية والمقاولات',
+      description: 'بناء ومقاولات بقيادة برايت هيرست.',
+      image: '/realestate.webp',
+    },
+    {
+      label: 'الخدمات اللوجستية وسلاسل الإمداد',
+      description: 'شحن وخدمات لوجستية بقيادة نوبل ستار للشحن.',
+      image: '/shipping.webp',
+    },
+    {
+      label: 'الاستيراد والتصدير',
+      description: 'توريد عالمي بقيادة كونتينر كارت والوحدة للتجارة.',
+      image: '/importexport.png',
+    },
+    {
+      label: 'استراتيجية العلامة التجارية',
+      description: 'حلول إبداعية ورقمية بقيادة فيو إنتراكتيف.',
+      image: '/tech.png',
+    },
+  ],
+}
+
+const headingCopy = {
+  en: { eyebrow: 'Where We Invest', title: 'Five sectors, one disciplined thesis' },
+  ar: { eyebrow: 'أين نستثمر', title: 'خمسة قطاعات، رؤية استثمارية واحدة منضبطة' },
+} as const
 
 /**
  * A single accordion panel. Collapsed, it's a narrow strip showing just
@@ -125,6 +160,9 @@ function Panel({
  */
 export function InvestmentSectors() {
   const [activeIndex, setActiveIndex] = React.useState(0)
+  const locale = useLocale() as keyof typeof panelsByLocale
+  const panels = panelsByLocale[locale]
+  const heading = headingCopy[locale]
 
   return (
     <SectionContainer
@@ -133,7 +171,7 @@ export function InvestmentSectors() {
       spacing="sm"
       className="flex min-h-screen w-full flex-col justify-center"
     >
-      <SectionHeading eyebrow="Where We Invest" title="Five sectors, one disciplined thesis" align="left" inverse />
+      <SectionHeading eyebrow={heading.eyebrow} title={heading.title} align="left" inverse />
 
       <div className="mt-10 flex h-[440px] flex-col gap-2 lg:h-[320px] lg:flex-row xl:gap-2.5">
         {panels.map((panel, index) => (

@@ -1,3 +1,4 @@
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
@@ -6,16 +7,22 @@ import { MissionValues } from '@/components/about/mission-values'
 import { HistoryTimeline } from '@/components/about/history-timeline'
 import { Leadership } from '@/components/about/leadership'
 import { InvestmentProcess } from '@/components/about/investment-process'
-import { navSections } from '@/lib/site-config'
 import { buildMetadata } from '@/lib/seo'
+import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 
-export const metadata = buildMetadata({
-  title: 'About',
-  description:
-    "Al Quba Investment is a Dubai-headquartered investment and asset management firm founded by Khasim Enoli, Founder & CEO. Learn about our history, founder's message, investment process, and global presence.",
-  path: '/about',
-})
+interface AboutPageProps {
+  params: { locale: string }
+}
+
+export function generateMetadata({ params }: AboutPageProps) {
+  return buildMetadata({
+    title: 'About',
+    description:
+      "Al Quba Investment is a Dubai-headquartered investment and asset management firm founded by Khasim Enoli, Founder & CEO. Learn about our history, founder's message, investment process, and global presence.",
+    path: localizedPath(params.locale, '/about'),
+  })
+}
 
 /**
  * About — composed from existing design system components plus a small
@@ -26,11 +33,13 @@ export const metadata = buildMetadata({
  * rule. No standalone office/address section — that's covered by the
  * footer on every page already.
  */
-export default function AboutPage() {
+export default function AboutPage({ params }: AboutPageProps) {
+  setRequestLocale(params.locale)
+
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]} />
-      <Navbar sections={navSections} />
+      <Navbar />
       <main>
         <AboutHero />
         <MissionValues />

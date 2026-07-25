@@ -1,7 +1,8 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { ArrowRight, Calendar, Clock } from 'lucide-react'
 import { StaggerItem } from '@/components/motion/reveal'
 import type { BlogPostItem } from '@/types'
@@ -20,6 +21,7 @@ export function BlogCard({
    *  custom scroll-linked animation) instead of the default stagger fade. */
   wrap?: boolean
 }) {
+  const t = useTranslations('Common')
   const content = (
     <Link
       href={href}
@@ -52,9 +54,9 @@ export function BlogCard({
         </h3>
         <p className="text-body-sm text-text-secondary">{excerpt}</p>
         <span className="inline-flex items-center gap-1.5 text-body-sm font-medium text-text-primary">
-          Read article
+          {t('readArticle')}
           <ArrowRight
-            className="size-4 transition-transform duration-200 ease-institutional group-hover:translate-x-1"
+            className="size-4 rtl:rotate-180 transition-transform duration-200 ease-institutional group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
             aria-hidden
           />
         </span>

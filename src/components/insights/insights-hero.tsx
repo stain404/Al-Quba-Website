@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
 import { FadeIn } from '@/components/motion/reveal'

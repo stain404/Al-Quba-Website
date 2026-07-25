@@ -1,3 +1,6 @@
+const createNextIntlPlugin = require('next-intl/plugin')
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
+
 const securityHeaders = [
   // HTTPS is enforced by the host in production; this just tells browsers
   // to remember that and skip the initial plaintext round-trip.
@@ -47,4 +50,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig)

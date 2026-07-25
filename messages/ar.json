@@ -1,0 +1,49 @@
+{
+  "Common": {
+    "readMore": "اقرأ المزيد",
+    "readArticle": "قراءة المقال",
+    "learnMore": "اعرف المزيد",
+    "viewAll": "عرض الكل",
+    "home": "الرئيسية",
+    "subscribe": "اشتراك",
+    "submitting": "جارٍ الإرسال…",
+    "requestConsultation": "اطلب استشارة",
+    "speakWithUs": "تواصل معنا",
+    "accessDashboard": "الدخول إلى لوحة المستثمر",
+    "contactOurTeam": "تواصل مع فريقنا",
+    "exploreInvestmentPools": "استعرض صناديق الاستثمار",
+    "discussOpportunities": "ناقش الفرص الاستثمارية",
+    "exploreTheDivision": "استكشف القطاع"
+  },
+  "Nav": {
+    "aboutUs": "من نحن",
+    "investorHub": "مركز المستثمرين",
+    "investorInsights": "رؤى المستثمرين",
+    "ourEcosystem": "منظومة أعمالنا",
+    "investmentPools": "صناديق الاستثمار"
+  },
+  "Footer": {
+    "tagline": "احلم بأبعد مما تتخيل مع القبا للاستثمار، شريك دبي الموثوق للثروة والنمو المستدام.",
+    "newsletterHeading": "انضم إلى مجتمعنا ولا تفوّت أي تحديث",
+    "newsletterSuccess": "تم اشتراكك بنجاح — شكرًا لانضمامك.",
+    "newsletterError": "حدث خطأ أثناء الاشتراك. يرجى المحاولة مرة أخرى.",
+    "emailAddress": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "emailInvalid": "أدخل بريدًا إلكترونيًا صحيحًا",
+    "company": "الشركة",
+    "aboutUsLink": "من نحن",
+    "blogsLink": "المدونة",
+    "contactUsLink": "تواصل معنا",
+    "investmentSectorsLink": "قطاعات الاستثمار",
+    "investmentPoolsLink": "صناديق الاستثمار",
+    "career": "الوظائف",
+    "getInTouch": "تواصل معنا",
+    "address": "العنوان",
+    "addressValue": "مكتب 306، برج الميزان، دبي، الإمارات العربية المتحدة",
+    "contact": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "copyright": "شركة القبا للاستثمار ذ.م.م. جميع الحقوق محفوظة.",
+    "termsConditions": "الشروط والأحكام",
+    "privacyPolicy": "سياسة الخصوصية"
+  }
+}

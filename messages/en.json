@@ -1,0 +1,49 @@
+{
+  "Common": {
+    "readMore": "Read More",
+    "readArticle": "Read article",
+    "learnMore": "Learn more",
+    "viewAll": "View all",
+    "home": "Home",
+    "subscribe": "Subscribe",
+    "submitting": "Submitting…",
+    "requestConsultation": "Request a Consultation",
+    "speakWithUs": "Speak with Us",
+    "accessDashboard": "Access Dashboard",
+    "contactOurTeam": "Contact Our Team",
+    "exploreInvestmentPools": "View Investment Pools",
+    "discussOpportunities": "Discuss Opportunities",
+    "exploreTheDivision": "Explore the Division"
+  },
+  "Nav": {
+    "aboutUs": "About Us",
+    "investorHub": "Investor Hub",
+    "investorInsights": "Investor Insights",
+    "ourEcosystem": "Our Ecosystem",
+    "investmentPools": "Investment Pools"
+  },
+  "Footer": {
+    "tagline": "Dream bigger with Al Quba Investments, Dubai's trusted partner for wealth and sustainable growth.",
+    "newsletterHeading": "Join Our Community & Never Miss an Update",
+    "newsletterSuccess": "You're subscribed — thanks for joining.",
+    "newsletterError": "Something went wrong subscribing. Please try again.",
+    "emailAddress": "E-mail Address",
+    "emailPlaceholder": "Enter your email address",
+    "emailInvalid": "Enter a valid email address",
+    "company": "Company",
+    "aboutUsLink": "About us",
+    "blogsLink": "Blogs",
+    "contactUsLink": "Contact us",
+    "investmentSectorsLink": "Investment sectors",
+    "investmentPoolsLink": "Investment pools",
+    "career": "Career",
+    "getInTouch": "Get In Touch",
+    "address": "Address",
+    "addressValue": "Office 306, Al Mezan Tower, Dubai, UAE",
+    "contact": "Contact",
+    "email": "E-Mail",
+    "copyright": "Al Quba Investment LLC. All rights reserved.",
+    "termsConditions": "Terms & Conditions",
+    "privacyPolicy": "Privacy Policy"
+  }
+}

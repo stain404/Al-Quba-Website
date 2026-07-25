@@ -1,12 +1,26 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { motion, useReducedMotion } from 'framer-motion'
+import { useLocale, useTranslations } from 'next-intl'
 import { ArrowUpRight, PlayCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { VideoPauseToggle } from '@/components/motion/video-pause-toggle'
 import { transitionContent } from '@/lib/animations'
+
+const copy = {
+  en: {
+    headline: ['Global Investments.', 'Built on Transparency.'],
+    body: 'We create long-term investment opportunities through diversified businesses, strategic partnerships, and disciplined capital management across global industries.',
+    ourStory: 'Our Story',
+  },
+  ar: {
+    headline: ['استثمارات عالمية.', 'مبنية على الشفافية.'],
+    body: 'نبني فرصًا استثمارية طويلة الأمد من خلال أعمال متنوعة، وشراكات استراتيجية، وإدارة رأس مال منضبطة عبر قطاعات عالمية متعددة.',
+    ourStory: 'قصتنا',
+  },
+} as const
 
 /**
  * Section 1 — Hero.
@@ -18,6 +32,9 @@ import { transitionContent } from '@/lib/animations'
 export function Hero() {
   const prefersReduced = useReducedMotion()
   const videoRef = React.useRef<HTMLVideoElement>(null)
+  const locale = useLocale() as keyof typeof copy
+  const t = useTranslations('Common')
+  const c = copy[locale]
 
   // Belt-and-suspenders on top of the `loop` attribute: some browsers
   // silently pause background video when a tab loses focus/visibility
@@ -139,26 +156,22 @@ export function Hero() {
           className="flex max-w-4xl flex-col gap-8"
         >
           <h1 className="font-nav text-display-sm leading-[1.1] text-text-inverse">
-            Global Investments.
+            {c.headline[0]}
             <br />
-            Built on Transparency.
+            {c.headline[1]}
           </h1>
 
-          <p className="max-w-lg text-[1.25rem] leading-relaxed text-text-inverse">
-            We create long-term investment opportunities through
-            diversified businesses, strategic partnerships, and disciplined
-            capital management across global industries.
-          </p>
+          <p className="max-w-lg text-[1.25rem] leading-relaxed text-text-inverse">{c.body}</p>
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Button variant="gold" size="lg" withArrow className="group" asChild>
-              <Link href="/contact">Request a Consultation</Link>
+              <Link href="/contact">{t('requestConsultation')}</Link>
             </Button>
             <Button variant="ghost-inverse" size="lg" asChild>
               <Link href="/about" className="group inline-flex items-center gap-2">
                 <PlayCircle className="size-5" strokeWidth={1.5} aria-hidden />
-                Our Story
-                <ArrowUpRight className="size-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100" aria-hidden />
+                {c.ourStory}
+                <ArrowUpRight className="size-4 rtl:rotate-180 opacity-0 transition-opacity duration-200 group-hover:opacity-100" aria-hidden />
               </Link>
             </Button>
           </div>

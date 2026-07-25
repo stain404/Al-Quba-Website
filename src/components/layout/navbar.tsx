@@ -1,28 +1,36 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLocale, useTranslations } from 'next-intl'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { expandCollapse } from '@/lib/animations'
 import { Button } from '@/components/ui/button'
 import { MegaMenu } from '@/components/layout/mega-menu'
-import { investorDashboardUrl } from '@/lib/site-config'
-import type { MegaMenuSection } from '@/types'
+import { LanguageSwitcher } from '@/components/layout/language-switcher'
+import { Link } from '@/i18n/navigation'
+import { getNavSections, investorDashboardUrl } from '@/lib/site-config'
+import type { Locale } from '@/i18n/routing'
 
 export interface NavbarProps {
   logo?: React.ReactNode
-  sections: MegaMenuSection[]
 }
 
 /**
  * Sticky top navigation. Transparent-over-hero on load, solidifies with a
  * hairline border once the page scrolls. Desktop uses hover-triggered mega
- * menus; mobile collapses into a full-screen sheet.
+ * menus; mobile collapses into a full-screen sheet. Fully self-sufficient
+ * on locale — computes its own nav sections and labels from `useLocale()`
+ * rather than receiving them as props, so every page just renders
+ * `<Navbar />`.
  */
-export function Navbar({ logo, sections }: NavbarProps) {
+export function Navbar({ logo }: NavbarProps) {
+  const locale = useLocale() as Locale
+  const t = useTranslations('Common')
+  const sections = React.useMemo(() => getNavSections(locale), [locale])
+
   const [scrolled, setScrolled] = React.useState(false)
   const [activeSection, setActiveSection] = React.useState<string | null>(null)
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -130,6 +138,7 @@ export function Navbar({ logo, sections }: NavbarProps) {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <LanguageSwitcher className={scrolled ? 'text-accent-ink' : 'text-accent-soft'} tone={scrolled ? 'dark' : 'auto'} />
           <Button
             variant="ghost"
             size="sm"
@@ -142,11 +151,11 @@ export function Navbar({ logo, sections }: NavbarProps) {
             )}
           >
             <a href={investorDashboardUrl} target="_blank" rel="noopener noreferrer">
-              Access Dashboard
+              {t('accessDashboard')}
             </a>
           </Button>
           <Button variant="gold" size="sm" withArrow asChild className="group">
-            <Link href="/contact">Speak with Us</Link>
+            <Link href="/contact">{t('speakWithUs')}</Link>
           </Button>
         </div>
 
@@ -186,6 +195,9 @@ export function Navbar({ logo, sections }: NavbarProps) {
             className="overflow-hidden border-t border-border bg-canvas-raised lg:hidden"
           >
             <ul className="flex flex-col gap-1 px-6 py-6">
+              <li className="flex justify-start pb-2">
+                <LanguageSwitcher className="text-text-secondary" tone="dark" />
+              </li>
               {sections.map((section) => {
                 const links = section.columns?.flatMap((c) => c.links) ?? []
                 return (
@@ -221,11 +233,11 @@ export function Navbar({ logo, sections }: NavbarProps) {
               })}
               <li className="flex flex-col gap-3 pt-4">
                 <Button variant="gold" withArrow asChild>
-                  <Link href="/contact">Speak with Us</Link>
+                  <Link href="/contact">{t('speakWithUs')}</Link>
                 </Button>
                 <Button variant="outline" asChild>
                   <a href={investorDashboardUrl} target="_blank" rel="noopener noreferrer">
-                    Access Dashboard
+                    {t('accessDashboard')}
                   </a>
                 </Button>
               </li>

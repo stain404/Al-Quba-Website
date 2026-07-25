@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
@@ -8,12 +9,12 @@ import { ArticleKeyTakeaways } from '@/components/insights/article-key-takeaways
 import { RelatedArticles } from '@/components/insights/related-articles'
 import { NewsletterSignup } from '@/components/insights/newsletter-signup'
 import { getAllArticles, getArticleBySlug } from '@/lib/insights-data'
-import { navSections } from '@/lib/site-config'
 import { buildMetadata } from '@/lib/seo'
+import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 
 interface ArticlePageProps {
-  params: { slug: string }
+  params: { locale: string; slug: string }
 }
 
 /** Pre-render every article page (featured + all category pieces) at build time. */
@@ -28,7 +29,7 @@ export function generateMetadata({ params }: ArticlePageProps) {
   return buildMetadata({
     title: article.title,
     description: article.excerpt,
-    path: `/insights/${article.slug}`,
+    path: localizedPath(params.locale, `/insights/${article.slug}`),
     image: article.imageSrc,
   })
 }
@@ -40,6 +41,7 @@ export function generateMetadata({ params }: ArticlePageProps) {
  * a closing CTA, and the newsletter signup.
  */
 export default function ArticlePage({ params }: ArticlePageProps) {
+  setRequestLocale(params.locale)
   const article = getArticleBySlug(params.slug)
   if (!article) notFound()
 
@@ -52,7 +54,7 @@ export default function ArticlePage({ params }: ArticlePageProps) {
           { name: article.title, path: `/insights/${article.slug}` },
         ]}
       />
-      <Navbar sections={navSections} />
+      <Navbar />
       <main>
         <ArticleHero article={article} />
         <ArticleBody body={article.body} />

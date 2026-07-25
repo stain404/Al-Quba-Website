@@ -1,8 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { useLocale } from 'next-intl'
 import { ArrowRight } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
@@ -15,6 +16,11 @@ const articles: BlogPostItem[] = [
   insightArticles.find((article) => article.slug === 'dubai-leads-global-trade-logistics')!,
   insightArticles.find((article) => article.slug === 'resilient-portfolios-alternative-investments')!,
 ]
+
+const copy = {
+  en: { eyebrow: 'Investor Education', title: 'Learn how we think before you invest', viewAll: 'View all resources' },
+  ar: { eyebrow: 'تثقيف المستثمرين', title: 'تعرف على منهجنا قبل أن تستثمر', viewAll: 'عرض جميع الموارد' },
+} as const
 
 const OFFSET = 90
 
@@ -56,20 +62,19 @@ function AnimatedBlogCard({ article, index }: { article: BlogPostItem; index: nu
  * ahead of the ask.
  */
 export function InvestorEducationPreview() {
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
+
   return (
     <SectionContainer surface="canvas" spacing="lg">
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-        <SectionHeading
-          eyebrow="Investor Education"
-          title="Learn how we think before you invest"
-          className="md:max-w-xl"
-        />
+        <SectionHeading eyebrow={c.eyebrow} title={c.title} className="md:max-w-xl" />
         <Link
           href="/insights"
           className="group inline-flex shrink-0 items-center gap-2 text-body-sm font-medium text-text-primary"
         >
-          View all resources
-          <ArrowRight className="size-4 transition-transform duration-200 ease-institutional group-hover:translate-x-1" aria-hidden />
+          {c.viewAll}
+          <ArrowRight className="size-4 rtl:rotate-180 transition-transform duration-200 ease-institutional group-hover:translate-x-1 rtl:group-hover:-translate-x-1" aria-hidden />
         </Link>
       </div>
 

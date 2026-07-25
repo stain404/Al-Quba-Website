@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
@@ -9,13 +10,13 @@ import { SectorProcess } from '@/components/sectors/sector-process'
 import { SectorCaseStudy } from '@/components/sectors/sector-case-study'
 import { RelatedSectors } from '@/components/sectors/related-sectors'
 import { sectors, getSectorBySlug } from '@/lib/sectors-data'
-import { navSections } from '@/lib/site-config'
 import { buildMetadata } from '@/lib/seo'
+import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 import { ServiceJsonLd } from '@/components/seo/service-json-ld'
 
 interface SectorPageProps {
-  params: { slug: string }
+  params: { locale: string; slug: string }
 }
 
 /** Pre-render all five sector pages at build time. */
@@ -30,7 +31,7 @@ export function generateMetadata({ params }: SectorPageProps) {
   return buildMetadata({
     title: sector.name,
     description: sector.description,
-    path: `/sectors/${sector.slug}`,
+    path: localizedPath(params.locale, `/sectors/${sector.slug}`),
   })
 }
 
@@ -47,6 +48,7 @@ export function generateMetadata({ params }: SectorPageProps) {
  * -> Why Choose [Company] -> Related Sectors -> Closing CTA.
  */
 export default function SectorDetailPage({ params }: SectorPageProps) {
+  setRequestLocale(params.locale)
   const sector = getSectorBySlug(params.slug)
   if (!sector) notFound()
 
@@ -77,7 +79,7 @@ export default function SectorDetailPage({ params }: SectorPageProps) {
         path={`/sectors/${sector.slug}`}
         serviceType="Investment Sector"
       />
-      <Navbar sections={navSections} />
+      <Navbar />
       <main>
         <SectorHero sector={sector} />
         {sector.overview && (

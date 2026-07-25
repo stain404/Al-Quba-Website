@@ -3,8 +3,14 @@
 import * as React from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { useLocale } from 'next-intl'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
+
+const copy = {
+  en: { eyebrow: 'Our Ecosystem', title: 'The partners behind our trade network' },
+  ar: { eyebrow: 'منظومة أعمالنا', title: 'الشركاء وراء شبكتنا التجارية' },
+} as const
 
 /**
  * Section 9 — Our Ecosystem.
@@ -17,12 +23,14 @@ import { SectionHeading } from '@/components/typography/heading'
 export function OurEcosystem() {
   const ref = React.useRef<HTMLDivElement>(null)
   const prefersReduced = useReducedMotion()
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [16, -16])
 
   return (
     <SectionContainer surface="canvas" spacing="lg">
-      <SectionHeading eyebrow="Our Ecosystem" title="The partners behind our trade network" />
+      <SectionHeading eyebrow={c.eyebrow} title={c.title} />
       <motion.div
         ref={ref}
         initial={{ opacity: 0, scale: 0.97, y: 24 }}

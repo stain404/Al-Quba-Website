@@ -2,11 +2,25 @@
 
 import * as React from 'react'
 import { motion, useReducedMotion, useScroll, useTransform, useMotionTemplate } from 'framer-motion'
+import { useLocale } from 'next-intl'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { InvestmentCard, InvestmentGrid } from '@/components/cards/investment-card'
 import { pools as poolsData } from '@/lib/pools-data'
 import type { InvestmentItem } from '@/types'
+
+const headingCopy = {
+  en: {
+    eyebrow: 'Structured Vehicles',
+    title: 'Investment pools built around real trade cycles',
+    description: 'Each pool is collateralized against a physical trade cycle — not a market thesis — giving investors a defined entry, cycle length, and exit.',
+  },
+  ar: {
+    eyebrow: 'أدوات استثمارية منظمة',
+    title: 'صناديق استثمارية مبنية على دورات تجارية حقيقية',
+    description: 'كل صندوق مضمون بدورة تجارية فعلية — لا برأي في اتجاه السوق — ما يمنح المستثمرين نقطة دخول محددة، ومدة دورة واضحة، ومخرجًا معلومًا.',
+  },
+} as const
 
 /**
  * Derived directly from src/lib/pools-data.ts (the same source the pool
@@ -54,13 +68,12 @@ function AnimatedPoolCard({ pool }: { pool: InvestmentItem }) {
  * Section 6 — Investment Pools.
  */
 export function InvestmentPools() {
+  const locale = useLocale() as keyof typeof headingCopy
+  const heading = headingCopy[locale]
+
   return (
     <SectionContainer id="pools" surface="muted" spacing="lg">
-      <SectionHeading
-        eyebrow="Structured Vehicles"
-        title="Investment pools built around real trade cycles"
-        description="Each pool is collateralized against a physical trade cycle — not a market thesis — giving investors a defined entry, cycle length, and exit."
-      />
+      <SectionHeading eyebrow={heading.eyebrow} title={heading.title} description={heading.description} />
       <div className="mt-16">
         <InvestmentGrid>
           {pools.map((pool) => (

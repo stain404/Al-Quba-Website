@@ -1,18 +1,25 @@
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { FadeIn } from '@/components/motion/reveal'
-import { navSections } from '@/lib/site-config'
 import { buildMetadata } from '@/lib/seo'
+import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 
-export const metadata = buildMetadata({
-  title: 'Terms & Conditions',
-  description:
-    'Terms and conditions governing use of the Al Quba Investment website and the information published on it.',
-  path: '/terms',
-})
+interface TermsPageProps {
+  params: { locale: string }
+}
+
+export function generateMetadata({ params }: TermsPageProps) {
+  return buildMetadata({
+    title: 'Terms & Conditions',
+    description:
+      'Terms and conditions governing use of the Al Quba Investment website and the information published on it.',
+    path: localizedPath(params.locale, '/terms'),
+  })
+}
 
 const LAST_UPDATED = 'July 2026'
 
@@ -23,11 +30,13 @@ const LAST_UPDATED = 'July 2026'
  * directly with qualified investors). Should be reviewed by qualified
  * legal counsel before being relied on as binding — flagged inline.
  */
-export default function TermsPage() {
+export default function TermsPage({ params }: TermsPageProps) {
+  setRequestLocale(params.locale)
+
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: 'Home', path: '/' }, { name: 'Terms & Conditions', path: '/terms' }]} />
-      <Navbar sections={navSections} />
+      <Navbar />
       <main>
         <SectionContainer surface="ink" spacing="lg" as="header">
           <FadeIn className="flex max-w-2xl flex-col gap-6">

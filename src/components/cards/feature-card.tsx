@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { ArrowUpRight } from 'lucide-react'
 import { Card } from '@/components/cards/card'
 import { StaggerItem } from '@/components/motion/reveal'

@@ -1,18 +1,25 @@
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { FadeIn } from '@/components/motion/reveal'
-import { navSections } from '@/lib/site-config'
 import { buildMetadata } from '@/lib/seo'
+import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 
-export const metadata = buildMetadata({
-  title: 'Privacy Policy',
-  description:
-    'How Al Quba Investment collects, uses, and protects information submitted through this website.',
-  path: '/privacy',
-})
+interface PrivacyPageProps {
+  params: { locale: string }
+}
+
+export function generateMetadata({ params }: PrivacyPageProps) {
+  return buildMetadata({
+    title: 'Privacy Policy',
+    description:
+      'How Al Quba Investment collects, uses, and protects information submitted through this website.',
+    path: localizedPath(params.locale, '/privacy'),
+  })
+}
 
 const LAST_UPDATED = 'July 2026'
 
@@ -24,11 +31,13 @@ const LAST_UPDATED = 'July 2026'
  * with qualified investors. Should be reviewed by qualified legal
  * counsel before being relied on as binding — flagged inline.
  */
-export default function PrivacyPage() {
+export default function PrivacyPage({ params }: PrivacyPageProps) {
+  setRequestLocale(params.locale)
+
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: 'Home', path: '/' }, { name: 'Privacy Policy', path: '/privacy' }]} />
-      <Navbar sections={navSections} />
+      <Navbar />
       <main>
         <SectionContainer surface="ink" spacing="lg" as="header">
           <FadeIn className="flex max-w-2xl flex-col gap-6">

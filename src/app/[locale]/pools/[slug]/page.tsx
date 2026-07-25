@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
@@ -12,13 +13,13 @@ import { PoolRisks } from '@/components/pools/pool-risks'
 import { PoolFAQ } from '@/components/pools/pool-faq'
 import { RelatedPools } from '@/components/pools/related-pools'
 import { pools, getPoolBySlug } from '@/lib/pools-data'
-import { navSections } from '@/lib/site-config'
 import { buildMetadata } from '@/lib/seo'
+import { localizedPath } from '@/i18n/routing'
 import { BreadcrumbJsonLd } from '@/components/seo/breadcrumb-json-ld'
 import { ServiceJsonLd } from '@/components/seo/service-json-ld'
 
 interface PoolPageProps {
-  params: { slug: string }
+  params: { locale: string; slug: string }
 }
 
 /** Pre-render all three pool pages at build time. */
@@ -33,7 +34,7 @@ export function generateMetadata({ params }: PoolPageProps) {
   return buildMetadata({
     title: pool.name,
     description: pool.description,
-    path: `/pools/${pool.slug}`,
+    path: localizedPath(params.locale, `/pools/${pool.slug}`),
   })
 }
 
@@ -56,6 +57,7 @@ export function generateMetadata({ params }: PoolPageProps) {
  * is skipped) works unchanged regardless of which hero renders.
  */
 export default function PoolDetailPage({ params }: PoolPageProps) {
+  setRequestLocale(params.locale)
   const pool = getPoolBySlug(params.slug)
   if (!pool) notFound()
 
@@ -76,7 +78,7 @@ export default function PoolDetailPage({ params }: PoolPageProps) {
         path={`/pools/${pool.slug}`}
         serviceType="Investment Pool"
       />
-      <Navbar sections={navSections} />
+      <Navbar />
       <main>
         {pool.heroDashboard && pool.heroDashboard.length > 0 ? (
           <PoolDashboardHero pool={pool} />

@@ -65,6 +65,18 @@
     --container-max: 1280px;
   }
 
+  /* Arabic (`dir="rtl"`) has no Manrope/Inter glyph coverage — Cairo
+     (loaded as --font-arabic in app/[locale]/layout.tsx, `ar` only)
+     takes over every text role so headings and body copy stay one
+     coherent typeface, the same way Manrope+Inter pair for English.
+     --font-mono is left untouched: figures stay in Western numerals in
+     both locales. */
+  :root[dir='rtl'] {
+    --font-display: var(--font-arabic);
+    --font-body: var(--font-arabic);
+    --font-nav: var(--font-arabic);
+  }
+
   * {
     @apply border-border;
   }

@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
+import { useLocale } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 
@@ -12,19 +13,42 @@ interface Office {
   y: number
 }
 
-const offices: Office[] = [
-  { country: 'United Kingdom', x: 41, y: 26 },
-  { country: 'Africa', x: 46, y: 56 },
-  { country: 'Bangladesh', x: 69, y: 41 },
-  { country: 'Turkey', x: 51, y: 34 },
-  { country: 'Egypt', x: 49, y: 41 },
-  { country: 'China', x: 73, y: 33 },
-  { country: 'India', x: 65, y: 43 },
-  { country: 'GCC', x: 55, y: 45 },
-]
+/** Country names only — x/y map coordinates are locale-independent. */
+const officesByLocale: Record<'en' | 'ar', Office[]> = {
+  en: [
+    { country: 'United Kingdom', x: 41, y: 26 },
+    { country: 'Africa', x: 46, y: 56 },
+    { country: 'Bangladesh', x: 69, y: 41 },
+    { country: 'Turkey', x: 51, y: 34 },
+    { country: 'Egypt', x: 49, y: 41 },
+    { country: 'China', x: 73, y: 33 },
+    { country: 'India', x: 65, y: 43 },
+    { country: 'GCC', x: 55, y: 45 },
+  ],
+  ar: [
+    { country: 'المملكة المتحدة', x: 41, y: 26 },
+    { country: 'أفريقيا', x: 46, y: 56 },
+    { country: 'بنغلاديش', x: 69, y: 41 },
+    { country: 'تركيا', x: 51, y: 34 },
+    { country: 'مصر', x: 49, y: 41 },
+    { country: 'الصين', x: 73, y: 33 },
+    { country: 'الهند', x: 65, y: 43 },
+    { country: 'دول مجلس التعاون الخليجي', x: 55, y: 45 },
+  ],
+}
 
-const leftOffices = offices.slice(0, 4)
-const rightOffices = offices.slice(4)
+const headingCopy = {
+  en: {
+    eyebrow: 'Global Presence',
+    title: 'Eight countries. One trade network.',
+    description: 'Our operating footprint follows the physical trade lanes our capital moves through — not a marketing map.',
+  },
+  ar: {
+    eyebrow: 'الحضور العالمي',
+    title: 'ثماني دول. شبكة تجارية واحدة.',
+    description: 'يتبع نطاق عملياتنا ممرات التجارة الفعلية التي يتحرك عبرها رأس مالنا — لا خريطة تسويقية.',
+  },
+} as const
 
 /** Short diagonal "kink" near the dot before the line straightens out
  *  horizontally to touch the country name — matches a hand-drawn leader
@@ -33,13 +57,13 @@ const KINK_LENGTH = 32
 
 function CountryList({
   items,
-  activeIndex,
+  activeCountry,
   align,
   isDesktop,
   registerRef,
 }: {
   items: Office[]
-  activeIndex: number
+  activeCountry: string | undefined
   align: 'left' | 'right'
   isDesktop: boolean
   registerRef: (country: string, el: HTMLLIElement | null) => void
@@ -55,7 +79,7 @@ function CountryList({
         // The active/muted cycling is tied to the desktop scroll-jacked
         // pin — without it (mobile), every office just reads as a plain,
         // fully legible list rather than flashing through one at a time.
-        const isActive = isDesktop && offices[activeIndex]?.country === office.country
+        const isActive = isDesktop && activeCountry === office.country
         return (
           <li
             key={office.country}
@@ -74,6 +98,12 @@ function CountryList({
 }
 
 export function GlobalPresence() {
+  const locale = useLocale() as keyof typeof officesByLocale
+  const offices = officesByLocale[locale]
+  const heading = headingCopy[locale]
+  const leftOffices = offices.slice(0, 4)
+  const rightOffices = offices.slice(4)
+
   const wrapperRef = React.useRef<HTMLDivElement>(null)
   const gridRef = React.useRef<HTMLDivElement>(null)
   const mapBoxRef = React.useRef<HTMLDivElement>(null)
@@ -167,14 +197,11 @@ export function GlobalPresence() {
 
         {/* Header */}
         <div className="mb-10 flex flex-col gap-4">
-          <Eyebrow inverse>Global Presence</Eyebrow>
+          <Eyebrow inverse>{heading.eyebrow}</Eyebrow>
           <Heading as="h2" size="display-md" inverse>
-            Eight countries. One trade network.
+            {heading.title}
           </Heading>
-          <p className="text-body-md text-text-inverse-muted">
-            Our operating footprint follows the physical trade lanes our
-            capital moves through — not a marketing map.
-          </p>
+          <p className="text-body-md text-text-inverse-muted">{heading.description}</p>
         </div>
 
         {/* Split: country list left, map center, country list right */}
@@ -185,7 +212,7 @@ export function GlobalPresence() {
 
           <CountryList
             items={leftOffices}
-            activeIndex={activeIndex}
+            activeCountry={active?.country}
             align="left"
             isDesktop={isDesktop}
             registerRef={registerRef}
@@ -250,7 +277,7 @@ export function GlobalPresence() {
 
           <CountryList
             items={rightOffices}
-            activeIndex={activeIndex}
+            activeCountry={active?.country}
             align="right"
             isDesktop={isDesktop}
             registerRef={registerRef}
