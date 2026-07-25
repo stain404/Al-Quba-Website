@@ -161,7 +161,7 @@ export const articles: Article[] = [
     date: 'June 2026',
     readTime: '7 min read',
     author: AUTHOR,
-    imageSrc: '/map.png',
+    imageSrc: '/GCC ECONOMIC OUTLOOK.png',
     href: '/insights/gcc-economic-outlook-global-investors',
     body: [
       {
@@ -305,7 +305,7 @@ export const articles: Article[] = [
     date: 'April 2026',
     readTime: '6 min read',
     author: AUTHOR,
-    imageSrc: '/office.png',
+    imageSrc: '/RESIDENTIAL AND COMMERCIAL REALESTATE.png',
     href: '/insights/residential-vs-commercial-property-portfolio',
     body: [
       {
@@ -341,7 +341,7 @@ export const articles: Article[] = [
     date: 'April 2026',
     readTime: '7 min read',
     author: AUTHOR,
-    imageSrc: '/portfolio.png',
+    imageSrc: '/Building Resilient Portfolios Through Alternative Investments.png',
     href: '/insights/resilient-portfolios-alternative-investments',
     body: [
       {
@@ -377,7 +377,7 @@ export const articles: Article[] = [
     date: 'March 2026',
     readTime: '6 min read',
     author: AUTHOR,
-    imageSrc: '/investment.jpg',
+    imageSrc: '/Understanding Risk, Return & Long-Term Wealth Creation.png',
     href: '/insights/risk-return-long-term-wealth-creation',
     body: [
       {
@@ -414,7 +414,7 @@ export const articles: Article[] = [
     date: 'March 2026',
     readTime: '7 min read',
     author: AUTHOR,
-    imageSrc: '/insights/five-industries-hero.jpg',
+    imageSrc: "/Five Industries Driving the UAE's Economic Transformation.png",
     href: '/insights/five-industries-uae-economic-transformation',
     body: [
       {
@@ -546,7 +546,7 @@ export const articles: Article[] = [
     date: 'February 2026',
     readTime: '6 min read',
     author: AUTHOR,
-    imageSrc: '/insights/family-offices-hero.jpg',
+    imageSrc: '/The Rise of Family Offices A New Era of Private Capital.png',
     href: '/insights/family-offices-private-capital-uae',
     body: [
       {

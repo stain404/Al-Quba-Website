@@ -61,7 +61,7 @@ export function InsightsGrid() {
       <div className="flex flex-col gap-10">
         <SectionHeading eyebrow={c.eyebrow} title={c.title} />
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div role="tablist" aria-label={c.filterLabel} className="flex flex-wrap gap-2">
             {categories.map((category) => (
               <button
