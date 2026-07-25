@@ -47,10 +47,24 @@ export function Hero() {
     const video = videoRef.current
     if (!video) return
 
+    // Decide the source in JS rather than via <source media="...">
+    // children — real-world browser support for `media`-based source
+    // selection on <video> is unreliable (it reliably works for
+    // <picture>/<img>, not consistently for <video>), so phones/tablets
+    // would sometimes still fetch the 4K desktop clip. Setting `src`
+    // directly guarantees the right file is requested.
+    const isMobileOrTablet = window.matchMedia('(max-width: 1023px)').matches
+    video.src = isMobileOrTablet ? '/hero-banner-mobile.mp4' : '/hero-banner-final-4k.mp4'
+    video.load()
+
     const tryPlay = () => {
       if (video.dataset.userPaused === 'true') return
       video.play().catch(() => { })
     }
+    // Browsers don't reliably honor the `autoplay` attribute after `src`
+    // is assigned dynamically (as opposed to being present at parse
+    // time), so kick playback explicitly once the new source is set.
+    tryPlay()
     const onVisibility = () => {
       if (document.visibilityState === 'visible') tryPlay()
     }
@@ -121,10 +135,8 @@ export function Hero() {
             zoom. Mobile uses a lighter 110% zoom than desktop's 122% —
             still enough to clip the watermark, without cropping in as
             tight on narrow screens. */}
-        {/* Separate <source> elements (rather than a single `src`) so
-            phones and tablets load the lighter mobile-optimized clip
-            instead of the 4K desktop export — the browser picks the
-            first matching `media` query at load time. */}
+        {/* `src` is assigned in the effect above (mobile vs. desktop
+            clip), not here — see the comment there for why. */}
         <video
           ref={videoRef}
           className="absolute left-1/2 top-0 h-[110%] w-[110%] -translate-x-1/2 object-cover sm:h-[122%] sm:w-[122%]"
@@ -132,10 +144,7 @@ export function Hero() {
           muted
           loop
           playsInline
-        >
-          <source src="/hero-banner-mobile.mp4" media="(max-width: 1023px)" />
-          <source src="/hero-banner-final-4k.mp4" />
-        </video>
+        />
         <motion.div
           className="absolute -top-1/3 left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full opacity-[0.16] blur-[120px]"
           style={{ background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)' }}
