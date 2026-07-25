@@ -2,11 +2,25 @@
 
 import * as React from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useLocale } from 'next-intl'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { SectionContainer } from '@/components/layout/section-container'
 import { VideoPauseToggle } from '@/components/motion/video-pause-toggle'
 
-const trustIndicators = ['Dubai, UAE', 'Investment Management', 'Global Investments', 'Long-Term Growth']
+const copy = {
+  en: {
+    eyebrow: 'About Al Quba',
+    heading: 'Building Long-Term Value Through Strategic Investments',
+    body: 'Al Quba Investment LLC is a Dubai-based investment and asset management firm committed to creating sustainable value through strategic investments across global industries. Through disciplined capital management, strategic partnerships, and diversified businesses, we help investors participate in long-term growth opportunities.',
+    trustIndicators: ['Dubai, UAE', 'Investment Management', 'Global Investments', 'Long-Term Growth'],
+  },
+  ar: {
+    eyebrow: 'عن القبا',
+    heading: 'نبني قيمة طويلة الأمد من خلال استثمارات استراتيجية',
+    body: 'شركة القبا للاستثمار ذ.م.م. هي شركة استثمار وإدارة أصول مقرها دبي، ملتزمة بخلق قيمة مستدامة من خلال استثمارات استراتيجية عبر قطاعات عالمية متعددة. من خلال إدارة رأس مال منضبطة، وشراكات استراتيجية، وأعمال متنوعة، نساعد المستثمرين على المشاركة في فرص نمو طويلة الأمد.',
+    trustIndicators: ['دبي، الإمارات', 'إدارة الاستثمار', 'استثمارات عالمية', 'نمو طويل الأمد'],
+  },
+} as const
 
 const OFFSET = 60
 /** Raw page-scroll distance (px) over which the hero fades/slides out —
@@ -32,6 +46,8 @@ export function AboutHero() {
   const prefersReduced = useReducedMotion()
   const { scrollY } = useScroll()
   const videoRef = React.useRef<HTMLVideoElement>(null)
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale]
 
   const y = useTransform(scrollY, [0, EXIT_DISTANCE], [0, -OFFSET])
   const opacity = useTransform(scrollY, [0, EXIT_DISTANCE], [1, 0])
@@ -78,20 +94,13 @@ export function AboutHero() {
           style={prefersReduced ? undefined : { y, opacity }}
           className="flex max-w-3xl flex-col gap-8 pt-16"
         >
-          <Eyebrow inverse>About Al Quba</Eyebrow>
+          <Eyebrow inverse>{c.eyebrow}</Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
-            Building Long-Term Value Through Strategic Investments
+            {c.heading}
           </Heading>
-          <p className="max-w-measure text-body-lg text-text-inverse">
-            Al Quba Investment LLC is a Dubai-based investment and asset
-            management firm committed to creating sustainable value through
-            strategic investments across global industries. Through
-            disciplined capital management, strategic partnerships, and
-            diversified businesses, we help investors participate in
-            long-term growth opportunities.
-          </p>
+          <p className="max-w-measure text-body-lg text-text-inverse">{c.body}</p>
           <ul className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
-            {trustIndicators.map((item, i) => (
+            {c.trustIndicators.map((item, i) => (
               <li key={item} className="flex items-center gap-2.5">
                 {i > 0 && <span className="size-1 rounded-full bg-text-inverse-muted" aria-hidden />}
                 <span className="text-caption uppercase tracking-wide text-text-inverse-muted">{item}</span>

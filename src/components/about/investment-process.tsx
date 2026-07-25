@@ -1,3 +1,4 @@
+import { getLocale } from 'next-intl/server'
 import type { LucideIcon } from 'lucide-react'
 import { Users, Target, PieChart, TrendingUp, Wallet } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
@@ -10,33 +11,34 @@ interface ProcessStep {
   description: string
 }
 
-const steps: ProcessStep[] = [
-  {
-    icon: Users,
-    title: 'Consultation & Profiling',
-    description: 'We assess your objectives, risk appetite, and capital allocation strategy.',
+const icons: LucideIcon[] = [Users, Target, PieChart, TrendingUp, Wallet]
+
+const copy = {
+  en: {
+    eyebrow: 'Our Process',
+    title: 'A structured investment process',
+    description: 'From consultation to returns, every step is designed for clarity, control, and long-term success.',
+    steps: [
+      { title: 'Consultation & Profiling', description: 'We assess your objectives, risk appetite, and capital allocation strategy.' },
+      { title: 'Pool Selection', description: 'You’re matched to structured opportunities aligned with defined return cycles.' },
+      { title: 'Capital Deployment', description: 'Funds are deployed into asset-backed trading or investment pools.' },
+      { title: 'Profit Execution', description: 'Returns are generated through managed cycles and disciplined execution.' },
+      { title: 'Distribution & Exit', description: 'Profits are distributed on a defined schedule, with clear exit options.' },
+    ],
   },
-  {
-    icon: Target,
-    title: 'Pool Selection',
-    description: 'You’re matched to structured opportunities aligned with defined return cycles.',
+  ar: {
+    eyebrow: 'منهجيتنا',
+    title: 'عملية استثمار منظمة',
+    description: 'من الاستشارة إلى العائد، كل خطوة مصممة لتحقيق الوضوح والتحكم والنجاح طويل الأمد.',
+    steps: [
+      { title: 'الاستشارة وتحديد الملف الاستثماري', description: 'نقيّم أهدافك ومدى تحملك للمخاطر واستراتيجية تخصيص رأس المال.' },
+      { title: 'اختيار الصندوق', description: 'يتم توجيهك نحو فرص منظمة تتماشى مع دورات عائد محددة.' },
+      { title: 'نشر رأس المال', description: 'يتم توظيف الأموال في تجارة أو صناديق استثمارية مضمونة بأصول.' },
+      { title: 'تحقيق الأرباح', description: 'تتحقق العوائد من خلال دورات مُدارة وتنفيذ منضبط.' },
+      { title: 'التوزيع والخروج', description: 'تُوزَّع الأرباح وفق جدول محدد، مع خيارات خروج واضحة.' },
+    ],
   },
-  {
-    icon: PieChart,
-    title: 'Capital Deployment',
-    description: 'Funds are deployed into asset-backed trading or investment pools.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Profit Execution',
-    description: 'Returns are generated through managed cycles and disciplined execution.',
-  },
-  {
-    icon: Wallet,
-    title: 'Distribution & Exit',
-    description: 'Profits are distributed on a defined schedule, with clear exit options.',
-  },
-]
+} as const
 
 /**
  * About / Investment Process.
@@ -46,15 +48,14 @@ const steps: ProcessStep[] = [
  * (consultation through exit) rather than a per-sector origination
  * sequence.
  */
-export function InvestmentProcess() {
+export async function InvestmentProcess() {
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
+  const steps = c.steps.map((step, index) => ({ ...step, icon: icons[index] }))
+
   return (
     <SectionContainer surface="muted" spacing="lg">
-      <SectionHeading
-        eyebrow="Our Process"
-        title="A structured investment process"
-        description="From consultation to returns, every step is designed for clarity, control, and long-term success."
-        align="center"
-      />
+      <SectionHeading eyebrow={c.eyebrow} title={c.title} description={c.description} align="center" />
 
       <Stagger className="mt-16">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-0">

@@ -1,3 +1,4 @@
+import { getLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { Linkedin, Quote } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
@@ -12,18 +13,40 @@ interface Leader {
   linkedin?: string
 }
 
-const leaders: Leader[] = [
-  {
-    name: 'Khasim Enoli',
-    role: 'Founder & CEO',
-    quote: 'Invest with Confidence, Backed by Trust.',
-    message: [
-      'From designing ships as a Naval Architect to navigating the complexities of the Oil & Gas industry, my path has always been driven by growth, innovation, and the discipline to build things that last — a journey recognized early on with the UAE’s youngest Golden Visa award.',
-      "Today, guiding Al Quba's diverse companies, my goal remains the same: to fuel success, create impact, and lead with integrity.",
-    ],
-    linkedin: 'https://linkedin.com/in/khasim-enoli-43211734',
+const copy = {
+  en: {
+    eyebrow: "CEO's Message",
+    title: 'A direct message from our Founder & CEO',
+    leaders: [
+      {
+        name: 'Khasim Enoli',
+        role: 'Founder & CEO',
+        quote: 'Invest with Confidence, Backed by Trust.',
+        message: [
+          'From designing ships as a Naval Architect to navigating the complexities of the Oil & Gas industry, my path has always been driven by growth, innovation, and the discipline to build things that last — a journey recognized early on with the UAE’s youngest Golden Visa award.',
+          "Today, guiding Al Quba's diverse companies, my goal remains the same: to fuel success, create impact, and lead with integrity.",
+        ],
+        linkedin: 'https://linkedin.com/in/khasim-enoli-43211734',
+      },
+    ] satisfies Leader[],
   },
-]
+  ar: {
+    eyebrow: 'كلمة الرئيس التنفيذي',
+    title: 'رسالة مباشرة من مؤسسنا والرئيس التنفيذي',
+    leaders: [
+      {
+        name: 'Khasim Enoli',
+        role: 'المؤسس والرئيس التنفيذي',
+        quote: 'استثمر بثقة، مدعومًا بالثقة.',
+        message: [
+          'من تصميم السفن كمهندس بحري، إلى التعامل مع تعقيدات قطاع النفط والغاز، كان مساري دائمًا مدفوعًا بالنمو والابتكار والانضباط اللازم لبناء أشياء تدوم — رحلة تم الاعتراف بها مبكرًا من خلال حصولي على أصغر تأشيرة ذهبية في الإمارات.',
+          'واليوم، وأنا أقود شركات القبا المتنوعة، يبقى هدفي كما هو: تحقيق النجاح، وخلق الأثر، والقيادة بنزاهة.',
+        ],
+        linkedin: 'https://linkedin.com/in/khasim-enoli-43211734',
+      },
+    ] satisfies Leader[],
+  },
+} as const
 
 const leadershipJsonLd = {
   '@context': 'https://schema.org',
@@ -34,7 +57,7 @@ const leadershipJsonLd = {
     '@type': 'Organization',
     name: 'Al Quba Investment',
   },
-  description: leaders[0].message.join(' '),
+  description: copy.en.leaders[0].message.join(' '),
 }
 
 /**
@@ -42,7 +65,10 @@ const leadershipJsonLd = {
  * A single profile row carrying the founder's direct message as a pull
  * quote, rather than the multi-person grid this section used to hold.
  */
-export function Leadership() {
+export async function Leadership() {
+  const locale = (await getLocale()) as keyof typeof copy
+  const c = copy[locale]
+
   return (
     <SectionContainer id="leadership" surface="canvas" spacing="lg">
       <script
@@ -50,10 +76,10 @@ export function Leadership() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(leadershipJsonLd) }}
       />
-      <SectionHeading eyebrow="CEO's Message" title="A direct message from our Founder & CEO" />
+      <SectionHeading eyebrow={c.eyebrow} title={c.title} />
 
       <div className="mt-16 flex flex-col">
-        {leaders.map((leader) => (
+        {c.leaders.map((leader) => (
           <FadeIn key={leader.name}>
             <div className="border-b border-t border-border py-12">
               <div className="mb-8 flex flex-col gap-1">
