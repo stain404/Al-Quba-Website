@@ -115,7 +115,7 @@ export async function AboutPreview() {
         <FadeIn delay={0.08} className="relative min-h-[480px] lg:min-h-0">
           <div className="sticky top-28 h-full w-full overflow-hidden rounded-2xl shadow-lg">
             <Image
-              src="/office.jpeg"
+              src="/office.png"
               alt="Al Quba Investment — executive office"
               fill
               className="object-cover"

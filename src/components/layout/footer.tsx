@@ -125,9 +125,10 @@ export function Footer() {
     { label: t('contactUsLink'), href: '/contact' },
     { label: t('investmentSectorsLink'), href: '/#sectors' },
     { label: t('investmentPoolsLink'), href: '/#pools' },
+    { label: t('career'), href: '/careers' },
   ]
-  /** Not linked yet — no page exists for this. Renders as plain text until real content is ready. */
-  const pendingCompanyLinks = [t('career')]
+  /** No longer used — career link is now a real linked route. */
+  const pendingCompanyLinks: string[] = []
   const legalLinks = [
     { label: t('termsConditions'), href: '/terms' },
     { label: t('privacyPolicy'), href: '/privacy' },
