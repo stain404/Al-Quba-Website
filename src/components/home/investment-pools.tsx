@@ -1,11 +1,10 @@
 'use client'
 
-import * as React from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, useMotionTemplate } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { InvestmentCard, InvestmentGrid } from '@/components/cards/investment-card'
+import { Stagger, StaggerItem } from '@/components/motion/reveal'
 import { getPools } from '@/lib/pools-data'
 import type { InvestmentItem } from '@/types'
 
@@ -42,33 +41,13 @@ function toInvestmentItems(locale: string): InvestmentItem[] {
 }
 
 /**
- * A single pool card, revealed with a wipe (a `clip-path` reveal, not a
- * fade/slide) — the card wipes in from the left as it enters the
- * viewport, holds fully revealed, then wipes back out to the left as you
- * scroll past. All driven by this card's own continuous scroll progress,
- * so scrolling back up plays the same wipe in reverse.
- */
-function AnimatedPoolCard({ pool }: { pool: InvestmentItem }) {
-  const cardRef = React.useRef<HTMLDivElement>(null)
-  const prefersReduced = useReducedMotion()
-
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start end', 'end start'],
-  })
-
-  const wipe = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [100, 0, 0, 100])
-  const clipPath = useMotionTemplate`inset(0 ${wipe}% 0 0)`
-
-  return (
-    <motion.div ref={cardRef} style={prefersReduced ? undefined : { clipPath }} className="h-full">
-      <InvestmentCard {...pool} wrap={false} />
-    </motion.div>
-  )
-}
-
-/**
  * Section 6 — Investment Pools.
+ * Cards reveal with the same whileInView fade-up used across the rest of
+ * the site (Stagger/StaggerItem), rather than a bespoke scroll-position-
+ * linked clip-path wipe — that continuous `useScroll` effect tracked each
+ * card's own scroll progress, which is fragile on mobile browsers where
+ * the viewport height keeps changing as the URL bar shows/hides, and
+ * could leave a card clipped to fully hidden.
  */
 export function InvestmentPools() {
   const locale = useLocale() as keyof typeof headingCopy
@@ -79,11 +58,15 @@ export function InvestmentPools() {
     <SectionContainer id="pools" surface="muted" spacing="lg">
       <SectionHeading eyebrow={heading.eyebrow} title={heading.title} description={heading.description} />
       <div className="mt-16">
-        <InvestmentGrid>
-          {pools.map((pool) => (
-            <AnimatedPoolCard key={pool.name} pool={pool} />
-          ))}
-        </InvestmentGrid>
+        <Stagger>
+          <InvestmentGrid>
+            {pools.map((pool) => (
+              <StaggerItem key={pool.name} className="h-full">
+                <InvestmentCard {...pool} wrap={false} />
+              </StaggerItem>
+            ))}
+          </InvestmentGrid>
+        </Stagger>
       </div>
     </SectionContainer>
   )

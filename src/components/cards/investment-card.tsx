@@ -30,27 +30,29 @@ export function InvestmentCard({
       className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 shadow-sm transition-all duration-200 ease-institutional hover:shadow-md focus-visible:outline-none focus-visible:shadow-focus"
     >
       {/* ── Image ────────────────────────────────────────────────────────
-          Mobile: fills the entire card (absolute inset-0, no aspect-ratio box)
-          Desktop: normal stacked aspect-ratio box                        */}
-      <div className={cn('relative md:w-full md:shrink-0', compact ? 'md:aspect-[5/3]' : 'md:aspect-[4/3]')}>
-        {/* Mobile full-card image */}
-        {imageSrc && (
-          <div className="absolute inset-0 md:hidden">
-            <Image
-              src={imageSrc}
-              alt={name}
-              fill
-              className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
-            />
-          </div>
-        )}
-        {/* Desktop image (inside aspect-ratio wrapper) */}
+          Mobile: fills the entire card. `absolute inset-0` here resolves
+          against the outer <Link>, which carries `relative h-full` — it
+          must NOT be nested inside the desktop aspect-ratio box below,
+          since that box has no defined height until `md:`, which used to
+          collapse this to 0px and make the image invisible on mobile.
+          Desktop: normal stacked aspect-ratio box.                       */}
+      {imageSrc && (
+        <div className="absolute inset-0 md:hidden">
+          <Image
+            src={imageSrc}
+            alt={name}
+            fill
+            className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
+          />
+        </div>
+      )}
+      <div className={cn('relative hidden md:block md:w-full md:shrink-0', compact ? 'md:aspect-[5/3]' : 'md:aspect-[4/3]')}>
         {imageSrc && (
           <Image
             src={imageSrc}
             alt={name}
             fill
-            className="hidden object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03] md:block"
+            className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
           />
         )}
       </div>
