@@ -88,7 +88,7 @@ export default function AboutPage({ params }: AboutPageProps) {
           primaryHref="/contact"
           secondaryLabel={cta.secondaryLabel}
           secondaryHref="/#sectors"
-          backgroundImageSrc="/footer-bg.png"
+          backgroundImageSrc="/footer.png"
         />
       </main>
       <Footer />

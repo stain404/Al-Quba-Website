@@ -36,7 +36,7 @@ export function CTASection({
   secondaryLabel,
   secondaryHref,
   surface = 'ink',
-  backgroundImageSrc = '/footer-bg.png',
+  backgroundImageSrc = '/footer.png',
 }: CTASectionProps) {
   const hasBackground = !!backgroundImageSrc
 

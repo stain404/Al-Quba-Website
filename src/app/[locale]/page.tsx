@@ -80,7 +80,7 @@ export default function HomePage({ params }: HomePageProps) {
           primaryHref="/contact"
           secondaryLabel={cta.secondaryLabel}
           secondaryHref="/#sectors"
-          backgroundImageSrc="/footer-bg.png"
+          backgroundImageSrc="/footer.png"
         />
       </main>
       {/* 12 */}
