@@ -20,6 +20,9 @@ export interface CTASectionProps {
    *  truthy src), content left-aligns over the image instead of
    *  centering on a flat surface color. Pass `""` to opt out entirely. */
   backgroundImageSrc?: string
+  /** Swapped in from `lg` up in place of `backgroundImageSrc` — the
+   *  laptop-only banner photo. */
+  backgroundImageSrcDesktop?: string
 }
 
 /**
@@ -37,6 +40,7 @@ export function CTASection({
   secondaryHref,
   surface = 'ink',
   backgroundImageSrc = '/footer.png',
+  backgroundImageSrcDesktop = '/footer-bg.png',
 }: CTASectionProps) {
   const hasBackground = !!backgroundImageSrc
 
@@ -54,7 +58,15 @@ export function CTASection({
             alt=""
             fill
             sizes="100vw"
-            className="object-cover object-[center_45%]"
+            className="object-cover object-[center_45%] lg:hidden"
+            priority={false}
+          />
+          <Image
+            src={backgroundImageSrcDesktop}
+            alt=""
+            fill
+            sizes="100vw"
+            className="hidden object-cover object-[center_45%] lg:block"
             priority={false}
           />
           {/* Right-to-left gradient (opaque on the left) keeps the
