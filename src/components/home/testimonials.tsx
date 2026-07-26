@@ -73,22 +73,22 @@ export function Testimonials() {
         </FadeIn>
 
         <FadeIn
+          dir="ltr"
           className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
         >
-          {/* Forced ltr: the -50% translateX loop technique relies on the
-              track's untransformed rest position being flush with the
-              left edge, overflowing to the right, which is only true in
-              ltr. Under the page's rtl direction (Arabic), a `width:
-              max-content` block instead sits flush against the RIGHT edge
-              and overflows left, so the same leftward -50% shift drags it
-              straight past its own content into empty space instead of
-              revealing the duplicate copy — the marquee would go blank
-              then pop back. Isolating this track as ltr keeps the loop
-              math correct regardless of page direction; each card's own
-              Arabic text still renders correctly (the browser's bidi
-              algorithm handles that independently of this wrapper). */}
+          {/* Forced ltr on this whole mask wrapper, not just the track:
+              the -50% translateX loop assumes the track's untransformed
+              rest position is flush with its CONTAINING BLOCK's left
+              edge, overflowing to the right — that anchor edge is decided
+              by the *parent's* direction, not the track's own `dir`, so
+              setting dir only on the track (as a first attempt) fixed the
+              card order but not the anchor, leaving the loop still
+              broken under the page's rtl direction. Setting it here,
+              higher up, makes the track's containing block ltr too, so
+              the loop math is correct regardless of page direction —
+              each card's own Arabic text still renders correctly via the
+              browser's own bidi handling, independent of this wrapper. */}
           <div
-            dir="ltr"
             className={cn(
               'flex w-max gap-6',
               !prefersReduced && 'animate-marquee group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]'
