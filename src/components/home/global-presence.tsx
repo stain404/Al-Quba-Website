@@ -59,13 +59,11 @@ function CountryList({
   items,
   activeCountry,
   align,
-  isDesktop,
   registerRef,
 }: {
   items: Office[]
   activeCountry: string | undefined
   align: 'left' | 'right'
-  isDesktop: boolean
   registerRef: (country: string, el: HTMLLIElement | null) => void
 }) {
   return (
@@ -76,10 +74,7 @@ function CountryList({
       )}
     >
       {items.map((office) => {
-        // The active/muted cycling is tied to the desktop scroll-jacked
-        // pin — without it (mobile), every office just reads as a plain,
-        // fully legible list rather than flashing through one at a time.
-        const isActive = isDesktop && activeCountry === office.country
+        const isActive = activeCountry === office.country
         return (
           <li
             key={office.country}
@@ -97,6 +92,18 @@ function CountryList({
   )
 }
 
+/**
+ * Section 8 — Global Presence.
+ * The scroll-jacked sticky pin + one-dot-at-a-time cycling now runs at
+ * every breakpoint, not just `lg` — the user explicitly wants the same
+ * scroll-driven animation on mobile rather than a static "all dots at
+ * once" fallback. Below `lg`, the two country-name side lists (with
+ * their leader lines) are hidden in favor of a single compact readout
+ * (dot + country name + progress dots) stacked under the map, since the
+ * full 3-column layout's header + two 4-item lists + map would overflow
+ * a phone's viewport while pinned — the compact mobile view guarantees
+ * everything fits within `h-dvh` regardless of screen height.
+ */
 export function GlobalPresence() {
   const locale = useLocale() as keyof typeof officesByLocale
   const offices = officesByLocale[locale]
@@ -111,7 +118,7 @@ export function GlobalPresence() {
 
   const [activeIndex, setActiveIndex] = React.useState(0)
   const [linePath, setLinePath] = React.useState<string | null>(null)
-  const [isDesktop, setIsDesktop] = React.useState(false)
+  const [isWideLayout, setIsWideLayout] = React.useState(false)
 
   const registerRef = React.useCallback((country: string, el: HTMLLIElement | null) => {
     itemRefs.current[country] = el
@@ -136,9 +143,11 @@ export function GlobalPresence() {
 
   const active = offices[activeIndex]
 
+  // Only the leader-line geometry and the 3-column list layout need the
+  // `lg` breakpoint — the cycling animation itself now runs everywhere.
   React.useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)')
-    const update = () => setIsDesktop(mq.matches)
+    const update = () => setIsWideLayout(mq.matches)
     update()
     mq.addEventListener('change', update)
     return () => mq.removeEventListener('change', update)
@@ -152,7 +161,7 @@ export function GlobalPresence() {
       const grid = gridRef.current
       const mapBox = mapBoxRef.current
       const item = itemRefs.current[active.country]
-      if (!isDesktop || !grid || !mapBox || !item) {
+      if (!isWideLayout || !grid || !mapBox || !item) {
         setLinePath(null)
         return
       }
@@ -182,61 +191,109 @@ export function GlobalPresence() {
     recompute()
     window.addEventListener('resize', recompute)
     return () => window.removeEventListener('resize', recompute)
-  }, [active, isDesktop])
+  }, [active, isWideLayout, leftOffices])
 
   return (
-    <div ref={wrapperRef} className="relative lg:h-[420vh]">
-      {/* The scroll-jacked sticky pin + single-dot cycling only makes
-          sense at the lg 3-column layout (list / map / list side by
-          side, compact enough to fit one screen). Below that, the grid
-          stacks to one column and a fixed h-screen + overflow-hidden
-          would clip the stacked content (including the map itself) —
-          so height/overflow/sticky are all lg-only. */}
-      <section className="flex flex-col justify-center overflow-visible bg-ink py-16 text-text-inverse md:py-20 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:py-28">
-      <div className="container mx-auto max-w-container">
+    <div ref={wrapperRef} className="relative h-[420vh]">
+      <section className="sticky top-0 flex h-dvh flex-col justify-center overflow-hidden bg-ink py-12 text-text-inverse md:py-20 lg:py-28">
+        <div className="container mx-auto max-w-container">
 
-        {/* Header */}
-        <div className="mb-10 flex flex-col gap-4">
-          <Eyebrow inverse>{heading.eyebrow}</Eyebrow>
-          <Heading as="h2" size="display-md" inverse>
-            {heading.title}
-          </Heading>
-          <p className="text-body-md text-text-inverse-muted">{heading.description}</p>
-        </div>
+          {/* Header */}
+          <div className="mb-6 flex flex-col gap-3 lg:mb-10 lg:gap-4">
+            <Eyebrow inverse>{heading.eyebrow}</Eyebrow>
+            <Heading as="h2" size="display-md" inverse>
+              {heading.title}
+            </Heading>
+            <p className="hidden text-body-md text-text-inverse-muted lg:block">{heading.description}</p>
+          </div>
 
-        {/* Split: country list left, map center, country list right */}
-        <div
-          ref={gridRef}
-          className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-[180px_1fr_180px] lg:gap-6"
-        >
-
-          <CountryList
-            items={leftOffices}
-            activeCountry={active?.country}
-            align="left"
-            isDesktop={isDesktop}
-            registerRef={registerRef}
-          />
-
-          {/* Map — outer div carries the horizontal padding (lg-only: below
-              that breakpoint the grid stacks to one column, and the inset
-              would misalign the map's edges against the header/lists above
-              it). Padding lives on this wrapper, not the aspect box below,
-              since the absolutely-positioned `fill` image inside would
-              otherwise ignore it. */}
-          <div className="lg:px-6">
-            <div ref={mapBoxRef} className="relative mx-auto aspect-[1761/893] w-full max-w-[560px]">
+          {/* Compact mobile/tablet view: map with a single cycling dot,
+              the active country name, and a progress-dot row — all of it
+              fits comfortably within the pinned viewport regardless of
+              phone height. */}
+          <div className="flex flex-col items-center gap-6 lg:hidden">
+            <div className="relative mx-auto aspect-[1761/893] w-full max-w-[420px]">
               <Image
                 src="/map.png"
                 alt="World map showing Al Quba Investment's office locations"
                 fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
+                sizes="100vw"
                 className="object-contain"
                 priority={false}
               />
+              <AnimatePresence mode="wait">
+                {active && (
+                  <motion.span
+                    key={active.country}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                    className="absolute -translate-x-1/2 -translate-y-1/2"
+                    style={{ left: `${active.x}%`, top: `${active.y}%` }}
+                  >
+                    <span className="relative flex items-center justify-center">
+                      <span className="absolute size-5 animate-ping rounded-full bg-[#7A5C31] opacity-40" />
+                      <span className="relative size-3 rounded-full bg-[#7A5C31]" />
+                    </span>
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </div>
 
-              {isDesktop ? (
-                /* Desktop: only the currently active (scroll-cycled) dot is shown. */
+            <AnimatePresence mode="wait">
+              {active && (
+                <motion.p
+                  key={active.country}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  className="text-body-lg font-semibold text-accent-on-ink"
+                >
+                  {active.country}
+                </motion.p>
+              )}
+            </AnimatePresence>
+
+            <div className="flex items-center gap-1.5" aria-hidden>
+              {offices.map((office, i) => (
+                <span
+                  key={office.country}
+                  className={cn(
+                    'h-1 rounded-full transition-all duration-300',
+                    i === activeIndex ? 'w-6 bg-accent-on-ink' : 'w-1.5 bg-white/20'
+                  )}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Wide layout (lg+): country list left, map center, country
+              list right, with a leader line drawn to the active item. */}
+          <div
+            ref={gridRef}
+            className="relative hidden items-center gap-6 lg:grid lg:grid-cols-[180px_1fr_180px]"
+          >
+
+            <CountryList
+              items={leftOffices}
+              activeCountry={active?.country}
+              align="left"
+              registerRef={registerRef}
+            />
+
+            <div className="px-6">
+              <div ref={mapBoxRef} className="relative mx-auto aspect-[1761/893] w-full max-w-[560px]">
+                <Image
+                  src="/map.png"
+                  alt="World map showing Al Quba Investment's office locations"
+                  fill
+                  sizes="40vw"
+                  className="object-contain"
+                  priority={false}
+                />
+
                 <AnimatePresence mode="wait">
                   {active && (
                     <motion.span
@@ -255,52 +312,34 @@ export function GlobalPresence() {
                     </motion.span>
                   )}
                 </AnimatePresence>
-              ) : (
-                /* Mobile: no scroll-jacked pin to cycle through one dot at
-                   a time, so all eight offices are marked at once — a
-                   clearer, fully "visible" map instead of one flickering
-                   marker as the page scrolls past. */
-                offices.map((office) => (
-                  <span
-                    key={office.country}
-                    className="absolute -translate-x-1/2 -translate-y-1/2"
-                    style={{ left: `${office.x}%`, top: `${office.y}%` }}
-                  >
-                    <span className="relative flex items-center justify-center">
-                      <span className="size-2.5 rounded-full bg-[#C9A96E] ring-2 ring-ink" />
-                    </span>
-                  </span>
-                ))
-              )}
+              </div>
             </div>
+
+            <CountryList
+              items={rightOffices}
+              activeCountry={active?.country}
+              align="right"
+              registerRef={registerRef}
+            />
+
+            {/* Connector line from the dot straight to the highlighted
+                country name in whichever list it lives in. */}
+            <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
+              {linePath && (
+                <path
+                  d={linePath}
+                  fill="none"
+                  stroke="#F7F6F2"
+                  strokeWidth={1}
+                  strokeOpacity={0.6}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              )}
+            </svg>
+
           </div>
-
-          <CountryList
-            items={rightOffices}
-            activeCountry={active?.country}
-            align="right"
-            isDesktop={isDesktop}
-            registerRef={registerRef}
-          />
-
-          {/* Connector line from the dot straight to the highlighted
-              country name in whichever list it lives in. */}
-          <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
-            {linePath && (
-              <path
-                d={linePath}
-                fill="none"
-                stroke="#F7F6F2"
-                strokeWidth={1}
-                strokeOpacity={0.6}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            )}
-          </svg>
-
         </div>
-      </div>
       </section>
     </div>
   )

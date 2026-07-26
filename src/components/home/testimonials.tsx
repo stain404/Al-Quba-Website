@@ -75,7 +75,20 @@ export function Testimonials() {
         <FadeIn
           className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
         >
+          {/* Forced ltr: the -50% translateX loop technique relies on the
+              track's untransformed rest position being flush with the
+              left edge, overflowing to the right, which is only true in
+              ltr. Under the page's rtl direction (Arabic), a `width:
+              max-content` block instead sits flush against the RIGHT edge
+              and overflows left, so the same leftward -50% shift drags it
+              straight past its own content into empty space instead of
+              revealing the duplicate copy — the marquee would go blank
+              then pop back. Isolating this track as ltr keeps the loop
+              math correct regardless of page direction; each card's own
+              Arabic text still renders correctly (the browser's bidi
+              algorithm handles that independently of this wrapper). */}
           <div
+            dir="ltr"
             className={cn(
               'flex w-max gap-6',
               !prefersReduced && 'animate-marquee group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]'

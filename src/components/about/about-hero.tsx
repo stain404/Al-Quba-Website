@@ -60,14 +60,12 @@ export function AboutHero() {
       contained={false}
       className="relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center"
     >
-      {/* Below `sm`, a full-height (very tall/narrow) mobile viewport
-          forced this landscape video to cover it at ~4x zoom, leaving
-          only a sliver of width visible. Instead, the video now sits in
-          its own horizontal band (aspect-[3/2] — close to the footage's
-          own ratio, so only mild cropping) stacked above the text on
-          mobile, and switches back to the full-bleed absolute cover
-          from `sm` up, matching the desktop look exactly as before. */}
-      <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden bg-[#1A140F] sm:absolute sm:inset-0 sm:aspect-auto">
+      {/* Full-bleed background video on every breakpoint, text overlaid on
+          top — on mobile this crops the (landscape) footage tighter than
+          desktop, which is fine here: keeping the headline/copy sitting
+          on the banner like the rest of the page matters more than
+          showing the full frame of the video. */}
+      <div className="absolute inset-0 overflow-hidden bg-[#1A140F]">
         <video
           ref={videoRef}
           className="absolute inset-0 size-full object-cover"
