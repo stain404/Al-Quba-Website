@@ -209,7 +209,7 @@ const copy: Record<'en' | 'ar', Copy> = {
     emptyHeading: 'No Current Openings',
     emptyBody: "We're always interested in exceptional talent. Submit your CV and we'll contact you when suitable opportunities become available.",
     emptyCta: 'Submit Your CV',
-    emptyMailSubject: 'Open Application — CV Submission',
+    emptyMailSubject: 'Open Application: CV Submission',
   },
   ar: {
     eyebrow: 'الفرص المتاحة حاليًا',
@@ -234,7 +234,7 @@ const copy: Record<'en' | 'ar', Copy> = {
     emptyHeading: 'لا توجد وظائف شاغرة حاليًا',
     emptyBody: 'نحن دائمًا مهتمون بالكفاءات المتميزة. أرسل سيرتك الذاتية وسنتواصل معك عند توفر فرص مناسبة.',
     emptyCta: 'أرسل سيرتك الذاتية',
-    emptyMailSubject: 'طلب توظيف مفتوح — إرسال السيرة الذاتية',
+    emptyMailSubject: 'طلب توظيف مفتوح: إرسال السيرة الذاتية',
   },
 }
 

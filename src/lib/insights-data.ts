@@ -63,7 +63,7 @@ export const featuredArticle: Article = {
   slug: 'uae-investment-landscape-2026',
   title: 'The UAE Investment Landscape 2026: Opportunities Across Trade, Real Estate & Private Markets',
   excerpt:
-    'A comprehensive look at where capital is moving across the UAE in 2026 — from trade and logistics to real estate and private markets — and what disciplined investors should be watching.',
+    'A comprehensive look at where capital is moving across the UAE in 2026, from trade and logistics to real estate and private markets, and what disciplined investors should be watching.',
   category: 'Market Insights',
   date: 'July 2026',
   readTime: '9 min read',
@@ -73,7 +73,7 @@ export const featuredArticle: Article = {
   body: [
     {
       type: 'paragraph',
-      text: 'The UAE has spent the last decade building the infrastructure, regulatory clarity, and global connectivity that make it one of the more resilient investment destinations in the region. 2026 is shaping up to be a year of consolidation rather than a single dramatic shift — capital is flowing steadily into trade, logistics, real estate, and increasingly, private markets. For investors, the opportunity lies less in timing a single trend and more in understanding how these sectors reinforce one another.',
+      text: 'The UAE has spent the last decade building the infrastructure, regulatory clarity, and global connectivity that make it one of the more resilient investment destinations in the region. 2026 is shaping up to be a year of consolidation rather than a single dramatic shift. Capital is flowing steadily into trade, logistics, real estate, and increasingly, private markets. For investors, the opportunity lies less in timing a single trend and more in understanding how these sectors reinforce one another.',
     },
     { type: 'heading', level: 2, text: 'Trade and Logistics Remain the Backbone' },
     {
@@ -83,12 +83,12 @@ export const featuredArticle: Article = {
     { type: 'heading', level: 2, text: 'Real Estate Is Maturing, Not Just Growing' },
     {
       type: 'paragraph',
-      text: 'Residential demand has been well documented, but the more interesting story for 2026 is the maturing of commercial and mixed-use real estate, where institutional-grade governance, transparent title structures, and long-lease income profiles are becoming the differentiators — not just headline price appreciation.',
+      text: 'Residential demand has been well documented, but the more interesting story for 2026 is the maturing of commercial and mixed-use real estate, where institutional-grade governance, transparent title structures, and long-lease income profiles are becoming the differentiators, not just headline price appreciation.',
     },
     { type: 'heading', level: 3, text: 'Where Institutional Capital Is Looking' },
     {
       type: 'paragraph',
-      text: 'Structured vehicles, income-generating assets, and sectors with clear regulatory oversight are attracting a growing share of institutional and family office capital — a trend that favors disciplined, governance-first investment approaches over speculative positioning.',
+      text: 'Structured vehicles, income-generating assets, and sectors with clear regulatory oversight are attracting a growing share of institutional and family office capital, a trend that favors disciplined, governance-first investment approaches over speculative positioning.',
     },
     {
       type: 'image',
@@ -99,7 +99,7 @@ export const featuredArticle: Article = {
     { type: 'heading', level: 2, text: 'Private Markets Are Opening Up' },
     {
       type: 'paragraph',
-      text: 'As public market valuations globally remain sensitive to rate expectations, private markets — direct trade finance, structured pools, and real-asset vehicles — offer investors a way to access real economic activity with less correlation to daily market sentiment.',
+      text: 'As public market valuations globally remain sensitive to rate expectations, private markets (direct trade finance, structured pools, and real-asset vehicles) offer investors a way to access real economic activity with less correlation to daily market sentiment.',
     },
     { type: 'heading', level: 2, text: 'Conclusion' },
     {
@@ -135,16 +135,16 @@ export const articles: Article[] = [
       { type: 'heading', level: 2, text: 'A Broader Base of Economic Activity' },
       {
         type: 'paragraph',
-        text: "Trade, tourism, logistics, and financial services are together contributing to a wider revenue base for the emirate — one less sensitive to any single sector's cycle than it was a decade ago.",
+        text: "Trade, tourism, logistics, and financial services are together contributing to a wider revenue base for the emirate, one less sensitive to any single sector's cycle than it was a decade ago.",
       },
       { type: 'heading', level: 2, text: 'Capital Is Getting More Selective' },
       {
         type: 'paragraph',
-        text: 'In a maturing market, investors are increasingly favoring transparency, regulatory clarity, and structured governance over speculative positioning — a shift that rewards patient, disciplined capital.',
+        text: 'In a maturing market, investors are increasingly favoring transparency, regulatory clarity, and structured governance over speculative positioning, a shift that rewards patient, disciplined capital.',
       },
       {
         type: 'paragraph',
-        text: "For long-term investors, the takeaway isn't a single hot sector — it's the growing depth and maturity of the market itself.",
+        text: "For long-term investors, the takeaway isn't a single hot sector. It's the growing depth and maturity of the market itself.",
       },
     ],
     keyTakeaways: [
@@ -166,12 +166,12 @@ export const articles: Article[] = [
     body: [
       {
         type: 'paragraph',
-        text: "The GCC's economic diversification agenda has moved from policy announcements to visible, on-the-ground activity — new sectors, new capital, and new categories of investor interest.",
+        text: "The GCC's economic diversification agenda has moved from policy announcements to visible, on-the-ground activity: new sectors, new capital, and new categories of investor interest.",
       },
       { type: 'heading', level: 2, text: 'A Region Diversifying in Parallel' },
       {
         type: 'paragraph',
-        text: 'Each Gulf economy is pursuing its own diversification path — logistics, tourism, technology, manufacturing — while sharing common enablers: currency stability, deep infrastructure investment, and growing intra-regional trade.',
+        text: 'Each Gulf economy is pursuing its own diversification path (logistics, tourism, technology, manufacturing) while sharing common enablers: currency stability, deep infrastructure investment, and growing intra-regional trade.',
       },
       { type: 'heading', level: 2, text: 'What This Means for Foreign Capital' },
       {
@@ -180,7 +180,7 @@ export const articles: Article[] = [
       },
       {
         type: 'paragraph',
-        text: "For global investors, the opportunity is in recognizing that the region's story is no longer one story — it's several, each with its own risk and return profile.",
+        text: "For global investors, the opportunity is in recognizing that the region's story is no longer one story. It's several, each with its own risk and return profile.",
       },
     ],
     keyTakeaways: [
@@ -212,7 +212,7 @@ export const articles: Article[] = [
       { type: 'heading', level: 2, text: 'A Trusted Node in a Diversifying Supply Chain' },
       {
         type: 'paragraph',
-        text: 'As global supply chains reduce reliance on single-source manufacturing, more trade is being routed through diversified, trusted hubs — Dubai chief among them.',
+        text: 'As global supply chains reduce reliance on single-source manufacturing, more trade is being routed through diversified, trusted hubs, Dubai chief among them.',
       },
       {
         type: 'paragraph',
@@ -310,7 +310,7 @@ export const articles: Article[] = [
     body: [
       {
         type: 'paragraph',
-        text: "Residential and commercial property are often discussed as if they're interchangeable asset classes — in practice, they behave quite differently, and the right allocation depends heavily on an investor's objectives.",
+        text: "Residential and commercial property are often discussed as if they're interchangeable asset classes. In practice, they behave quite differently, and the right allocation depends heavily on an investor's objectives.",
       },
       { type: 'heading', level: 2, text: 'Residential: Liquidity and Familiarity' },
       {
@@ -324,7 +324,7 @@ export const articles: Article[] = [
       },
       {
         type: 'paragraph',
-        text: 'Rather than choosing one over the other, disciplined investors typically hold both — residential for liquidity and optionality, commercial for income stability — sized to their broader portfolio objectives.',
+        text: 'Rather than choosing one over the other, disciplined investors typically hold both (residential for liquidity and optionality, commercial for income stability) sized to their broader portfolio objectives.',
       },
     ],
     keyTakeaways: [
@@ -356,11 +356,11 @@ export const articles: Article[] = [
       { type: 'heading', level: 2, text: 'Resilience Through Structure, Not Just Diversification' },
       {
         type: 'paragraph',
-        text: "The value of alternatives comes as much from how they're structured — governance, underwriting discipline, transparency — as from simply being a different asset class.",
+        text: "The value of alternatives comes as much from how they're structured (governance, underwriting discipline, transparency) as from simply being a different asset class.",
       },
       {
         type: 'paragraph',
-        text: "Resilience isn't just about holding different things — it's about holding well-structured things.",
+        text: "Resilience isn't just about holding different things. It's about holding well-structured things.",
       },
     ],
     keyTakeaways: [
@@ -387,7 +387,7 @@ export const articles: Article[] = [
       { type: 'heading', level: 2, text: "Return Without Understood Risk Isn't a Strategy" },
       {
         type: 'paragraph',
-        text: 'Understanding what specifically generates a return — and what could interrupt it — matters more than the headline number before committing capital.',
+        text: 'Understanding what specifically generates a return, and what could interrupt it, matters more than the headline number before committing capital.',
       },
       { type: 'heading', level: 2, text: 'Compounding Favors Consistency' },
       {
@@ -455,7 +455,7 @@ export const articles: Article[] = [
       },
       {
         type: 'paragraph',
-        text: 'Infrastructure investment — including transportation, utilities, and smart city initiatives — enhances property values while improving overall economic competitiveness.',
+        text: 'Infrastructure investment (including transportation, utilities, and smart city initiatives) enhances property values while improving overall economic competitiveness.',
       },
       {
         type: 'paragraph',
@@ -699,11 +699,11 @@ const articleTranslations: Record<string, ArticleTranslation> = {
   'uae-investment-landscape-2026': {
     title: 'المشهد الاستثماري في الإمارات 2026: فرص عبر التجارة والعقارات والأسواق الخاصة',
     excerpt:
-      'نظرة شاملة على وجهات تدفق رأس المال في دولة الإمارات خلال عام 2026 — من التجارة والخدمات اللوجستية إلى العقارات والأسواق الخاصة — وما ينبغي للمستثمرين المنضبطين مراقبته.',
+      'نظرة شاملة على وجهات تدفق رأس المال في دولة الإمارات خلال عام 2026، من التجارة والخدمات اللوجستية إلى العقارات والأسواق الخاصة، وما ينبغي للمستثمرين المنضبطين مراقبته.',
     body: [
       {
         type: 'paragraph',
-        text: 'أمضت دولة الإمارات العقد الماضي في بناء البنية التحتية، والوضوح التنظيمي، والاتصال العالمي التي تجعلها واحدة من أكثر الوجهات الاستثمارية مرونة في المنطقة. يتشكل عام 2026 ليكون عام توطيد أكثر منه تحولًا دراميًا واحدًا — إذ يتدفق رأس المال باطراد نحو التجارة، والخدمات اللوجستية، والعقارات، وبشكل متزايد، الأسواق الخاصة. وبالنسبة للمستثمرين، لا تكمن الفرصة في توقيت اتجاه واحد بقدر ما تكمن في فهم كيفية تعزيز هذه القطاعات لبعضها البعض.',
+        text: 'أمضت دولة الإمارات العقد الماضي في بناء البنية التحتية، والوضوح التنظيمي، والاتصال العالمي التي تجعلها واحدة من أكثر الوجهات الاستثمارية مرونة في المنطقة. يتشكل عام 2026 ليكون عام توطيد أكثر منه تحولًا دراميًا واحدًا. إذ يتدفق رأس المال باطراد نحو التجارة، والخدمات اللوجستية، والعقارات، وبشكل متزايد، الأسواق الخاصة. وبالنسبة للمستثمرين، لا تكمن الفرصة في توقيت اتجاه واحد بقدر ما تكمن في فهم كيفية تعزيز هذه القطاعات لبعضها البعض.',
       },
       { type: 'heading', level: 2, text: 'التجارة والخدمات اللوجستية تظل العمود الفقري' },
       {
@@ -713,12 +713,12 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       { type: 'heading', level: 2, text: 'العقارات في طور النضج، لا مجرد النمو' },
       {
         type: 'paragraph',
-        text: 'الطلب السكني موثّق جيدًا، لكن القصة الأكثر إثارة للاهتمام في عام 2026 هي نضج القطاع العقاري التجاري والمتعدد الاستخدامات، حيث أصبحت الحوكمة على مستوى المؤسسات، وهياكل الملكية الشفافة، ومصادر الدخل القائمة على عقود الإيجار الطويلة هي العوامل المميزة — وليس فقط ارتفاع الأسعار الظاهري.',
+        text: 'الطلب السكني موثّق جيدًا، لكن القصة الأكثر إثارة للاهتمام في عام 2026 هي نضج القطاع العقاري التجاري والمتعدد الاستخدامات، حيث أصبحت الحوكمة على مستوى المؤسسات، وهياكل الملكية الشفافة، ومصادر الدخل القائمة على عقود الإيجار الطويلة هي العوامل المميزة، وليس فقط ارتفاع الأسعار الظاهري.',
       },
       { type: 'heading', level: 3, text: 'أين يتجه رأس المال المؤسسي' },
       {
         type: 'paragraph',
-        text: 'تجتذب الأدوات المهيكلة، والأصول المدرّة للدخل، والقطاعات ذات الرقابة التنظيمية الواضحة حصة متنامية من رأس مال المؤسسات ومكاتب العائلات — وهو اتجاه يفضّل نُهج الاستثمار المنضبطة القائمة على الحوكمة على المراكز المضاربية.',
+        text: 'تجتذب الأدوات المهيكلة، والأصول المدرّة للدخل، والقطاعات ذات الرقابة التنظيمية الواضحة حصة متنامية من رأس مال المؤسسات ومكاتب العائلات، وهو اتجاه يفضّل نُهج الاستثمار المنضبطة القائمة على الحوكمة على المراكز المضاربية.',
       },
       {
         type: 'image',
@@ -729,7 +729,7 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       { type: 'heading', level: 2, text: 'الأسواق الخاصة تنفتح أكثر' },
       {
         type: 'paragraph',
-        text: 'بينما تظل تقييمات الأسواق العامة عالميًا حساسة لتوقعات أسعار الفائدة، توفر الأسواق الخاصة — التمويل التجاري المباشر، والمجمعات المهيكلة، وأدوات الأصول العينية — للمستثمرين وسيلة للوصول إلى نشاط اقتصادي حقيقي بارتباط أقل بمعنويات السوق اليومية.',
+        text: 'بينما تظل تقييمات الأسواق العامة عالميًا حساسة لتوقعات أسعار الفائدة، توفر الأسواق الخاصة (التمويل التجاري المباشر، والمجمعات المهيكلة، وأدوات الأصول العينية) للمستثمرين وسيلة للوصول إلى نشاط اقتصادي حقيقي بارتباط أقل بمعنويات السوق اليومية.',
       },
       { type: 'heading', level: 2, text: 'الخلاصة' },
       {
@@ -755,16 +755,16 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       { type: 'heading', level: 2, text: 'قاعدة أوسع من النشاط الاقتصادي' },
       {
         type: 'paragraph',
-        text: 'تُسهم التجارة والسياحة والخدمات اللوجستية والخدمات المالية معًا في توسيع قاعدة إيرادات الإمارة — قاعدة أقل حساسية لدورة أي قطاع بمفرده مقارنة بما كانت عليه قبل عقد من الزمن.',
+        text: 'تُسهم التجارة والسياحة والخدمات اللوجستية والخدمات المالية معًا في توسيع قاعدة إيرادات الإمارة، قاعدة أقل حساسية لدورة أي قطاع بمفرده مقارنة بما كانت عليه قبل عقد من الزمن.',
       },
       { type: 'heading', level: 2, text: 'رأس المال يزداد انتقائية' },
       {
         type: 'paragraph',
-        text: 'في سوق آخذة في النضج، يفضّل المستثمرون بشكل متزايد الشفافية والوضوح التنظيمي والحوكمة المهيكلة على المراكز المضاربية — وهو تحول يكافئ رأس المال الصبور والمنضبط.',
+        text: 'في سوق آخذة في النضج، يفضّل المستثمرون بشكل متزايد الشفافية والوضوح التنظيمي والحوكمة المهيكلة على المراكز المضاربية، وهو تحول يكافئ رأس المال الصبور والمنضبط.',
       },
       {
         type: 'paragraph',
-        text: 'بالنسبة للمستثمرين على المدى الطويل، لا تكمن الخلاصة في قطاع رائج واحد — بل في العمق والنضج المتناميين للسوق نفسها.',
+        text: 'بالنسبة للمستثمرين على المدى الطويل، لا تكمن الخلاصة في قطاع رائج واحد، بل في العمق والنضج المتناميين للسوق نفسها.',
       },
     ],
     keyTakeaways: [
@@ -779,12 +779,12 @@ const articleTranslations: Record<string, ArticleTranslation> = {
     body: [
       {
         type: 'paragraph',
-        text: 'انتقلت أجندة التنويع الاقتصادي لدول مجلس التعاون الخليجي من مجرد إعلانات سياسية إلى نشاط ملموس على أرض الواقع — قطاعات جديدة، ورأس مال جديد، وفئات جديدة من اهتمام المستثمرين.',
+        text: 'انتقلت أجندة التنويع الاقتصادي لدول مجلس التعاون الخليجي من مجرد إعلانات سياسية إلى نشاط ملموس على أرض الواقع: قطاعات جديدة، ورأس مال جديد، وفئات جديدة من اهتمام المستثمرين.',
       },
       { type: 'heading', level: 2, text: 'منطقة تتنوع بشكل متوازٍ' },
       {
         type: 'paragraph',
-        text: 'يسلك كل اقتصاد خليجي مسار تنويعه الخاص — الخدمات اللوجستية، والسياحة، والتقنية، والتصنيع — مع مشاركته عوامل تمكين مشتركة: استقرار العملة، والاستثمار العميق في البنية التحتية، ونمو التجارة البينية الإقليمية.',
+        text: 'يسلك كل اقتصاد خليجي مسار تنويعه الخاص (الخدمات اللوجستية، والسياحة، والتقنية، والتصنيع) مع مشاركته عوامل تمكين مشتركة: استقرار العملة، والاستثمار العميق في البنية التحتية، ونمو التجارة البينية الإقليمية.',
       },
       { type: 'heading', level: 2, text: 'ماذا يعني هذا لرأس المال الأجنبي' },
       {
@@ -793,7 +793,7 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       },
       {
         type: 'paragraph',
-        text: 'بالنسبة للمستثمرين العالميين، تكمن الفرصة في إدراك أن قصة المنطقة لم تعد قصة واحدة — بل عدة قصص، لكل منها ملامح مخاطر وعائد خاصة بها.',
+        text: 'بالنسبة للمستثمرين العالميين، تكمن الفرصة في إدراك أن قصة المنطقة لم تعد قصة واحدة، بل عدة قصص، لكل منها ملامح مخاطر وعائد خاصة بها.',
       },
     ],
     keyTakeaways: [
@@ -818,7 +818,7 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       { type: 'heading', level: 2, text: 'عقدة موثوقة في سلسلة توريد آخذة في التنوع' },
       {
         type: 'paragraph',
-        text: 'مع تقليص سلاسل التوريد العالمية اعتمادها على التصنيع من مصدر واحد، يُوجَّه المزيد من التجارة عبر مراكز متنوعة وموثوقة — وفي مقدمتها دبي.',
+        text: 'مع تقليص سلاسل التوريد العالمية اعتمادها على التصنيع من مصدر واحد، يُوجَّه المزيد من التجارة عبر مراكز متنوعة وموثوقة، وفي مقدمتها دبي.',
       },
       {
         type: 'paragraph',
@@ -895,7 +895,7 @@ const articleTranslations: Record<string, ArticleTranslation> = {
     body: [
       {
         type: 'paragraph',
-        text: 'كثيرًا ما يُنظر إلى العقارات السكنية والتجارية على أنها فئات أصول قابلة للتبادل — لكن في الواقع، يتصرف كل منهما بشكل مختلف تمامًا، ويعتمد التوزيع الصحيح إلى حد كبير على أهداف المستثمر.',
+        text: 'كثيرًا ما يُنظر إلى العقارات السكنية والتجارية على أنها فئات أصول قابلة للتبادل. لكن في الواقع، يتصرف كل منهما بشكل مختلف تمامًا، ويعتمد التوزيع الصحيح إلى حد كبير على أهداف المستثمر.',
       },
       { type: 'heading', level: 2, text: 'السكني: السيولة والألفة' },
       {
@@ -909,7 +909,7 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       },
       {
         type: 'paragraph',
-        text: 'بدلًا من الاختيار بين الاثنين، يحرص المستثمرون المنضبطون عادةً على امتلاك كليهما — السكني من أجل السيولة والمرونة، والتجاري من أجل استقرار الدخل — بأحجام تتناسب مع أهداف محفظتهم الأشمل.',
+        text: 'بدلًا من الاختيار بين الاثنين، يحرص المستثمرون المنضبطون عادةً على امتلاك كليهما (السكني من أجل السيولة والمرونة، والتجاري من أجل استقرار الدخل) بأحجام تتناسب مع أهداف محفظتهم الأشمل.',
       },
     ],
     keyTakeaways: [
@@ -934,11 +934,11 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       { type: 'heading', level: 2, text: 'المرونة من خلال الهيكلة، لا التنويع فقط' },
       {
         type: 'paragraph',
-        text: 'تنبع قيمة الاستثمارات البديلة بقدر كبير من كيفية هيكلتها — الحوكمة، وانضباط الاكتتاب، والشفافية — بقدر ما تنبع من كونها فئة أصول مختلفة فحسب.',
+        text: 'تنبع قيمة الاستثمارات البديلة بقدر كبير من كيفية هيكلتها (الحوكمة، وانضباط الاكتتاب، والشفافية) بقدر ما تنبع من كونها فئة أصول مختلفة فحسب.',
       },
       {
         type: 'paragraph',
-        text: 'لا تتعلق المرونة بامتلاك أشياء مختلفة فحسب — بل بامتلاك أشياء جيدة الهيكلة.',
+        text: 'لا تتعلق المرونة بامتلاك أشياء مختلفة فحسب، بل بامتلاك أشياء جيدة الهيكلة.',
       },
     ],
     keyTakeaways: [
@@ -949,7 +949,7 @@ const articleTranslations: Record<string, ArticleTranslation> = {
   },
   'risk-return-long-term-wealth-creation': {
     title: 'فهم المخاطر والعائد وبناء الثروة على المدى الطويل',
-    excerpt: 'نظرة واقعية على كيفية دفع الإدارة المنضبطة للمخاطر — لا مطاردة العوائد — لبناء الثروة على المدى الطويل.',
+    excerpt: 'نظرة واقعية على كيفية دفع الإدارة المنضبطة للمخاطر، لا مطاردة العوائد، لبناء الثروة على المدى الطويل.',
     body: [
       {
         type: 'paragraph',
@@ -958,7 +958,7 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       { type: 'heading', level: 2, text: 'العائد دون فهم المخاطر ليس استراتيجية' },
       {
         type: 'paragraph',
-        text: 'فهم ما الذي يولّد العائد تحديدًا — وما الذي قد يعطّله — أهم من الرقم الظاهري قبل الالتزام برأس المال.',
+        text: 'فهم ما الذي يولّد العائد تحديدًا، وما الذي قد يعطّله، أهم من الرقم الظاهري قبل الالتزام برأس المال.',
       },
       { type: 'heading', level: 2, text: 'التراكم يفضّل الاتساق' },
       {
@@ -1018,7 +1018,7 @@ const articleTranslations: Record<string, ArticleTranslation> = {
       },
       {
         type: 'paragraph',
-        text: 'يعزز الاستثمار في البنية التحتية — بما في ذلك النقل والمرافق ومبادرات المدن الذكية — قيمة العقارات مع تحسين التنافسية الاقتصادية الإجمالية.',
+        text: 'يعزز الاستثمار في البنية التحتية (بما في ذلك النقل والمرافق ومبادرات المدن الذكية) قيمة العقارات مع تحسين التنافسية الاقتصادية الإجمالية.',
       },
       {
         type: 'paragraph',

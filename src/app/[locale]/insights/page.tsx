@@ -18,12 +18,12 @@ const metadataCopy = {
   en: {
     title: 'Insights',
     description:
-      'Commentary on trade finance, structured investing, and the markets Al Quba Investment operates in — written by our investment team.',
+      'Commentary on trade finance, structured investing, and the markets Al Quba Investment operates in, written by our investment team.',
   },
   ar: {
     title: 'الرؤى الاستثمارية',
     description:
-      'تعليقات حول التمويل التجاري، والاستثمار المهيكل، والأسواق التي تعمل فيها القبا للاستثمار — بقلم فريق الاستثمار لدينا.',
+      'تعليقات حول التمويل التجاري، والاستثمار المهيكل، والأسواق التي تعمل فيها القبا للاستثمار، بقلم فريق الاستثمار لدينا.',
   },
 } as const
 

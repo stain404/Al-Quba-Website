@@ -270,7 +270,7 @@ export const pools: Pool[] = [
     ],
     steps: [
       { title: 'Operator Review', description: 'Operators are assessed on booking volume, revenue history, and confirmed forward reservations.' },
-      { title: 'Facility Deployment', description: 'Pool capital funds pre-season working capital — fleet leasing, staffing, and fuel reserves.' },
+      { title: 'Facility Deployment', description: 'Pool capital funds pre-season working capital: fleet leasing, staffing, and fuel reserves.' },
       { title: 'Peak Season Operation', description: 'Operators run their peak-season schedule against confirmed bookings.' },
       { title: 'Revenue Sweep & Repayment', description: 'A portion of booking revenue is swept to the facility throughout the season until repaid in full.' },
     ],
@@ -429,7 +429,7 @@ const poolTranslations: Record<string, PoolTranslation> = {
     ],
     steps: [
       { title: 'مراجعة المشغل', description: 'يتم تقييم المشغلين بناءً على حجم الحجوزات، وسجل الإيرادات، والحجوزات المستقبلية المؤكدة.' },
-      { title: 'نشر التسهيل', description: 'يموّل رأس مال الصندوق رأس المال التشغيلي لما قبل الموسم — تأجير الأسطول، والتوظيف، واحتياطيات الوقود.' },
+      { title: 'نشر التسهيل', description: 'يموّل رأس مال الصندوق رأس المال التشغيلي لما قبل الموسم: تأجير الأسطول، والتوظيف، واحتياطيات الوقود.' },
       { title: 'تشغيل موسم الذروة', description: 'يدير المشغلون جدولهم في موسم الذروة مقابل حجوزات مؤكدة.' },
       { title: 'تحصيل الإيرادات والسداد', description: 'يُحوَّل جزء من إيرادات الحجوزات إلى التسهيل طوال الموسم حتى السداد الكامل.' },
     ],

@@ -65,7 +65,7 @@ export async function AboutPreview() {
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl shadow-lg">
               <Image
                 src="/office.png"
-                alt="Al Quba Investment — executive office"
+                alt="Al Quba Investment executive office"
                 fill
                 className="object-cover"
                 sizes="(min-width: 1024px) 60vw, 100vw"

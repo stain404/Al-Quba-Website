@@ -3,8 +3,8 @@ import { SectionContainer } from '@/components/layout/section-container'
 import { FadeIn } from '@/components/motion/reveal'
 
 const copy = {
-  en: { title: 'Al Quba Investment — Dubai office location' },
-  ar: { title: 'القبا للاستثمار — موقع مكتب دبي' },
+  en: { title: 'Al Quba Investment, Dubai office location' },
+  ar: { title: 'القبا للاستثمار، موقع مكتب دبي' },
 } as const
 
 /**

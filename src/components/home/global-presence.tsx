@@ -41,12 +41,12 @@ const headingCopy = {
   en: {
     eyebrow: 'Global Presence',
     title: 'Eight countries. One trade network.',
-    description: 'Our operating footprint follows the physical trade lanes our capital moves through — not a marketing map.',
+    description: 'Our operating footprint follows the physical trade lanes our capital moves through, not a marketing map.',
   },
   ar: {
     eyebrow: 'الحضور العالمي',
     title: 'ثماني دول. شبكة تجارية واحدة.',
-    description: 'يتبع نطاق عملياتنا ممرات التجارة الفعلية التي يتحرك عبرها رأس مالنا — لا خريطة تسويقية.',
+    description: 'يتبع نطاق عملياتنا ممرات التجارة الفعلية التي يتحرك عبرها رأس مالنا، لا خريطة تسويقية.',
   },
 } as const
 

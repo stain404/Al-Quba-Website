@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 
   return {
     metadataBase: new URL(siteConfig.url),
-    title: { default: siteConfig.title, template: `%s — ${siteConfig.name}` },
+    title: { default: siteConfig.title, template: `%s | ${siteConfig.name}` },
     description: siteConfig.description,
     keywords: [
       'Al Quba Investment',

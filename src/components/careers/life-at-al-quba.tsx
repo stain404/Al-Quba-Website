@@ -8,7 +8,7 @@ const highlights = [
   { icon: BookOpen, label: 'Continuous Learning', desc: 'Structured training, mentorship, and knowledge-sharing at every level.' },
   { icon: BarChart2, label: 'Career Development', desc: 'Clear progression paths and performance frameworks that reward results.' },
   { icon: Globe2, label: 'Diverse Workforce', desc: 'A multinational team bringing perspectives from across the globe.' },
-  { icon: Clock, label: 'Long-Term Opportunities', desc: 'We invest in our people the same way we invest capital — for the long run.' },
+  { icon: Clock, label: 'Long-Term Opportunities', desc: 'We invest in our people the same way we invest capital: for the long run.' },
 ]
 
 export function LifeAtAlQuba() {
@@ -41,7 +41,7 @@ export function LifeAtAlQuba() {
 
           <p className="max-w-measure text-body-lg leading-relaxed text-text-secondary">
             We're a firm that moves with intention. Every hire is deliberate, every promotion
-            earned. We don't hire for seats — we hire for roles that matter. Our people are
+            earned. We don't hire for seats. We hire for roles that matter. Our people are
             trusted to own their work, collaborate openly, and build careers that compound
             in the same way good investments do: steadily, with discipline, over time.
           </p>

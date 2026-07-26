@@ -21,7 +21,7 @@ export function RecruitmentProcess() {
       <SectionHeading
         eyebrow="How We Hire"
         title="Our Recruitment Process"
-        description="A transparent, straightforward process designed to find the right fit — for you and for us."
+        description="A transparent, straightforward process designed to find the right fit, for you and for us."
       />
 
       <div className="mt-16 overflow-x-auto pb-4">

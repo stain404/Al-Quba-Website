@@ -26,7 +26,7 @@ export function buildMetadata({
    *  hero photo — while keeping every other metadata field consistent. */
   image?: string
 }): Metadata {
-  const fullTitle = isHome ? title : `${title} — ${siteConfig.name}`
+  const fullTitle = isHome ? title : `${title} | ${siteConfig.name}`
   const url = `${siteConfig.url}${path}`
   const ogImage = image ?? '/opengraph-image'
 

@@ -9,14 +9,14 @@ const copy = {
     heading: "Didn't Find the Right Role?",
     body: "We're always interested in meeting talented professionals who share our long-term vision. Submit your CV and we'll be in touch when a suitable opportunity arises.",
     cta: 'Submit Your CV',
-    mailSubject: 'Open Application — CV Submission',
+    mailSubject: 'Open Application: CV Submission',
   },
   ar: {
     eyebrow: 'طلب توظيف مفتوح',
     heading: 'لم تجد الدور المناسب؟',
     body: 'نحن دائمًا مهتمون بالتعرف على محترفين موهوبين يشاركوننا رؤيتنا طويلة الأمد. أرسل سيرتك الذاتية وسنتواصل معك عند توفر فرصة مناسبة.',
     cta: 'أرسل سيرتك الذاتية',
-    mailSubject: 'طلب توظيف مفتوح — إرسال السيرة الذاتية',
+    mailSubject: 'طلب توظيف مفتوح: إرسال السيرة الذاتية',
   },
 } as const
 

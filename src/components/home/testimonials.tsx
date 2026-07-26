@@ -23,7 +23,7 @@ const copy = {
     },
     individual: [
       { quote: 'What we value most is the transparency. You always know where your money is going and how it’s working.', name: 'Sidra Aydeed', role: 'Investor' },
-      { quote: 'Al Quba has consistently delivered on what they promised — the returns have been strong, and I always know exactly where my capital stands.', name: 'Basheer Ayathulla', role: 'Investor' },
+      { quote: 'Al Quba has consistently delivered on what they promised. The returns have been strong, and I always know exactly where my capital stands.', name: 'Basheer Ayathulla', role: 'Investor' },
       { quote: 'The level of service is what stands out most. Every question is answered directly, and the results have exceeded what I expected going in.', name: 'Ashraf Mavullah', role: 'Investor' },
     ] satisfies TestimonialItem[],
   },
@@ -39,7 +39,7 @@ const copy = {
     },
     individual: [
       { quote: 'أكثر ما نقدّره هو الشفافية. تعرف دائمًا إلى أين تذهب أموالك وكيف تعمل.', name: 'سدرة عيديد', role: 'مستثمرة' },
-      { quote: 'التزمت القبا دائمًا بما وعدت به — كانت العوائد قوية، وأعرف دائمًا بالضبط أين يقف رأس مالي.', name: 'بشير أياتالله', role: 'مستثمر' },
+      { quote: 'التزمت القبا دائمًا بما وعدت به. كانت العوائد قوية، وأعرف دائمًا بالضبط أين يقف رأس مالي.', name: 'بشير أياتالله', role: 'مستثمر' },
       { quote: 'أكثر ما يميزهم هو مستوى الخدمة. تتم الإجابة عن كل سؤال مباشرة، وتفوقت النتائج على ما توقعته في البداية.', name: 'أشرف مافولا', role: 'مستثمر' },
     ] satisfies TestimonialItem[],
   },

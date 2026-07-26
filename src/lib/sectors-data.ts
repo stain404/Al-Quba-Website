@@ -130,7 +130,7 @@ export const sectors: Sector[] = [
       heading: 'Driving Global Trade with Confidence',
       body: [
         "Al Quba Investment's Global Exports Division brings together international trade expertise, cross-border commerce capability, and durable buyer-supplier relationships to help businesses move products confidently across global markets.",
-        'Through reliable export operations and disciplined supply chain efficiency, the division supports market expansion for manufacturers, suppliers, and distributors — creating dependable trade corridors rather than one-off transactions.',
+        'Through reliable export operations and disciplined supply chain efficiency, the division supports market expansion for manufacturers, suppliers, and distributors, creating dependable trade corridors rather than one-off transactions.',
       ],
     },
     caseStudyHeading: {
@@ -170,7 +170,7 @@ export const sectors: Sector[] = [
     whyItMatters: {
       heading: 'Why Al Quba Invests in Global Exports',
       body: [
-        "Global trade continues to grow as businesses seek reliable partners capable of connecting supply with demand across borders. Al Quba Investment invests in this division because it combines growing international demand with genuinely diversified exposure across global markets — not a single corridor or category.",
+        "Global trade continues to grow as businesses seek reliable partners capable of connecting supply with demand across borders. Al Quba Investment invests in this division because it combines growing international demand with genuinely diversified exposure across global markets, not a single corridor or category.",
         'Long-term commercial relationships, built over years rather than single transactions, give the division the operational resilience to sustain trade growth through changing market conditions, while ongoing international expansion continues to open new opportunities for our investors and trading partners alike.',
       ],
     },
@@ -191,7 +191,7 @@ export const sectors: Sector[] = [
         eyebrow: 'Industry Outlook',
         title: 'Where global trade is headed',
         description:
-          'International trade continues to expand through emerging markets, digital trade enablement, and increasing supply chain diversification — creating long-term opportunities for investors positioned in genuinely global trade networks.',
+          'International trade continues to expand through emerging markets, digital trade enablement, and increasing supply chain diversification, creating long-term opportunities for investors positioned in genuinely global trade networks.',
       },
       items: [
         { icon: TrendingUp, title: 'Growing Markets', description: 'Expanding demand across established and emerging international markets.' },
@@ -418,7 +418,7 @@ export const sectors: Sector[] = [
       heading: 'Enabling Smarter Global Commerce',
       body: [
         "International trade is built on trusted relationships, efficient supply chains, and reliable market access. Al Quba Investment's Import & Export Division brings these elements together through its portfolio companies, creating opportunities for manufacturers, suppliers, distributors, and buyers to trade confidently across borders.",
-        'By combining traditional commercial trading with modern B2B digital commerce, the division supports businesses throughout the entire trade lifecycle—from sourcing products and identifying suppliers to facilitating procurement, distribution, and long-term commercial partnerships.',
+        'By combining traditional commercial trading with modern B2B digital commerce, the division supports businesses throughout the entire trade lifecycle, from sourcing products and identifying suppliers to facilitating procurement, distribution, and long-term commercial partnerships.',
       ],
     },
     caseStudyHeading: {
@@ -529,7 +529,7 @@ export const sectors: Sector[] = [
     overview: {
       heading: 'Creating Stronger Brands Through Innovation',
       body: [
-        "A strong brand is more than a logo—it's the foundation of business growth and long-term customer trust. Al Quba Investment's Brand Strategy Division helps organizations build compelling brand identities through creative thinking, digital experiences, and strategic communication.",
+        "A strong brand is more than a logo. It's the foundation of business growth and long-term customer trust. Al Quba Investment's Brand Strategy Division helps organizations build compelling brand identities through creative thinking, digital experiences, and strategic communication.",
         'By integrating branding, marketing, technology, and design, the division enables businesses to increase visibility, engage customers, and strengthen their competitive advantage in an evolving digital marketplace.',
       ],
     },
@@ -667,7 +667,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
       heading: 'قيادة التجارة العالمية بثقة',
       body: [
         'يجمع قطاع التصدير العالمي التابع لشركة القبا للاستثمار بين خبرة التجارة الدولية، والقدرة على التجارة العابرة للحدود، والعلاقات الراسخة بين المشترين والموردين لمساعدة الشركات على نقل منتجاتها بثقة عبر الأسواق العالمية.',
-        'من خلال عمليات تصدير موثوقة وكفاءة منضبطة في سلسلة الإمداد، يدعم القطاع توسع الأسواق للمصنّعين والموردين والموزعين — ما يخلق ممرات تجارية موثوقة بدلًا من صفقات لمرة واحدة.',
+        'من خلال عمليات تصدير موثوقة وكفاءة منضبطة في سلسلة الإمداد، يدعم القطاع توسع الأسواق للمصنّعين والموردين والموزعين، ما يخلق ممرات تجارية موثوقة بدلًا من صفقات لمرة واحدة.',
       ],
     },
     caseStudyHeading: { eyebrow: 'الشركة المميزة', title: 'شركة حبرون للتجارة العامة ذ.م.م' },
@@ -700,7 +700,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     whyItMatters: {
       heading: 'لماذا تستثمر القبا في التصدير العالمي',
       body: [
-        'تستمر التجارة العالمية في النمو مع سعي الشركات لشركاء موثوقين قادرين على ربط العرض بالطلب عبر الحدود. تستثمر القبا للاستثمار في هذا القطاع لأنه يجمع بين طلب دولي متنامٍ وتنوع حقيقي عبر الأسواق العالمية — وليس ممرًا أو فئة واحدة.',
+        'تستمر التجارة العالمية في النمو مع سعي الشركات لشركاء موثوقين قادرين على ربط العرض بالطلب عبر الحدود. تستثمر القبا للاستثمار في هذا القطاع لأنه يجمع بين طلب دولي متنامٍ وتنوع حقيقي عبر الأسواق العالمية، وليس ممرًا أو فئة واحدة.',
         'العلاقات التجارية طويلة الأمد، المبنية على مدى سنوات وليس على صفقة واحدة، تمنح القطاع المرونة التشغيلية اللازمة لاستدامة نمو التجارة عبر تغيّر ظروف السوق، بينما يستمر التوسع الدولي في فتح فرص جديدة لمستثمرينا وشركائنا التجاريين على حد سواء.',
       ],
     },
@@ -717,7 +717,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
       heading: {
         eyebrow: 'نظرة على القطاع',
         title: 'إلى أين تتجه التجارة العالمية',
-        description: 'تستمر التجارة الدولية في التوسع عبر الأسواق الناشئة، وتمكين التجارة الرقمية، وزيادة تنويع سلسلة الإمداد — ما يخلق فرصًا طويلة الأمد للمستثمرين المتمركزين في شبكات تجارة عالمية حقيقية.',
+        description: 'تستمر التجارة الدولية في التوسع عبر الأسواق الناشئة، وتمكين التجارة الرقمية، وزيادة تنويع سلسلة الإمداد، ما يخلق فرصًا طويلة الأمد للمستثمرين المتمركزين في شبكات تجارة عالمية حقيقية.',
       },
       items: [
         { title: 'أسواق متنامية', description: 'طلب متوسع عبر الأسواق الدولية الراسخة والناشئة.' },
@@ -891,7 +891,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
       heading: 'تمكين تجارة عالمية أذكى',
       body: [
         'تُبنى التجارة الدولية على علاقات موثوقة، وسلاسل إمداد فعّالة، ووصول موثوق للأسواق. يجمع قطاع الاستيراد والتصدير التابع لشركة القبا للاستثمار هذه العناصر من خلال شركاته التشغيلية، ما يخلق فرصًا للمصنّعين والموردين والموزعين والمشترين للتجارة بثقة عبر الحدود.',
-        'من خلال الجمع بين التجارة التجارية التقليدية والتجارة الرقمية الحديثة بين الشركات، يدعم القطاع الشركات طوال دورة التجارة الكاملة — من توريد المنتجات وتحديد الموردين إلى تسهيل الشراء والتوزيع والشراكات التجارية طويلة الأمد.',
+        'من خلال الجمع بين التجارة التجارية التقليدية والتجارة الرقمية الحديثة بين الشركات، يدعم القطاع الشركات طوال دورة التجارة الكاملة، من توريد المنتجات وتحديد الموردين إلى تسهيل الشراء والتوزيع والشراكات التجارية طويلة الأمد.',
       ],
     },
     caseStudyHeading: { eyebrow: 'شركاتنا التشغيلية', title: 'الشركات المميزة' },
@@ -972,7 +972,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     overview: {
       heading: 'خلق علامات تجارية أقوى من خلال الابتكار',
       body: [
-        'العلامة التجارية القوية أكثر من مجرد شعار — إنها أساس نمو الأعمال وثقة العملاء طويلة الأمد. يساعد قطاع استراتيجية العلامة التجارية التابع لشركة القبا للاستثمار المؤسسات على بناء هويات علامة تجارية مقنعة من خلال التفكير الإبداعي، والتجارب الرقمية، والتواصل الاستراتيجي.',
+        'العلامة التجارية القوية أكثر من مجرد شعار. إنها أساس نمو الأعمال وثقة العملاء طويلة الأمد. يساعد قطاع استراتيجية العلامة التجارية التابع لشركة القبا للاستثمار المؤسسات على بناء هويات علامة تجارية مقنعة من خلال التفكير الإبداعي، والتجارب الرقمية، والتواصل الاستراتيجي.',
         'من خلال دمج العلامة التجارية والتسويق والتقنية والتصميم، يمكّن القطاع الشركات من زيادة الظهور، وإشراك العملاء، وتعزيز ميزتها التنافسية في سوق رقمي متطور.',
       ],
     },

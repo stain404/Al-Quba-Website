@@ -23,7 +23,7 @@ const copy = {
         role: 'Founder & CEO',
         quote: 'Invest with Confidence, Backed by Trust.',
         message: [
-          'From designing ships as a Naval Architect to navigating the complexities of the Oil & Gas industry, my path has always been driven by growth, innovation, and the discipline to build things that last — a journey recognized early on with the UAE’s youngest Golden Visa award.',
+          'From designing ships as a Naval Architect to navigating the complexities of the Oil & Gas industry, my path has always been driven by growth, innovation, and the discipline to build things that last, a journey recognized early on with the UAE’s youngest Golden Visa award.',
           "Today, guiding Al Quba's diverse companies, my goal remains the same: to fuel success, create impact, and lead with integrity.",
         ],
         linkedin: 'https://linkedin.com/in/khasim-enoli-43211734',
@@ -39,7 +39,7 @@ const copy = {
         role: 'المؤسس والرئيس التنفيذي',
         quote: 'استثمر بثقة، مدعومًا بالثقة.',
         message: [
-          'من تصميم السفن كمهندس بحري، إلى التعامل مع تعقيدات قطاع النفط والغاز، كان مساري دائمًا مدفوعًا بالنمو والابتكار والانضباط اللازم لبناء أشياء تدوم — رحلة تم الاعتراف بها مبكرًا من خلال حصولي على أصغر تأشيرة ذهبية في الإمارات.',
+          'من تصميم السفن كمهندس بحري، إلى التعامل مع تعقيدات قطاع النفط والغاز، كان مساري دائمًا مدفوعًا بالنمو والابتكار والانضباط اللازم لبناء أشياء تدوم، رحلة تم الاعتراف بها مبكرًا من خلال حصولي على أصغر تأشيرة ذهبية في الإمارات.',
           'واليوم، وأنا أقود شركات القبا المتنوعة، يبقى هدفي كما هو: تحقيق النجاح، وخلق الأثر، والقيادة بنزاهة.',
         ],
         linkedin: 'https://linkedin.com/in/khasim-enoli-43211734',
@@ -125,7 +125,7 @@ export async function Leadership() {
                       </p>
                     ))}
                   </cite>
-                  <p className="mt-6 font-display text-heading-sm italic text-accent-ink">— {leader.name}</p>
+                  <p className="mt-6 font-display text-heading-sm italic text-accent-ink">{leader.name}</p>
                 </blockquote>
               </div>
             </div>

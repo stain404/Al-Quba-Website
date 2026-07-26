@@ -16,12 +16,12 @@ const metadataCopy = {
   en: {
     title: 'Careers',
     description:
-      'Join Al Quba Investment Group — a Dubai-headquartered investment firm building long-term value across global industries. Explore current openings and grow with us.',
+      'Join Al Quba Investment Group, a Dubai-headquartered investment firm building long-term value across global industries. Explore current openings and grow with us.',
   },
   ar: {
     title: 'الوظائف',
     description:
-      'انضم إلى مجموعة القبا للاستثمار — شركة استثمار مقرها دبي تبني قيمة طويلة الأمد عبر قطاعات عالمية متعددة. استكشف الوظائف الشاغرة وانمُ معنا.',
+      'انضم إلى مجموعة القبا للاستثمار، شركة استثمار مقرها دبي تبني قيمة طويلة الأمد عبر قطاعات عالمية متعددة. استكشف الوظائف الشاغرة وانمُ معنا.',
   },
 } as const
 

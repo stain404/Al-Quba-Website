@@ -12,12 +12,12 @@ const headingCopy = {
   en: {
     eyebrow: 'Structured Vehicles',
     title: 'Investment pools built around real trade cycles',
-    description: 'Each pool is collateralized against a physical trade cycle — not a market thesis — giving investors a defined entry, cycle length, and exit.',
+    description: 'Each pool is collateralized against a physical trade cycle, not a market thesis, giving investors a defined entry, cycle length, and exit.',
   },
   ar: {
     eyebrow: 'أدوات استثمارية منظمة',
     title: 'صناديق استثمارية مبنية على دورات تجارية حقيقية',
-    description: 'كل صندوق مضمون بدورة تجارية فعلية — لا برأي في اتجاه السوق — ما يمنح المستثمرين نقطة دخول محددة، ومدة دورة واضحة، ومخرجًا معلومًا.',
+    description: 'كل صندوق مضمون بدورة تجارية فعلية، لا برأي في اتجاه السوق، ما يمنح المستثمرين نقطة دخول محددة، ومدة دورة واضحة، ومخرجًا معلومًا.',
   },
 } as const
 

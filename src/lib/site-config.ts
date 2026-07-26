@@ -4,7 +4,7 @@ import type { Locale } from '@/i18n/routing'
 export const siteConfig = {
   name: 'Al Quba Investment',
   legalName: 'Al Quba Investment LLC',
-  title: 'Al Quba Investment LLC — Global Investment & Asset Management, Dubai',
+  title: 'Al Quba Investment LLC | Global Investment & Asset Management, Dubai',
   description:
     'Al Quba Investment is a Dubai-headquartered investment and asset management firm deploying long-term capital across global exports, infrastructure and contracting, logistics and supply chain, import-export, and brand strategy divisions on behalf of institutional investors and family offices.',
   url: 'https://www.alquba.com',

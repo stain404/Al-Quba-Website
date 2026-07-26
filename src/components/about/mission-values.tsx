@@ -13,7 +13,7 @@ const copy = {
     heading: 'Building Sustainable Value Through Strategic Investments',
     body: 'Al Quba Investment LLC is a diversified investment company headquartered in Dubai, focused on identifying and managing opportunities across trading, logistics, real estate, technology, and global commerce. We combine strategic thinking, disciplined capital management, and responsible governance to deliver sustainable long-term value for our investors and partners.',
     visionMission: [
-      { label: 'Vision', body: 'To be recognized as a disciplined, diversified investment house — one whose capital allocation decisions are judged not by market cycles, but by the durability of the value they create for investors, partners, and the economies we operate within, across every sector and market we enter.' },
+      { label: 'Vision', body: 'To be recognized as a disciplined, diversified investment house, one whose capital allocation decisions are judged not by market cycles, but by the durability of the value they create for investors, partners, and the economies we operate within, across every sector and market we enter.' },
       { label: 'Mission', body: 'We commit capital with discipline: rigorous underwriting, diversified exposure, and governance that holds regardless of market conditions. Our role is to identify real economic opportunity, structure it responsibly, and manage it with the same transparency and accountability our investors expect of their own capital.' },
     ],
   },
@@ -22,7 +22,7 @@ const copy = {
     heading: 'نبني قيمة مستدامة من خلال استثمارات استراتيجية',
     body: 'شركة القبا للاستثمار ذ.م.م. هي شركة استثمار متنوعة مقرها دبي، تركز على تحديد وإدارة الفرص عبر التجارة والخدمات اللوجستية والعقارات والتقنية والتجارة العالمية. نجمع بين التفكير الاستراتيجي، وإدارة رأس المال المنضبطة، والحوكمة المسؤولة لتحقيق قيمة مستدامة طويلة الأمد لمستثمرينا وشركائنا.',
     visionMission: [
-      { label: 'الرؤية', body: 'أن نكون بيتًا استثماريًا منضبطًا ومتنوعًا — تُقاس قرارات تخصيص رأس ماله ليس بدورات السوق، بل بمدى استدامة القيمة التي تخلقها للمستثمرين والشركاء والاقتصادات التي نعمل ضمنها، عبر كل قطاع وسوق ندخله.' },
+      { label: 'الرؤية', body: 'أن نكون بيتًا استثماريًا منضبطًا ومتنوعًا، تُقاس قرارات تخصيص رأس ماله ليس بدورات السوق، بل بمدى استدامة القيمة التي تخلقها للمستثمرين والشركاء والاقتصادات التي نعمل ضمنها، عبر كل قطاع وسوق ندخله.' },
       { label: 'المهمة', body: 'نلتزم برأس المال بانضباط: تحليل ائتماني صارم، وتعرض متنوع، وحوكمة تصمد أيًا كانت الظروف السوقية. دورنا هو تحديد الفرصة الاقتصادية الحقيقية، وهيكلتها بمسؤولية، وإدارتها بنفس الشفافية والمساءلة التي يتوقعها مستثمرونا لرأس مالهم الخاص.' },
     ],
   },
