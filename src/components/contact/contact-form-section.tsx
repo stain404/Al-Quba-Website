@@ -2,7 +2,6 @@ import { Mail, Phone, MapPin, MessageCircle, Clock } from 'lucide-react'
 import { getLocale } from 'next-intl/server'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
-import { Card } from '@/components/cards/card'
 import { ContactForm } from '@/components/forms/contact-form'
 import { FadeIn } from '@/components/motion/reveal'
 import { SocialLinks } from '@/components/ui/social-links'
@@ -83,10 +82,11 @@ const copy = {
 
 /**
  * Contact / Form Section.
- * Dark ink panel carrying the heading + a plain icon/label/value contact
- * list + social row, with the form itself sitting in a white elevated
- * card on top — replaces the earlier even two-column card-grid layout
- * with the client's requested "form floats over a dark panel" look.
+ * One unified rounded card floating on the page's plain white
+ * background — a blue (ink) panel on one side carrying the heading,
+ * icon/label/value contact list, and social row, with the form itself
+ * sitting in a white panel on the other side of the same card, not a
+ * full-bleed dark section.
  */
 export async function ContactFormSection() {
   const locale = (await getLocale()) as keyof typeof copy
@@ -94,9 +94,9 @@ export async function ContactFormSection() {
   const details = detailsByLocale[locale]
 
   return (
-    <SectionContainer surface="ink" spacing="lg">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
-        <FadeIn className="flex flex-col gap-10">
+    <SectionContainer surface="canvas" spacing="lg">
+      <FadeIn className="grid grid-cols-1 overflow-hidden rounded-3xl shadow-xl lg:grid-cols-[1fr_1.2fr]">
+        <div className="flex flex-col gap-10 bg-ink p-8 text-text-inverse sm:p-12">
           <div className="flex flex-col gap-4">
             <Eyebrow inverse>{c.eyebrow}</Eyebrow>
             <Heading as="h2" size="display-sm" inverse className="max-w-md">
@@ -140,17 +140,15 @@ export async function ContactFormSection() {
             <span className="text-caption uppercase tracking-wide text-text-inverse-muted">{c.followUs}</span>
             <SocialLinks />
           </div>
-        </FadeIn>
+        </div>
 
-        <FadeIn delay={0.08}>
-          <Card surface="canvas" padding="lg" className="rounded-2xl shadow-xl sm:p-10">
-            <Heading as="h2" size="heading-lg" className="mb-8">
-              {c.formHeading}
-            </Heading>
-            <ContactForm />
-          </Card>
-        </FadeIn>
-      </div>
+        <div className="flex flex-col justify-center bg-white p-8 sm:p-12">
+          <Heading as="h2" size="heading-lg" className="mb-8">
+            {c.formHeading}
+          </Heading>
+          <ContactForm />
+        </div>
+      </FadeIn>
     </SectionContainer>
   )
 }
