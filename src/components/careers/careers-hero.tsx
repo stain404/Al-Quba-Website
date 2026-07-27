@@ -54,7 +54,7 @@ export function CareersHero() {
       className="relative w-full overflow-hidden bg-[#1A140F] pt-32 pb-20 md:pt-40 md:pb-24"
     >
       <Image
-        src="/career.jpeg"
+        src="/careers.png"
         alt=""
         fill
         sizes="100vw"

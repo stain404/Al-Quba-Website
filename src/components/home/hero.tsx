@@ -140,6 +140,10 @@ export function Hero() {
           }
           transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
         />
+        {/* Subtle uniform black scrim over the whole banner for contrast,
+            layered under the bottom-heavy gradient below */}
+        <div className="absolute inset-0 bg-black/15" />
+
         {/* Scrim — subtle at the top so the video reads clearly, but
             deep enough behind the text block (bottom-anchored content)
             to keep the headline and copy legible over bright footage */}
