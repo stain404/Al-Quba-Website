@@ -59,7 +59,7 @@ export function CareersHero() {
         fill
         sizes="100vw"
         priority
-        className="object-cover"
+        className="object-cover object-[55%_center] md:object-center"
       />
       <div
         className="absolute inset-0 bg-gradient-to-r from-[#1A140F]/85 via-[#1A140F]/60 to-[#1A140F]/25"
