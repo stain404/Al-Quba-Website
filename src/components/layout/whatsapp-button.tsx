@@ -3,8 +3,8 @@
 import * as React from 'react'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { cn } from '@/lib/utils'
+import { WHATSAPP_NUMBER } from '@/lib/whatsapp'
 
-export const WHATSAPP_NUMBER = '971505762203'
 const DEFAULT_MESSAGE = "Hi, I'd like to know more about Al Quba Investment."
 
 /**

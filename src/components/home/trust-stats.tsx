@@ -12,7 +12,7 @@ const copy = {
       { label: 'Years of Industry Experience', value: 10, suffix: '+' },
       { label: 'Strategic Subsidiaries', value: 19 },
       { label: 'Investment Sectors', value: 5 },
-      { label: 'Countries Served', value: 4 },
+      { label: 'Countries Served', value: 8 },
     ] satisfies StatItem[],
   },
   ar: {
@@ -21,7 +21,7 @@ const copy = {
       { label: 'سنوات الخبرة في القطاع', value: 10, suffix: '+' },
       { label: 'شركات تابعة استراتيجية', value: 19 },
       { label: 'قطاعات استثمارية', value: 5 },
-      { label: 'دول نخدمها', value: 4 },
+      { label: 'دول نخدمها', value: 8 },
     ] satisfies StatItem[],
   },
 } as const

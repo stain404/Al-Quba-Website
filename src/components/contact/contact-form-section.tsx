@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { ContactForm } from '@/components/forms/contact-form'
 import { FadeIn } from '@/components/motion/reveal'
-import { WHATSAPP_NUMBER } from '@/components/layout/whatsapp-button'
+import { WHATSAPP_NUMBER } from '@/lib/whatsapp'
 
 const detailsByLocale = {
   en: [
