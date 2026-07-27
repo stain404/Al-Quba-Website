@@ -3,29 +3,21 @@ import { getLocale } from 'next-intl/server'
 import { SectionContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { Card } from '@/components/cards/card'
-import { Button } from '@/components/ui/button'
-import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { ContactForm } from '@/components/forms/contact-form'
 import { FadeIn } from '@/components/motion/reveal'
-import { WHATSAPP_NUMBER } from '@/lib/whatsapp'
+import { SocialLinks } from '@/components/ui/social-links'
 
 const detailsByLocale = {
   en: [
     {
-      icon: MapPin,
-      label: 'Address',
-      value: 'Office 306, Al Mezan Tower, Al Qusais, Muhaisnah 4, Dubai, UAE',
-      href: 'https://www.google.com/maps/search/?api=1&query=Office+306,+Al+Mezan+Tower,+Al+Qusais,+Muhaisnah+4,+Dubai,+UAE',
-    },
-    {
       icon: Mail,
-      label: 'E-Mail',
+      label: 'Email',
       value: 'inbox@alqubainvestment.com',
       href: 'mailto:inbox@alqubainvestment.com',
     },
     {
       icon: Phone,
-      label: 'Enquiry',
+      label: 'Call',
       value: '+971 50 576 2203',
       href: 'tel:+971505762203',
     },
@@ -35,14 +27,14 @@ const detailsByLocale = {
       value: '+971 50 576 2203',
       href: 'https://wa.me/971505762203',
     },
-  ],
-  ar: [
     {
       icon: MapPin,
-      label: 'العنوان',
-      value: 'مكتب 306، برج الميزان، القصيص، مهيصنة 4، دبي، الإمارات العربية المتحدة',
+      label: 'Location',
+      value: 'Office 306, Al Mezan Tower, Al Qusais, Muhaisnah 4, Dubai, UAE',
       href: 'https://www.google.com/maps/search/?api=1&query=Office+306,+Al+Mezan+Tower,+Al+Qusais,+Muhaisnah+4,+Dubai,+UAE',
     },
+  ],
+  ar: [
     {
       icon: Mail,
       label: 'البريد الإلكتروني',
@@ -51,7 +43,7 @@ const detailsByLocale = {
     },
     {
       icon: Phone,
-      label: 'الاستفسارات',
+      label: 'الاتصال',
       value: '+971 50 576 2203',
       href: 'tel:+971505762203',
     },
@@ -61,33 +53,40 @@ const detailsByLocale = {
       value: '+971 50 576 2203',
       href: 'https://wa.me/971505762203',
     },
+    {
+      icon: MapPin,
+      label: 'الموقع',
+      value: 'مكتب 306، برج الميزان، القصيص، مهيصنة 4، دبي، الإمارات العربية المتحدة',
+      href: 'https://www.google.com/maps/search/?api=1&query=Office+306,+Al+Mezan+Tower,+Al+Qusais,+Muhaisnah+4,+Dubai,+UAE',
+    },
   ],
 } as const
 
 const copy = {
   en: {
-    eyebrow: 'Get in Touch',
+    eyebrow: 'Contact',
     heading: 'Reach us directly',
     officeHours: 'Office Hours',
     officeHoursValue: 'Monday – Friday, 9:00 AM – 6:00 PM GST',
-    whatsappCta: 'Chat with Us on WhatsApp',
+    formHeading: 'Get In Touch',
+    followUs: 'Follow us on',
   },
   ar: {
-    eyebrow: 'تواصل معنا',
+    eyebrow: 'اتصل بنا',
     heading: 'تواصل معنا مباشرة',
     officeHours: 'ساعات العمل',
     officeHoursValue: 'الإثنين – الجمعة، 9:00 صباحًا – 6:00 مساءً بتوقيت الخليج',
-    whatsappCta: 'تواصل معنا عبر واتساب',
+    formHeading: 'تواصل معنا',
+    followUs: 'تابعنا على',
   },
 } as const
 
 /**
  * Contact / Form Section.
- * A roughly equal two-column split — contact details on the left, the
- * existing ContactForm reference implementation on the right. Distinct
- * from the narrow-label/wide-content SplitContainer pattern used on
- * About and Pools, since both columns carry comparable visual weight
- * here.
+ * Dark ink panel carrying the heading + a plain icon/label/value contact
+ * list + social row, with the form itself sitting in a white elevated
+ * card on top — replaces the earlier even two-column card-grid layout
+ * with the client's requested "form floats over a dark panel" look.
  */
 export async function ContactFormSection() {
   const locale = (await getLocale()) as keyof typeof copy
@@ -95,80 +94,62 @@ export async function ContactFormSection() {
   const details = detailsByLocale[locale]
 
   return (
-    <SectionContainer surface="canvas" spacing="lg">
-      <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.3fr]">
-        <FadeIn className="flex flex-col gap-12">
+    <SectionContainer surface="ink" spacing="lg">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-16">
+        <FadeIn className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>{c.eyebrow}</Eyebrow>
-            <Heading as="h2" size="display-sm" className="max-w-sm">
+            <Eyebrow inverse>{c.eyebrow}</Eyebrow>
+            <Heading as="h2" size="display-sm" inverse className="max-w-md">
               {c.heading}
             </Heading>
           </div>
 
-          <div className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+          <div className="flex flex-col gap-6">
             {details.map((detail) => (
               <a
                 key={detail.label}
                 href={detail.href}
                 target={detail.href.startsWith('http') ? '_blank' : undefined}
                 rel={detail.href.startsWith('http') ? 'noreferrer' : undefined}
-                className="block h-full focus-visible:outline-none focus-visible:shadow-focus rounded-lg"
+                className="group flex items-start gap-4 focus-visible:outline-none"
               >
-                <Card
-                  surface="canvas"
-                  padding="sm"
-                  className="flex h-full flex-col gap-3 transition-all duration-200 ease-institutional hover:-translate-y-1 hover:shadow-md"
-                >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-navy/6 text-navy">
-                    <detail.icon className="size-5" strokeWidth={1.5} aria-hidden />
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border-ink text-accent-on-ink transition-colors duration-150 group-hover:border-text-inverse">
+                  <detail.icon className="size-[18px]" strokeWidth={1.5} aria-hidden />
+                </span>
+                <div className="flex flex-col gap-0.5 pt-1.5">
+                  <span className="text-body-sm font-semibold text-text-inverse">{detail.label}</span>
+                  <span className="text-body-sm text-text-inverse-muted transition-colors duration-150 group-hover:text-text-inverse">
+                    {detail.value}
                   </span>
-                  <div className="flex flex-col gap-0.5">
-                    <span className="text-caption uppercase tracking-wide text-text-tertiary">{detail.label}</span>
-                    <span className="text-body-sm text-text-primary">{detail.value}</span>
-                  </div>
-                </Card>
+                </div>
               </a>
             ))}
-          </div>
 
-          <div className="flex items-start gap-3 border-t border-border pt-10">
-            <Clock className="mt-0.5 size-4 shrink-0 text-text-tertiary" strokeWidth={1.5} aria-hidden />
-            <div className="flex flex-col gap-0.5">
-              <span className="text-caption uppercase tracking-wide text-text-tertiary">{c.officeHours}</span>
-              <span className="text-body-sm text-text-secondary">{c.officeHoursValue}</span>
+            <div className="flex items-start gap-4">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border-ink text-accent-on-ink">
+                <Clock className="size-[18px]" strokeWidth={1.5} aria-hidden />
+              </span>
+              <div className="flex flex-col gap-0.5 pt-1.5">
+                <span className="text-body-sm font-semibold text-text-inverse">{c.officeHours}</span>
+                <span className="text-body-sm text-text-inverse-muted">{c.officeHoursValue}</span>
+              </div>
             </div>
           </div>
 
-          <Button variant="outline" size="lg" asChild className="w-fit">
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5"
-            >
-              <WhatsAppIcon className="size-5 text-[#25D366]" />
-              {c.whatsappCta}
-            </a>
-          </Button>
+          <div className="flex flex-col gap-3 border-t border-border-ink pt-8">
+            <span className="text-caption uppercase tracking-wide text-text-inverse-muted">{c.followUs}</span>
+            <SocialLinks />
+          </div>
         </FadeIn>
 
-        <div className="flex flex-col gap-12">
-          {/* Invisible mirror of the left column's heading block, sized
-              identically so the form below starts at the same visual
-              level as the first row of contact cards rather than the
-              very top of the column. Hidden below `lg`, where the two
-              columns stack and this alignment no longer applies. */}
-          <div className="hidden flex-col gap-4 lg:flex" aria-hidden="true">
-            <Eyebrow className="invisible">{c.eyebrow}</Eyebrow>
-            <Heading as="h2" size="display-sm" className="invisible max-w-sm">
-              {c.heading}
+        <FadeIn delay={0.08}>
+          <Card surface="canvas" padding="lg" className="rounded-2xl shadow-xl sm:p-10">
+            <Heading as="h2" size="heading-lg" className="mb-8">
+              {c.formHeading}
             </Heading>
-          </div>
-
-          <FadeIn delay={0.08}>
             <ContactForm />
-          </FadeIn>
-        </div>
+          </Card>
+        </FadeIn>
       </div>
     </SectionContainer>
   )
