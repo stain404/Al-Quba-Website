@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-import { appendSubmission } from '@/lib/submissions-store'
+import { sendMail } from '@/lib/mailer'
 
 const newsletterSchema = z.object({
   email: z.string().email(),
@@ -14,7 +14,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
   }
 
-  await appendSubmission('newsletter-subscribers.json', parsed.data)
+  try {
+    await sendMail({
+      subject: 'New newsletter subscriber',
+      text: `${parsed.data.email} subscribed to the newsletter.`,
+    })
+  } catch (err) {
+    console.error('Newsletter signup email failed:', err)
+    return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 })
+  }
 
   return NextResponse.json({ ok: true })
 }
