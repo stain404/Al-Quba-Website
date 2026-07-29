@@ -15,9 +15,12 @@ const manrope = Manrope({
   variable: '--font-display',
 })
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
+/** 500 covers inline data (`data-md`); 700 is the real cut behind the large
+ *  stat figures (`data-lg`) — without it the browser synthesizes a fake bold
+ *  and the counters render noticeably smeared at 3.75rem. */
 const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: ['500'],
+  weight: ['500', '700'],
   variable: '--font-mono',
 })
 /** Arabic has no Manrope/Inter glyphs — Cairo covers both the display and

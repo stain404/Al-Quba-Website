@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 const cardVariants = cva('rounded-lg transition-all duration-200 ease-institutional', {
   variants: {
     surface: {
-      canvas: 'bg-canvas-raised border border-border shadow-sm hover:shadow-md',
+      canvas: 'bg-canvas-raised border border-border shadow-md hover:shadow-lg',
       muted: 'bg-canvas-muted border border-transparent',
       ink: 'bg-ink-raised border border-border-ink text-text-inverse',
       outline: 'bg-transparent border border-border-strong',

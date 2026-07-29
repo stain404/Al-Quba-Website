@@ -65,9 +65,10 @@ const config: Config = {
       },
       fontSize: {
         // Weights bumped to 700 for the Manrope/sans display face (a
-        // grotesque sans reads thin at the old serif-era 400 weight) —
-        // display-sm is left untouched since it's the Home hero heading's
-        // size and that heading was explicitly kept as-is.
+        // grotesque sans reads thin at the old serif-era 400 weight).
+        // display-sm keeps the lighter 450: it is the one soft display
+        // step, used for card titles and subsection headings rather than
+        // for a page headline. The Home hero uses display-xl.
         'display-xl': ['clamp(2.75rem, 5vw + 1rem, 5.5rem)', { lineHeight: '1.02', fontWeight: '700' }],
         'display-lg': ['clamp(2.25rem, 3.5vw + 1rem, 4rem)', { lineHeight: '1.05', fontWeight: '700' }],
         'display-md': ['clamp(1.875rem, 2.5vw + 1rem, 2.75rem)', { lineHeight: '1.1', fontWeight: '700' }],

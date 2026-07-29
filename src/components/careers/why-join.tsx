@@ -42,7 +42,7 @@ export function WhyJoin() {
       <Stagger className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (
           <StaggerItem key={card.title}>
-            <div className="group flex h-full flex-col gap-5 rounded-[18px] border border-border bg-canvas-raised p-8 shadow-sm transition-all duration-300 ease-institutional hover:-translate-y-2 hover:shadow-lg">
+            <div className="group flex h-full flex-col gap-5 rounded-[18px] border border-border bg-canvas-raised p-8 shadow-md transition-all duration-300 ease-institutional hover:-translate-y-2 hover:shadow-lg">
               <div className="flex size-11 items-center justify-center rounded-full border border-border">
                 <card.icon className="size-5 text-accent" strokeWidth={1.5} />
               </div>

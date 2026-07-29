@@ -37,7 +37,7 @@ export function OurEcosystem() {
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="group relative mt-16 aspect-[1628/966] w-full overflow-hidden rounded-lg shadow-sm transition-shadow duration-500 hover:shadow-lg"
+        className="group relative mt-16 aspect-[1628/966] w-full overflow-hidden rounded-lg shadow-md transition-shadow duration-500 hover:shadow-lg"
       >
         <motion.div style={prefersReduced ? undefined : { y }} className="absolute inset-0">
           <Image

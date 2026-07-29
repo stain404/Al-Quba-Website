@@ -244,7 +244,7 @@ function PositionCard({ position, c }: { position: Position; c: Copy }) {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-canvas-raised shadow-sm transition-shadow duration-200 hover:shadow-md">
+    <div className="overflow-hidden rounded-lg border border-border bg-canvas-raised shadow-md transition-shadow duration-200 hover:shadow-lg">
       {/* Always-visible header */}
       <button
         type="button"

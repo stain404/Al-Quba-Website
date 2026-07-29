@@ -141,13 +141,19 @@ export function Hero() {
           transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
         />
         {/* Subtle uniform black scrim over the whole banner for contrast,
-            layered under the bottom-heavy gradient below */}
-        <div className="absolute inset-0 bg-black/15" />
+            layered under the bottom-heavy gradient below. Carries more
+            weight than it used to (15% → 25%) because the enlarged
+            headline has to hold against this clip's brightest frames —
+            the hazy sunset sky — not just its darker ones. */}
+        <div className="absolute inset-0 bg-black/25" />
 
         {/* Scrim — subtle at the top so the video reads clearly, but
             deep enough behind the text block (bottom-anchored content)
-            to keep the headline and copy legible over bright footage */}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 via-45% to-transparent" />
+            to keep the headline and copy legible over bright footage.
+            The mid stop sits at 55% rather than 45%: the display-xl
+            headline is a much taller block than the old display-sm one,
+            so its top edge reaches into what used to be clear sky. */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/55 via-55% to-transparent" />
 
         <VideoPauseToggle videoRef={videoRef} className="pointer-events-auto absolute bottom-4 right-4 z-20 sm:bottom-6 sm:right-6" />
       </div>
@@ -157,15 +163,19 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...transitionContent, delay: 0.1 }}
-          className="flex max-w-4xl flex-col gap-8"
+          className="flex flex-col gap-8"
         >
-          <h1 className="font-nav text-display-sm leading-[1.1] text-text-inverse">
-            {c.headline[0]}
-            <br />
-            {c.headline[1]}
+          {/* Each statement is its own block rather than one string split by
+              a <br>: the two lines stay structurally distinct, and each wraps
+              inside itself on narrow screens instead of the break landing
+              mid-phrase. `tracking-tight` is LTR-only — Arabic is set in
+              Cairo, where negative tracking fights the script's joining. */}
+          <h1 className="font-display text-display-xl text-text-inverse ltr:tracking-tight">
+            <span className="block">{c.headline[0]}</span>
+            <span className="block">{c.headline[1]}</span>
           </h1>
 
-          <p className="max-w-lg text-[1.25rem] leading-relaxed text-text-inverse">{c.body}</p>
+          <p className="max-w-measure text-body-lg leading-relaxed text-text-inverse">{c.body}</p>
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Button variant="gold" size="lg" withArrow className="group" asChild>

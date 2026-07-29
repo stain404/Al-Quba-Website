@@ -9,7 +9,7 @@ const copy = {
   en: {
     eyebrow: 'Track Record',
     stats: [
-      { label: 'Years of Industry Experience', value: 10, suffix: '+' },
+      { label: 'Years of Industry Experience', value: 5, suffix: '+' },
       { label: 'Strategic Subsidiaries', value: 19 },
       { label: 'Investment Sectors', value: 5 },
       { label: 'Countries Served', value: 8 },
@@ -18,7 +18,7 @@ const copy = {
   ar: {
     eyebrow: 'سجل الإنجازات',
     stats: [
-      { label: 'سنوات الخبرة في القطاع', value: 10, suffix: '+' },
+      { label: 'سنوات الخبرة في القطاع', value: 5, suffix: '+' },
       { label: 'شركات تابعة استراتيجية', value: 19 },
       { label: 'قطاعات استثمارية', value: 5 },
       { label: 'دول نخدمها', value: 8 },

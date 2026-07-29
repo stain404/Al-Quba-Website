@@ -49,7 +49,7 @@ export function LifeAtAlQuba() {
           <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {highlights.map((h) => (
               <StaggerItem key={h.label}>
-                <div className="flex flex-col gap-3 rounded-[18px] border border-border bg-canvas-raised p-6 shadow-sm">
+                <div className="flex flex-col gap-3 rounded-[18px] border border-border bg-canvas-raised p-6 shadow-md">
                   <div className="flex items-center gap-3">
                     <h.icon className="size-4 shrink-0 text-accent" strokeWidth={1.5} />
                     <span className="text-body-sm font-semibold text-text-primary">{h.label}</span>

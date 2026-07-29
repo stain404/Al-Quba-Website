@@ -1,8 +1,10 @@
 import { getLocale } from 'next-intl/server'
+import type { LucideIcon } from 'lucide-react'
 import { Layers, TrendingUp, ShieldCheck, Award, Globe2, Handshake } from 'lucide-react'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
-import { FeatureCard, FeatureGrid } from '@/components/cards/feature-card'
+import { Card } from '@/components/cards/card'
+import { Stagger, StaggerItem } from '@/components/motion/reveal'
 
 const icons = [Layers, TrendingUp, ShieldCheck, Award, Globe2, Handshake]
 
@@ -36,10 +38,59 @@ const copy = {
 } as const
 
 /**
+ * One reason card. Deliberately local to this section rather than a change
+ * to the shared FeatureCard — that component is also used on every sector
+ * and pool detail page, and this treatment is tuned for a six-up grid on a
+ * muted band, not for those contexts.
+ */
+function ReasonCard({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: LucideIcon
+  title: string
+  description: string
+}) {
+  return (
+    <StaggerItem className="h-full">
+      <Card
+        surface="canvas"
+        padding="lg"
+        className="group relative flex h-full flex-col overflow-hidden hover:-translate-y-1"
+      >
+        {/* The signature gold hairline, earned rather than given: it draws
+            in across the card's top edge only on hover, so at rest the
+            section still carries exactly one gold mark (the eyebrow rule)
+            and never six. */}
+        <span
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-500 ease-institutional group-hover:scale-x-100 rtl:origin-right"
+        />
+
+        <span className="flex size-12 items-center justify-center rounded-md border border-border bg-canvas text-navy transition-colors duration-300 ease-institutional group-hover:border-transparent group-hover:bg-ink group-hover:text-text-inverse">
+          <Icon className="size-5" strokeWidth={1.5} aria-hidden />
+        </span>
+
+        {/* Rhythm: generous above the title (icon is a separate group),
+            tight between title and its description (they are one group). */}
+        <h3 className="mt-8 text-balance text-heading-md font-semibold text-text-primary">
+          {title}
+        </h3>
+        <p className="mt-3 text-body-sm leading-relaxed text-text-secondary">
+          {description}
+        </p>
+      </Card>
+    </StaggerItem>
+  )
+}
+
+/**
  * Section 4 — Why Invest with Al Quba.
- * Six premium feature cards on a balanced 3-column grid — the shared
- * FeatureCard/FeatureGrid pattern (equal height, staggered fade-up on
- * scroll, subtle hover lift) used across sector/pool detail pages.
+ * Six reason cards on a balanced 3-column grid. The grid is wrapped in a
+ * `Stagger` so the per-card `StaggerItem` variants actually orchestrate —
+ * without a stagger parent they render statically and the entrance the
+ * cards were written for never runs.
  */
 export async function WhyChooseAlQuba() {
   const locale = (await getLocale()) as keyof typeof copy
@@ -48,21 +99,19 @@ export async function WhyChooseAlQuba() {
   return (
     <SectionContainer surface="muted" spacing="lg">
       <SectionHeading eyebrow={c.eyebrow} title={c.title} description={c.description} />
-      <div className="mt-16">
-        <FeatureGrid>
-          {c.reasons.map((reason, index) => {
-            const Icon = icons[index]
-            return (
-              <FeatureCard
-                key={reason.title}
-                icon={<Icon className="size-5" strokeWidth={1.5} aria-hidden />}
-                title={reason.title}
-                description={reason.description}
-              />
-            )
-          })}
-        </FeatureGrid>
-      </div>
+      <Stagger className="mt-16 grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {c.reasons.map((reason, index) => {
+          const Icon = icons[index]
+          return (
+            <ReasonCard
+              key={reason.title}
+              icon={Icon}
+              title={reason.title}
+              description={reason.description}
+            />
+          )
+        })}
+      </Stagger>
     </SectionContainer>
   )
 }

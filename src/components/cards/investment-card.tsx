@@ -27,7 +27,7 @@ export function InvestmentCard({
   const content = (
     <Link
       href={href}
-      className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 shadow-sm transition-all duration-200 ease-institutional hover:shadow-md focus-visible:outline-none focus-visible:shadow-focus"
+      className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 shadow-md transition-all duration-200 ease-institutional hover:shadow-lg focus-visible:outline-none focus-visible:shadow-focus"
     >
       {/* ── Image ────────────────────────────────────────────────────────
           Mobile: fills the entire card. `absolute inset-0` here resolves
