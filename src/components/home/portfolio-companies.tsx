@@ -22,25 +22,36 @@ const copy = {
   },
 } as const
 
+/** Background baked into every file in `public/logos` (sampled from the
+ *  supplied artwork, which was uniformly #fafafa). The frame below uses
+ *  the same value so a logo can never show a seam against its card. */
+const LOGO_BG = '#fafafa'
+
 /**
  * Company name (as written in `sectors-data`) -> logo file.
  *
  * Keyed by name rather than added to the sector data itself so the data
  * stays a plain list of companies and this stays a presentation concern.
- * All five files are the same grey-on-off-white treatment at ~2:1, which
- * is what lets the grid read as one set rather than a jumble of vendor
- * brand colours.
+ *
+ * These point at `public/logos`, not the raw supplied files. The originals
+ * were each a mark floating in a different amount of whitespace — the
+ * marks occupied anywhere from 24% to 45% of their canvas height — so
+ * dropping them into equal boxes made some read tiny and others huge. The
+ * normalised set is trimmed to the mark and re-padded to a common 2:1
+ * canvas, capped at 50% width and 56% height, which is what makes six
+ * different logos read as one set. Regenerate rather than hand-edit if a
+ * new logo arrives; the originals are still in `public/`.
  *
  * Bright Hurst Contracting has no logo supplied yet — anything without an
  * entry here falls back to a typographic lockup below, so a missing file
  * degrades to a quieter card instead of a hole in the grid.
  */
 const logos: Record<string, string> = {
-  'Hebron General Trading LLC': '/hebron.jpeg',
-  'NobleStar Shipping Services LLC': '/noblestargrey.jpeg',
-  ContainerKart: '/containerkart.jpeg',
-  'Al Wahda Trading': '/alwahda.jpeg',
-  'Phew Interactive': '/phew.jpeg',
+  'Hebron General Trading LLC': '/logos/hebron.png',
+  'NobleStar Shipping Services LLC': '/logos/noblestar.png',
+  ContainerKart: '/logos/containerkart.png',
+  'Al Wahda Trading': '/logos/alwahda.png',
+  'Phew Interactive': '/logos/phew.png',
 }
 
 function CompanyCard({
@@ -60,12 +71,12 @@ function CompanyCard({
         href={`/sectors/${sectorSlug}`}
         className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-canvas transition-all duration-300 ease-institutional hover:-translate-y-1 hover:border-border-strong hover:shadow-md"
       >
-        {/* Fixed 2:1 frame, filled edge to edge. The supplied files are
-            all ~1.97:1 and already carry generous whitespace around the
-            mark, so `object-cover` trims well under 2% and the file's own
-            padding does the framing — no CSS padding needed on top, which
-            would only shrink the logos inside their own margins. */}
-        <div className="relative aspect-[2/1] w-full bg-white">
+        {/* Fixed 2:1 frame, filled edge to edge. The normalised files are
+            exactly 800x400, so `object-cover` fills without cropping
+            anything at all and the padding baked into each file does the
+            framing. No CSS padding on top — that would only shrink the
+            marks inside margins they already have. */}
+        <div className="relative aspect-[2/1] w-full" style={{ backgroundColor: LOGO_BG }}>
           {logo ? (
             <Image
               src={logo}
