@@ -6,7 +6,6 @@ import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { Stagger, StaggerItem } from '@/components/motion/reveal'
 import { sectors } from '@/lib/sectors-data'
-import { siteConfig } from '@/lib/site-config'
 
 const copy = {
   en: {
@@ -14,18 +13,12 @@ const copy = {
     title: 'The companies we operate',
     description:
       'Every division below is run by a named operating company. These are the businesses Al Quba capital sits behind.',
-    entityLabel: 'Registered entity',
-    hqLabel: 'Headquarters',
-    hqValue: 'Office 306, Al Mezan Tower, Al Qusais, Muhaisnah 4, Dubai, UAE',
   },
   ar: {
     eyebrow: 'المحفظة',
     title: 'الشركات التي ندير',
     description:
       'كل قطاع أدناه تديره شركة تشغيلية باسمها. هذه هي الأعمال التي يقف خلفها رأس مال القبا.',
-    entityLabel: 'الكيان المسجل',
-    hqLabel: 'المقر الرئيسي',
-    hqValue: 'مكتب 306، برج الميزان، القصيص، محيصنة 4، دبي، الإمارات',
   },
 } as const
 
@@ -67,10 +60,11 @@ function CompanyCard({
         href={`/sectors/${sectorSlug}`}
         className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-canvas transition-all duration-300 ease-institutional hover:-translate-y-1 hover:border-border-strong hover:shadow-md"
       >
-        {/* Fixed 2:1 frame with `object-contain`: the supplied files are
-            all ~1.97:1, but contain (rather than cover) means a future
-            logo at a different ratio letterboxes politely instead of
-            being cropped through its wordmark. */}
+        {/* Fixed 2:1 frame, filled edge to edge. The supplied files are
+            all ~1.97:1 and already carry generous whitespace around the
+            mark, so `object-cover` trims well under 2% and the file's own
+            padding does the framing — no CSS padding needed on top, which
+            would only shrink the logos inside their own margins. */}
         <div className="relative aspect-[2/1] w-full bg-white">
           {logo ? (
             <Image
@@ -78,7 +72,7 @@ function CompanyCard({
               alt={`${company} logo`}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-contain p-6 transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
+              className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
             />
           ) : (
             // No logo on file. A typographic lockup in the display face
@@ -150,32 +144,6 @@ export async function PortfolioCompanies() {
         ))}
       </Stagger>
 
-      {/* Verifiable corporate facts, stated plainly. Deliberately not
-          dressed up as badges or seals: a badge asserts third-party
-          verification, and nothing here has been verified by a third
-          party — these are simply true and checkable.
-
-          TODO(al-quba): add the DED trade licence number here once
-          confirmed, as `licenceLabel` / `licenceValue` in `copy` above.
-          A licence number is the single strongest trust signal a UAE
-          investment company can publish, because it is independently
-          checkable. Do not add audit, regulator, or certification
-          claims unless the underlying credential actually exists and
-          can be named. */}
-      <dl className="mt-16 flex flex-col gap-6 border-t border-border pt-8 sm:flex-row sm:gap-16">
-        <div>
-          <dt className="text-caption font-medium uppercase tracking-wide text-text-tertiary">
-            {c.entityLabel}
-          </dt>
-          <dd className="mt-2 text-body-md text-text-primary">{siteConfig.legalName}</dd>
-        </div>
-        <div>
-          <dt className="text-caption font-medium uppercase tracking-wide text-text-tertiary">
-            {c.hqLabel}
-          </dt>
-          <dd className="mt-2 max-w-measure text-body-md text-text-primary">{c.hqValue}</dd>
-        </div>
-      </dl>
     </SectionContainer>
   )
 }
