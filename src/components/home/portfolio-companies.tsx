@@ -144,8 +144,14 @@ export async function PortfolioCompanies() {
     }))
   )
 
+  // Bottom padding is dropped because Testimonials directly below is also
+  // `surface="muted" spacing="lg"`. Two identical beige bands meeting
+  // stacked pb-32 on pt-32, which reads as one 256px hole rather than as
+  // section rhythm; the next section's own top padding is the gap. Restore
+  // `pb` if anything on a different surface is inserted between them. Both
+  // breakpoints are needed — md:py-32 sets its own bottom.
   return (
-    <SectionContainer surface="muted" spacing="lg">
+    <SectionContainer surface="muted" spacing="lg" className="pb-0 md:pb-0">
       <SectionHeading eyebrow={c.eyebrow} title={c.title} description={c.description} />
 
       {/* `repeat`: the cascade replays every time the grid scrolls back
@@ -160,7 +166,6 @@ export async function PortfolioCompanies() {
           <CompanyCard key={entry.company} {...entry} />
         ))}
       </Stagger>
-
     </SectionContainer>
   )
 }
