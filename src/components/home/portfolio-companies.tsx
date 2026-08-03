@@ -86,13 +86,16 @@ function CompanyCard({
             colour as this card, so no seam shows behind them. */}
         <div className="mt-auto flex w-full items-end justify-between gap-4 pt-5">
           {logo ? (
-            <div className="relative h-13 w-30">
+            // Anchored to the inline start and the baseline, so every mark
+            // lines up on the same left edge (right edge in Arabic) and the
+            // same bottom rule regardless of its own proportions.
+            <div className="relative h-10 w-24">
               <Image
                 src={logo}
                 alt={`${company} logo`}
                 fill
-                sizes="120px"
-                className="object-contain object-left-bottom"
+                sizes="96px"
+                className="object-contain object-left-bottom rtl:object-right-bottom"
               />
             </div>
           ) : (
@@ -145,7 +148,14 @@ export async function PortfolioCompanies() {
     <SectionContainer surface="muted" spacing="lg">
       <SectionHeading eyebrow={c.eyebrow} title={c.title} description={c.description} />
 
-      <Stagger className="mt-16 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* `repeat`: the cascade replays every time the grid scrolls back
+          into view rather than firing once. Opt-in here only — see
+          `repeatViewport` in lib/animations for why it is not the
+          site-wide default. */}
+      <Stagger
+        repeat
+        className="mt-16 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {entries.map((entry) => (
           <CompanyCard key={entry.company} {...entry} />
         ))}

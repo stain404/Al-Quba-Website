@@ -72,3 +72,15 @@ export const expandCollapse: Variants = {
 }
 
 export const defaultViewport = { once: true, margin: '-80px' }
+
+/**
+ * Re-triggering viewport: the reveal replays every time the block scrolls
+ * back into view rather than firing once and staying put.
+ *
+ * Deliberately opt-in per section rather than the default. Applied
+ * site-wide it turns every band on a long page into a permanent
+ * animation, which reads as restless on an institutional surface and
+ * costs a layout pass each time a section crosses the fold. Use it where
+ * the repeat is the point.
+ */
+export const repeatViewport = { once: false, margin: '-80px' }

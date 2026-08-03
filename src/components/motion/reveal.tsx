@@ -2,7 +2,13 @@
 
 import * as React from 'react'
 import { motion, useReducedMotion, type HTMLMotionProps } from 'framer-motion'
-import { fadeUp, fadeOnly, staggerContainer, defaultViewport } from '@/lib/animations'
+import {
+  fadeUp,
+  fadeOnly,
+  staggerContainer,
+  defaultViewport,
+  repeatViewport,
+} from '@/lib/animations'
 
 /**
  * FadeIn — the default content reveal used across the site.
@@ -13,8 +19,9 @@ export function FadeIn({
   className,
   delay = 0,
   as = 'div',
+  repeat = false,
   ...props
-}: HTMLMotionProps<'div'> & { delay?: number; as?: React.ElementType }) {
+}: HTMLMotionProps<'div'> & { delay?: number; as?: React.ElementType; repeat?: boolean }) {
   const prefersReduced = useReducedMotion()
   const MotionTag = motion[as as 'div'] ?? motion.div
 
@@ -23,7 +30,7 @@ export function FadeIn({
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={defaultViewport}
+      viewport={repeat ? repeatViewport : defaultViewport}
       variants={prefersReduced ? fadeOnly : fadeUp}
       transition={{ delay }}
       {...props}
@@ -42,18 +49,24 @@ export const RevealOnScroll = FadeIn
 /**
  * Stagger — wraps a list of children (each should be a StaggerItem or
  * motion element using fadeUp) and staggers their entrance.
+ *
+ * `repeat` replays the whole stagger every time the group scrolls back
+ * into view. The children need no change: they follow the parent's
+ * variant state, so returning the parent to `hidden` on exit rewinds
+ * them together and the next entry re-runs the cascade.
  */
 export function Stagger({
   children,
   className,
+  repeat = false,
   ...props
-}: HTMLMotionProps<'div'>) {
+}: HTMLMotionProps<'div'> & { repeat?: boolean }) {
   return (
     <motion.div
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={defaultViewport}
+      viewport={repeat ? repeatViewport : defaultViewport}
       variants={staggerContainer}
       {...props}
     >
