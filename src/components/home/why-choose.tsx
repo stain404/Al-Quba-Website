@@ -16,7 +16,7 @@ const copy = {
     reasons: [
       { title: 'Diversified Portfolio', description: 'Access investment opportunities across trading, logistics, technology, real estate, and international commerce through a balanced investment strategy.' },
       { title: 'Strategic Growth', description: 'We focus on businesses and assets with long-term growth potential, creating sustainable value beyond short-term market trends.' },
-      { title: 'Transparent Investment Approach', description: 'Clear communication, structured investment processes, and regular reporting ensure confidence throughout every investment journey.' },
+      { title: 'Quarterly Investor Reporting', description: 'Investors receive a quarterly report on where their capital sits and how it is performing. Questions are answered directly by the team managing the position.' },
       { title: 'Experienced Leadership', description: 'Led by professionals with extensive expertise in investment management, international trade, and business development.' },
       { title: 'Global Business Network', description: 'Operating from Dubai while leveraging international partnerships and cross-border opportunities across multiple markets.' },
       { title: 'Long-Term Partnerships', description: 'We build lasting relationships with investors through responsible governance, disciplined capital allocation, and shared success.' },
@@ -29,7 +29,7 @@ const copy = {
     reasons: [
       { title: 'محفظة متنوعة', description: 'فرص استثمارية عبر التجارة والخدمات اللوجستية والتقنية والعقارات والتجارة الدولية من خلال استراتيجية استثمار متوازنة.' },
       { title: 'نمو استراتيجي', description: 'نركز على أعمال وأصول ذات إمكانات نمو طويلة الأمد، ما يخلق قيمة مستدامة تتجاوز اتجاهات السوق قصيرة الأمد.' },
-      { title: 'نهج استثماري شفاف', description: 'تواصل واضح، وعمليات استثمار منظمة، وتقارير دورية تضمن الثقة في كل مرحلة من رحلة الاستثمار.' },
+      { title: 'تقارير ربع سنوية للمستثمرين', description: 'يتلقى المستثمرون تقريرًا ربع سنوي يوضح أين يقف رأس مالهم وكيف يؤدي. وتُجاب الأسئلة مباشرة من الفريق الذي يدير المركز الاستثماري.' },
       { title: 'قيادة ذات خبرة', description: 'بقيادة محترفين ذوي خبرة واسعة في إدارة الاستثمار والتجارة الدولية وتطوير الأعمال.' },
       { title: 'شبكة أعمال عالمية', description: 'ننطلق من دبي مستفيدين من شراكات دولية وفرص عابرة للحدود عبر أسواق متعددة.' },
       { title: 'شراكات طويلة الأمد', description: 'نبني علاقات دائمة مع المستثمرين عبر حوكمة مسؤولة، وتخصيص منضبط لرأس المال، ونجاح مشترك.' },

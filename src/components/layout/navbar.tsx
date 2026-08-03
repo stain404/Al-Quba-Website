@@ -12,6 +12,7 @@ import { MegaMenu } from '@/components/layout/mega-menu'
 import { LanguageSwitcher } from '@/components/layout/language-switcher'
 import { Link } from '@/i18n/navigation'
 import { getNavSections, investorDashboardUrl } from '@/lib/site-config'
+import { trackEvent } from '@/lib/analytics'
 import type { Locale } from '@/i18n/routing'
 
 export interface NavbarProps {
@@ -150,7 +151,12 @@ export function Navbar({ logo }: NavbarProps) {
                 : 'border-white/25 text-accent-soft hover:bg-white/10'
             )}
           >
-            <a href={investorDashboardUrl} target="_blank" rel="noopener noreferrer">
+            <a
+              href={investorDashboardUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent('investor_login_click', { placement: 'navbar' })}
+            >
               {t('accessDashboard')}
             </a>
           </Button>

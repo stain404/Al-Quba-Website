@@ -6,6 +6,7 @@ import { Manrope, Inter, IBM_Plex_Mono, Cairo } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/lib/site-config'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
+import { GoogleTagManager, GoogleTagManagerNoScript } from '@/components/analytics/google-tag-manager'
 import { routing, type Locale } from '@/i18n/routing'
 import '../globals.css'
 
@@ -52,9 +53,13 @@ export async function generateMetadata({ params }: { params: { locale: string } 
     description: siteConfig.description,
     keywords: [
       'Al Quba Investment',
-      'Dubai investment firm',
-      'asset management Dubai',
-      'trade finance',
+      'investment companies in Dubai',
+      'private investment firms UAE',
+      'trade finance Dubai',
+      'portfolio management Dubai',
+      'asset management UAE',
+      'trade-backed investments',
+      'investment firm Al Qusais Dubai',
       'structured investment pools',
       'DIFC investment firm',
     ],
@@ -147,7 +152,9 @@ export default async function RootLayout({
         isArabic && cairo.variable
       )}
     >
+      <GoogleTagManager />
       <body className="overflow-x-clip bg-canvas font-body text-text-primary antialiased">
+        <GoogleTagManagerNoScript />
         <NextIntlClientProvider messages={messages}>
           <script
             type="application/ld+json"

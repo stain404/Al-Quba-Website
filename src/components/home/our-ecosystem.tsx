@@ -42,7 +42,7 @@ export function OurEcosystem() {
         <motion.div style={prefersReduced ? undefined : { y }} className="absolute inset-0">
           <Image
             src="/portfolio.png"
-            alt="Al Quba Investment ecosystem partners"
+            alt="Al Quba Investment ecosystem: Hebron General Trading LLC, Bright Hurst Contracting, NobleStar Shipping Services LLC, ContainerKart, Al Wahda Trading, and Phew Interactive"
             fill
             sizes="100vw"
             className="object-contain transition-transform duration-700 ease-institutional group-hover:scale-[1.02]"

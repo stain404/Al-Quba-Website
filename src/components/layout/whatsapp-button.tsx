@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { cn } from '@/lib/utils'
+import { trackEvent } from '@/lib/analytics'
 import { WHATSAPP_NUMBER } from '@/lib/whatsapp'
 
 const DEFAULT_MESSAGE = "Hi, I'd like to know more about Al Quba Investment."
@@ -38,6 +39,10 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
+      // Click-to-chat leaves the site entirely, so without this the whole
+      // WhatsApp lead path is invisible in analytics. Fired on click
+      // rather than on navigation because `wa.me` opens in a new tab.
+      onClick={() => trackEvent('whatsapp_click', { placement: 'floating_button' })}
       aria-hidden={overFooter}
       tabIndex={overFooter ? -1 : undefined}
       className={cn(

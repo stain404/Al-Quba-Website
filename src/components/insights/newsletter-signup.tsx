@@ -63,7 +63,7 @@ export function NewsletterSignup() {
   const onSubmit = async (values: NewsletterValues) => {
     setSubmitError(null)
     try {
-      await subscribeToNewsletter(values.email)
+      await subscribeToNewsletter(values.email, 'insights')
     } catch {
       setSubmitError(c.error)
       throw new Error('Subscription failed')

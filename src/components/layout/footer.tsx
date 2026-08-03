@@ -42,7 +42,7 @@ function NewsletterForm() {
   const onSubmit = async (values: NewsletterValues) => {
     setSubmitError(null)
     try {
-      await subscribeToNewsletter(values.email)
+      await subscribeToNewsletter(values.email, 'footer')
     } catch {
       setSubmitError(t('newsletterError'))
       throw new Error('Subscription failed')
