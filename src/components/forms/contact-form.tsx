@@ -10,6 +10,7 @@ import { Check, CheckCircle2, ChevronDown, AlertCircle } from 'lucide-react'
 import { Checkbox } from '@/components/ui/inputs'
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/motion/reveal'
+import { trackEvent } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 const MESSAGE_MAX_LENGTH = 1000
@@ -228,6 +229,15 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         throw new Error('Submission failed')
       }
     }
+    // Only reached once the submission actually succeeded — the failure
+    // paths above throw, so a bounced enquiry is never counted as a lead.
+    // `inquiryType` is a fixed dropdown value, not free text, so it can
+    // segment leads without any of the submitted PII leaving the page.
+    trackEvent('generate_lead', {
+      form: 'contact',
+      inquiry_type: values.inquiryType,
+      locale,
+    })
     reset()
   }
 

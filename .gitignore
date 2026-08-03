@@ -33,3 +33,7 @@ next-env.d.ts
 # form submission data — contains PII (names, emails, messages), never commit
 /data/*.json
 
+
+# Everything in public/ is served at the site root by Next.js, so a
+# stray .env there is a publicly downloadable secret. Never ship one.
+public/*.env
