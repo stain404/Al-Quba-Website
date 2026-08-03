@@ -6,8 +6,11 @@ export const siteConfig = {
   legalName: 'Al Quba Investment LLC',
   title: 'Al Quba Investment LLC | Global Investment & Asset Management, Dubai',
   description:
-    'Al Quba Investment is a Dubai-headquartered investment and asset management firm deploying long-term capital across global exports, infrastructure and contracting, logistics and supply chain, import-export, and brand strategy divisions on behalf of institutional investors and family offices.',
-  url: 'https://www.alquba.com',
+    'Al Quba Investment LLC is a private investment firm in Dubai, UAE, deploying long-term capital across global exports, infrastructure and contracting, logistics and supply chain, import-export, and brand strategy divisions on behalf of institutional investors and family offices. Six operating companies, quarterly investor reporting.',
+  // Drives metadataBase, every canonical URL, the sitemap, the OG image
+  // URLs and the JSON-LD `url`. Must match the domain the site is actually
+  // served from -- the same domain as the firm's email addresses.
+  url: 'https://www.alqubainvestment.com',
 }
 
 export const investorDashboardUrl = 'https://alquba-investor.workpoint001.info/login'

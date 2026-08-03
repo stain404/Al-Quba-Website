@@ -10,8 +10,8 @@ import { FadeIn } from '@/components/motion/reveal'
 const copy = {
   en: {
     eyebrow: 'Who We Are',
-    heading: 'Building Sustainable Value Through Strategic Investments',
-    body: 'Al Quba Investment LLC is a diversified investment company headquartered in Dubai, focused on identifying and managing opportunities across trading, logistics, real estate, technology, and global commerce. We combine strategic thinking, disciplined capital management, and responsible governance to deliver sustainable long-term value for our investors and partners.',
+    heading: 'A private investment firm operating six companies from Dubai',
+    body: 'Al Quba Investment LLC is a private investment firm headquartered in Al Qusais, Dubai. We hold six operating companies across global exports, infrastructure and contracting, logistics and supply chain, import and export, and brand strategy. We report to our investors quarterly. Our model is to buy into businesses we can help run, and then to hold them.',
     visionMission: [
       { label: 'Vision', body: 'To be recognized as a disciplined, diversified investment house, one whose capital allocation decisions are judged not by market cycles, but by the durability of the value they create for investors, partners, and the economies we operate within, across every sector and market we enter.' },
       { label: 'Mission', body: 'We commit capital with discipline: rigorous underwriting, diversified exposure, and governance that holds regardless of market conditions. Our role is to identify real economic opportunity, structure it responsibly, and manage it with the same transparency and accountability our investors expect of their own capital.' },
@@ -19,8 +19,8 @@ const copy = {
   },
   ar: {
     eyebrow: 'من نحن',
-    heading: 'نبني قيمة مستدامة من خلال استثمارات استراتيجية',
-    body: 'شركة القبا للاستثمار ذ.م.م. هي شركة استثمار متنوعة مقرها دبي، تركز على تحديد وإدارة الفرص عبر التجارة والخدمات اللوجستية والعقارات والتقنية والتجارة العالمية. نجمع بين التفكير الاستراتيجي، وإدارة رأس المال المنضبطة، والحوكمة المسؤولة لتحقيق قيمة مستدامة طويلة الأمد لمستثمرينا وشركائنا.',
+    heading: 'شركة استثمار خاصة تدير ست شركات من دبي',
+    body: 'شركة القبا للاستثمار ذ.م.م. هي شركة استثمار خاصة مقرها القصيص، دبي. نملك ست شركات تشغيلية في التصدير العالمي، والبنية التحتية والمقاولات، والخدمات اللوجستية وسلاسل الإمداد، والاستيراد والتصدير، واستراتيجية العلامة التجارية. ونقدم لمستثمرينا تقارير ربع سنوية. نموذجنا هو الاستثمار في أعمال نستطيع المساهمة في إدارتها، ثم الاحتفاظ بها.',
     visionMission: [
       { label: 'الرؤية', body: 'أن نكون بيتًا استثماريًا منضبطًا ومتنوعًا، تُقاس قرارات تخصيص رأس ماله ليس بدورات السوق، بل بمدى استدامة القيمة التي تخلقها للمستثمرين والشركاء والاقتصادات التي نعمل ضمنها، عبر كل قطاع وسوق ندخله.' },
       { label: 'المهمة', body: 'نلتزم برأس المال بانضباط: تحليل ائتماني صارم، وتعرض متنوع، وحوكمة تصمد أيًا كانت الظروف السوقية. دورنا هو تحديد الفرصة الاقتصادية الحقيقية، وهيكلتها بمسؤولية، وإدارتها بنفس الشفافية والمساءلة التي يتوقعها مستثمرونا لرأس مالهم الخاص.' },
