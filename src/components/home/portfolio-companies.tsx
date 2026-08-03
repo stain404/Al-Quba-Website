@@ -22,11 +22,6 @@ const copy = {
   },
 } as const
 
-/** Background baked into every file in `public/logos` (sampled from the
- *  supplied artwork, which was uniformly #fafafa). The frame below uses
- *  the same value so a logo can never show a seam against its card. */
-const LOGO_BG = '#fafafa'
-
 /**
  * Company name (as written in `sectors-data`) -> logo file.
  *
@@ -39,8 +34,11 @@ const LOGO_BG = '#fafafa'
  * dropping them into equal boxes made some read tiny and others huge. The
  * normalised set is trimmed to the mark and re-padded to a common 2:1
  * canvas, capped at 50% width and 56% height, which is what makes six
- * different logos read as one set. Regenerate rather than hand-edit if a
- * new logo arrives; the originals are still in `public/`.
+ * different logos read as one set. They are padded on #FBFAF7, the same
+ * colour as the card (`canvas-raised`), so the mark reads as sitting
+ * directly on the card with no plate or seam behind it. Regenerate rather
+ * than hand-edit if a new logo arrives; the originals are still in
+ * `public/`, and the padding colour must track the card background.
  *
  * Bright Hurst Contracting has no logo supplied yet — anything without an
  * entry here falls back to a typographic lockup below, so a missing file
@@ -69,48 +67,46 @@ function CompanyCard({
     <StaggerItem className="h-full">
       <Link
         href={`/sectors/${sectorSlug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-canvas transition-all duration-300 ease-institutional hover:-translate-y-1 hover:border-border-strong hover:shadow-md"
+        className="group flex h-full flex-col items-start gap-3 rounded-lg border border-border bg-canvas-raised px-7 pb-6 pt-7 transition-all duration-300 ease-institutional hover:-translate-y-1 hover:border-border-strong hover:shadow-md"
       >
-        {/* Fixed 2:1 frame, filled edge to edge. The normalised files are
-            exactly 800x400, so `object-cover` fills without cropping
-            anything at all and the padding baked into each file does the
-            framing. No CSS padding on top — that would only shrink the
-            marks inside margins they already have. */}
-        <div className="relative aspect-[2/1] w-full" style={{ backgroundColor: LOGO_BG }}>
-          {logo ? (
-            <Image
-              src={logo}
-              alt={`${company} logo`}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
-            />
-          ) : (
-            // No logo on file. A typographic lockup in the display face
-            // keeps the card the same height and weight as its
-            // neighbours rather than leaving a gap in the row.
-            <div className="flex size-full items-center justify-center p-6">
-              <span className="text-center font-display text-heading-md font-bold uppercase tracking-wide text-text-tertiary">
-                {company.replace(/ (Contracting|LLC)$/, '')}
-              </span>
-            </div>
-          )}
-        </div>
+        {/* Division label, ruled with the one gold mark the card gets. */}
+        <span className="inline-flex items-center gap-2.5 text-caption uppercase tracking-wide text-text-tertiary">
+          <span aria-hidden className="h-px w-6 shrink-0 bg-accent" />
+          {sectorName}
+        </span>
 
-        {/* The name stays real text under the mark. The logos carry short
-            forms ("HEBRON"), so the full legal name here is additive, and
-            it keeps the roster crawlable — which was the whole reason
-            this section replaced the flat ecosystem diagram. */}
-        <div className="flex flex-1 flex-col border-t border-border p-6">
-          <h3 className="text-balance text-heading-sm font-semibold text-text-primary">
-            {company}
-          </h3>
-          <span className="mt-2 inline-flex items-center gap-1.5 text-caption uppercase tracking-wide text-text-tertiary">
-            {sectorName}
-            <ArrowUpRight
-              className="size-3 shrink-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 rtl:rotate-180"
-              aria-hidden
-            />
+        {/* The legal name leads the card. It is the fact a reader is here to
+            check, and the logos below carry only short forms ("HEBRON"). */}
+        <h3 className="text-balance font-display text-heading-md font-bold leading-tight text-text-primary">
+          {company}
+        </h3>
+
+        {/* Mark sits at the foot as a signature rather than a plate. The
+            files in public/logos are padded on canvas-raised, the same
+            colour as this card, so no seam shows behind them. */}
+        <div className="mt-auto flex w-full items-end justify-between gap-4 pt-5">
+          {logo ? (
+            <div className="relative h-13 w-30">
+              <Image
+                src={logo}
+                alt={`${company} logo`}
+                fill
+                sizes="120px"
+                className="object-contain object-left-bottom"
+              />
+            </div>
+          ) : (
+            // No logo supplied. A wordmark in the display face holds the
+            // same slot rather than leaving the footer lopsided.
+            <span className="font-display text-body-sm font-bold uppercase tracking-wide text-text-tertiary">
+              {company.replace(/ (Contracting|LLC)$/, '')}
+            </span>
+          )}
+          <span
+            aria-hidden
+            className="grid size-7 shrink-0 place-items-center rounded-full border border-border text-text-tertiary transition-colors duration-300 ease-institutional group-hover:border-transparent group-hover:bg-ink group-hover:text-text-inverse"
+          >
+            <ArrowUpRight className="size-3.5 rtl:rotate-180" />
           </span>
         </div>
       </Link>
