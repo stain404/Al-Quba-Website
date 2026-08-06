@@ -35,10 +35,10 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
           {
             heading: 'منظومة أعمالنا',
             links: [
-              { label: 'التجارة الدولية', href: '/sectors/global-exports', description: 'التجارة الدولية بقيادة شركة حبرون للتجارة العامة' },
+              { label: 'التجارة الدولية', href: '/sectors/global-exports', description: 'تجارة عالمية بقيادة حبرون وكونتينر كارت والوحدة للتجارة' },
               { label: 'العقارات', href: '/sectors/infrastructure-contracting', description: 'البناء والمقاولات بقيادة برايت هيرست' },
               { label: 'الشحن والخدمات اللوجستية', href: '/sectors/logistics-supply-chain', description: 'الشحن والخدمات اللوجستية بقيادة نوبل ستار للشحن' },
-              { label: 'الاستيراد والتصدير', href: '/sectors/import-export', description: 'التوريد العالمي بقيادة كونتينر كارت والوحدة للتجارة' },
+              { label: 'الاستيراد والتصدير', href: '/sectors/import-export', description: 'التوريد العابر للحدود والمشتريات الرقمية' },
               { label: 'استراتيجية العلامة التجارية', href: '/sectors/brand-strategy', description: 'حلول إبداعية ورقمية بقيادة فيو إنتراكتيف' },
               { label: 'السياحة', href: '/sectors/tourism', description: 'السفر والضيافة بقيادة صندوق السفر العالمي الأول' },
             ],
@@ -52,8 +52,13 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
             ],
           },
         ],
+        featured: {
+          title: 'رؤى المستثمرين',
+          description: 'تحليلاتنا لأسواق الإمارات والخليج، واتجاهات القطاعات، وبناء المحافظ على المدى الطويل.',
+          href: '/insights',
+        },
       },
-      { label: 'رؤى المستثمرين', href: '/insights' },
+      { label: 'الوظائف', href: '/careers' },
     ]
   }
 
@@ -66,10 +71,10 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
         {
           heading: 'Our Ecosystem',
           links: [
-            { label: 'International Trading', href: '/sectors/global-exports', description: 'International trade led by Hebron General Trading LLC' },
+            { label: 'International Trading', href: '/sectors/global-exports', description: 'Global trade led by Hebron, ContainerKart, and Al Wahda Trading' },
             { label: 'Real Estate', href: '/sectors/infrastructure-contracting', description: 'Construction and contracting led by Bright Hurst' },
             { label: 'Shipping & Logistics', href: '/sectors/logistics-supply-chain', description: 'Freight and logistics led by NobleStar Shipping' },
-            { label: 'Import & Export', href: '/sectors/import-export', description: 'Global sourcing led by ContainerKart and Al Wahda Trading' },
+            { label: 'Import & Export', href: '/sectors/import-export', description: 'Cross-border sourcing and digital procurement' },
             { label: 'Brand Strategy', href: '/sectors/brand-strategy', description: 'Creative and digital solutions led by Phew Interactive' },
             { label: 'Tourism', href: '/sectors/tourism', description: 'Travel and hospitality led by Global Travel Fund I' },
           ],
@@ -83,8 +88,16 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
           ],
         },
       ],
+      // Fills the 320px track the mega menu grid has always reserved for a
+      // featured card — Investor Insights moved in here when Careers took
+      // its place in the top-level nav row.
+      featured: {
+        title: 'Investor Insights',
+        description: 'Our read on UAE and GCC markets, sector trends, and long-term portfolio construction.',
+        href: '/insights',
+      },
     },
-    { label: 'Investor Insights', href: '/insights' },
+    { label: 'Careers', href: '/careers' },
   ]
 }
 

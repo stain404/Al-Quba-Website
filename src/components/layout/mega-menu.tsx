@@ -3,9 +3,15 @@
 import * as React from 'react'
 import { Link } from '@/i18n/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useLocale } from 'next-intl'
 import { ArrowRight } from 'lucide-react'
 import { transitionContent } from '@/lib/animations'
 import type { MegaMenuSection } from '@/types'
+
+const copy = {
+  en: { learnMore: 'Learn more' },
+  ar: { learnMore: 'اعرف المزيد' },
+} as const
 
 export interface MegaMenuProps {
   section: MegaMenuSection
@@ -20,6 +26,9 @@ export interface MegaMenuProps {
  * beneath the trigger row. One panel is shown at a time.
  */
 export function MegaMenu({ section, open, onClose, onMouseEnter, onMouseLeave }: MegaMenuProps) {
+  const locale = useLocale() as keyof typeof copy
+  const c = copy[locale] ?? copy.en
+
   return (
     <AnimatePresence>
       {open && (
@@ -68,9 +77,9 @@ export function MegaMenu({ section, open, onClose, onMouseEnter, onMouseLeave }:
                   <p className="text-body-sm text-text-inverse-muted">{section.featured.description}</p>
                 </div>
                 <span className="inline-flex items-center gap-2 text-body-sm font-medium text-accent-ink">
-                  Learn more
+                  {c.learnMore}
                   <ArrowRight
-                    className="size-4 transition-transform duration-200 ease-institutional group-hover:translate-x-1"
+                    className="size-4 rtl:rotate-180 transition-transform duration-200 ease-institutional group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
                     aria-hidden
                   />
                 </span>

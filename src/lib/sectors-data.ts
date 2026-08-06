@@ -206,7 +206,11 @@ export const sectors: Sector[] = [
         { icon: Target, title: 'Trade Opportunities', description: 'New avenues for sustainable growth as global commerce evolves.' },
       ],
     },
-    companies: ['Hebron General Trading LLC'],
+    /* ContainerKart and Al Wahda sit here rather than under Import &
+       Export: all three are the firm's trading businesses, and the home
+       Portfolio grid attributes a company to exactly one division. The
+       Import & Export page still spotlights both in its case studies. */
+    companies: ['Hebron General Trading LLC', 'ContainerKart', 'Al Wahda Trading'],
   },
   {
     slug: 'infrastructure-contracting',
@@ -516,7 +520,9 @@ export const sectors: Sector[] = [
         { icon: TrendingUp, title: 'Business Growth', description: 'Sustainable growth opportunities for businesses of every size.' },
       ],
     },
-    companies: ['ContainerKart', 'Al Wahda Trading'],
+    /* Both operating companies are attributed to International Trading
+       above; this page still carries them as its case-study spotlights. */
+    companies: [],
   },
   {
     slug: 'brand-strategy',

@@ -205,7 +205,15 @@ export function Navbar({ logo }: NavbarProps) {
                 <LanguageSwitcher className="text-text-secondary" tone="dark" />
               </li>
               {sections.map((section) => {
-                const links = section.columns?.flatMap((c) => c.links) ?? []
+                // The mega menu's featured card has no equivalent slot in
+                // this sheet, so it joins the flattened link list rather
+                // than dropping off the nav entirely on mobile.
+                const links = [
+                  ...(section.columns?.flatMap((c) => c.links) ?? []),
+                  ...(section.featured
+                    ? [{ label: section.featured.title, href: section.featured.href }]
+                    : []),
+                ]
                 return (
                   <li key={section.label} className="border-b border-border py-4 first:pt-0 last:border-none">
                     {links.length > 0 ? (

@@ -24,7 +24,7 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
   en: [
     {
       label: 'International Trading',
-      description: 'International trade led by Hebron General Trading LLC.',
+      description: 'Global trade led by Hebron, ContainerKart, and Al Wahda Trading.',
       image: '/Trading.png',
     },
     {
@@ -39,7 +39,7 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
     },
     {
       label: 'Import & Export',
-      description: 'Global sourcing led by ContainerKart and Al Wahda Trading.',
+      description: 'Cross-border sourcing and digital procurement.',
       image: '/importexport.jpeg',
     },
     {
@@ -56,7 +56,7 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
   ar: [
     {
       label: 'التجارة الدولية',
-      description: 'تجارة دولية بقيادة شركة حبرون للتجارة العامة.',
+      description: 'تجارة عالمية بقيادة حبرون وكونتينر كارت والوحدة للتجارة.',
       image: '/Trading.png',
     },
     {
@@ -71,7 +71,7 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
     },
     {
       label: 'الاستيراد والتصدير',
-      description: 'توريد عالمي بقيادة كونتينر كارت والوحدة للتجارة.',
+      description: 'التوريد العابر للحدود والمشتريات الرقمية.',
       image: '/importexport.jpeg',
     },
     {

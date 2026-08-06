@@ -22,7 +22,7 @@ export const faqs: Faq[] = [
   {
     question: 'How are investment returns determined?',
     answer:
-      'Investment returns are based on the performance of the underlying assets or investment opportunities. While projections may be provided for illustrative purposes, actual returns depend on market conditions, business performance, and other economic factors. Past performance does not guarantee future results.',
+      'Investment returns are based on the performance of the underlying assets or investment opportunities.',
   },
   {
     question: 'How do I get started with Al Quba Investment?',
@@ -56,7 +56,7 @@ const faqTranslationsAr: Faq[] = [
   {
     question: 'كيف تُحدَّد عوائد الاستثمار؟',
     answer:
-      'تعتمد عوائد الاستثمار على أداء الأصول أو الفرص الاستثمارية الأساسية. وبينما قد تُقدَّم توقعات لأغراض توضيحية، فإن العوائد الفعلية تعتمد على ظروف السوق، وأداء الأعمال، وعوامل اقتصادية أخرى. الأداء السابق لا يضمن نتائج مستقبلية.',
+      'تعتمد عوائد الاستثمار على أداء الأصول أو الفرص الاستثمارية الأساسية.',
   },
   {
     question: 'كيف أبدأ الاستثمار مع القبا؟',
