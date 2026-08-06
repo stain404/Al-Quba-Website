@@ -35,11 +35,12 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
           {
             heading: 'منظومة أعمالنا',
             links: [
-              { label: 'قطاع التصدير العالمي', href: '/sectors/global-exports', description: 'التجارة الدولية بقيادة شركة حبرون للتجارة العامة' },
-              { label: 'البنية التحتية والمقاولات والبيئة العمرانية', href: '/sectors/infrastructure-contracting', description: 'البناء والمقاولات بقيادة برايت هيرست' },
-              { label: 'الخدمات اللوجستية وسلاسل الإمداد', href: '/sectors/logistics-supply-chain', description: 'الشحن والخدمات اللوجستية بقيادة نوبل ستار للشحن' },
+              { label: 'التجارة الدولية', href: '/sectors/global-exports', description: 'التجارة الدولية بقيادة شركة حبرون للتجارة العامة' },
+              { label: 'العقارات', href: '/sectors/infrastructure-contracting', description: 'البناء والمقاولات بقيادة برايت هيرست' },
+              { label: 'الشحن والخدمات اللوجستية', href: '/sectors/logistics-supply-chain', description: 'الشحن والخدمات اللوجستية بقيادة نوبل ستار للشحن' },
               { label: 'الاستيراد والتصدير', href: '/sectors/import-export', description: 'التوريد العالمي بقيادة كونتينر كارت والوحدة للتجارة' },
               { label: 'استراتيجية العلامة التجارية', href: '/sectors/brand-strategy', description: 'حلول إبداعية ورقمية بقيادة فيو إنتراكتيف' },
+              { label: 'السياحة', href: '/sectors/tourism', description: 'السفر والضيافة بقيادة صندوق السفر العالمي الأول' },
             ],
           },
           {
@@ -65,11 +66,12 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
         {
           heading: 'Our Ecosystem',
           links: [
-            { label: 'Global Exports Division', href: '/sectors/global-exports', description: 'International trade led by Hebron General Trading LLC' },
-            { label: 'Infrastructure, Contracting & Built Environments', href: '/sectors/infrastructure-contracting', description: 'Construction and contracting led by Bright Hurst' },
-            { label: 'Logistics & Supply Chain', href: '/sectors/logistics-supply-chain', description: 'Freight and logistics led by NobleStar Shipping' },
+            { label: 'International Trading', href: '/sectors/global-exports', description: 'International trade led by Hebron General Trading LLC' },
+            { label: 'Real Estate', href: '/sectors/infrastructure-contracting', description: 'Construction and contracting led by Bright Hurst' },
+            { label: 'Shipping & Logistics', href: '/sectors/logistics-supply-chain', description: 'Freight and logistics led by NobleStar Shipping' },
             { label: 'Import & Export', href: '/sectors/import-export', description: 'Global sourcing led by ContainerKart and Al Wahda Trading' },
             { label: 'Brand Strategy', href: '/sectors/brand-strategy', description: 'Creative and digital solutions led by Phew Interactive' },
+            { label: 'Tourism', href: '/sectors/tourism', description: 'Travel and hospitality led by Global Travel Fund I' },
           ],
         },
         {

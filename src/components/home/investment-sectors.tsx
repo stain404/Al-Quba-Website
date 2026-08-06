@@ -17,26 +17,23 @@ interface SectorPanel {
 
 /**
  * Kept in lockstep with the "Our Ecosystem" mega menu column
- * (src/lib/site-config.ts) — same 5 sectors, same taglines, same order —
+ * (src/lib/site-config.ts) — same 6 sectors, same taglines, same order —
  * so Home and the nav never disagree about what the firm invests in.
  */
 const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
   en: [
     {
-      label: 'Global Exports Division',
+      label: 'International Trading',
       description: 'International trade led by Hebron General Trading LLC.',
       image: '/Trading.png',
     },
     {
-      // Shortened for this collapsed vertical strip specifically — the
-      // sector page itself uses the full "Infrastructure, Contracting &
-      // Built Environments" name.
-      label: 'Infrastructure & Contracting',
+      label: 'Real Estate',
       description: 'Construction and contracting led by Bright Hurst.',
       image: '/realestate.jpeg',
     },
     {
-      label: 'Logistics & Supply Chain',
+      label: 'Shipping & Logistics',
       description: 'Freight and logistics led by NobleStar Shipping.',
       image: '/shipping.jpeg',
     },
@@ -50,20 +47,25 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
       description: 'Creative and digital solutions led by Phew Interactive.',
       image: '/brandandstrategy.png',
     },
+    {
+      label: 'Tourism',
+      description: 'Travel and hospitality led by Global Travel Fund I.',
+      image: '/toursim.jpg',
+    },
   ],
   ar: [
     {
-      label: 'قطاع التصدير العالمي',
+      label: 'التجارة الدولية',
       description: 'تجارة دولية بقيادة شركة حبرون للتجارة العامة.',
       image: '/Trading.png',
     },
     {
-      label: 'البنية التحتية والمقاولات',
+      label: 'العقارات',
       description: 'بناء ومقاولات بقيادة برايت هيرست.',
       image: '/realestate.jpeg',
     },
     {
-      label: 'الخدمات اللوجستية وسلاسل الإمداد',
+      label: 'الشحن والخدمات اللوجستية',
       description: 'شحن وخدمات لوجستية بقيادة نوبل ستار للشحن.',
       image: '/shipping.jpeg',
     },
@@ -77,12 +79,17 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
       description: 'حلول إبداعية ورقمية بقيادة فيو إنتراكتيف.',
       image: '/brandandstrategy.png',
     },
+    {
+      label: 'السياحة',
+      description: 'سفر وضيافة بقيادة صندوق السفر العالمي الأول.',
+      image: '/toursim.jpg',
+    },
   ],
 }
 
 const headingCopy = {
-  en: { eyebrow: 'Where We Invest', title: 'Five sectors, one disciplined thesis' },
-  ar: { eyebrow: 'أين نستثمر', title: 'خمسة قطاعات، رؤية استثمارية واحدة منضبطة' },
+  en: { eyebrow: 'Where We Invest', title: 'Six sectors, one disciplined thesis' },
+  ar: { eyebrow: 'أين نستثمر', title: 'ستة قطاعات، رؤية استثمارية واحدة منضبطة' },
 } as const
 
 /**
@@ -131,8 +138,8 @@ function Panel({
           /* py-8 (tuned for the vertical rotated text on desktop, where
              padding runs along the column's length) left collapsed mobile
              strips with almost no room for a single horizontal text line —
-             at ~47px tall (5 panels sharing a 420px column) that reads as
-             visibly clipped. Mobile gets much lighter padding instead. */
+             at well under 60px tall (the collapsed panels share the mobile
+             column with the expanded one) that reads as visibly clipped. Mobile gets much lighter padding instead. */
           <div className="flex h-full items-center justify-center px-4 py-2 transition-all duration-500 lg:px-4 lg:py-10 lg:[writing-mode:vertical-lr]">
             <h3 className="whitespace-nowrap font-semibold text-body-md text-white/75 lg:rotate-180">{panel.label}</h3>
           </div>

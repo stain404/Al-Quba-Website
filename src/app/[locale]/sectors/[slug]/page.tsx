@@ -19,7 +19,7 @@ interface SectorPageProps {
   params: { locale: string; slug: string }
 }
 
-/** Pre-render all five sector pages at build time. */
+/** Pre-render every sector page at build time. */
 export function generateStaticParams() {
   return sectors.map((sector) => ({ slug: sector.slug }))
 }
@@ -57,7 +57,7 @@ const pageCopy = {
 } as const
 
 /**
- * Sector Detail — one template shared by all five investment divisions,
+ * Sector Detail — one template shared by every investment division,
  * populated from src/lib/sectors-data.ts. Every optional block (overview,
  * whyItMatters, process, industryOutlook, whyChoose) renders only when a
  * sector actually supplies it, so surfaces are alternated dynamically

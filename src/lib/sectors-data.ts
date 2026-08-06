@@ -23,6 +23,12 @@ import {
   PenTool,
   Palette,
   HardHat,
+  Plane,
+  Hotel,
+  MapPin,
+  Luggage,
+  Ticket,
+  CalendarCheck,
 } from 'lucide-react'
 
 export interface SectorCapability {
@@ -113,7 +119,7 @@ export interface Sector {
 export const sectors: Sector[] = [
   {
     slug: 'global-exports',
-    name: 'Global Exports Division',
+    name: 'International Trading',
     icon: Globe2,
     heroImage: '/Trading.png',
     heroImagePosition: 'left center',
@@ -204,7 +210,7 @@ export const sectors: Sector[] = [
   },
   {
     slug: 'infrastructure-contracting',
-    name: 'Infrastructure, Contracting & Built Environments',
+    name: 'Real Estate',
     icon: Building2,
     heroImage: '/realestate.jpeg',
     heroSubtitle: 'Building Strong Foundations for Sustainable Growth',
@@ -299,7 +305,7 @@ export const sectors: Sector[] = [
   },
   {
     slug: 'logistics-supply-chain',
-    name: 'Logistics & Supply Chain',
+    name: 'Shipping & Logistics',
     icon: Ship,
     heroImage: '/shipping.jpeg',
     heroSubtitle: 'Delivering Global Connectivity Through Integrated Logistics',
@@ -615,6 +621,95 @@ export const sectors: Sector[] = [
     },
     companies: ['Phew Interactive'],
   },
+  {
+    slug: 'tourism',
+    name: 'Tourism',
+    icon: Plane,
+    heroImage: '/toursim.jpg',
+    heroSubtitle: 'Investing in the Global Appetite for Travel',
+    tagline:
+      "Al Quba Investment's Tourism Division participates in the growth of global travel through hospitality partnerships, tour and travel operations, and destination experiences. By working alongside established operators rather than owning heavy infrastructure, the division captures travel demand while keeping capital mobile.",
+    description:
+      "Explore Al Quba Investment's Tourism Division and Global Travel Fund I, delivering hospitality partnerships, travel operations, and destination experiences across global markets.",
+    heroMetrics: [
+      { label: 'Active Positions', value: '1' },
+      { label: 'Model', value: 'Asset-light' },
+    ],
+    overview: {
+      heading: 'Capturing Travel Growth Without Owning the Concrete',
+      body: [
+        "Travel and tourism is one of the most durable consumer categories in the world, and the Gulf sits at the centre of it. Al Quba Investment's Tourism Division invests into that demand through hospitality operators, travel service providers, and destination experiences rather than by acquiring hotels and resorts outright.",
+        'That asset-light posture keeps capital flexible: exposure spreads across accommodation, tour operations, and travel services, and positions can be adjusted as seasonality and destination demand shift.',
+      ],
+    },
+    caseStudyHeading: {
+      eyebrow: 'Featured Fund',
+      title: 'Global Travel Fund I',
+    },
+    caseStudy: {
+      title: 'Global Travel Fund I',
+      description:
+        'Global Travel Fund I is a professionally managed travel and tourism investment pool focused on capitalising on the continued growth of the global travel industry. Through strategic partnerships with hospitality providers, travel operators, and tourism-focused businesses, the fund aims to create sustainable long-term value through diversified, asset-light investment opportunities.',
+      highlights: [
+        'Strategic partnerships with established hospitality operators',
+        'Asset-light exposure rather than heavy property ownership',
+        'Diversified revenue across accommodation, tours, and travel services',
+        'Returns generated from live travel demand, not speculative valuation',
+        'Positions reviewed against seasonality and destination performance',
+      ],
+      metrics: [
+        { label: 'Structure', value: 'Managed Investment Pool' },
+        { label: 'Focus', value: 'Travel & Hospitality' },
+        { label: 'Model', value: 'Asset-Light' },
+      ],
+    },
+    capabilitiesHeading: {
+      eyebrow: 'Division Capabilities',
+      title: 'Six areas of travel and hospitality expertise',
+    },
+    capabilities: [
+      { icon: Hotel, title: 'Hospitality Partnerships', description: 'Working with established accommodation operators rather than building and running properties ourselves.' },
+      { icon: Luggage, title: 'Tour & Travel Operations', description: 'Supporting operators who package, sell, and deliver travel itineraries at scale.' },
+      { icon: MapPin, title: 'Destination Experiences', description: 'Backing the excursions, attractions, and local experiences travellers actually book on arrival.' },
+      { icon: Ticket, title: 'Travel Services', description: 'Exposure to booking, ticketing, and ancillary services across the traveller journey.' },
+      { icon: Users, title: 'Inbound & Outbound Flows', description: 'Positioned across both visitors arriving into the Gulf and Gulf residents travelling abroad.' },
+      { icon: ShieldCheck, title: 'Operator Due Diligence', description: 'Every partner is reviewed on licensing, track record, and operational capacity before capital moves.' },
+    ],
+    whyItMatters: {
+      heading: 'Why Al Quba Invests in Tourism',
+      body: [
+        'Tourism is where consumer spending, infrastructure investment, and national strategy converge. The UAE and the wider GCC have made visitor economies a policy priority, and the resulting expansion in aviation capacity, events, and destination development continues to pull demand into the region.',
+        'For investors, the division offers exposure to that growth with a shorter cycle and lighter balance sheet than property ownership, and revenue that tracks real occupancy and booking activity rather than asset appreciation alone.',
+      ],
+    },
+    processHeading: {
+      eyebrow: 'Investment Journey',
+      title: 'From destination research to distribution',
+    },
+    process: [
+      { title: 'Destination Research', description: 'Assessing visitor volumes, seasonality, and demand drivers before any market is entered.' },
+      { title: 'Operator Selection', description: 'Identifying licensed hospitality and travel operators with a verifiable delivery record.' },
+      { title: 'Partnership Structuring', description: 'Agreeing commercial terms, revenue share, and reporting obligations up front.' },
+      { title: 'Capital Deployment', description: 'Allocating into approved hospitality and tourism opportunities.' },
+      { title: 'Performance Monitoring', description: 'Tracking occupancy, bookings, and operator performance through the season.' },
+      { title: 'Revenue Distribution', description: 'Profits are distributed according to the investment cycle and fund terms.' },
+    ],
+    industryOutlook: {
+      heading: {
+        eyebrow: 'Industry Outlook',
+        title: 'Where travel demand is headed',
+        description:
+          'Global travel continues to expand through rising middle-class mobility, expanded aviation capacity, and sustained national investment in visitor economies, creating long-term opportunities for investors positioned alongside established operators.',
+      },
+      items: [
+        { icon: TrendingUp, title: 'Rising Travel Demand', description: 'Sustained growth in leisure and business travel across regional and international markets.' },
+        { icon: Hotel, title: 'Hospitality Expansion', description: 'Continued development of accommodation capacity across Gulf destinations.' },
+        { icon: CalendarCheck, title: 'Events & Seasonality', description: 'Major events and calendar peaks creating repeatable demand windows.' },
+        { icon: Globe2, title: 'Destination Diversification', description: 'Exposure spread across multiple destinations rather than a single market.' },
+      ],
+    },
+    companies: [],
+  },
 ]
 
 /**
@@ -653,7 +748,7 @@ interface SectorTranslation {
 
 const sectorTranslations: Record<string, SectorTranslation> = {
   'global-exports': {
-    name: 'قطاع التصدير العالمي',
+    name: 'التجارة الدولية',
     heroSubtitle: 'توسيع التجارة الدولية من خلال شراكات موثوقة',
     tagline:
       'يسهّل قطاع التصدير العالمي التابع لشركة القبا للاستثمار حركة المنتجات عالية الجودة عبر الأسواق الدولية من خلال التوريد الاستراتيجي، وعمليات تصدير موثوقة، وشراكات تجارية طويلة الأمد. من خلال ربط المصنّعين والموردين والمشترين حول العالم، نخلق فرصًا تجارية مستدامة تدفع النمو العالمي.',
@@ -728,7 +823,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     },
   },
   'infrastructure-contracting': {
-    name: 'البنية التحتية والمقاولات والبيئة العمرانية',
+    name: 'العقارات',
     heroSubtitle: 'بناء أسس متينة لنمو مستدام',
     tagline:
       'يقدّم قطاع البنية التحتية والمقاولات والبيئة العمرانية التابع لشركة القبا للاستثمار حلول بناء ومقاولات موثوقة تدعم التطوير التجاري والصناعي وتطوير البنية التحتية. من خلال جودة التنفيذ، والخبرة الهندسية، وتنفيذ المشاريع بكفاءة، يساهم القطاع في إنشاء مساحات حديثة تدعم النمو الاقتصادي والقيمة طويلة الأمد.',
@@ -799,7 +894,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     },
   },
   'logistics-supply-chain': {
-    name: 'الخدمات اللوجستية وسلاسل الإمداد',
+    name: 'الشحن والخدمات اللوجستية',
     heroSubtitle: 'تحقيق التواصل العالمي من خلال خدمات لوجستية متكاملة',
     tagline:
       'يقدّم قطاع الخدمات اللوجستية وسلاسل الإمداد التابع لشركة القبا للاستثمار حلولًا لوجستية موثوقة تمكّن الشركات من نقل البضائع بكفاءة عبر الأسواق المحلية والدولية. من خلال الشحن المتكامل، وتنسيق الشحنات، والخبرة في سلاسل الإمداد، يدعم القطاع التجارة السلسة مع تعزيز التواصل التجاري العالمي.',
@@ -1036,6 +1131,81 @@ const sectorTranslations: Record<string, SectorTranslation> = {
       ],
     },
   },
+  tourism: {
+    name: 'السياحة',
+    heroSubtitle: 'الاستثمار في الشغف العالمي بالسفر',
+    tagline:
+      'يشارك قطاع السياحة في شركة القبا للاستثمار في نمو السفر العالمي من خلال شراكات الضيافة، وعمليات السفر والسياحة، وتجارب الوجهات. ومن خلال العمل إلى جانب مشغّلين راسخين بدلًا من امتلاك بنية تحتية ثقيلة، يلتقط القطاع الطلب على السفر مع الحفاظ على مرونة رأس المال.',
+    description:
+      'اكتشف قطاع السياحة في شركة القبا للاستثمار وصندوق السفر العالمي الأول، الذي يقدّم شراكات ضيافة وعمليات سفر وتجارب وجهات عبر الأسواق العالمية.',
+    heroMetrics: [
+      { label: 'مراكز نشطة', value: '1' },
+      { label: 'النموذج', value: 'خفيف الأصول' },
+    ],
+    overview: {
+      heading: 'التقاط نمو السفر دون امتلاك الأصول الثقيلة',
+      body: [
+        'يُعد السفر والسياحة من أكثر القطاعات الاستهلاكية استدامة في العالم، والخليج يقع في قلبه. يستثمر قطاع السياحة في شركة القبا للاستثمار في هذا الطلب من خلال مشغّلي الضيافة، ومزودي خدمات السفر، وتجارب الوجهات، بدلًا من شراء الفنادق والمنتجعات مباشرة.',
+        'يحافظ هذا التوجه خفيف الأصول على مرونة رأس المال: يتوزع التعرض عبر الإقامة وعمليات الجولات وخدمات السفر، ويمكن تعديل المراكز مع تغير الموسمية والطلب على الوجهات.',
+      ],
+    },
+    caseStudyHeading: { eyebrow: 'الصندوق المميز', title: 'صندوق السفر العالمي الأول' },
+    caseStudy: {
+      title: 'صندوق السفر العالمي الأول',
+      description:
+        'صندوق السفر العالمي الأول هو صندوق استثماري مُدار باحتراف في قطاع السفر والسياحة، يركّز على الاستفادة من النمو المستمر لصناعة السفر العالمية. ومن خلال شراكات استراتيجية مع مزودي الضيافة ومشغّلي السفر والشركات السياحية، يهدف الصندوق إلى خلق قيمة مستدامة طويلة الأمد عبر فرص استثمارية متنوعة وخفيفة الأصول.',
+      highlights: [
+        'شراكات استراتيجية مع مشغّلي ضيافة راسخين',
+        'تعرض خفيف الأصول بدلًا من التملك العقاري الثقيل',
+        'إيرادات متنوعة عبر الإقامة والجولات وخدمات السفر',
+        'عوائد ناتجة عن طلب سفر فعلي وليس عن تقييم مضاربي',
+        'مراجعة المراكز وفق الموسمية وأداء الوجهات',
+      ],
+      metrics: [
+        { label: 'الهيكل', value: 'صندوق استثماري مُدار' },
+        { label: 'التركيز', value: 'السفر والضيافة' },
+        { label: 'النموذج', value: 'خفيف الأصول' },
+      ],
+    },
+    capabilitiesHeading: { eyebrow: 'قدرات القطاع', title: 'ستة مجالات من الخبرة في السفر والضيافة' },
+    capabilities: [
+      { title: 'شراكات الضيافة', description: 'العمل مع مشغّلي إقامة راسخين بدلًا من بناء العقارات وتشغيلها بأنفسنا.' },
+      { title: 'عمليات الجولات والسفر', description: 'دعم المشغّلين الذين يصممون برامج السفر ويبيعونها وينفذونها على نطاق واسع.' },
+      { title: 'تجارب الوجهات', description: 'دعم الرحلات والمعالم والتجارب المحلية التي يحجزها المسافرون فعليًا عند وصولهم.' },
+      { title: 'خدمات السفر', description: 'تعرض لخدمات الحجز والتذاكر والخدمات المساندة عبر رحلة المسافر.' },
+      { title: 'حركة الوافدين والمغادرين', description: 'تموضع يشمل الزوار القادمين إلى الخليج ومقيمي الخليج المسافرين إلى الخارج.' },
+      { title: 'العناية الواجبة تجاه المشغّلين', description: 'يخضع كل شريك لمراجعة التراخيص والسجل والقدرة التشغيلية قبل نشر رأس المال.' },
+    ],
+    whyItMatters: {
+      heading: 'لماذا تستثمر القبا في السياحة',
+      body: [
+        'السياحة هي نقطة التقاء الإنفاق الاستهلاكي والاستثمار في البنية التحتية والاستراتيجية الوطنية. وقد جعلت الإمارات ودول مجلس التعاون اقتصاد الزوار أولوية في سياساتها، وما نتج عن ذلك من توسع في الطاقة الاستيعابية للطيران والفعاليات وتطوير الوجهات يواصل جذب الطلب إلى المنطقة.',
+        'وبالنسبة للمستثمرين، يوفر القطاع تعرضًا لهذا النمو بدورة أقصر وميزانية أخف من التملك العقاري، وبإيرادات تتبع الإشغال والحجوزات الفعلية لا ارتفاع قيمة الأصول وحده.',
+      ],
+    },
+    processHeading: { eyebrow: 'رحلة الاستثمار', title: 'من دراسة الوجهة إلى توزيع الأرباح' },
+    process: [
+      { title: 'دراسة الوجهة', description: 'تقييم أعداد الزوار والموسمية ومحركات الطلب قبل دخول أي سوق.' },
+      { title: 'اختيار المشغّل', description: 'تحديد مشغّلي الضيافة والسفر المرخّصين ذوي السجل الموثّق.' },
+      { title: 'هيكلة الشراكة', description: 'الاتفاق على الشروط التجارية وتقاسم الإيرادات والتزامات التقارير مسبقًا.' },
+      { title: 'نشر رأس المال', description: 'تخصيص الاستثمار في فرص الضيافة والسياحة المعتمدة.' },
+      { title: 'متابعة الأداء', description: 'تتبع الإشغال والحجوزات وأداء المشغّل طوال الموسم.' },
+      { title: 'توزيع الإيرادات', description: 'تُوزَّع الأرباح وفقًا لدورة الاستثمار وشروط الصندوق.' },
+    ],
+    industryOutlook: {
+      heading: {
+        eyebrow: 'نظرة على القطاع',
+        title: 'إلى أين يتجه الطلب على السفر',
+        description: 'يواصل السفر العالمي التوسع مع تزايد حركة الطبقة الوسطى، وتوسع الطاقة الاستيعابية للطيران، والاستثمار الوطني المستمر في اقتصاد الزوار، ما يخلق فرصًا طويلة الأمد للمستثمرين المتموضعين إلى جانب مشغّلين راسخين.',
+      },
+      items: [
+        { title: 'تنامي الطلب على السفر', description: 'نمو مستمر في سفر الترفيه والأعمال عبر الأسواق الإقليمية والدولية.' },
+        { title: 'توسع الضيافة', description: 'تطوير متواصل للطاقة الاستيعابية للإقامة عبر وجهات الخليج.' },
+        { title: 'الفعاليات والموسمية', description: 'فعاليات كبرى وذروات موسمية تخلق نوافذ طلب متكررة.' },
+        { title: 'تنويع الوجهات', description: 'تعرض موزع على وجهات متعددة بدلًا من سوق واحد.' },
+      ],
+    },
+  },
 }
 
 function mergeCaseStudy(
@@ -1107,10 +1277,10 @@ export function getSectorBySlug(slug: string, locale: string = 'en'): Sector | u
 }
 
 /**
- * Icon lookup for sectors not yet fully authored. All five divisions
- * (Global Exports, Infrastructure/Contracting/Built Environments,
- * Logistics & Supply Chain, Import & Export, Brand Strategy) are now
- * live, so this stays empty — kept in place so RelatedSectors doesn't
+ * Icon lookup for sectors not yet fully authored. All six divisions
+ * (International Trading, Real Estate, Shipping & Logistics, Import &
+ * Export, Brand Strategy, Tourism) are now live, so this stays empty —
+ * kept in place so RelatedSectors doesn't
  * need changes if another sector is ever added ahead of full authoring.
  */
 export const upcomingSectors: { slug: string; name: string; icon: LucideIcon }[] = []
