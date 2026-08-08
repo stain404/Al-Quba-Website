@@ -79,18 +79,6 @@ export interface Pool {
   snapshot?: PoolSnapshotItem[]
   /** Investment Highlights — richer title+description cards. */
   investmentHighlights?: PoolHighlight[]
-  /**
-   * Dashboard metrics rendered inside the two-column PoolDashboardHero
-   * (used instead of the classic PoolHero when present). Same shape as
-   * `snapshot`, but a distinct field so a pool can show these figures in
-   * the hero itself without the separate Investment Snapshot section
-   * further down the page rendering the same data twice.
-   */
-  heroDashboard?: PoolSnapshotItem[]
-  /** Right-column feature panel for PoolDashboardHero — same shape as
-   *  `investmentHighlights`, kept distinct for the same reason as
-   *  `heroDashboard` above. */
-  heroFeatures?: PoolHighlight[]
   /** A single supplementary FAQ entry specific to this pool. */
   faq?: { question: string; answer: string }
   steps: PoolStep[]
@@ -230,7 +218,13 @@ export const pools: Pool[] = [
       'Asset-light business model.',
       'Operational efficiency with risk-managed approach.',
     ],
-    heroDashboard: [
+    /* Travel once carried these nine tiles as `heroDashboard`, which
+       swapped the shared PoolHero for a bespoke two-column dashboard hero
+       and folded the figures into it — the single reason this page read as
+       a different template from Cocoa. As `snapshot` they render through
+       the shared PoolInvestmentSnapshot 3x3 grid instead. Order and icons
+       are identical to Cocoa's so the two grids match tile for tile. */
+    snapshot: [
       { icon: PieChart, label: 'Profit Split', value: '50% / 50%', detail: 'Al Quba / Investors' },
       { icon: Lock, label: 'Lock-in Period', value: '1 Year' },
       { icon: Clock, label: 'Cool-off Period', value: '20 Days' },
@@ -246,43 +240,20 @@ export const pools: Pool[] = [
       { icon: Percent, label: 'Management Fee', value: '2%' },
       { icon: BadgeCheck, label: 'Pool Status', value: 'Open to Subscription', isStatus: true },
     ],
-    heroFeatures: [
-      {
-        icon: Handshake,
-        title: 'Strategic Partnerships with Global Travel Brands',
-        description: 'Strong alliances with leading airlines, hospitality providers, travel operators, and tourism businesses across international markets.',
-      },
-      {
-        icon: TrendingUp,
-        title: 'High-Growth Global Travel Industry',
-        description: 'Benefit from continued recovery and expansion driven by international tourism, business travel, leisure experiences, and increasing global mobility.',
-      },
-      {
-        icon: Layers,
-        title: 'Asset-Light Investment Strategy',
-        description: 'Diversified exposure across hospitality, travel services, tourism infrastructure, and experience-driven businesses without significant capital-intensive operations.',
-      },
-      {
-        icon: ShieldCheck,
-        title: 'Disciplined Capital Deployment & Risk Management',
-        description: 'Professional portfolio management supported by strategic partnerships, operational efficiency, ongoing performance monitoring, and comprehensive risk controls.',
-      },
-    ],
     steps: [
-      { title: 'Operator Review', description: 'Operators are assessed on booking volume, revenue history, and confirmed forward reservations.' },
-      { title: 'Facility Deployment', description: 'Pool capital funds pre-season working capital: fleet leasing, staffing, and fuel reserves.' },
-      { title: 'Peak Season Operation', description: 'Operators run their peak-season schedule against confirmed bookings.' },
-      { title: 'Revenue Sweep & Repayment', description: 'A portion of booking revenue is swept to the facility throughout the season until repaid in full.' },
+      { title: 'Strategic Partner Selection', description: 'Identify qualified hospitality operators, tourism assets, and strategic travel partnerships.' },
+      { title: 'Capital Deployment', description: 'Allocate investment into approved hospitality and tourism opportunities.' },
+      { title: 'Revenue Generation', description: 'Generate returns through hospitality operations, travel demand, and tourism-related income.' },
+      { title: 'Revenue Distribution', description: 'Profits are distributed according to the investment cycle and fund terms.' },
     ],
-    structure: [
-      { term: 'Lock-in Period', detail: '1 Year' },
-      { term: 'Cooling Period', detail: '20 Days' },
-      { term: 'Pool Age', detail: '3 Years' },
-    ],
+    /* Empty to match Cocoa: an empty `structure` skips the Fund Details
+       section, which also flips PoolHowItWorks to the `muted` surface, so
+       the downstream section backgrounds line up with Cocoa's exactly. */
+    structure: [],
     risks: [
-      { icon: ShieldCheck, title: 'Revenue Sweep Mechanism', description: 'Repayment is automated against booking revenue rather than dependent on a single lump-sum payment.' },
-      { icon: FileCheck, title: 'Confirmed Bookings Only', description: 'Facilities are sized against already-confirmed reservations, not projected demand.' },
-      { icon: Clock, title: 'Seasonal Alignment', description: 'Cycle length is fixed to a single peak season, avoiding off-season exposure.' },
+      { icon: Handshake, title: 'Strategic Brand Partnerships', description: 'Investments are deployed only through established hospitality and travel partners.' },
+      { icon: Layers, title: 'Asset-Light Investment Model', description: 'Capital is allocated into operational opportunities rather than owning heavy physical infrastructure.' },
+      { icon: ShieldCheck, title: 'Diversified Revenue Streams', description: 'Exposure is spread across multiple travel and hospitality segments to reduce concentration risk.' },
     ],
     brochureUrl: '/contact',
   },
@@ -311,8 +282,6 @@ interface PoolTranslation {
   heroMetrics: { label: string; value: string }[]
   highlights: string[]
   snapshot?: PoolSnapshotTranslation[]
-  heroDashboard?: PoolSnapshotTranslation[]
-  heroFeatures?: { title: string; description: string }[]
   steps: { title: string; description: string }[]
   structure?: { term: string; detail: string }[]
   risks: { title: string; description: string }[]
@@ -410,7 +379,7 @@ const poolTranslations: Record<string, PoolTranslation> = {
       'نموذج أعمال خفيف الأصول.',
       'كفاءة تشغيلية بنهج مُدار للمخاطر.',
     ],
-    heroDashboard: [
+    snapshot: [
       { label: 'توزيع الأرباح', value: '50% / 50%', detail: 'القبا / المستثمرون' },
       { label: 'فترة القفل', value: '1 سنة' },
       { label: 'فترة التهدئة', value: '20 يومًا' },
@@ -421,27 +390,20 @@ const poolTranslations: Record<string, PoolTranslation> = {
       { label: 'رسوم الإدارة', value: '2%' },
       { label: 'حالة الصندوق', value: 'متاح للاكتتاب' },
     ],
-    heroFeatures: [
-      { title: 'شراكات استراتيجية مع علامات سفر عالمية', description: 'تحالفات قوية مع شركات طيران رائدة، ومقدمي خدمات ضيافة، ومشغلي سفر، وشركات سياحية عبر أسواق دولية.' },
-      { title: 'صناعة سفر عالمية عالية النمو', description: 'استفد من التعافي والتوسع المستمرين مدفوعين بالسياحة الدولية، وسفر الأعمال، وتجارب الترفيه، وزيادة الحراك العالمي.' },
-      { title: 'استراتيجية استثمار خفيفة الأصول', description: 'تعرّض متنوع عبر الضيافة، وخدمات السفر، والبنية التحتية السياحية، والأعمال القائمة على التجربة دون عمليات كثيفة رأس المال.' },
-      { title: 'نشر منضبط لرأس المال وإدارة المخاطر', description: 'إدارة محفظة احترافية مدعومة بشراكات استراتيجية، وكفاءة تشغيلية، ومراقبة أداء مستمرة، وضوابط مخاطر شاملة.' },
-    ],
     steps: [
-      { title: 'مراجعة المشغل', description: 'يتم تقييم المشغلين بناءً على حجم الحجوزات، وسجل الإيرادات، والحجوزات المستقبلية المؤكدة.' },
-      { title: 'نشر التسهيل', description: 'يموّل رأس مال الصندوق رأس المال التشغيلي لما قبل الموسم: تأجير الأسطول، والتوظيف، واحتياطيات الوقود.' },
-      { title: 'تشغيل موسم الذروة', description: 'يدير المشغلون جدولهم في موسم الذروة مقابل حجوزات مؤكدة.' },
-      { title: 'تحصيل الإيرادات والسداد', description: 'يُحوَّل جزء من إيرادات الحجوزات إلى التسهيل طوال الموسم حتى السداد الكامل.' },
+      { title: 'اختيار الشركاء الاستراتيجيين', description: 'تحديد مشغّلي الضيافة المؤهلين، والأصول السياحية، والشراكات الاستراتيجية في قطاع السفر.' },
+      { title: 'نشر رأس المال', description: 'تخصيص الاستثمار في فرص الضيافة والسياحة المعتمدة.' },
+      { title: 'توليد الإيرادات', description: 'تحقيق العوائد من خلال عمليات الضيافة، والطلب على السفر، والدخل المرتبط بالسياحة.' },
+      { title: 'توزيع الإيرادات', description: 'تُوزَّع الأرباح وفقًا لدورة الاستثمار وشروط الصندوق.' },
     ],
-    structure: [
-      { term: 'فترة القفل', detail: '1 سنة' },
-      { term: 'فترة التهدئة', detail: '20 يومًا' },
-      { term: 'عمر الصندوق', detail: '3 سنوات' },
-    ],
+    /* Omitted deliberately: `localizePool` resolves `t.structure ?? pool.structure`,
+       so leaving this out falls through to the English pool's now-empty
+       array and the Fund Details section is skipped in Arabic too. Left in
+       place it would have kept rendering a section Cocoa does not have. */
     risks: [
-      { title: 'آلية تحصيل الإيرادات', description: 'يتم السداد تلقائيًا مقابل إيرادات الحجوزات بدلًا من الاعتماد على دفعة واحدة مقطوعة.' },
-      { title: 'حجوزات مؤكدة فقط', description: 'يتم تحديد حجم التسهيلات بناءً على حجوزات مؤكدة بالفعل، وليس طلبًا متوقعًا.' },
-      { title: 'التوافق الموسمي', description: 'مدة الدورة ثابتة على موسم ذروة واحد، ما يتجنب التعرض خارج الموسم.' },
+      { title: 'شراكات استراتيجية مع العلامات التجارية', description: 'يتم نشر الاستثمارات فقط من خلال شركاء ضيافة وسفر راسخين.' },
+      { title: 'نموذج استثماري خفيف الأصول', description: 'يُخصَّص رأس المال في فرص تشغيلية بدلًا من امتلاك بنية تحتية مادية ثقيلة.' },
+      { title: 'مصادر إيرادات متنوعة', description: 'يتوزع التعرض عبر قطاعات سفر وضيافة متعددة للحد من مخاطر التركّز.' },
     ],
   },
 }
@@ -472,8 +434,6 @@ function localizePool(pool: Pool, locale: string): Pool {
     heroMetrics: t.heroMetrics,
     highlights: t.highlights,
     snapshot: mergeSnapshot(pool.snapshot, t.snapshot),
-    heroDashboard: mergeSnapshot(pool.heroDashboard, t.heroDashboard),
-    heroFeatures: pool.heroFeatures ? mergeTitled(pool.heroFeatures, t.heroFeatures) : pool.heroFeatures,
     steps: mergeTitled(pool.steps, t.steps),
     structure: t.structure ?? pool.structure,
     risks: mergeTitled(pool.risks, t.risks),

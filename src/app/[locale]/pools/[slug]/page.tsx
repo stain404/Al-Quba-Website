@@ -4,7 +4,6 @@ import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { CTASection } from '@/components/sections/cta-section'
 import { PoolHero } from '@/components/pools/pool-hero'
-import { PoolDashboardHero } from '@/components/pools/pool-dashboard-hero'
 import { PoolInvestmentSnapshot } from '@/components/pools/pool-investment-snapshot'
 import { PoolHighlights } from '@/components/pools/pool-highlights'
 import { PoolHowItWorks } from '@/components/pools/pool-how-it-works'
@@ -64,14 +63,9 @@ const ctaCopy = {
  * Details, and the FAQ — that content duplicated the Hero, Investment
  * Snapshot, and How It Works sections, so the page was shortened to
  * Hero → Snapshot → How It Works → Risk & Safeguards → Related →
- * CTA. Travel Fund uses PoolDashboardHero instead of the classic
- * PoolHero (triggered by the presence of `heroDashboard`) — its own
- * two-column executive dashboard absorbs what would otherwise be the
- * Investment Snapshot and Investment Highlights sections, so those
- * stay unpopulated for Travel to avoid showing the same figures twice.
- * Both hero variants share the `ink` surface, so the downstream surface
- * alternation (PoolHowItWorks' `surface` override for when Fund Details
- * is skipped) works unchanged regardless of which hero renders.
+ * CTA. Travel Fund once rendered a bespoke two-column dashboard hero
+ * that absorbed the Investment Snapshot section; it now runs on this
+ * same template as Cocoa, section for section.
  */
 export default function PoolDetailPage({ params }: PoolPageProps) {
   setRequestLocale(params.locale)
@@ -99,11 +93,7 @@ export default function PoolDetailPage({ params }: PoolPageProps) {
       />
       <Navbar />
       <main>
-        {pool.heroDashboard && pool.heroDashboard.length > 0 ? (
-          <PoolDashboardHero pool={pool} />
-        ) : (
-          <PoolHero pool={pool} />
-        )}
+        <PoolHero pool={pool} />
         {pool.snapshot && pool.snapshot.length > 0 && (
           <PoolInvestmentSnapshot overview={pool.description} snapshot={pool.snapshot} />
         )}
