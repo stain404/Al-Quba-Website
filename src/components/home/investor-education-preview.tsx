@@ -22,7 +22,16 @@ const copy = {
   ar: { eyebrow: 'تثقيف المستثمرين', title: 'تعرف على منهجنا قبل أن تستثمر', viewAll: 'عرض جميع الموارد' },
 } as const
 
+/**
+ * The alternating offsets are designed for the multi-column grid, where
+ * neighbouring cards sit side by side and their opposing travel never
+ * interacts. Stacked into one column below `md`, those same neighbours
+ * move *toward* each other — a ±90px pair closes 180px across a 40px
+ * grid gap, so cards overlapped at some scroll positions and left a gulf
+ * at others. Mobile keeps the effect at an amplitude the gap can absorb.
+ */
 const OFFSET = 90
+const OFFSET_STACKED = 16
 
 /**
  * Each card tracks its own scroll transit through the viewport and maps
@@ -38,15 +47,35 @@ function AnimatedBlogCard({ article, index }: { article: BlogPostItem; index: nu
   const ref = React.useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
 
+  // Matches BlogGrid's own `md:grid-cols-2` — the breakpoint at which
+  // cards stop sharing a column.
+  const [isStacked, setIsStacked] = React.useState(true)
+  React.useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const update = () => setIsStacked(!mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  const offset = isStacked ? OFFSET_STACKED : OFFSET
   const fromAbove = index % 2 === 0
   // Settles at its resting position and holds there for a stretch (0.35
   // to 0.65) before continuing on in the same direction it entered from.
   const y = useTransform(
     scrollYProgress,
     [0, 0.35, 0.65, 1],
-    fromAbove ? [-OFFSET, 0, 0, OFFSET] : [OFFSET, 0, 0, -OFFSET]
+    fromAbove ? [-offset, 0, 0, offset] : [offset, 0, 0, -offset]
   )
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0])
+  // Stacked, a card occupies most of the viewport for its whole transit,
+  // so the wide fade band left it visibly dimmed while it was the only
+  // thing on screen. Mobile holds full opacity across a much longer
+  // middle stretch and only fades at the very edges.
+  const opacity = useTransform(
+    scrollYProgress,
+    isStacked ? [0, 0.12, 0.88, 1] : [0, 0.25, 0.75, 1],
+    [0, 1, 1, 0]
+  )
 
   return (
     <motion.div ref={ref} style={{ y, opacity }}>

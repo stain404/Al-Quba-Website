@@ -2,8 +2,9 @@
 
 import * as React from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useLocale } from 'next-intl'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 
@@ -42,13 +43,51 @@ const headingCopy = {
     eyebrow: 'Global Presence',
     title: 'Eight countries. One trade network.',
     description: 'Our operating footprint follows the physical trade lanes our capital moves through, not a marketing map.',
+    previous: 'Previous country',
+    next: 'Next country',
   },
   ar: {
     eyebrow: 'الحضور العالمي',
     title: 'ثماني دول. شبكة تجارية واحدة.',
     description: 'يتبع نطاق عملياتنا ممرات التجارة الفعلية التي يتحرك عبرها رأس مالنا، لا خريطة تسويقية.',
+    previous: 'الدولة السابقة',
+    next: 'الدولة التالية',
   },
 } as const
+
+/**
+ * Prev/next control flanking the map. Physically left = previous and
+ * right = next in both locales rather than mirroring under RTL: these
+ * step through pins on a world map, so the direction users read as
+ * "back" is the one that moves left across the map, not the one that
+ * matches text flow.
+ */
+function MapNavButton({
+  direction,
+  label,
+  onClick,
+  className,
+}: {
+  direction: 'previous' | 'next'
+  label: string
+  onClick: () => void
+  className?: string
+}) {
+  const Icon = direction === 'previous' ? ChevronLeft : ChevronRight
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      className={cn(
+        'absolute top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/70 text-text-inverse backdrop-blur-sm transition-colors duration-200 hover:border-accent/50 hover:bg-ink hover:text-accent-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 lg:size-11',
+        className
+      )}
+    >
+      <Icon className="size-5" strokeWidth={1.5} aria-hidden />
+    </button>
+  )
+}
 
 /** Short diagonal "kink" near the dot before the line straightens out
  *  horizontally to touch the country name — matches a hand-drawn leader
@@ -111,7 +150,6 @@ export function GlobalPresence() {
   const leftOffices = offices.slice(0, 4)
   const rightOffices = offices.slice(4)
 
-  const wrapperRef = React.useRef<HTMLDivElement>(null)
   const gridRef = React.useRef<HTMLDivElement>(null)
   const mapBoxRef = React.useRef<HTMLDivElement>(null)
   const itemRefs = React.useRef<Record<string, HTMLLIElement | null>>({})
@@ -124,27 +162,19 @@ export function GlobalPresence() {
     itemRefs.current[country] = el
   }, [])
 
-  // The wrapper is much taller than the viewport; the section inside it is
-  // `sticky`, so it locks in place for the whole scroll transit while
-  // activeIndex cycles through the offices, then releases once the
-  // wrapper's bottom clears the viewport.
-  const { scrollYProgress } = useScroll({
-    target: wrapperRef,
-    offset: ['start start', 'end end'],
-  })
-
-  useMotionValueEvent(scrollYProgress, 'change', (progress) => {
-    const index = Math.min(
-      offices.length - 1,
-      Math.floor(progress * offices.length)
-    )
-    setActiveIndex(Math.max(0, index))
-  })
+  // Wraps at both ends, so the controls never dead-end on a disabled
+  // button — there's no first or last country here, just a loop.
+  const step = React.useCallback(
+    (delta: number) => {
+      setActiveIndex((current) => (current + delta + offices.length) % offices.length)
+    },
+    [offices.length]
+  )
 
   const active = offices[activeIndex]
 
   // Only the leader-line geometry and the 3-column list layout need the
-  // `lg` breakpoint — the cycling animation itself now runs everywhere.
+  // `lg` breakpoint.
   React.useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)')
     const update = () => setIsWideLayout(mq.matches)
@@ -194,30 +224,37 @@ export function GlobalPresence() {
   }, [active, isWideLayout, leftOffices])
 
   return (
-    <div ref={wrapperRef} className="relative h-[420vh]">
-      <section className="sticky top-0 flex h-dvh flex-col justify-center overflow-hidden bg-ink py-12 text-text-inverse md:py-20 lg:py-28">
-        <div className="container mx-auto max-w-container">
+    /* No scroll runway and no sticky pin: the country cycle is driven by
+       the prev/next controls flanking the map, so this is an ordinary
+       section sized to its own content. */
+    <section className="overflow-hidden bg-ink py-20 text-text-inverse md:py-24 lg:py-28">
+      <div className="container mx-auto max-w-container">
 
-          {/* Header */}
-          <div className="mb-6 flex flex-col gap-3 lg:mb-10 lg:gap-4">
-            <Eyebrow inverse>{heading.eyebrow}</Eyebrow>
-            <Heading as="h2" size="display-md" inverse>
-              {heading.title}
-            </Heading>
-            <p className="hidden text-body-md text-text-inverse-muted lg:block">{heading.description}</p>
-          </div>
+        {/* Header */}
+        <div className="mb-8 flex flex-col gap-3 lg:mb-10 lg:gap-4">
+          <Eyebrow inverse>{heading.eyebrow}</Eyebrow>
+          <Heading as="h2" size="display-md" inverse>
+            {heading.title}
+          </Heading>
+          <p className="text-body-sm text-text-inverse-muted lg:text-body-md">{heading.description}</p>
+        </div>
 
-          {/* Compact mobile/tablet view: map with a single cycling dot,
-              the active country name, and a progress-dot row — all of it
-              fits comfortably within the pinned viewport regardless of
-              phone height. */}
-          <div className="flex flex-col items-center gap-6 lg:hidden">
-            <div className="relative mx-auto aspect-[1761/893] w-full max-w-[420px]">
+        {/* Compact mobile/tablet view: map with a single dot, the active
+            country name, and a progress-dot row. */}
+        <div className="flex flex-col items-center gap-7 lg:hidden">
+          {/* Padded inward so the flanking controls have somewhere to sit
+              without overlapping the landmasses — the map itself is a
+              wide, short 1761:893 and its dots sit well inside the
+              frame. */}
+          <div className="relative w-full px-11">
+            <MapNavButton direction="previous" label={heading.previous} onClick={() => step(-1)} className="left-0" />
+            <MapNavButton direction="next" label={heading.next} onClick={() => step(1)} className="right-0" />
+            <div className="relative mx-auto aspect-[1761/893] w-full max-w-[560px]">
               <Image
                 src="/map.png"
                 alt="World map showing Al Quba Investment's office locations"
                 fill
-                sizes="100vw"
+                sizes="(min-width: 640px) 560px, 100vw"
                 className="object-contain"
                 priority={false}
               />
@@ -240,34 +277,35 @@ export function GlobalPresence() {
                 )}
               </AnimatePresence>
             </div>
-
-            <AnimatePresence mode="wait">
-              {active && (
-                <motion.p
-                  key={active.country}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="text-body-lg font-semibold text-accent-on-ink"
-                >
-                  {active.country}
-                </motion.p>
-              )}
-            </AnimatePresence>
-
-            <div className="flex items-center gap-1.5" aria-hidden>
-              {offices.map((office, i) => (
-                <span
-                  key={office.country}
-                  className={cn(
-                    'h-1 rounded-full transition-all duration-300',
-                    i === activeIndex ? 'w-6 bg-accent-on-ink' : 'w-1.5 bg-white/20'
-                  )}
-                />
-              ))}
-            </div>
           </div>
+
+          <AnimatePresence mode="wait">
+            {active && (
+              <motion.p
+                key={active.country}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="text-body-lg font-semibold text-accent-on-ink"
+              >
+                {active.country}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          <div className="flex items-center gap-1.5" aria-hidden>
+            {offices.map((office, i) => (
+              <span
+                key={office.country}
+                className={cn(
+                  'h-1 rounded-full transition-all duration-300',
+                  i === activeIndex ? 'w-6 bg-accent-on-ink' : 'w-1.5 bg-white/20'
+                )}
+              />
+            ))}
+          </div>
+        </div>
 
           {/* Wide layout (lg+): country list left, map center, country
               list right, with a leader line drawn to the active item. */}
@@ -283,7 +321,11 @@ export function GlobalPresence() {
               registerRef={registerRef}
             />
 
-            <div className="px-6">
+            {/* The px-6 gutter is where the controls sit, clear of both
+                the map and the country lists either side of it. */}
+            <div className="relative px-6">
+              <MapNavButton direction="previous" label={heading.previous} onClick={() => step(-1)} className="-left-2" />
+              <MapNavButton direction="next" label={heading.next} onClick={() => step(1)} className="-right-2" />
               <div ref={mapBoxRef} className="relative mx-auto aspect-[1761/893] w-full max-w-[560px]">
                 <Image
                   src="/map.png"
@@ -339,8 +381,7 @@ export function GlobalPresence() {
             </svg>
 
           </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   )
 }

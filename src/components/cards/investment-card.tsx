@@ -44,6 +44,14 @@ export function InvestmentCard({
             fill
             className="object-cover transition-transform duration-500 ease-institutional group-hover:scale-[1.03]"
           />
+          {/* Mobile-only: the text block below overlays this photo, and a
+              frosted panel alone can't carry it over a bright or busy
+              crop. This darkens the lower half the panel sits on so the
+              contrast doesn't depend on what the photo is doing. */}
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
+            aria-hidden
+          />
         </div>
       )}
       <div className={cn('relative hidden md:block md:w-full md:shrink-0', compact ? 'md:aspect-[5/3]' : 'md:aspect-[4/3]')}>
@@ -67,7 +75,7 @@ export function InvestmentCard({
           // mobile: overlay with frosted glass — sits at the BOTTOM of the card
           'mt-auto',
           // frosted glass scrim (mobile only)
-          'bg-black/30 backdrop-blur-md md:backdrop-blur-none',
+          'bg-black/45 backdrop-blur-md md:backdrop-blur-none',
           // desktop: solid dark background, no blur
           'md:bg-ink'
         )}

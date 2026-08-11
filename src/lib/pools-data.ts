@@ -14,7 +14,6 @@ import {
   Target,
   Wallet,
   Percent,
-  BadgeCheck,
   Handshake,
   Layers,
 } from 'lucide-react'
@@ -44,8 +43,6 @@ export interface PoolSnapshotItem {
   detail?: string
   /** Small disclaimer specific to this figure (e.g. projected returns). */
   disclaimer?: string
-  /** Renders `value` as a status pill instead of plain text. */
-  isStatus?: boolean
 }
 
 export interface PoolHighlight {
@@ -64,12 +61,10 @@ export interface Pool {
   description: string
   /** Full-bleed photo background for the pool hero, e.g. '/frozen_food.png'. */
   heroImage?: string
-  /** Subscription status shown as a pill in the hero, e.g. 'Open to Subscription'. */
-  status: string
-  /** Drives CTA/pill styling — kept as an explicit boolean rather than
-   *  string-matching `status` (e.g. `.includes('open')`), since `status`
-   *  is translated per locale and a substring match on translated text
-   *  is unreliable. */
+  /** Whether the pool is accepting subscriptions. No longer surfaced as
+   *  a visible status anywhere — subscription status was removed from
+   *  the hero, the snapshot grid, and the home cards — but it still
+   *  decides the hero CTA ("Invest Now" vs "Explore Other Pools"). */
   isOpen: boolean
   /** "Investment Details" — rendered in the hero's metrics row. */
   heroMetrics: { label: string; value: string }[]
@@ -101,15 +96,18 @@ export const pools: Pool[] = [
     category: 'Frozen Meat Trading Fund',
     poolNumber: 1,
     heroImage: '/frozen_food.png',
-    status: 'Fully Subscribed',
     isOpen: false,
     tagline:
       'Frost Capital Fund I is a professionally managed frozen meat trading investment pool designed to capitalize on high-volume international trade opportunities. Leveraging established supplier relationships, efficient cold-chain logistics, and disciplined capital deployment, the fund focuses on delivering sustainable value through structured trading cycles.',
     description:
       'Frost Capital Fund I is a short-term frozen meat trading investment pool focused on sourcing, importing, and distributing premium frozen meat products across established international trade corridors. By combining strong supplier relationships, efficient cold-chain logistics, and disciplined inventory management, the fund is structured to optimize capital deployment while maintaining operational efficiency and controlled risk.',
-    heroMetrics: [
-      { label: 'Pool Status', value: 'Fully Subscribed' },
-    ],
+    /* Pool Status was the only hero metric every pool carried, so with
+       subscription status removed these lists are empty. PoolHero already
+       guards on `heroMetrics.length > 0` and drops its "Investment
+       Details" block, and the home InvestmentCard hides its metric row
+       when there's no value — the figures worth showing all live in
+       `snapshot` regardless. */
+    heroMetrics: [],
     highlights: [
       'Established cold-chain and storage network.',
       'Strong supplier partnerships in frozen meat trade.',
@@ -130,7 +128,6 @@ export const pools: Pool[] = [
       { icon: Target, label: 'Target Capital', value: 'AED 1.8 Million' },
       { icon: Wallet, label: 'Minimum Investment', value: 'AED 50,000' },
       { icon: Percent, label: 'Management Fee', value: '2%' },
-      { icon: BadgeCheck, label: 'Pool Status', value: 'Fully Subscribed', isStatus: true },
     ],
     steps: [
       { title: 'Origination', description: 'Our trade desk secures a confirmed purchase order from a Gulf distributor and identifies a verified origin supplier.' },
@@ -144,7 +141,7 @@ export const pools: Pool[] = [
       { icon: FileCheck, title: 'Verified Counterparties', description: 'All distributors and suppliers undergo a formal credit and compliance review before onboarding.' },
       { icon: Clock, title: 'Defined Cycle Length', description: 'Capital is never committed beyond the length of a single, pre-agreed trade cycle.' },
     ],
-    brochureUrl: '/contact',
+    brochureUrl: '/brochures/frozen.pdf',
   },
   {
     slug: 'cocoa',
@@ -152,15 +149,12 @@ export const pools: Pool[] = [
     category: 'Branded Chocolate Trading Fund',
     poolNumber: 2,
     heroImage: '/cocoa_beans.png',
-    status: 'Fully Subscribed',
     isOpen: false,
     tagline:
       'Premium Cocoa Fund I is a professionally managed branded chocolate trading investment pool designed to capitalize on consistent global FMCG demand. Through strategic supplier partnerships, efficient distribution networks, and disciplined capital deployment, the fund focuses on creating sustainable long-term value while maintaining operational efficiency and controlled risk.',
     description:
       'Premium Cocoa Fund I is a branded chocolate trading and distribution investment pool focused on sourcing internationally recognised premium chocolate brands and supplying high-demand retail and wholesale markets. By combining strong supplier relationships, efficient inventory management, and an established distribution network, the fund is structured to maximise capital efficiency while delivering sustainable long-term growth.',
-    heroMetrics: [
-      { label: 'Pool Status', value: 'Fully Subscribed' },
-    ],
+    heroMetrics: [],
     highlights: [
       'Strong global chocolate brand sourcing.',
       'High-demand FMCG category with repeat consumption.',
@@ -181,7 +175,6 @@ export const pools: Pool[] = [
       { icon: Target, label: 'Target Capital', value: 'AED 2 Million' },
       { icon: Wallet, label: 'Minimum Investment', value: 'AED 50,000' },
       { icon: Percent, label: 'Management Fee', value: '2%' },
-      { icon: BadgeCheck, label: 'Pool Status', value: 'Fully Subscribed', isStatus: true },
     ],
     steps: [
       { title: 'Offtake Agreement', description: 'A processor commits to a fixed-price offtake contract ahead of the harvest season.' },
@@ -195,7 +188,7 @@ export const pools: Pool[] = [
       { icon: Landmark, title: 'Cooperative Vetting', description: 'Every financed cooperative has a multi-season delivery track record before onboarding.' },
       { icon: Clock, title: 'Single Seasonal Cycle', description: 'Capital is tied to one harvest cycle at a time, never rolled into unrelated positions.' },
     ],
-    brochureUrl: '/contact',
+    brochureUrl: '/brochures/cocoa.pdf',
   },
   {
     slug: 'travel',
@@ -203,15 +196,12 @@ export const pools: Pool[] = [
     category: 'Global Travel Investment Fund',
     poolNumber: 3,
     heroImage: '/travel.jpeg',
-    status: 'Open to Subscription',
     isOpen: true,
     tagline:
       'Global Travel Fund I is a professionally managed travel and tourism investment pool focused on capitalising on the continued growth of the global travel industry. Through strategic partnerships with hospitality providers, travel operators, and tourism-focused businesses, the fund aims to create sustainable long-term value through diversified, asset-light investment opportunities.',
     description:
       'Travel and tourism investment fund leveraging strategic partnerships, premium travel experiences, and asset-light business models to capture global travel growth.',
-    heroMetrics: [
-      { label: 'Pool Status', value: 'Open to Subscription' },
-    ],
+    heroMetrics: [],
     highlights: [
       'Strategic partnerships with global travel brands.',
       'High-growth travel industry.',
@@ -238,7 +228,6 @@ export const pools: Pool[] = [
       { icon: Target, label: 'Target Capital', value: 'AED 2 Million' },
       { icon: Wallet, label: 'Minimum Investment', value: 'AED 50,000' },
       { icon: Percent, label: 'Management Fee', value: '2%' },
-      { icon: BadgeCheck, label: 'Pool Status', value: 'Open to Subscription', isStatus: true },
     ],
     steps: [
       { title: 'Strategic Partner Selection', description: 'Identify qualified hospitality operators, tourism assets, and strategic travel partnerships.' },
@@ -255,7 +244,7 @@ export const pools: Pool[] = [
       { icon: Layers, title: 'Asset-Light Investment Model', description: 'Capital is allocated into operational opportunities rather than owning heavy physical infrastructure.' },
       { icon: ShieldCheck, title: 'Diversified Revenue Streams', description: 'Exposure is spread across multiple travel and hospitality segments to reduce concentration risk.' },
     ],
-    brochureUrl: '/contact',
+    brochureUrl: '/brochures/travel.pdf',
   },
 ]
 
@@ -278,7 +267,6 @@ interface PoolTranslation {
   category: string
   tagline: string
   description: string
-  status: string
   heroMetrics: { label: string; value: string }[]
   highlights: string[]
   snapshot?: PoolSnapshotTranslation[]
@@ -291,12 +279,11 @@ const poolTranslations: Record<string, PoolTranslation> = {
   frozen: {
     name: 'صندوق فروست كابيتال الأول',
     category: 'صندوق تجارة اللحوم المجمدة',
-    status: 'مكتمل الاكتتاب',
     tagline:
       'صندوق فروست كابيتال الأول هو صندوق استثماري مُدار باحترافية لتجارة اللحوم المجمدة، مصمم للاستفادة من فرص التجارة الدولية عالية الحجم. من خلال علاقات موردين راسخة، وخدمات لوجستية فعّالة لسلسلة التبريد، ونشر منضبط لرأس المال، يركز الصندوق على تحقيق قيمة مستدامة من خلال دورات تجارية منظمة.',
     description:
       'صندوق فروست كابيتال الأول هو صندوق استثماري قصير الأمد لتجارة اللحوم المجمدة، يركز على توريد واستيراد وتوزيع منتجات اللحوم المجمدة الفاخرة عبر ممرات تجارية دولية راسخة. من خلال الجمع بين علاقات موردين قوية، وخدمات لوجستية فعّالة لسلسلة التبريد، وإدارة منضبطة للمخزون، صُمم الصندوق لتحسين نشر رأس المال مع الحفاظ على الكفاءة التشغيلية ومخاطر محكومة.',
-    heroMetrics: [{ label: 'حالة الصندوق', value: 'مكتمل الاكتتاب' }],
+    heroMetrics: [],
     highlights: [
       'شبكة راسخة لسلسلة التبريد والتخزين.',
       'شراكات قوية مع موردين في تجارة اللحوم المجمدة.',
@@ -312,7 +299,6 @@ const poolTranslations: Record<string, PoolTranslation> = {
       { label: 'رأس المال المستهدف', value: '1.8 مليون درهم' },
       { label: 'الحد الأدنى للاستثمار', value: '50,000 درهم' },
       { label: 'رسوم الإدارة', value: '2%' },
-      { label: 'حالة الصندوق', value: 'مكتمل الاكتتاب' },
     ],
     steps: [
       { title: 'الاستحداث', description: 'يؤمّن مكتب التداول لدينا أمر شراء مؤكدًا من موزع خليجي ويحدد موردًا معتمدًا في بلد المنشأ.' },
@@ -329,12 +315,11 @@ const poolTranslations: Record<string, PoolTranslation> = {
   cocoa: {
     name: 'صندوق الكاكاو الفاخر الأول',
     category: 'صندوق تجارة الشوكولاتة ذات العلامة التجارية',
-    status: 'مكتمل الاكتتاب',
     tagline:
       'صندوق الكاكاو الفاخر الأول هو صندوق استثماري مُدار باحترافية لتجارة الشوكولاتة ذات العلامة التجارية، مصمم للاستفادة من الطلب العالمي الثابت على منتجات الاستهلاك السريع. من خلال شراكات استراتيجية مع الموردين، وشبكات توزيع فعّالة، ونشر منضبط لرأس المال، يركز الصندوق على خلق قيمة مستدامة طويلة الأمد مع الحفاظ على الكفاءة التشغيلية ومخاطر محكومة.',
     description:
       'صندوق الكاكاو الفاخر الأول هو صندوق استثماري لتجارة وتوزيع الشوكولاتة ذات العلامة التجارية، يركز على توريد علامات شوكولاتة فاخرة معروفة عالميًا وتزويد أسواق التجزئة والجملة عالية الطلب. من خلال الجمع بين علاقات موردين قوية، وإدارة فعّالة للمخزون، وشبكة توزيع راسخة، صُمم الصندوق لتعظيم كفاءة رأس المال مع تحقيق نمو مستدام طويل الأمد.',
-    heroMetrics: [{ label: 'حالة الصندوق', value: 'مكتمل الاكتتاب' }],
+    heroMetrics: [],
     highlights: [
       'توريد قوي لعلامات شوكولاتة عالمية.',
       'فئة استهلاك سريع عالية الطلب باستهلاك متكرر.',
@@ -350,7 +335,6 @@ const poolTranslations: Record<string, PoolTranslation> = {
       { label: 'رأس المال المستهدف', value: '2 مليون درهم' },
       { label: 'الحد الأدنى للاستثمار', value: '50,000 درهم' },
       { label: 'رسوم الإدارة', value: '2%' },
-      { label: 'حالة الصندوق', value: 'مكتمل الاكتتاب' },
     ],
     steps: [
       { title: 'اتفاقية الشراء الآجل', description: 'يلتزم أحد المصنّعين بعقد شراء آجل بسعر ثابت قبل موسم الحصاد.' },
@@ -367,12 +351,11 @@ const poolTranslations: Record<string, PoolTranslation> = {
   travel: {
     name: 'صندوق السفر العالمي الأول',
     category: 'صندوق الاستثمار في قطاع السفر العالمي',
-    status: 'متاح للاكتتاب',
     tagline:
       'صندوق السفر العالمي الأول هو صندوق استثماري مُدار باحترافية في قطاع السفر والسياحة، يركز على الاستفادة من النمو المستمر لصناعة السفر العالمية. من خلال شراكات استراتيجية مع مقدمي خدمات الضيافة، ومشغلي السفر، والشركات السياحية، يهدف الصندوق إلى خلق قيمة مستدامة طويلة الأمد من خلال فرص استثمارية متنوعة وخفيفة الأصول.',
     description:
       'صندوق استثماري في قطاع السفر والسياحة يستفيد من الشراكات الاستراتيجية، وتجارب السفر الفاخرة، ونماذج أعمال خفيفة الأصول لالتقاط نمو السفر العالمي.',
-    heroMetrics: [{ label: 'حالة الصندوق', value: 'متاح للاكتتاب' }],
+    heroMetrics: [],
     highlights: [
       'شراكات استراتيجية مع علامات سفر عالمية.',
       'صناعة سفر عالية النمو.',
@@ -388,7 +371,6 @@ const poolTranslations: Record<string, PoolTranslation> = {
       { label: 'رأس المال المستهدف', value: '2 مليون درهم' },
       { label: 'الحد الأدنى للاستثمار', value: '50,000 درهم' },
       { label: 'رسوم الإدارة', value: '2%' },
-      { label: 'حالة الصندوق', value: 'متاح للاكتتاب' },
     ],
     steps: [
       { title: 'اختيار الشركاء الاستراتيجيين', description: 'تحديد مشغّلي الضيافة المؤهلين، والأصول السياحية، والشراكات الاستراتيجية في قطاع السفر.' },
@@ -428,7 +410,6 @@ function localizePool(pool: Pool, locale: string): Pool {
     ...pool,
     name: t.name,
     category: t.category,
-    status: t.status,
     tagline: t.tagline,
     description: t.description,
     heroMetrics: t.heroMetrics,

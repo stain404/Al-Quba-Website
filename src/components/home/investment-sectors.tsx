@@ -154,11 +154,20 @@ function Panel({
         priority={false}
       />
 
+      {/* Flat base scrim under the directional gradient below. The
+          gradient alone only darkens the bottom of the panel, but an
+          expanded panel puts its label at the TOP — over whatever the
+          photo happens to be doing up there (bright sky on several of
+          these). This guarantees a contrast floor across the whole
+          panel at every breakpoint. */}
+      <div className="absolute inset-0 bg-black/35 transition-opacity duration-500" aria-hidden />
+
       <div
+        aria-hidden
         className={cn(
-          'absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent transition-all duration-500',
+          'absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/85 to-transparent transition-all duration-500',
           isActive
-            ? 'h-[60%] lg:h-[40%]'
+            ? 'h-[70%] lg:h-[55%]'
             : 'h-full w-[70%] bg-gradient-to-r lg:h-[70%] lg:w-full lg:bg-gradient-to-t'
         )}
       />
@@ -171,7 +180,7 @@ function Panel({
              at well under 60px tall (the collapsed panels share the mobile
              column with the expanded one) that reads as visibly clipped. Mobile gets much lighter padding instead. */
           <div className="flex h-full items-center justify-center px-4 py-2 transition-all duration-500 lg:px-4 lg:py-10 lg:[writing-mode:vertical-lr]">
-            <h3 className="whitespace-nowrap font-semibold text-body-md text-white/75 lg:rotate-180">{panel.label}</h3>
+            <h3 className="whitespace-nowrap font-semibold text-body-md text-white lg:rotate-180">{panel.label}</h3>
           </div>
         )}
 
@@ -206,11 +215,16 @@ export function InvestmentSectors() {
       id="sectors"
       surface="ink"
       spacing="sm"
-      className="flex min-h-screen w-full flex-col justify-center"
+      // min-h-screen is a laptop framing device — it lets the accordion
+      // sit centered in a full viewport. On a phone the section's own
+      // content is already about a screen tall, so forcing 100vh on top
+      // of it and centering left a band of empty ink above and below the
+      // accordion. Below lg the section just wraps its content.
+      className="flex w-full flex-col justify-center lg:min-h-screen"
     >
       <SectionHeading eyebrow={heading.eyebrow} title={heading.title} align="left" inverse />
 
-      <div className="mt-10 flex h-[440px] flex-col gap-2 lg:h-[320px] lg:flex-row xl:gap-2.5">
+      <div className="mt-8 flex h-[440px] flex-col gap-2 lg:mt-10 lg:h-[320px] lg:flex-row xl:gap-2.5">
         {panels.map((panel, index) => (
           <Panel
             key={panel.label}

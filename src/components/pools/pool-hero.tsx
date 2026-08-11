@@ -99,17 +99,6 @@ export async function PoolHero({ pool }: { pool: Pool }) {
               )}
               <Eyebrow inverse>{pool.category}</Eyebrow>
             </div>
-            <span
-              className={cn(
-                'inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-body-sm font-medium uppercase tracking-wide',
-                isOpen
-                  ? 'border-accent/40 bg-accent/10 text-accent-ink'
-                  : 'border-white/15 bg-white/8 text-text-inverse'
-              )}
-            >
-              <span className={cn('size-1.5 rounded-full', isOpen ? 'bg-accent-ink' : 'bg-text-inverse')} aria-hidden />
-              {pool.status}
-            </span>
           </div>
 
           <Heading as="h1" size="display-lg" inverse className="font-nav">

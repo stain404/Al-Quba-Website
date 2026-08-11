@@ -69,14 +69,24 @@ export function CTASection({
             className="hidden object-cover object-[center_45%] lg:block"
             priority={false}
           />
-          {/* Right-to-left gradient (opaque on the left) keeps the
-              left-aligned text legible against a busy photo without
-              flattening the image entirely on the right. Uses a warm
-              near-black instead of the brand `ink` navy — ink stacked on
-              top of this photo's own deep-blue sky read as a flat blue
-              block; a warm dark tone blends into the sunset instead. */}
+          {/* Flat base scrim, under the directional gradient below —
+              a contrast floor the photo can't undercut no matter which
+              part of the frame a given crop lands on. */}
+          <div className="absolute inset-0 bg-[#1A140F]/35" aria-hidden />
+
+          {/* The directional gradient is horizontal only from `lg`, where
+              the text really does sit in the left half and the photo's
+              right side is worth keeping open. Below that the text block
+              spans the full column width, so a left-to-right ramp ran the
+              headline out over the near-transparent end of its own scrim;
+              narrow screens get a bottom-heavy vertical ramp instead,
+              which tracks where the text actually is.
+
+              Warm near-black rather than the brand `ink` navy — ink over
+              this photo's deep-blue sky read as a flat blue block, while
+              a warm dark tone blends into the sunset. */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-[#1A140F] via-[#1A140F]/60 to-[#1A140F]/10"
+            className="absolute inset-0 bg-gradient-to-t from-[#1A140F] via-[#1A140F]/70 to-[#1A140F]/25 lg:bg-gradient-to-r lg:from-[#1A140F] lg:via-[#1A140F]/60 lg:to-[#1A140F]/10"
             aria-hidden
           />
         </>

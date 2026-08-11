@@ -2,7 +2,6 @@ import { getLocale } from 'next-intl/server'
 import { SectionContainer, SplitContainer } from '@/components/layout/section-container'
 import { Eyebrow, Heading } from '@/components/typography/heading'
 import { Card } from '@/components/cards/card'
-import { Badge } from '@/components/ui/badge'
 import { Stagger, StaggerItem, FadeIn } from '@/components/motion/reveal'
 import type { PoolSnapshotItem } from '@/lib/pools-data'
 
@@ -58,13 +57,7 @@ export async function PoolInvestmentSnapshot({
                     </span>
                     <div className="flex flex-col gap-1">
                       <span className="text-caption uppercase tracking-wide text-text-tertiary">{item.label}</span>
-                      {item.isStatus ? (
-                        <Badge variant="gold" className="w-fit">
-                          {item.value}
-                        </Badge>
-                      ) : (
-                        <span className="font-mono text-data-md text-text-primary">{item.value}</span>
-                      )}
+                      <span className="font-mono text-data-md text-text-primary">{item.value}</span>
                       {item.detail && <span className="text-body-sm text-text-secondary">{item.detail}</span>}
                     </div>
                     {item.disclaimer && (
