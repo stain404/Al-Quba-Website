@@ -127,7 +127,7 @@ export const sectors: Sector[] = [
     tagline:
       "Al Quba Investment's Global Exports Division facilitates the movement of high-quality products across international markets through strategic sourcing, reliable export operations, and long-term commercial partnerships. By connecting manufacturers, suppliers, and buyers worldwide, we create sustainable trade opportunities that drive global growth.",
     description:
-      "Explore Al Quba Investment's Global Exports Division and discover how Hebron General Trading LLC delivers trusted international trade, strategic sourcing, and export solutions across global markets.",
+      "Explore Al Quba Investment's Global Exports Division and discover how Hebron General Trading LLC, ContainerKart, and Al Wahda Trading deliver trusted international trade, strategic sourcing, and export solutions across global markets.",
     heroMetrics: [
       { label: 'Active Trade Lines', value: '18' },
       { label: 'Avg. Cycle Length', value: '5 months' },
@@ -140,27 +140,67 @@ export const sectors: Sector[] = [
       ],
     },
     caseStudyHeading: {
-      eyebrow: 'Featured Company',
-      title: 'Hebron General Trading LLC',
+      eyebrow: 'Our Operating Companies',
+      title: 'Featured Companies',
     },
-    caseStudy: {
-      title: 'Hebron General Trading LLC',
-      description:
-        'Hebron is a fast-growing company that has built a very strong reputation as a wholesale distributor of foods and other products. We mainly deal with the distribution of large volumes of grocery products, including cereals, pulses, meat, poultry, seafood, dates & nuts, spices, rice, and FMCG products, and are well positioned throughout the Middle East.',
-      highlights: [
-        'Global product sourcing across trusted supplier networks',
-        'International export operations across Middle East markets',
-        'Wholesale trading in grocery, FMCG, and frozen food categories',
-        'Quality assurance across every stage of the supply chain',
-        'Reliable, long-term distribution partnerships',
-      ],
-      metrics: [
-        { label: 'Role', value: 'Wholesale Distributor' },
-        { label: 'Region', value: 'Middle East' },
-        { label: 'Focus', value: 'Grocery & FMCG Products' },
-      ],
-      logoSrc: '/hebron-logo.svg',
-    },
+    caseStudy: [
+      {
+        title: 'Hebron General Trading LLC',
+        description:
+          'Hebron is a fast-growing company that has built a very strong reputation as a wholesale distributor of foods and other products. We mainly deal with the distribution of large volumes of grocery products, including cereals, pulses, meat, poultry, seafood, dates & nuts, spices, rice, and FMCG products, and are well positioned throughout the Middle East.',
+        highlights: [
+          'Global product sourcing across trusted supplier networks',
+          'International export operations across Middle East markets',
+          'Wholesale trading in grocery, FMCG, and frozen food categories',
+          'Quality assurance across every stage of the supply chain',
+          'Reliable, long-term distribution partnerships',
+        ],
+        metrics: [
+          { label: 'Role', value: 'Wholesale Distributor' },
+          { label: 'Region', value: 'Middle East' },
+          { label: 'Focus', value: 'Grocery & FMCG Products' },
+        ],
+        logoSrc: '/hebron-logo.svg',
+      },
+      {
+        title: 'ContainerKart',
+        description:
+          'ContainerKart is an innovative full-container-load startup, fully owned by AL QUBA, specializing in the bulk procurement and trade of high-demand products, including both food (FMCG) and non-food items. We source entire containers directly from farmers and production units after ensuring quality and efficiency in our supply chain.',
+        highlights: [
+          'Digital B2B Marketplace',
+          'Verified Global Suppliers',
+          'Bulk Container Trading',
+          'International Procurement',
+          'Cross-Border Commerce',
+          'Trade Facilitation',
+        ],
+        metrics: [
+          { label: 'Ownership', value: 'Fully Owned by Al Quba' },
+          { label: 'Model', value: 'Full-Container-Load' },
+          { label: 'Focus', value: 'FMCG & Non-Food Bulk Trade' },
+        ],
+        logoSrc: '/containerkart-logo.png',
+      },
+      {
+        title: 'Al Wahda Trading',
+        description:
+          'Al Wahda Trading serves as the commercial trading arm of the division, specializing in sourcing, importing, and distributing products across regional markets. By maintaining strong supplier relationships and an extensive procurement network, the company delivers reliable trading solutions tailored to evolving market demands.',
+        highlights: [
+          'Wholesale Trading',
+          'Product Procurement',
+          'Import Operations',
+          'Distribution Network',
+          'Commercial Partnerships',
+          'Regional Market Expertise',
+        ],
+        metrics: [
+          { label: 'Based In', value: 'Qatar' },
+          { label: 'Role', value: 'Commercial Trading' },
+          { label: 'Focus', value: 'Import & Distribution' },
+        ],
+        logoSrc: '/alwahda-logo.jpg',
+      },
+    ],
     capabilitiesHeading: {
       eyebrow: 'Core Capabilities',
       title: 'Six areas of specialized expertise',
@@ -759,7 +799,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     tagline:
       'يسهّل قطاع التصدير العالمي التابع لشركة القبا للاستثمار حركة المنتجات عالية الجودة عبر الأسواق الدولية من خلال التوريد الاستراتيجي، وعمليات تصدير موثوقة، وشراكات تجارية طويلة الأمد. من خلال ربط المصنّعين والموردين والمشترين حول العالم، نخلق فرصًا تجارية مستدامة تدفع النمو العالمي.',
     description:
-      'اكتشف قطاع التصدير العالمي التابع لشركة القبا للاستثمار، وتعرّف على كيفية تقديم شركة حبرون للتجارة العامة ذ.م.م لحلول تجارة دولية موثوقة، وتوريد استراتيجي، وحلول تصدير عبر الأسواق العالمية.',
+      'اكتشف قطاع التصدير العالمي التابع لشركة القبا للاستثمار، وتعرّف على كيفية تقديم شركة حبرون للتجارة العامة ذ.م.م وكونتينر كارت والوحدة للتجارة لحلول تجارة دولية موثوقة، وتوريد استراتيجي، وحلول تصدير عبر الأسواق العالمية.',
     heroMetrics: [
       { label: 'خطوط تجارية نشطة', value: '18' },
       { label: 'متوسط مدة الدورة', value: '5 أشهر' },
@@ -771,24 +811,48 @@ const sectorTranslations: Record<string, SectorTranslation> = {
         'من خلال عمليات تصدير موثوقة وكفاءة منضبطة في سلسلة الإمداد، يدعم القطاع توسع الأسواق للمصنّعين والموردين والموزعين، ما يخلق ممرات تجارية موثوقة بدلًا من صفقات لمرة واحدة.',
       ],
     },
-    caseStudyHeading: { eyebrow: 'الشركة المميزة', title: 'شركة حبرون للتجارة العامة ذ.م.م' },
-    caseStudy: {
-      title: 'شركة حبرون للتجارة العامة ذ.م.م',
-      description:
-        'حبرون شركة سريعة النمو بنت سمعة قوية كموزع بالجملة للأغذية ومنتجات أخرى. نعمل بشكل رئيسي في توزيع كميات كبيرة من المنتجات الغذائية، بما في ذلك الحبوب والبقوليات واللحوم والدواجن والمأكولات البحرية والتمور والمكسرات والتوابل والأرز ومنتجات الاستهلاك السريع، ولدينا مكانة قوية في جميع أنحاء الشرق الأوسط.',
-      highlights: [
-        'توريد عالمي للمنتجات عبر شبكات موردين موثوقة',
-        'عمليات تصدير دولية عبر أسواق الشرق الأوسط',
-        'تجارة الجملة في فئات البقالة ومنتجات الاستهلاك السريع والأغذية المجمدة',
-        'ضمان الجودة في كل مرحلة من مراحل سلسلة الإمداد',
-        'شراكات توزيع موثوقة وطويلة الأمد',
-      ],
-      metrics: [
-        { label: 'الدور', value: 'موزع بالجملة' },
-        { label: 'المنطقة', value: 'الشرق الأوسط' },
-        { label: 'التركيز', value: 'منتجات البقالة والاستهلاك السريع' },
-      ],
-    },
+    caseStudyHeading: { eyebrow: 'شركاتنا التشغيلية', title: 'الشركات المميزة' },
+    caseStudy: [
+      {
+        title: 'شركة حبرون للتجارة العامة ذ.م.م',
+        description:
+          'حبرون شركة سريعة النمو بنت سمعة قوية كموزع بالجملة للأغذية ومنتجات أخرى. نعمل بشكل رئيسي في توزيع كميات كبيرة من المنتجات الغذائية، بما في ذلك الحبوب والبقوليات واللحوم والدواجن والمأكولات البحرية والتمور والمكسرات والتوابل والأرز ومنتجات الاستهلاك السريع، ولدينا مكانة قوية في جميع أنحاء الشرق الأوسط.',
+        highlights: [
+          'توريد عالمي للمنتجات عبر شبكات موردين موثوقة',
+          'عمليات تصدير دولية عبر أسواق الشرق الأوسط',
+          'تجارة الجملة في فئات البقالة ومنتجات الاستهلاك السريع والأغذية المجمدة',
+          'ضمان الجودة في كل مرحلة من مراحل سلسلة الإمداد',
+          'شراكات توزيع موثوقة وطويلة الأمد',
+        ],
+        metrics: [
+          { label: 'الدور', value: 'موزع بالجملة' },
+          { label: 'المنطقة', value: 'الشرق الأوسط' },
+          { label: 'التركيز', value: 'منتجات البقالة والاستهلاك السريع' },
+        ],
+      },
+      {
+        title: 'ContainerKart',
+        description:
+          'كونتينر كارت شركة ناشئة مبتكرة متخصصة في تجارة الحاويات الكاملة، مملوكة بالكامل لشركة القبا، وتتخصص في الشراء والتجارة بالجملة لمنتجات عالية الطلب، تشمل المنتجات الغذائية (الاستهلاك السريع) وغير الغذائية. نقوم بتوريد حاويات كاملة مباشرة من المزارعين ووحدات الإنتاج بعد ضمان الجودة والكفاءة في سلسلة الإمداد لدينا.',
+        highlights: ['سوق رقمي بين الشركات', 'موردون عالميون معتمدون', 'تجارة الحاويات بالجملة', 'الشراء الدولي', 'التجارة العابرة للحدود', 'تسهيل التجارة'],
+        metrics: [
+          { label: 'الملكية', value: 'مملوكة بالكامل لشركة القبا' },
+          { label: 'النموذج', value: 'حاوية كاملة الحمولة' },
+          { label: 'التركيز', value: 'تجارة الاستهلاك السريع والمنتجات غير الغذائية بالجملة' },
+        ],
+      },
+      {
+        title: 'Al Wahda Trading',
+        description:
+          'تعمل الوحدة للتجارة كذراع التجارة التجارية للقطاع، وتتخصص في توريد واستيراد وتوزيع المنتجات عبر الأسواق الإقليمية. من خلال الحفاظ على علاقات قوية مع الموردين وشبكة شراء واسعة، تقدّم الشركة حلول تجارة موثوقة تتكيف مع متطلبات السوق المتغيرة.',
+        highlights: ['تجارة الجملة', 'شراء المنتجات', 'عمليات الاستيراد', 'شبكة التوزيع', 'شراكات تجارية', 'خبرة في السوق الإقليمي'],
+        metrics: [
+          { label: 'المقر', value: 'قطر' },
+          { label: 'الدور', value: 'تجارة تجارية' },
+          { label: 'التركيز', value: 'الاستيراد والتوزيع' },
+        ],
+      },
+    ],
     capabilitiesHeading: { eyebrow: 'القدرات الأساسية', title: 'ستة مجالات من الخبرة المتخصصة' },
     capabilities: [
       { title: 'التوريد العالمي للمنتجات', description: 'تحديد وتأمين منتجات عالية الجودة من موردين موثوقين عبر الأسواق الدولية.' },

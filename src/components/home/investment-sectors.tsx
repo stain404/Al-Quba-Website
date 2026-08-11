@@ -4,6 +4,7 @@ import * as React from 'react'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { useLocale } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
@@ -13,6 +14,8 @@ interface SectorPanel {
   description: string
   /** Placeholder photo — swap for real sector photography later. */
   image: string
+  /** Sector detail page this panel opens — same hrefs as the mega menu. */
+  href: string
 }
 
 /**
@@ -26,31 +29,37 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
       label: 'International Trading',
       description: 'Global trade led by Hebron, ContainerKart, and Al Wahda Trading.',
       image: '/Trading.png',
+      href: '/sectors/global-exports',
     },
     {
       label: 'Real Estate',
       description: 'Construction and contracting led by Bright Hurst.',
       image: '/realestate.jpeg',
+      href: '/sectors/infrastructure-contracting',
     },
     {
       label: 'Shipping & Logistics',
       description: 'Freight and logistics led by NobleStar Shipping.',
       image: '/shipping.jpeg',
+      href: '/sectors/logistics-supply-chain',
     },
     {
       label: 'Import & Export',
       description: 'Cross-border sourcing and digital procurement.',
       image: '/importexport.jpeg',
+      href: '/sectors/import-export',
     },
     {
       label: 'Brand Strategy',
       description: 'Creative and digital solutions led by Phew Interactive.',
       image: '/brandandstrategy.png',
+      href: '/sectors/brand-strategy',
     },
     {
       label: 'Tourism',
       description: 'Travel and hospitality led by Global Travel Fund I.',
       image: '/toursim.jpg',
+      href: '/sectors/tourism',
     },
   ],
   ar: [
@@ -58,31 +67,37 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
       label: 'التجارة الدولية',
       description: 'تجارة عالمية بقيادة حبرون وكونتينر كارت والوحدة للتجارة.',
       image: '/Trading.png',
+      href: '/sectors/global-exports',
     },
     {
       label: 'العقارات',
       description: 'بناء ومقاولات بقيادة برايت هيرست.',
       image: '/realestate.jpeg',
+      href: '/sectors/infrastructure-contracting',
     },
     {
       label: 'الشحن والخدمات اللوجستية',
       description: 'شحن وخدمات لوجستية بقيادة نوبل ستار للشحن.',
       image: '/shipping.jpeg',
+      href: '/sectors/logistics-supply-chain',
     },
     {
       label: 'الاستيراد والتصدير',
       description: 'التوريد العابر للحدود والمشتريات الرقمية.',
       image: '/importexport.jpeg',
+      href: '/sectors/import-export',
     },
     {
       label: 'استراتيجية العلامة التجارية',
       description: 'حلول إبداعية ورقمية بقيادة فيو إنتراكتيف.',
       image: '/brandandstrategy.png',
+      href: '/sectors/brand-strategy',
     },
     {
       label: 'السياحة',
       description: 'سفر وضيافة بقيادة صندوق السفر العالمي الأول.',
       image: '/toursim.jpg',
+      href: '/sectors/tourism',
     },
   ],
 }
@@ -95,8 +110,16 @@ const headingCopy = {
 /**
  * A single accordion panel. Collapsed, it's a narrow strip showing just
  * the label (rotated vertically on desktop); active, it expands to show
- * the full description and arrow. Hovering a collapsed panel activates
- * it — only one panel is expanded at a time.
+ * the full description and arrow. Hovering or clicking a collapsed panel
+ * activates it — only one panel is expanded at a time.
+ *
+ * Every panel is a link to its sector page, but a collapsed one swallows
+ * the first click and expands instead of navigating: the narrow strip
+ * shows only a label, so on touch — where there's no hover to expand
+ * with — a straight navigation would fire before the visitor ever saw
+ * what they were choosing. Staying a link throughout (rather than
+ * swapping element types on expand) keeps keyboard focus on the panel
+ * across that first activation.
  */
 function Panel({
   panel,
@@ -108,8 +131,15 @@ function Panel({
   onActivate: () => void
 }) {
   return (
-    <div
-      onClick={onActivate}
+    <Link
+      href={panel.href}
+      onMouseEnter={onActivate}
+      onClick={(event) => {
+        if (!isActive) {
+          event.preventDefault()
+          onActivate()
+        }
+      }}
       className={cn(
         'group relative flex cursor-pointer flex-col overflow-hidden rounded-lg transition-[flex-grow] duration-500 ease-in-out lg:flex-row',
         isActive ? 'flex-1 lg:flex-[3.5]' : 'flex-[0.4] lg:w-16 lg:flex-[0.55]'
@@ -155,7 +185,7 @@ function Panel({
           </div>
         )}
       </div>
-    </div>
+    </Link>
   )
 }
 
