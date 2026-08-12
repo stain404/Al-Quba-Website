@@ -61,6 +61,10 @@ export interface Pool {
   description: string
   /** Full-bleed photo background for the pool hero, e.g. '/frozen_food.png'. */
   heroImage?: string
+  /** Lightens the hero scrim. The default weight is tuned for the bright
+   *  product shots (frozen meat, cocoa beans) that need holding back;
+   *  a photo that is already dark reaches near-black under it. */
+  heroScrimSoft?: boolean
   /** Whether the pool is accepting subscriptions. No longer surfaced as
    *  a visible status anywhere — subscription status was removed from
    *  the hero, the snapshot grid, and the home cards — but it still
@@ -98,7 +102,7 @@ export const pools: Pool[] = [
     heroImage: '/frozen_food.png',
     isOpen: false,
     tagline:
-      'Frost Capital Fund I is a professionally managed frozen meat trading investment pool designed to capitalize on high-volume international trade opportunities. Leveraging established supplier relationships, efficient cold-chain logistics, and disciplined capital deployment, the fund focuses on delivering sustainable value through structured trading cycles.',
+      'A professionally managed frozen meat trading pool built on established supplier relationships, efficient cold-chain logistics, and disciplined capital deployment across structured trading cycles.',
     description:
       'Frost Capital Fund I is a short-term frozen meat trading investment pool focused on sourcing, importing, and distributing premium frozen meat products across established international trade corridors. By combining strong supplier relationships, efficient cold-chain logistics, and disciplined inventory management, the fund is structured to optimize capital deployment while maintaining operational efficiency and controlled risk.',
     /* Pool Status was the only hero metric every pool carried, so with
@@ -149,9 +153,10 @@ export const pools: Pool[] = [
     category: 'Branded Chocolate Trading Fund',
     poolNumber: 2,
     heroImage: '/cocoa_beans.png',
+    heroScrimSoft: true,
     isOpen: false,
     tagline:
-      'Premium Cocoa Fund I is a professionally managed branded chocolate trading investment pool designed to capitalize on consistent global FMCG demand. Through strategic supplier partnerships, efficient distribution networks, and disciplined capital deployment, the fund focuses on creating sustainable long-term value while maintaining operational efficiency and controlled risk.',
+      'A professionally managed branded chocolate trading pool capitalising on steady global FMCG demand through strategic supplier partnerships, efficient distribution, and disciplined capital deployment.',
     description:
       'Premium Cocoa Fund I is a branded chocolate trading and distribution investment pool focused on sourcing internationally recognised premium chocolate brands and supplying high-demand retail and wholesale markets. By combining strong supplier relationships, efficient inventory management, and an established distribution network, the fund is structured to maximise capital efficiency while delivering sustainable long-term growth.',
     heroMetrics: [],
@@ -196,9 +201,10 @@ export const pools: Pool[] = [
     category: 'Global Travel Investment Fund',
     poolNumber: 3,
     heroImage: '/travel.jpeg',
+    heroScrimSoft: true,
     isOpen: true,
     tagline:
-      'Global Travel Fund I is a professionally managed travel and tourism investment pool focused on capitalising on the continued growth of the global travel industry. Through strategic partnerships with hospitality providers, travel operators, and tourism-focused businesses, the fund aims to create sustainable long-term value through diversified, asset-light investment opportunities.',
+      'A professionally managed travel and tourism pool capturing global travel growth through partnerships with hospitality providers and travel operators, in diversified, asset-light positions.',
     description:
       'Travel and tourism investment fund leveraging strategic partnerships, premium travel experiences, and asset-light business models to capture global travel growth.',
     heroMetrics: [],
@@ -280,7 +286,7 @@ const poolTranslations: Record<string, PoolTranslation> = {
     name: 'صندوق فروست كابيتال الأول',
     category: 'صندوق تجارة اللحوم المجمدة',
     tagline:
-      'صندوق فروست كابيتال الأول هو صندوق استثماري مُدار باحترافية لتجارة اللحوم المجمدة، مصمم للاستفادة من فرص التجارة الدولية عالية الحجم. من خلال علاقات موردين راسخة، وخدمات لوجستية فعّالة لسلسلة التبريد، ونشر منضبط لرأس المال، يركز الصندوق على تحقيق قيمة مستدامة من خلال دورات تجارية منظمة.',
+      'صندوق استثماري مُدار باحترافية لتجارة اللحوم المجمدة، مبني على علاقات موردين راسخة، وخدمات لوجستية فعّالة لسلسلة التبريد، ونشر منضبط لرأس المال عبر دورات تجارية منظمة.',
     description:
       'صندوق فروست كابيتال الأول هو صندوق استثماري قصير الأمد لتجارة اللحوم المجمدة، يركز على توريد واستيراد وتوزيع منتجات اللحوم المجمدة الفاخرة عبر ممرات تجارية دولية راسخة. من خلال الجمع بين علاقات موردين قوية، وخدمات لوجستية فعّالة لسلسلة التبريد، وإدارة منضبطة للمخزون، صُمم الصندوق لتحسين نشر رأس المال مع الحفاظ على الكفاءة التشغيلية ومخاطر محكومة.',
     heroMetrics: [],
@@ -316,7 +322,7 @@ const poolTranslations: Record<string, PoolTranslation> = {
     name: 'صندوق الكاكاو الفاخر الأول',
     category: 'صندوق تجارة الشوكولاتة ذات العلامة التجارية',
     tagline:
-      'صندوق الكاكاو الفاخر الأول هو صندوق استثماري مُدار باحترافية لتجارة الشوكولاتة ذات العلامة التجارية، مصمم للاستفادة من الطلب العالمي الثابت على منتجات الاستهلاك السريع. من خلال شراكات استراتيجية مع الموردين، وشبكات توزيع فعّالة، ونشر منضبط لرأس المال، يركز الصندوق على خلق قيمة مستدامة طويلة الأمد مع الحفاظ على الكفاءة التشغيلية ومخاطر محكومة.',
+      'صندوق استثماري مُدار باحترافية لتجارة الشوكولاتة ذات العلامة التجارية، يستفيد من الطلب العالمي الثابت على منتجات الاستهلاك السريع عبر شراكات موردين استراتيجية وتوزيع فعّال ونشر منضبط لرأس المال.',
     description:
       'صندوق الكاكاو الفاخر الأول هو صندوق استثماري لتجارة وتوزيع الشوكولاتة ذات العلامة التجارية، يركز على توريد علامات شوكولاتة فاخرة معروفة عالميًا وتزويد أسواق التجزئة والجملة عالية الطلب. من خلال الجمع بين علاقات موردين قوية، وإدارة فعّالة للمخزون، وشبكة توزيع راسخة، صُمم الصندوق لتعظيم كفاءة رأس المال مع تحقيق نمو مستدام طويل الأمد.',
     heroMetrics: [],
@@ -352,7 +358,7 @@ const poolTranslations: Record<string, PoolTranslation> = {
     name: 'صندوق السفر العالمي الأول',
     category: 'صندوق الاستثمار في قطاع السفر العالمي',
     tagline:
-      'صندوق السفر العالمي الأول هو صندوق استثماري مُدار باحترافية في قطاع السفر والسياحة، يركز على الاستفادة من النمو المستمر لصناعة السفر العالمية. من خلال شراكات استراتيجية مع مقدمي خدمات الضيافة، ومشغلي السفر، والشركات السياحية، يهدف الصندوق إلى خلق قيمة مستدامة طويلة الأمد من خلال فرص استثمارية متنوعة وخفيفة الأصول.',
+      'صندوق استثماري مُدار باحترافية في قطاع السفر والسياحة، يلتقط نمو السفر العالمي عبر شراكات مع مقدمي خدمات الضيافة ومشغلي السفر، في مراكز متنوعة وخفيفة الأصول.',
     description:
       'صندوق استثماري في قطاع السفر والسياحة يستفيد من الشراكات الاستراتيجية، وتجارب السفر الفاخرة، ونماذج أعمال خفيفة الأصول لالتقاط نمو السفر العالمي.',
     heroMetrics: [],

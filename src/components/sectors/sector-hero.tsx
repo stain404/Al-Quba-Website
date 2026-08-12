@@ -35,7 +35,6 @@ const copy = {
 export async function SectorHero({ sector }: { sector: Sector }) {
   const Icon = sector.icon
   const hasImage = !!sector.heroImage
-  const hasLongTagline = sector.tagline.length > 200
   const locale = (await getLocale()) as keyof typeof copy
   const c = copy[locale]
 
@@ -47,7 +46,10 @@ export async function SectorHero({ sector }: { sector: Sector }) {
       contained={!hasImage}
       className={cn(
         'relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center',
-        hasImage && 'bg-[#1A140F]'
+        // Below `sm` the photo is a band above the copy rather than behind
+        // it, so this is the surface the text actually sits on — black, to
+        // match the scrim covering the photo from `sm` up.
+        hasImage && 'bg-black'
       )}
     >
       {sector.heroImage && (
@@ -69,13 +71,25 @@ export async function SectorHero({ sector }: { sector: Sector }) {
             style={{ objectPosition: sector.heroImagePosition ?? 'center' }}
             priority
           />
-          {/* Warm near-black instead of the brand `ink` navy — ink
-              stacked on a photo reads as a flat blue block (see
-              CTASection); a warm dark tone blends into the photo
-              instead, and is lightened further so more of the image
-              shows through than the CTA banner's version. */}
+          {/* Flat black base under the ramp — a contrast floor the photo
+              can't undercut wherever its bright areas fall. */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-[#1A140F]/70 via-[#1A140F]/40 to-[#1A140F]/10"
+            className={cn('absolute inset-0', sector.heroScrimSoft ? 'bg-black/15' : 'bg-black/40')}
+            aria-hidden
+          />
+          {/* Black rather than the warm near-black this used to carry:
+              the hero copy sits directly on it and needs the weight. The
+              ramp still opens toward the right so the photo isn't
+              flattened behind the empty half of the composition. The soft
+              variant is for photos dark enough to carry the copy on their
+              own — full weight on top of those reads as near-black. */}
+          <div
+            className={cn(
+              'absolute inset-0 bg-gradient-to-r',
+              sector.heroScrimSoft
+                ? 'from-black/60 via-black/30 to-black/5'
+                : 'from-black/85 via-black/60 to-black/20'
+            )}
             aria-hidden
           />
         </div>
@@ -87,16 +101,25 @@ export async function SectorHero({ sector }: { sector: Sector }) {
             <span className="flex size-14 items-center justify-center rounded-md bg-accent/12 text-accent-ink">
               <Icon className="size-6" strokeWidth={1.5} aria-hidden />
             </span>
-            <Eyebrow inverse>{sector.heroHeadline ? sector.name : c.investmentSector}</Eyebrow>
+            {/* Eyebrow's own `inverse` paints muted grey; the hero wants
+                full white, and the colour lives on the inner span so it
+                has to be reached past the wrapper. */}
+            <Eyebrow inverse className="[&>span]:text-text-inverse">
+              {sector.heroHeadline ? sector.name : c.investmentSector}
+            </Eyebrow>
           </div>
 
           <Heading as="h1" size="display-lg" inverse className="font-nav">
             {sector.heroHeadline ?? sector.name}
           </Heading>
           {sector.heroSubtitle && (
-            <p className="text-heading-sm font-medium text-accent-ink">{sector.heroSubtitle}</p>
+            <p className="text-heading-md font-medium text-accent-ink">{sector.heroSubtitle}</p>
           )}
-          <p className={cn('max-w-measure text-text-inverse', hasLongTagline ? 'text-body-sm' : 'text-body-lg')}>
+          {/* Long taglines used to drop to body-sm to fit; they now hold
+              the same size as short ones and simply run longer. Shrinking
+              the copy on exactly the sectors with the most to say was
+              backwards. */}
+          <p className="max-w-measure text-body-xl text-text-inverse">
             {sector.tagline}
           </p>
 

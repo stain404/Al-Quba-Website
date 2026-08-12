@@ -53,7 +53,10 @@ export async function PoolHero({ pool }: { pool: Pool }) {
       contained={!hasImage}
       className={cn(
         'relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center',
-        hasImage && 'bg-[#1A140F]'
+        // Below `sm` the photo is a band above the copy rather than behind
+        // it, so this is the surface the text actually sits on — black, to
+        // match the scrim covering the photo from `sm` up.
+        hasImage && 'bg-black'
       )}
     >
       {pool.heroImage && (
@@ -74,12 +77,25 @@ export async function PoolHero({ pool }: { pool: Pool }) {
             className="object-cover"
             priority
           />
-          {/* Warm near-black instead of the brand `ink` navy — ink
-              stacked on a photo reads as a flat blue block (see
-              CTASection / SectorHero); a warm dark tone blends into
-              the photo instead. */}
+          {/* Flat black base under the ramp — a contrast floor the photo
+              can't undercut wherever its bright areas fall. */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-[#1A140F]/70 via-[#1A140F]/40 to-[#1A140F]/10"
+            className={cn('absolute inset-0', pool.heroScrimSoft ? 'bg-black/15' : 'bg-black/40')}
+            aria-hidden
+          />
+          {/* Black rather than the warm near-black this used to carry:
+              the hero copy sits directly on it and needs the weight. The
+              ramp still opens toward the right so the photo isn't
+              flattened behind the empty half of the composition. The soft
+              variant is for photos dark enough to carry the copy on their
+              own — full weight on top of those reads as near-black. */}
+          <div
+            className={cn(
+              'absolute inset-0 bg-gradient-to-r',
+              pool.heroScrimSoft
+                ? 'from-black/60 via-black/30 to-black/5'
+                : 'from-black/85 via-black/60 to-black/20'
+            )}
             aria-hidden
           />
         </div>
@@ -93,26 +109,29 @@ export async function PoolHero({ pool }: { pool: Pool }) {
             </span>
             <div className="flex flex-col gap-1">
               {pool.poolNumber && (
-                <span className="font-mono text-caption uppercase tracking-wide text-text-inverse-muted">
+                <span className="font-mono text-body-sm uppercase tracking-wide text-text-inverse">
                   {c.pool} {String(pool.poolNumber).padStart(2, '0')}
                 </span>
               )}
-              <Eyebrow inverse>{pool.category}</Eyebrow>
+              {/* Eyebrow's own `inverse` paints muted grey; the hero wants
+                  full white, and the colour lives on the inner span so it
+                  has to be reached past the wrapper. */}
+              <Eyebrow inverse className="[&>span]:text-text-inverse">{pool.category}</Eyebrow>
             </div>
           </div>
 
           <Heading as="h1" size="display-lg" inverse className="font-nav">
             {pool.name}
           </Heading>
-          <p className="max-w-measure text-body-lg text-text-inverse">{pool.tagline}</p>
+          <p className="max-w-measure text-body-xl text-text-inverse">{pool.tagline}</p>
 
           {pool.heroMetrics.length > 0 && (
             <div className="flex flex-col gap-3 border-t border-border-ink pt-8">
-              <span className="text-caption uppercase tracking-wide text-text-inverse-muted">{c.investmentDetails}</span>
+              <span className="text-body-sm uppercase tracking-wide text-text-inverse">{c.investmentDetails}</span>
               <dl className="flex flex-wrap gap-x-10 gap-y-4">
                 {pool.heroMetrics.map((metric) => (
                   <div key={metric.label} className="flex flex-col gap-1">
-                    <dt className="text-caption uppercase tracking-wide text-text-inverse-muted">{metric.label}</dt>
+                    <dt className="text-body-sm uppercase tracking-wide text-text-inverse">{metric.label}</dt>
                     <dd className="font-mono text-data-md text-accent-ink">{metric.value}</dd>
                   </div>
                 ))}
@@ -123,7 +142,7 @@ export async function PoolHero({ pool }: { pool: Pool }) {
           {pool.highlights.length > 0 && (
             <ul className="flex flex-col gap-2.5">
               {pool.highlights.map((highlight) => (
-                <li key={highlight} className="flex items-start gap-2.5 text-body-sm text-text-inverse-muted">
+                <li key={highlight} className="flex items-start gap-2.5 text-body-md text-text-inverse">
                   <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-accent-ink" strokeWidth={1.5} aria-hidden />
                   {highlight}
                 </li>

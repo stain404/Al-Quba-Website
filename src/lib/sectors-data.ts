@@ -86,6 +86,10 @@ export interface Sector {
   heroImage?: string
   /** CSS object-position for heroImage, e.g. 'left center'. Defaults to 'center'. Use when the photo's focal point isn't centered, so it doesn't get cropped out on narrow (mobile) viewports. */
   heroImagePosition?: string
+  /** Lightens the hero scrim. The default weight is tuned for bright
+   *  photos that need holding back; a photo that is already dark reaches
+   *  near-black under it. Mirrors the same flag on `Pool`. */
+  heroScrimSoft?: boolean
   overview?: SectorOverviewBlock
   /** "Why This Division Matters" — a second editorial block further down the page, same shape as `overview`. */
   whyItMatters?: SectorOverviewBlock
@@ -125,7 +129,7 @@ export const sectors: Sector[] = [
     heroImagePosition: 'left center',
     heroSubtitle: 'Expanding International Trade Through Trusted Partnerships',
     tagline:
-      "Al Quba Investment's Global Exports Division facilitates the movement of high-quality products across international markets through strategic sourcing, reliable export operations, and long-term commercial partnerships. By connecting manufacturers, suppliers, and buyers worldwide, we create sustainable trade opportunities that drive global growth.",
+      "Al Quba Investment's Global Exports Division moves high-quality products across international markets through strategic sourcing, reliable export operations, and long-term commercial partnerships that drive sustainable trade.",
     description:
       "Explore Al Quba Investment's Global Exports Division and discover how Hebron General Trading LLC, ContainerKart, and Al Wahda Trading deliver trusted international trade, strategic sourcing, and export solutions across global markets.",
     heroMetrics: [
@@ -259,7 +263,7 @@ export const sectors: Sector[] = [
     heroImage: '/realestate.jpeg',
     heroSubtitle: 'Building Strong Foundations for Sustainable Growth',
     tagline:
-      "Al Quba Investment's Infrastructure, Contracting & Built Environments Division delivers reliable construction and contracting solutions that support commercial, industrial, and infrastructure development. Through quality workmanship, engineering expertise, and efficient project execution, the division contributes to creating modern spaces that support economic growth and long-term value.",
+      "Al Quba Investment's Infrastructure, Contracting & Built Environments Division delivers reliable construction for commercial, industrial, and infrastructure development, built on quality workmanship and engineering expertise.",
     description:
       "Discover Al Quba Investment's Infrastructure, Contracting & Built Environments Division and Bright Hurst Contracting, delivering commercial construction, contracting, engineering support, and infrastructure development solutions.",
     heroMetrics: [],
@@ -352,9 +356,10 @@ export const sectors: Sector[] = [
     name: 'Shipping & Logistics',
     icon: Ship,
     heroImage: '/shipping.jpeg',
+    heroScrimSoft: true,
     heroSubtitle: 'Delivering Global Connectivity Through Integrated Logistics',
     tagline:
-      "Al Quba Investment's Logistics & Supply Chain Division delivers reliable logistics solutions that enable businesses to move goods efficiently across domestic and international markets. Through integrated shipping, freight coordination, and supply chain expertise, the division supports seamless trade while strengthening global business connectivity.",
+      "Al Quba Investment's Logistics & Supply Chain Division moves goods efficiently across domestic and international markets through integrated shipping, freight coordination, and deep supply chain expertise.",
     description:
       "Discover Al Quba Investment's Logistics & Supply Chain Division and NobleStar Shipping Services LLC, delivering integrated shipping, freight coordination, cargo management, and supply chain solutions.",
     heroMetrics: [
@@ -457,7 +462,7 @@ export const sectors: Sector[] = [
     heroImage: '/importexport.jpeg',
     heroSubtitle: 'Connecting Businesses Through Global Trade',
     tagline:
-      "The Import & Export Division of Al Quba Investment facilitates seamless international trade by connecting businesses with trusted sourcing, procurement, and distribution solutions. Through strategic partnerships and technology-driven commerce, the division enables efficient cross-border trade while helping businesses expand into regional and international markets.",
+      "Al Quba Investment's Import & Export Division connects businesses with trusted sourcing, procurement, and distribution, combining strategic partnerships with technology-driven commerce to make cross-border trade efficient.",
     description:
       "Discover Al Quba Investment's Import & Export Division featuring ContainerKart and Al Wahda Trading, delivering global sourcing, commercial trading, wholesale distribution, and cross-border trade solutions.",
     heroMetrics: [
@@ -571,7 +576,7 @@ export const sectors: Sector[] = [
     heroImage: '/brandandstrategy.png',
     heroSubtitle: 'Building Brands That Inspire Growth',
     tagline:
-      "Al Quba Investment's Brand Strategy Division empowers businesses through creative branding, digital innovation, and strategic marketing solutions. By combining technology, creativity, and business insight, the division helps organizations strengthen their market presence, connect with audiences, and achieve sustainable growth.",
+      "Al Quba Investment's Brand Strategy Division empowers businesses through creative branding, digital innovation, and strategic marketing that strengthen market presence and drive sustainable growth.",
     description:
       "Discover Al Quba Investment's Brand Strategy Division and Phew Interactive, delivering branding, website development, digital marketing, creative design, UI/UX, and technology solutions.",
     heroMetrics: [
@@ -674,9 +679,9 @@ export const sectors: Sector[] = [
     heroImage: '/toursim.jpg',
     heroSubtitle: 'Investing in the Global Appetite for Travel',
     tagline:
-      "Al Quba Investment's Tourism Division participates in the growth of global travel through hospitality partnerships, tour and travel operations, and destination experiences. By working alongside established operators rather than owning heavy infrastructure, the division captures travel demand while keeping capital mobile.",
+      "Al Quba Investment's Tourism Division captures global travel demand through hospitality partnerships, tour operations, and destination experiences, working alongside established operators rather than owning heavy infrastructure.",
     description:
-      "Explore Al Quba Investment's Tourism Division and Global Travel Fund I, delivering hospitality partnerships, travel operations, and destination experiences across global markets.",
+      "Explore Al Quba Investment's Tourism Division featuring Mapshore and Global Travel Fund I, delivering travel management, hospitality partnerships, and destination experiences across global markets.",
     heroMetrics: [
       { label: 'Active Positions', value: '1' },
       { label: 'Model', value: 'Asset-light' },
@@ -689,26 +694,47 @@ export const sectors: Sector[] = [
       ],
     },
     caseStudyHeading: {
-      eyebrow: 'Featured Fund',
-      title: 'Global Travel Fund I',
+      eyebrow: 'Our Operating Companies',
+      title: 'Featured Companies',
     },
-    caseStudy: {
-      title: 'Global Travel Fund I',
-      description:
-        'Global Travel Fund I is a professionally managed travel and tourism investment pool focused on capitalising on the continued growth of the global travel industry. Through strategic partnerships with hospitality providers, travel operators, and tourism-focused businesses, the fund aims to create sustainable long-term value through diversified, asset-light investment opportunities.',
-      highlights: [
-        'Strategic partnerships with established hospitality operators',
-        'Asset-light exposure rather than heavy property ownership',
-        'Diversified revenue across accommodation, tours, and travel services',
-        'Returns generated from live travel demand, not speculative valuation',
-        'Positions reviewed against seasonality and destination performance',
-      ],
-      metrics: [
-        { label: 'Structure', value: 'Managed Investment Pool' },
-        { label: 'Focus', value: 'Travel & Hospitality' },
-        { label: 'Model', value: 'Asset-Light' },
-      ],
-    },
+    caseStudy: [
+      {
+        title: 'Mapshore',
+        description:
+          'Mapshore is a premier UAE-based travel and tourism management company crafting seamless, personalised travel experiences across the globe. Serving corporate clients, leisure travellers, families, and solo adventurers, it connects people to world-class destinations through a comprehensive, end-to-end travel service network, combining deep industry expertise with strong global partnerships.',
+        highlights: [
+          'Worldwide flight ticketing',
+          'Hotel and luxury stay bookings',
+          'Custom-curated tour packages',
+          'Travel insurance solutions',
+          'UAE tourist visas and global visa assistance',
+          'Corporate, leisure, family, and solo travel',
+        ],
+        metrics: [
+          { label: 'Based In', value: 'United Arab Emirates' },
+          { label: 'Role', value: 'Travel & Tourism Management' },
+          { label: 'Focus', value: 'End-to-End Travel Services' },
+        ],
+        logoSrc: '/mapshore.png',
+      },
+      {
+        title: 'Global Travel Fund I',
+        description:
+          'Global Travel Fund I is a professionally managed travel and tourism investment pool focused on capitalising on the continued growth of the global travel industry. Through strategic partnerships with hospitality providers, travel operators, and tourism-focused businesses, the fund aims to create sustainable long-term value through diversified, asset-light investment opportunities.',
+        highlights: [
+          'Strategic partnerships with established hospitality operators',
+          'Asset-light exposure rather than heavy property ownership',
+          'Diversified revenue across accommodation, tours, and travel services',
+          'Returns generated from live travel demand, not speculative valuation',
+          'Positions reviewed against seasonality and destination performance',
+        ],
+        metrics: [
+          { label: 'Structure', value: 'Managed Investment Pool' },
+          { label: 'Focus', value: 'Travel & Hospitality' },
+          { label: 'Model', value: 'Asset-Light' },
+        ],
+      },
+    ],
     capabilitiesHeading: {
       eyebrow: 'Division Capabilities',
       title: 'Six areas of travel and hospitality expertise',
@@ -754,7 +780,7 @@ export const sectors: Sector[] = [
         { icon: Globe2, title: 'Destination Diversification', description: 'Exposure spread across multiple destinations rather than a single market.' },
       ],
     },
-    companies: [],
+    companies: ['Mapshore'],
   },
 ]
 
@@ -797,7 +823,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     name: 'التجارة الدولية',
     heroSubtitle: 'توسيع التجارة الدولية من خلال شراكات موثوقة',
     tagline:
-      'يسهّل قطاع التصدير العالمي التابع لشركة القبا للاستثمار حركة المنتجات عالية الجودة عبر الأسواق الدولية من خلال التوريد الاستراتيجي، وعمليات تصدير موثوقة، وشراكات تجارية طويلة الأمد. من خلال ربط المصنّعين والموردين والمشترين حول العالم، نخلق فرصًا تجارية مستدامة تدفع النمو العالمي.',
+      'ينقل قطاع التصدير العالمي التابع لشركة القبا للاستثمار المنتجات عالية الجودة عبر الأسواق الدولية من خلال التوريد الاستراتيجي، وعمليات تصدير موثوقة، وشراكات تجارية طويلة الأمد تدفع تجارة مستدامة.',
     description:
       'اكتشف قطاع التصدير العالمي التابع لشركة القبا للاستثمار، وتعرّف على كيفية تقديم شركة حبرون للتجارة العامة ذ.م.م وكونتينر كارت والوحدة للتجارة لحلول تجارة دولية موثوقة، وتوريد استراتيجي، وحلول تصدير عبر الأسواق العالمية.',
     heroMetrics: [
@@ -896,7 +922,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     name: 'العقارات',
     heroSubtitle: 'بناء أسس متينة لنمو مستدام',
     tagline:
-      'يقدّم قطاع البنية التحتية والمقاولات والبيئة العمرانية التابع لشركة القبا للاستثمار حلول بناء ومقاولات موثوقة تدعم التطوير التجاري والصناعي وتطوير البنية التحتية. من خلال جودة التنفيذ، والخبرة الهندسية، وتنفيذ المشاريع بكفاءة، يساهم القطاع في إنشاء مساحات حديثة تدعم النمو الاقتصادي والقيمة طويلة الأمد.',
+      'يقدّم قطاع البنية التحتية والمقاولات والبيئة العمرانية التابع لشركة القبا للاستثمار حلول بناء موثوقة للتطوير التجاري والصناعي والبنية التحتية، قائمة على جودة التنفيذ والخبرة الهندسية.',
     description:
       'اكتشف قطاع البنية التحتية والمقاولات والبيئة العمرانية التابع لشركة القبا للاستثمار وشركة برايت هيرست للمقاولات، المتخصصة في البناء التجاري والمقاولات والدعم الهندسي وحلول تطوير البنية التحتية.',
     heroMetrics: [],
@@ -967,7 +993,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     name: 'الشحن والخدمات اللوجستية',
     heroSubtitle: 'تحقيق التواصل العالمي من خلال خدمات لوجستية متكاملة',
     tagline:
-      'يقدّم قطاع الخدمات اللوجستية وسلاسل الإمداد التابع لشركة القبا للاستثمار حلولًا لوجستية موثوقة تمكّن الشركات من نقل البضائع بكفاءة عبر الأسواق المحلية والدولية. من خلال الشحن المتكامل، وتنسيق الشحنات، والخبرة في سلاسل الإمداد، يدعم القطاع التجارة السلسة مع تعزيز التواصل التجاري العالمي.',
+      'ينقل قطاع الخدمات اللوجستية وسلاسل الإمداد التابع لشركة القبا للاستثمار البضائع بكفاءة عبر الأسواق المحلية والدولية من خلال الشحن المتكامل، وتنسيق الشحنات، وخبرة عميقة في سلاسل الإمداد.',
     description:
       'اكتشف قطاع الخدمات اللوجستية وسلاسل الإمداد التابع لشركة القبا للاستثمار وشركة نوبل ستار لخدمات الشحن ذ.م.م، المتخصصة في الشحن المتكامل وتنسيق الشحنات وإدارة البضائع وحلول سلسلة الإمداد.',
     heroMetrics: [
@@ -1045,7 +1071,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     name: 'الاستيراد والتصدير',
     heroSubtitle: 'ربط الشركات من خلال التجارة العالمية',
     tagline:
-      'يسهّل قطاع الاستيراد والتصدير التابع لشركة القبا للاستثمار التجارة الدولية السلسة من خلال ربط الشركات بحلول توريد وشراء وتوزيع موثوقة. من خلال شراكات استراتيجية وتجارة قائمة على التقنية، يمكّن القطاع التجارة العابرة للحدود بكفاءة مع مساعدة الشركات على التوسع في الأسواق الإقليمية والدولية.',
+      'يربط قطاع الاستيراد والتصدير التابع لشركة القبا للاستثمار الشركات بحلول توريد وشراء وتوزيع موثوقة، جامعًا بين الشراكات الاستراتيجية والتجارة القائمة على التقنية لتجارة عابرة للحدود بكفاءة.',
     description:
       'اكتشف قطاع الاستيراد والتصدير التابع لشركة القبا للاستثمار، ويضم كونتينر كارت والوحدة للتجارة، لتقديم توريد عالمي، وتجارة تجارية، وتوزيع بالجملة، وحلول تجارة عابرة للحدود.',
     heroMetrics: [
@@ -1127,7 +1153,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     name: 'استراتيجية العلامة التجارية',
     heroSubtitle: 'بناء علامات تجارية تلهم النمو',
     tagline:
-      'يمكّن قطاع استراتيجية العلامة التجارية التابع لشركة القبا للاستثمار الشركات من خلال العلامات التجارية الإبداعية، والابتكار الرقمي، وحلول التسويق الاستراتيجي. من خلال الجمع بين التقنية والإبداع ورؤية الأعمال، يساعد القطاع المؤسسات على تعزيز حضورها في السوق، والتواصل مع جمهورها، وتحقيق نمو مستدام.',
+      'يمكّن قطاع استراتيجية العلامة التجارية التابع لشركة القبا للاستثمار الشركات من خلال العلامات التجارية الإبداعية، والابتكار الرقمي، والتسويق الاستراتيجي الذي يعزز الحضور في السوق ويحقق نموًا مستدامًا.',
     description:
       'اكتشف قطاع استراتيجية العلامة التجارية التابع لشركة القبا للاستثمار وشركة فيو إنتراكتيف، المتخصصة في العلامات التجارية، وتطوير المواقع الإلكترونية، والتسويق الرقمي، والتصميم الإبداعي، وتجربة المستخدم، والحلول التقنية.',
     heroMetrics: [
@@ -1205,9 +1231,9 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     name: 'السياحة',
     heroSubtitle: 'الاستثمار في الشغف العالمي بالسفر',
     tagline:
-      'يشارك قطاع السياحة في شركة القبا للاستثمار في نمو السفر العالمي من خلال شراكات الضيافة، وعمليات السفر والسياحة، وتجارب الوجهات. ومن خلال العمل إلى جانب مشغّلين راسخين بدلًا من امتلاك بنية تحتية ثقيلة، يلتقط القطاع الطلب على السفر مع الحفاظ على مرونة رأس المال.',
+      'يلتقط قطاع السياحة في شركة القبا للاستثمار الطلب العالمي على السفر من خلال شراكات الضيافة، وعمليات السفر، وتجارب الوجهات، بالعمل إلى جانب مشغّلين راسخين بدلًا من امتلاك بنية تحتية ثقيلة.',
     description:
-      'اكتشف قطاع السياحة في شركة القبا للاستثمار وصندوق السفر العالمي الأول، الذي يقدّم شراكات ضيافة وعمليات سفر وتجارب وجهات عبر الأسواق العالمية.',
+      'اكتشف قطاع السياحة في شركة القبا للاستثمار، ويضم مابشور وصندوق السفر العالمي الأول، ليقدّم إدارة سفر وشراكات ضيافة وتجارب وجهات عبر الأسواق العالمية.',
     heroMetrics: [
       { label: 'مراكز نشطة', value: '1' },
       { label: 'النموذج', value: 'خفيف الأصول' },
@@ -1219,24 +1245,44 @@ const sectorTranslations: Record<string, SectorTranslation> = {
         'يحافظ هذا التوجه خفيف الأصول على مرونة رأس المال: يتوزع التعرض عبر الإقامة وعمليات الجولات وخدمات السفر، ويمكن تعديل المراكز مع تغير الموسمية والطلب على الوجهات.',
       ],
     },
-    caseStudyHeading: { eyebrow: 'الصندوق المميز', title: 'صندوق السفر العالمي الأول' },
-    caseStudy: {
-      title: 'صندوق السفر العالمي الأول',
-      description:
-        'صندوق السفر العالمي الأول هو صندوق استثماري مُدار باحتراف في قطاع السفر والسياحة، يركّز على الاستفادة من النمو المستمر لصناعة السفر العالمية. ومن خلال شراكات استراتيجية مع مزودي الضيافة ومشغّلي السفر والشركات السياحية، يهدف الصندوق إلى خلق قيمة مستدامة طويلة الأمد عبر فرص استثمارية متنوعة وخفيفة الأصول.',
-      highlights: [
-        'شراكات استراتيجية مع مشغّلي ضيافة راسخين',
-        'تعرض خفيف الأصول بدلًا من التملك العقاري الثقيل',
-        'إيرادات متنوعة عبر الإقامة والجولات وخدمات السفر',
-        'عوائد ناتجة عن طلب سفر فعلي وليس عن تقييم مضاربي',
-        'مراجعة المراكز وفق الموسمية وأداء الوجهات',
-      ],
-      metrics: [
-        { label: 'الهيكل', value: 'صندوق استثماري مُدار' },
-        { label: 'التركيز', value: 'السفر والضيافة' },
-        { label: 'النموذج', value: 'خفيف الأصول' },
-      ],
-    },
+    caseStudyHeading: { eyebrow: 'شركاتنا التشغيلية', title: 'الشركات المميزة' },
+    caseStudy: [
+      {
+        title: 'Mapshore',
+        description:
+          'مابشور شركة رائدة مقرها الإمارات العربية المتحدة في إدارة السفر والسياحة، تصمّم تجارب سفر سلسة ومخصصة حول العالم. تخدم الشركات والمسافرين بغرض الترفيه والعائلات والمسافرين الأفراد، وتربطهم بوجهات عالمية المستوى عبر شبكة خدمات سفر متكاملة من البداية إلى النهاية، تجمع بين خبرة عميقة في القطاع وشراكات عالمية قوية.',
+        highlights: [
+          'حجز تذاكر الطيران حول العالم',
+          'حجوزات الفنادق والإقامات الفاخرة',
+          'باقات سياحية مصممة خصيصًا',
+          'حلول التأمين على السفر',
+          'تأشيرات سياحية إماراتية ومساعدة في التأشيرات العالمية',
+          'سفر الشركات والترفيه والعائلات والأفراد',
+        ],
+        metrics: [
+          { label: 'المقر', value: 'الإمارات العربية المتحدة' },
+          { label: 'الدور', value: 'إدارة السفر والسياحة' },
+          { label: 'التركيز', value: 'خدمات سفر متكاملة' },
+        ],
+      },
+      {
+        title: 'صندوق السفر العالمي الأول',
+        description:
+          'صندوق السفر العالمي الأول هو صندوق استثماري مُدار باحتراف في قطاع السفر والسياحة، يركّز على الاستفادة من النمو المستمر لصناعة السفر العالمية. ومن خلال شراكات استراتيجية مع مزودي الضيافة ومشغّلي السفر والشركات السياحية، يهدف الصندوق إلى خلق قيمة مستدامة طويلة الأمد عبر فرص استثمارية متنوعة وخفيفة الأصول.',
+        highlights: [
+          'شراكات استراتيجية مع مشغّلي ضيافة راسخين',
+          'تعرض خفيف الأصول بدلًا من التملك العقاري الثقيل',
+          'إيرادات متنوعة عبر الإقامة والجولات وخدمات السفر',
+          'عوائد ناتجة عن طلب سفر فعلي وليس عن تقييم مضاربي',
+          'مراجعة المراكز وفق الموسمية وأداء الوجهات',
+        ],
+        metrics: [
+          { label: 'الهيكل', value: 'صندوق استثماري مُدار' },
+          { label: 'التركيز', value: 'السفر والضيافة' },
+          { label: 'النموذج', value: 'خفيف الأصول' },
+        ],
+      },
+    ],
     capabilitiesHeading: { eyebrow: 'قدرات القطاع', title: 'ستة مجالات من الخبرة في السفر والضيافة' },
     capabilities: [
       { title: 'شراكات الضيافة', description: 'العمل مع مشغّلي إقامة راسخين بدلًا من بناء العقارات وتشغيلها بأنفسنا.' },

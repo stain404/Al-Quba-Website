@@ -76,6 +76,9 @@ const config: Config = {
         'heading-lg': ['1.5rem', { lineHeight: '1.3', fontWeight: '600' }],
         'heading-md': ['1.5rem', { lineHeight: '1.3', fontWeight: '600' }],
         'heading-sm': ['1.125rem', { lineHeight: '1.4', fontWeight: '600' }],
+        // Detail-page hero copy. Above body-lg because a hero paragraph
+        // is read at arm's length against a photo, not in a text column.
+        'body-xl': ['1.3125rem', { lineHeight: '1.55', fontWeight: '400' }],
         'body-lg': ['1.125rem', { lineHeight: '1.6', fontWeight: '400' }],
         'body-md': ['1rem', { lineHeight: '1.65', fontWeight: '400' }],
         'body-sm': ['0.875rem', { lineHeight: '1.55', fontWeight: '400' }],

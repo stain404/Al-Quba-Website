@@ -39,6 +39,7 @@ const copy = {
  * directly on the card with no plate or seam behind it. Regenerate rather
  * than hand-edit if a new logo arrives; the originals are still in
  * `public/`, and the padding colour must track the card background.
+ * `scripts/normalise-logo.js` performs that regeneration.
  *
  * Bright Hurst Contracting has no logo supplied yet — anything without an
  * entry here falls back to a typographic lockup below, so a missing file
@@ -50,6 +51,7 @@ const logos: Record<string, string> = {
   ContainerKart: '/logos/containerkart.png',
   'Al Wahda Trading': '/logos/alwahda.png',
   'Phew Interactive': '/logos/phew.png',
+  Mapshore: '/logos/mapshore.png',
 }
 
 function CompanyCard({
