@@ -74,7 +74,7 @@ function buildNavSections(locale: Locale): MegaMenuSection[] {
             { label: 'Shipping & Logistics', href: '/sectors/logistics-supply-chain', description: 'Freight and logistics led by NobleStar Shipping' },
             { label: 'Import & Export', href: '/sectors/import-export', description: 'Cross-border sourcing and digital procurement' },
             { label: 'Brand Strategy', href: '/sectors/brand-strategy', description: 'Creative and digital solutions led by Phew Interactive' },
-            { label: 'Tourism', href: '/sectors/tourism', description: 'Travel and hospitality led by Global Travel Fund I' },
+            { label: 'Tourism', href: '/sectors/tourism', description: 'Travel and hospitality led by Mapshore' },
           ],
         },
         {

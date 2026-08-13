@@ -57,7 +57,7 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
     },
     {
       label: 'Tourism',
-      description: 'Travel and hospitality led by Global Travel Fund I.',
+      description: 'Travel and hospitality led by Mapshore.',
       image: '/toursim.jpg',
       href: '/sectors/tourism',
     },
@@ -95,7 +95,7 @@ const panelsByLocale: Record<'en' | 'ar', SectorPanel[]> = {
     },
     {
       label: 'السياحة',
-      description: 'سفر وضيافة بقيادة صندوق السفر العالمي الأول.',
+      description: 'سفر وضيافة بقيادة مابشور.',
       image: '/toursim.jpg',
       href: '/sectors/tourism',
     },
@@ -220,7 +220,7 @@ export function InvestmentSectors() {
       // content is already about a screen tall, so forcing 100vh on top
       // of it and centering left a band of empty ink above and below the
       // accordion. Below lg the section just wraps its content.
-      className="flex w-full flex-col justify-center lg:min-h-screen"
+      className="flex w-full flex-col justify-center lg:min-h-svh"
     >
       <SectionHeading eyebrow={heading.eyebrow} title={heading.title} align="left" inverse />
 

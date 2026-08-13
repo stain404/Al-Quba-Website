@@ -41,9 +41,11 @@ const copy = {
  * `public/`, and the padding colour must track the card background.
  * `scripts/normalise-logo.js` performs that regeneration.
  *
- * Bright Hurst Contracting has no logo supplied yet — anything without an
- * entry here falls back to a typographic lockup below, so a missing file
- * degrades to a quieter card instead of a hole in the grid.
+ * Mapshore and Bright Hurst are normalised from the greyscale versions of
+ * their marks (`public/mapshore-bw.png`, `public/brighthust-bw.png`); the
+ * colour originals are alongside them. Anything without an entry here
+ * falls back to a typographic lockup below, so a missing file degrades to
+ * a quieter card instead of a hole in the grid.
  */
 const logos: Record<string, string> = {
   'Hebron General Trading LLC': '/logos/hebron.png',
@@ -52,6 +54,7 @@ const logos: Record<string, string> = {
   'Al Wahda Trading': '/logos/alwahda.png',
   'Phew Interactive': '/logos/phew.png',
   Mapshore: '/logos/mapshore.png',
+  'Bright Hurst Contracting': '/logos/brighthust.png',
 }
 
 function CompanyCard({

@@ -101,7 +101,7 @@ export interface Sector {
   processHeading?: SectionHeadingOverride
   /** A single spotlight, or several when a sector has multiple named
    *  partners to feature (e.g. Import & Export). */
-  caseStudy: SectorCaseStudy | SectorCaseStudy[]
+  caseStudy?: SectorCaseStudy | SectorCaseStudy[]
   /** Overrides the default "Case Study" section heading. */
   caseStudyHeading?: SectionHeadingOverride
   /** "Industry Outlook" — a qualitative discussion block plus a small
@@ -291,6 +291,11 @@ export const sectors: Sector[] = [
         'Quality Execution',
       ],
       metrics: [],
+      // The full-colour navy mark, trimmed out of the supplied original
+      // (`public/brighthust.png`) with its near-white plate knocked out to
+      // alpha so it sits directly on the card. The greyscale variant in
+      // `public/logos` is the Portfolio grid's, not this one's.
+      logoSrc: '/brighthust-logo.png',
     },
     capabilitiesHeading: {
       eyebrow: 'Division Capabilities',
@@ -464,7 +469,7 @@ export const sectors: Sector[] = [
     tagline:
       "Al Quba Investment's Import & Export Division connects businesses with trusted sourcing, procurement, and distribution, combining strategic partnerships with technology-driven commerce to make cross-border trade efficient.",
     description:
-      "Discover Al Quba Investment's Import & Export Division featuring ContainerKart and Al Wahda Trading, delivering global sourcing, commercial trading, wholesale distribution, and cross-border trade solutions.",
+      "Discover Al Quba Investment's Import & Export Division, delivering global sourcing, commercial trading, wholesale distribution, and cross-border trade solutions.",
     heroMetrics: [
       { label: 'Active Corridors', value: '9' },
       { label: 'Avg. Facility Term', value: '4 months' },
@@ -476,50 +481,10 @@ export const sectors: Sector[] = [
         'By combining traditional commercial trading with modern B2B digital commerce, the division supports businesses throughout the entire trade lifecycle, from sourcing products and identifying suppliers to facilitating procurement, distribution, and long-term commercial partnerships.',
       ],
     },
-    caseStudyHeading: {
-      eyebrow: 'Our Operating Companies',
-      title: 'Featured Companies',
-    },
-    caseStudy: [
-      {
-        title: 'ContainerKart',
-        description:
-          'ContainerKart is an innovative full-container-load startup, fully owned by AL QUBA, specializing in the bulk procurement and trade of high-demand products, including both food (FMCG) and non-food items. We source entire containers directly from farmers and production units after ensuring quality and efficiency in our supply chain.',
-        highlights: [
-          'Digital B2B Marketplace',
-          'Verified Global Suppliers',
-          'Bulk Container Trading',
-          'International Procurement',
-          'Cross-Border Commerce',
-          'Trade Facilitation',
-        ],
-        metrics: [
-          { label: 'Ownership', value: 'Fully Owned by Al Quba' },
-          { label: 'Model', value: 'Full-Container-Load' },
-          { label: 'Focus', value: 'FMCG & Non-Food Bulk Trade' },
-        ],
-        logoSrc: '/containerkart-logo.png',
-      },
-      {
-        title: 'Al Wahda Trading',
-        description:
-          'Al Wahda Trading serves as the commercial trading arm of the division, specializing in sourcing, importing, and distributing products across regional markets. By maintaining strong supplier relationships and an extensive procurement network, the company delivers reliable trading solutions tailored to evolving market demands.',
-        highlights: [
-          'Wholesale Trading',
-          'Product Procurement',
-          'Import Operations',
-          'Distribution Network',
-          'Commercial Partnerships',
-          'Regional Market Expertise',
-        ],
-        metrics: [
-          { label: 'Based In', value: 'Qatar' },
-          { label: 'Role', value: 'Commercial Trading' },
-          { label: 'Focus', value: 'Import & Distribution' },
-        ],
-        logoSrc: '/alwahda-logo.jpg',
-      },
-    ],
+    // No featured-company spotlight on this division: ContainerKart and
+    // Al Wahda Trading are showcased on Global Exports, and repeating
+    // them here made the two divisions read as the same page. With no
+    // `caseStudy`/`caseStudyHeading`, SectorCaseStudy renders nothing.
     capabilitiesHeading: {
       eyebrow: 'Division Capabilities',
       title: 'How the division creates value',
@@ -681,7 +646,7 @@ export const sectors: Sector[] = [
     tagline:
       "Al Quba Investment's Tourism Division captures global travel demand through hospitality partnerships, tour operations, and destination experiences, working alongside established operators rather than owning heavy infrastructure.",
     description:
-      "Explore Al Quba Investment's Tourism Division featuring Mapshore and Global Travel Fund I, delivering travel management, hospitality partnerships, and destination experiences across global markets.",
+      "Explore Al Quba Investment's Tourism Division featuring Mapshore, delivering travel management, hospitality partnerships, and destination experiences across global markets.",
     heroMetrics: [
       { label: 'Active Positions', value: '1' },
       { label: 'Model', value: 'Asset-light' },
@@ -716,23 +681,6 @@ export const sectors: Sector[] = [
           { label: 'Focus', value: 'End-to-End Travel Services' },
         ],
         logoSrc: '/mapshore.png',
-      },
-      {
-        title: 'Global Travel Fund I',
-        description:
-          'Global Travel Fund I is a professionally managed travel and tourism investment pool focused on capitalising on the continued growth of the global travel industry. Through strategic partnerships with hospitality providers, travel operators, and tourism-focused businesses, the fund aims to create sustainable long-term value through diversified, asset-light investment opportunities.',
-        highlights: [
-          'Strategic partnerships with established hospitality operators',
-          'Asset-light exposure rather than heavy property ownership',
-          'Diversified revenue across accommodation, tours, and travel services',
-          'Returns generated from live travel demand, not speculative valuation',
-          'Positions reviewed against seasonality and destination performance',
-        ],
-        metrics: [
-          { label: 'Structure', value: 'Managed Investment Pool' },
-          { label: 'Focus', value: 'Travel & Hospitality' },
-          { label: 'Model', value: 'Asset-Light' },
-        ],
       },
     ],
     capabilitiesHeading: {
@@ -813,7 +761,7 @@ interface SectorTranslation {
   processHeading?: SectionHeadingOverride
   process?: { title: string; description: string }[]
   caseStudyHeading?: SectionHeadingOverride
-  caseStudy: SectorCaseStudyTranslation | SectorCaseStudyTranslation[]
+  caseStudy?: SectorCaseStudyTranslation | SectorCaseStudyTranslation[]
   industryOutlook?: { heading?: SectionHeadingOverride; items: { title: string; description: string }[] }
   whyChoose?: { heading?: SectionHeadingOverride; items: { title: string; description: string }[] }
 }
@@ -1073,7 +1021,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     tagline:
       'يربط قطاع الاستيراد والتصدير التابع لشركة القبا للاستثمار الشركات بحلول توريد وشراء وتوزيع موثوقة، جامعًا بين الشراكات الاستراتيجية والتجارة القائمة على التقنية لتجارة عابرة للحدود بكفاءة.',
     description:
-      'اكتشف قطاع الاستيراد والتصدير التابع لشركة القبا للاستثمار، ويضم كونتينر كارت والوحدة للتجارة، لتقديم توريد عالمي، وتجارة تجارية، وتوزيع بالجملة، وحلول تجارة عابرة للحدود.',
+      'اكتشف قطاع الاستيراد والتصدير التابع لشركة القبا للاستثمار، لتقديم توريد عالمي، وتجارة تجارية، وتوزيع بالجملة، وحلول تجارة عابرة للحدود.',
     heroMetrics: [
       { label: 'ممرات نشطة', value: '9' },
       { label: 'متوسط مدة التسهيلات', value: '4 أشهر' },
@@ -1085,31 +1033,6 @@ const sectorTranslations: Record<string, SectorTranslation> = {
         'من خلال الجمع بين التجارة التجارية التقليدية والتجارة الرقمية الحديثة بين الشركات، يدعم القطاع الشركات طوال دورة التجارة الكاملة، من توريد المنتجات وتحديد الموردين إلى تسهيل الشراء والتوزيع والشراكات التجارية طويلة الأمد.',
       ],
     },
-    caseStudyHeading: { eyebrow: 'شركاتنا التشغيلية', title: 'الشركات المميزة' },
-    caseStudy: [
-      {
-        title: 'ContainerKart',
-        description:
-          'كونتينر كارت شركة ناشئة مبتكرة متخصصة في تجارة الحاويات الكاملة، مملوكة بالكامل لشركة القبا، وتتخصص في الشراء والتجارة بالجملة لمنتجات عالية الطلب، تشمل المنتجات الغذائية (الاستهلاك السريع) وغير الغذائية. نقوم بتوريد حاويات كاملة مباشرة من المزارعين ووحدات الإنتاج بعد ضمان الجودة والكفاءة في سلسلة الإمداد لدينا.',
-        highlights: ['سوق رقمي بين الشركات', 'موردون عالميون معتمدون', 'تجارة الحاويات بالجملة', 'الشراء الدولي', 'التجارة العابرة للحدود', 'تسهيل التجارة'],
-        metrics: [
-          { label: 'الملكية', value: 'مملوكة بالكامل لشركة القبا' },
-          { label: 'النموذج', value: 'حاوية كاملة الحمولة' },
-          { label: 'التركيز', value: 'تجارة الاستهلاك السريع والمنتجات غير الغذائية بالجملة' },
-        ],
-      },
-      {
-        title: 'Al Wahda Trading',
-        description:
-          'تعمل الوحدة للتجارة كذراع التجارة التجارية للقطاع، وتتخصص في توريد واستيراد وتوزيع المنتجات عبر الأسواق الإقليمية. من خلال الحفاظ على علاقات قوية مع الموردين وشبكة شراء واسعة، تقدّم الشركة حلول تجارة موثوقة تتكيف مع متطلبات السوق المتغيرة.',
-        highlights: ['تجارة الجملة', 'شراء المنتجات', 'عمليات الاستيراد', 'شبكة التوزيع', 'شراكات تجارية', 'خبرة في السوق الإقليمي'],
-        metrics: [
-          { label: 'المقر', value: 'قطر' },
-          { label: 'الدور', value: 'تجارة تجارية' },
-          { label: 'التركيز', value: 'الاستيراد والتوزيع' },
-        ],
-      },
-    ],
     capabilitiesHeading: { eyebrow: 'قدرات القطاع', title: 'كيف يخلق القطاع القيمة' },
     capabilities: [
       { title: 'الشراء الدولي', description: 'ربط الشركات بموردين موثوقين عبر الأسواق العالمية.' },
@@ -1233,7 +1156,7 @@ const sectorTranslations: Record<string, SectorTranslation> = {
     tagline:
       'يلتقط قطاع السياحة في شركة القبا للاستثمار الطلب العالمي على السفر من خلال شراكات الضيافة، وعمليات السفر، وتجارب الوجهات، بالعمل إلى جانب مشغّلين راسخين بدلًا من امتلاك بنية تحتية ثقيلة.',
     description:
-      'اكتشف قطاع السياحة في شركة القبا للاستثمار، ويضم مابشور وصندوق السفر العالمي الأول، ليقدّم إدارة سفر وشراكات ضيافة وتجارب وجهات عبر الأسواق العالمية.',
+      'اكتشف قطاع السياحة في شركة القبا للاستثمار، ويضم مابشور، ليقدّم إدارة سفر وشراكات ضيافة وتجارب وجهات عبر الأسواق العالمية.',
     heroMetrics: [
       { label: 'مراكز نشطة', value: '1' },
       { label: 'النموذج', value: 'خفيف الأصول' },
@@ -1263,23 +1186,6 @@ const sectorTranslations: Record<string, SectorTranslation> = {
           { label: 'المقر', value: 'الإمارات العربية المتحدة' },
           { label: 'الدور', value: 'إدارة السفر والسياحة' },
           { label: 'التركيز', value: 'خدمات سفر متكاملة' },
-        ],
-      },
-      {
-        title: 'صندوق السفر العالمي الأول',
-        description:
-          'صندوق السفر العالمي الأول هو صندوق استثماري مُدار باحتراف في قطاع السفر والسياحة، يركّز على الاستفادة من النمو المستمر لصناعة السفر العالمية. ومن خلال شراكات استراتيجية مع مزودي الضيافة ومشغّلي السفر والشركات السياحية، يهدف الصندوق إلى خلق قيمة مستدامة طويلة الأمد عبر فرص استثمارية متنوعة وخفيفة الأصول.',
-        highlights: [
-          'شراكات استراتيجية مع مشغّلي ضيافة راسخين',
-          'تعرض خفيف الأصول بدلًا من التملك العقاري الثقيل',
-          'إيرادات متنوعة عبر الإقامة والجولات وخدمات السفر',
-          'عوائد ناتجة عن طلب سفر فعلي وليس عن تقييم مضاربي',
-          'مراجعة المراكز وفق الموسمية وأداء الوجهات',
-        ],
-        metrics: [
-          { label: 'الهيكل', value: 'صندوق استثماري مُدار' },
-          { label: 'التركيز', value: 'السفر والضيافة' },
-          { label: 'النموذج', value: 'خفيف الأصول' },
         ],
       },
     ],
@@ -1325,9 +1231,12 @@ const sectorTranslations: Record<string, SectorTranslation> = {
 }
 
 function mergeCaseStudy(
-  en: SectorCaseStudy | SectorCaseStudy[],
-  ar: SectorCaseStudyTranslation | SectorCaseStudyTranslation[]
-): SectorCaseStudy | SectorCaseStudy[] {
+  en: SectorCaseStudy | SectorCaseStudy[] | undefined,
+  ar: SectorCaseStudyTranslation | SectorCaseStudyTranslation[] | undefined
+): SectorCaseStudy | SectorCaseStudy[] | undefined {
+  // A division with no featured company (Import & Export) has nothing to
+  // merge in either language.
+  if (!en || !ar) return en
   if (Array.isArray(en) && Array.isArray(ar)) {
     return en.map((item, i) => ({ ...item, ...ar[i] }))
   }

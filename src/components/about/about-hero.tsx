@@ -58,7 +58,7 @@ export function AboutHero() {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center"
+      className="relative flex min-h-svh w-full flex-col overflow-hidden sm:items-center"
     >
       {/* Full-bleed background video on every breakpoint, text overlaid on
           top — on mobile this crops the (landscape) footage tighter than
@@ -90,9 +90,15 @@ export function AboutHero() {
       <div className="container relative z-10 mx-auto max-w-container">
         <motion.div
           style={prefersReduced ? undefined : { y, opacity }}
-          className="flex max-w-3xl flex-col gap-8 pt-16"
+          className="flex max-w-3xl flex-col gap-8"
         >
-          <Eyebrow inverse>{c.eyebrow}</Eyebrow>
+          {/* Eyebrow's own `inverse` paints muted grey, which loses too
+              much against the video; full white here, same override as
+              SectorHero. The colour lives on the inner span, so it has to
+              be reached past the wrapper. */}
+          <Eyebrow inverse className="[&>span]:text-text-inverse">
+            {c.eyebrow}
+          </Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
             {c.heading}
           </Heading>

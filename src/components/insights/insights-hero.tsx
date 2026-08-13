@@ -41,7 +41,7 @@ export function InsightsHero() {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center"
+      className="relative flex min-h-svh w-full flex-col overflow-hidden sm:items-center"
     >
       {/* Full-bleed background video on every breakpoint, text overlaid on
           top — on mobile this crops the (landscape) footage tighter than
@@ -71,8 +71,12 @@ export function InsightsHero() {
       </div>
 
       <div className="container relative z-10 mx-auto max-w-container">
-        <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
-          <Eyebrow inverse>{c.eyebrow}</Eyebrow>
+        <FadeIn onMount className="flex max-w-3xl flex-col gap-8">
+          {/* Full white rather than Eyebrow's muted `inverse` grey, same
+              override as SectorHero — the colour is on the inner span. */}
+          <Eyebrow inverse className="[&>span]:text-text-inverse">
+            {c.eyebrow}
+          </Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
             {c.heading}
           </Heading>

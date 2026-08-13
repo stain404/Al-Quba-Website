@@ -32,15 +32,19 @@ export function SectorCaseStudy({
   surface = 'muted',
   id,
 }: {
-  caseStudy: SectorCaseStudyType | SectorCaseStudyType[]
+  caseStudy?: SectorCaseStudyType | SectorCaseStudyType[]
   heading?: SectionHeadingOverride
   surface?: 'canvas' | 'muted'
   id?: string
 }) {
   const prefersReduced = useReducedMotion()
-  const items = Array.isArray(caseStudy) ? caseStudy : [caseStudy]
+  const items = caseStudy ? (Array.isArray(caseStudy) ? caseStudy : [caseStudy]) : []
   const locale = useLocale() as keyof typeof copy
   const c = copy[locale]
+
+  // A sector with no featured company drops the section entirely rather
+  // than rendering a heading over an empty band.
+  if (items.length === 0) return null
 
   return (
     <SectionContainer id={id} surface={surface} spacing="lg" className="overflow-x-hidden">

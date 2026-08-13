@@ -22,7 +22,7 @@ export function ArticleHero({ article }: { article: Article }) {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-[#1A140F] sm:items-center"
+      className="relative flex min-h-svh w-full flex-col overflow-hidden bg-[#1A140F] sm:items-center"
     >
       <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto">
         <Image src={article.imageSrc} alt="" fill sizes="100vw" priority className="object-cover" />
@@ -33,7 +33,7 @@ export function ArticleHero({ article }: { article: Article }) {
       </div>
 
       <div className="container relative z-10 mx-auto max-w-container">
-        <FadeIn className="flex max-w-3xl flex-col gap-6 pt-16">
+        <FadeIn onMount className="flex max-w-3xl flex-col gap-6">
           <Badge variant="gold" className="w-fit">
             {article.category}
           </Badge>

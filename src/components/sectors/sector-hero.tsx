@@ -45,7 +45,7 @@ export async function SectorHero({ sector }: { sector: Sector }) {
       as="header"
       contained={!hasImage}
       className={cn(
-        'relative flex min-h-screen w-full flex-col overflow-hidden sm:items-center',
+        'relative flex min-h-svh w-full flex-col overflow-hidden sm:items-center',
         // Below `sm` the photo is a band above the copy rather than behind
         // it, so this is the surface the text actually sits on — black, to
         // match the scrim covering the photo from `sm` up.
@@ -96,7 +96,7 @@ export async function SectorHero({ sector }: { sector: Sector }) {
       )}
 
       <div className={cn(hasImage && 'container relative z-10 mx-auto max-w-container')}>
-        <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
+        <FadeIn onMount className="flex max-w-3xl flex-col gap-8">
           <div className="flex items-center gap-4">
             <span className="flex size-14 items-center justify-center rounded-md bg-accent/12 text-accent-ink">
               <Icon className="size-6" strokeWidth={1.5} aria-hidden />

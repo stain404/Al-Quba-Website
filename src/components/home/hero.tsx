@@ -102,7 +102,11 @@ export function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-screen w-full items-end overflow-hidden bg-ink text-text-inverse"
+      /* `min-h-svh`, not `min-h-screen`: `100vh` on mobile browsers measures
+         the viewport with the URL bar collapsed, so this hero rendered taller
+         than the screen actually shows and pushed its own bottom-anchored
+         copy under the fold. Every hero on the site uses `svh` for this. */
+      className="relative flex min-h-svh w-full items-end overflow-hidden bg-ink text-text-inverse"
     >
       {/* Full-bleed background on every breakpoint — same absolute
           inset-0 treatment on mobile as on desktop, just with a lighter

@@ -34,7 +34,7 @@ export async function ContactHero() {
       spacing="lg"
       as="header"
       contained={false}
-      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-[#1A140F] sm:items-center"
+      className="relative flex min-h-svh w-full flex-col overflow-hidden bg-[#1A140F] sm:items-center"
     >
       {/* Below `sm`, a full-height (very tall/narrow) mobile viewport
           forced this landscape photo to cover it at ~4x zoom, leaving
@@ -62,8 +62,12 @@ export async function ContactHero() {
       </div>
 
       <div className="container relative z-10 mx-auto max-w-container">
-        <FadeIn className="flex max-w-3xl flex-col gap-8 pt-16">
-          <Eyebrow inverse>{c.eyebrow}</Eyebrow>
+        <FadeIn onMount className="flex max-w-3xl flex-col gap-8">
+          {/* Full white rather than Eyebrow's muted `inverse` grey, same
+              override as SectorHero — the colour is on the inner span. */}
+          <Eyebrow inverse className="[&>span]:text-text-inverse">
+            {c.eyebrow}
+          </Eyebrow>
           <Heading as="h1" size="display-lg" inverse className="font-nav">
             {c.heading}
           </Heading>

@@ -13,6 +13,17 @@ import {
 /**
  * FadeIn — the default content reveal used across the site.
  * Wrap any block that should animate in once as it enters the viewport.
+ *
+ * Pass `onMount` for anything already on screen when the page loads —
+ * page heroes, above-the-fold copy. The scroll trigger is an
+ * IntersectionObserver that only starts at hydration, and for content
+ * already in view it races that hydration: it usually fires, and when it
+ * doesn't the block is left at opacity 0 and the section renders visibly
+ * blank. Content below the fold genuinely scrolls into view later, so the
+ * observer is reliable there and stays the default.
+ *
+ * Related trap: do not centre a reveal inside a `justify-center` flex
+ * parent — that made the same observer miss every single time.
  */
 export function FadeIn({
   children,
@@ -20,17 +31,26 @@ export function FadeIn({
   delay = 0,
   as = 'div',
   repeat = false,
+  onMount = false,
   ...props
-}: HTMLMotionProps<'div'> & { delay?: number; as?: React.ElementType; repeat?: boolean }) {
+}: HTMLMotionProps<'div'> & {
+  delay?: number
+  as?: React.ElementType
+  repeat?: boolean
+  onMount?: boolean
+}) {
   const prefersReduced = useReducedMotion()
   const MotionTag = motion[as as 'div'] ?? motion.div
+
+  const trigger = onMount
+    ? { animate: 'visible' }
+    : { whileInView: 'visible', viewport: repeat ? repeatViewport : defaultViewport }
 
   return (
     <MotionTag
       className={className}
       initial="hidden"
-      whileInView="visible"
-      viewport={repeat ? repeatViewport : defaultViewport}
+      {...trigger}
       variants={prefersReduced ? fadeOnly : fadeUp}
       transition={{ delay }}
       {...props}
