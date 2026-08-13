@@ -444,8 +444,8 @@ export default function TermsPage({ params }: TermsPageProps) {
                 </a>
                 <br />
                 {c.contactWebsiteLabel}:{' '}
-                <a href="https://www.alquba.com" dir="ltr" className="text-navy underline underline-offset-4">
-                  www.alquba.com
+                <a href="https://alqubainvestment.com" dir="ltr" className="text-navy underline underline-offset-4">
+                  alqubainvestment.com
                 </a>
               </p>
               <p className="text-body-md text-text-secondary">{c.contactClosing}</p>

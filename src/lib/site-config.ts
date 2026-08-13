@@ -8,12 +8,10 @@ export const siteConfig = {
   description:
     'Al Quba Investment LLC is a private investment firm in Dubai, UAE, deploying long-term capital across global exports, infrastructure and contracting, logistics and supply chain, import-export, and brand strategy divisions on behalf of institutional investors and family offices. Six operating companies, quarterly investor reporting.',
   // Drives metadataBase, every canonical URL, the sitemap, the OG image
-  // URLs and the JSON-LD `url`. Left pointing at the original domain
-  // while this is still a test build -- pointing it at the production
-  // domain before launch would have two sites claiming the same
-  // canonical. Switch it at launch, to whichever domain actually serves
-  // the site (the firm's email uses alqubainvestment.com).
-  url: 'https://www.alquba.com',
+  // URLs and the JSON-LD `url`. Apex, no `www` -- matches the canonical
+  // the existing site already publishes, so the new build inherits that
+  // authority rather than splitting it across two hostnames.
+  url: 'https://alqubainvestment.com',
 }
 
 export const investorDashboardUrl = 'https://alquba-investor.workpoint001.info/login'

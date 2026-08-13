@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-import { sendMail } from '@/lib/mailer'
+import { addSubscriber } from '@/lib/newsletter-list'
 
 const newsletterSchema = z.object({
   email: z.string().email(),
@@ -15,12 +15,9 @@ export async function POST(request: Request) {
   }
 
   try {
-    await sendMail({
-      subject: 'New newsletter subscriber',
-      text: `${parsed.data.email} subscribed to the newsletter.`,
-    })
+    await addSubscriber(parsed.data.email)
   } catch (err) {
-    console.error('Newsletter signup email failed:', err)
+    console.error('Newsletter signup failed:', err)
     return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 })
   }
 

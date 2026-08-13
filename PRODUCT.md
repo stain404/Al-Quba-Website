@@ -49,7 +49,7 @@ Al Quba invests through businesses it actually operates. The five divisions and 
 
 ## Brand Commitments
 
-- Legal name **Al Quba Investment LLC**; displayed as **Al Quba Investment**. Canonical domain `https://www.alquba.com`.
+- Legal name **Al Quba Investment LLC**; displayed as **Al Quba Investment**. Canonical domain `https://alqubainvestment.com`.
 - Positioning line in use: *Global Investments. Built on Transparency.*
 - Voice: institutional, measured, concrete. Specific named companies and structures over adjectives; no hype, no urgency tactics.
 - Logo assets present: `public/AQ logo.png`, plus subsidiary logos (`hebron-logo.svg`, `phew-logo.png`, `containerkart-logo.png`, `alwahda-logo.jpg`, `NobleStar.jpg`).
