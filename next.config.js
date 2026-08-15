@@ -28,12 +28,39 @@ const nextConfig = {
     // No remote images are used anywhere in this project — every asset
     // ships from /public, so remote image loading stays disabled rather
     // than allowing arbitrary external hostnames.
+
+    // AVIF first, WebP second. Every source image here is a large
+    // photographic PNG/JPEG, which is exactly the case AVIF wins on —
+    // the hero/footer plates drop roughly another third below WebP.
+    formats: ['image/avif', 'image/webp'],
+    // Default is 60 seconds, which made every optimised image
+    // revalidate on essentially every visit (`max-age=60,
+    // must-revalidate`) even though the underlying files only change on
+    // a redeploy. The optimiser keys its cache on the source file, so a
+    // changed image produces a new cache entry on the next build.
+    minimumCacheTTL: 31536000,
   },
   async headers() {
     return [
       {
         source: '/:path*',
         headers: securityHeaders,
+      },
+      {
+        // Everything under /public was being served with
+        // `Cache-Control: public, max-age=0`, so the three background
+        // videos (27MB combined) and every logo re-validated on each
+        // visit. These filenames are not content-hashed the way
+        // /_next/static is, so this stops short of `immutable`: 30 days
+        // of silent reuse, then a cheap revalidation that picks up a
+        // replaced file rather than pinning it for a year.
+        source: '/:all*(mp4|webm|png|jpg|jpeg|svg|ico|woff|woff2)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
+          },
+        ],
       },
     ]
   },
@@ -42,6 +69,17 @@ const nextConfig = {
     // permanent redirects preserve any existing bookmarks/inbound links
     // and pass on SEO equity from the old URLs rather than 404ing.
     return [
+      // www and the apex both answered 200 with no redirect between
+      // them, so every page existed at two crawlable URLs. The canonical
+      // tag already pointed search engines at the apex; this makes the
+      // apex the only version that actually serves, which also stops the
+      // two hostnames from splitting the HSTS/cookie state.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.alqubainvestment.com' }],
+        destination: 'https://alqubainvestment.com/:path*',
+        permanent: true,
+      },
       { source: '/sectors/trading', destination: '/sectors/global-exports', permanent: true },
       { source: '/sectors/shipping', destination: '/sectors/logistics-supply-chain', permanent: true },
       { source: '/sectors/technology', destination: '/sectors/brand-strategy', permanent: true },
