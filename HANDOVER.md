@@ -60,10 +60,38 @@ Create these on the server. **They are not in the repository** — credentials a
 | `BREVO_API_KEY` | Brevo API key — supplied separately |
 | `BREVO_LIST_ID` | Numeric ID of the Brevo newsletter list |
 | `NEXT_PUBLIC_GTM_ID` | Google Tag Manager ID — optional, production only |
+| `NEXT_PUBLIC_META_PIXEL_ID` | Meta (Facebook) Pixel ID — optional, production only |
 
 The first five drive the **contact form** (SMTP). The two `BREVO_*` values drive the **newsletter signup**, which writes subscribers into a Brevo contact list rather than sending mail. The two systems are independent — one can be misconfigured while the other works, so test both.
 
 The app must be **restarted after setting these**. Without them the contact and newsletter forms return a server error and **enquiries are silently lost** — see the verification step in section 6.
+
+### The two `NEXT_PUBLIC_` variables are different — they need a rebuild, not a restart
+
+`NEXT_PUBLIC_GTM_ID` and `NEXT_PUBLIC_META_PIXEL_ID` are baked into the
+JavaScript bundle during `npm run build`, not read when the server starts.
+Setting them in the PM2/systemd environment and restarting does **not** work:
+the build has already inlined them as undefined, and both tags then render
+nothing at all — no error, no warning, just no analytics. This fails silently,
+so it is easy to believe it is working when it is not.
+
+Set them **before building**. The simplest way is a `.env.local` file in the
+project root, which `next build` reads automatically:
+
+```bash
+cd /path/to/al-quba-investment
+nano .env.local            # add the variables, one KEY=value per line
+npm run build              # values are inlined here
+pm2 restart al-quba        # or: sudo systemctl restart <service>
+```
+
+The same file can hold the server-side variables above, so everything lives in
+one place. It is gitignored and survives `git pull`; it does **not** survive
+re-cloning the repo into a fresh directory.
+
+Verify after deploying by loading the site and searching the page source for
+`fbq(` (Meta) or `gtm-init` (GTM). If either is absent, the variable was not
+present at build time.
 
 `SMTP_PASS` must be a Google **App Password**, generated at https://myaccount.google.com/apppasswords with 2-Step Verification enabled on the account. The normal account login password will not work.
 
