@@ -125,12 +125,24 @@ export default function PrivacyPage({ params }: PrivacyPageProps) {
             </section>
 
             <section className="flex flex-col gap-4">
-              <Heading as="h2" size="heading-lg">6. Cookies</Heading>
+              <Heading as="h2" size="heading-lg">6. Cookies and Tracking</Heading>
               <p className="text-body-md text-text-secondary">
-                The Site may use a minimal set of cookies or similar technologies strictly
-                necessary for the Site to function, and, where enabled, privacy-conscious analytics
-                to understand aggregate usage. These do not identify you individually for marketing
-                purposes.
+                The Site uses a minimal set of cookies or similar technologies strictly necessary
+                for the Site to function, and analytics to understand aggregate usage.
+              </p>
+              <p className="text-body-md text-text-secondary">
+                The Site also uses the Meta Pixel, an advertising technology provided by Meta
+                Platforms, Inc. (Facebook and Instagram). It records pages you view and certain
+                actions you take here &mdash; such as submitting an enquiry, subscribing to the
+                newsletter, or opening our WhatsApp contact &mdash; and shares that activity with
+                Meta. Meta may link it to an existing Facebook or Instagram account and use it to
+                measure our advertising and to show you our ads on its platforms. We do not send
+                Meta your name, email address, company, or the contents of any message you submit.
+              </p>
+              <p className="text-body-md text-text-secondary">
+                You can limit this through your Facebook or Instagram ad preferences, through your
+                browser&rsquo;s cookie controls, or by using tracking protection or an ad blocker.
+                Declining has no effect on your ability to use the Site or to contact us.
               </p>
             </section>
 

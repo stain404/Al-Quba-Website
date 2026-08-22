@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import { siteConfig } from '@/lib/site-config'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
 import { GoogleTagManager, GoogleTagManagerNoScript } from '@/components/analytics/google-tag-manager'
+import { MetaPixel, MetaPixelNoScript } from '@/components/analytics/meta-pixel'
 import { routing, type Locale } from '@/i18n/routing'
 import '../globals.css'
 
@@ -153,8 +154,10 @@ export default async function RootLayout({
       )}
     >
       <GoogleTagManager />
+      <MetaPixel />
       <body className="overflow-x-clip bg-canvas font-body text-text-primary antialiased">
         <GoogleTagManagerNoScript />
+        <MetaPixelNoScript />
         <NextIntlClientProvider messages={messages}>
           <script
             type="application/ld+json"
