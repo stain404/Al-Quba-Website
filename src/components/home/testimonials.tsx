@@ -5,7 +5,6 @@ import { useLocale } from 'next-intl'
 import { SectionContainer } from '@/components/layout/section-container'
 import { SectionHeading } from '@/components/typography/heading'
 import { TestimonialCard } from '@/components/cards/testimonial-card'
-import { InstitutionalTestimonial } from '@/components/cards/institutional-testimonial'
 import { FadeIn } from '@/components/motion/reveal'
 import { cn } from '@/lib/utils'
 import type { TestimonialItem } from '@/types'
@@ -14,13 +13,7 @@ const copy = {
   en: {
     eyebrow: 'Testimonials',
     title: 'What our partners say',
-    description: 'Direct feedback from the institutions and individual investors we work alongside.',
-    institutional: {
-      quote: 'Al Quba demonstrates a structured and transparent approach to investment management. The clarity in execution and consistency in communication reflect a strong operational framework.',
-      name: 'Banger Financial Labs',
-      role: 'Institutional Partner',
-      logoSrc: '/banger-finlabs-logo.jpeg',
-    },
+    description: 'Direct feedback from the investors we work alongside.',
     individual: [
       { quote: 'What we value most is the transparency. You always know where your money is going and how it’s working.', name: 'Sidra Aydeed', role: 'Investor' },
       { quote: 'Al Quba has consistently delivered on what they promised. The returns have been strong, and I always know exactly where my capital stands.', name: 'Basheer Ayathulla', role: 'Investor' },
@@ -30,13 +23,7 @@ const copy = {
   ar: {
     eyebrow: 'آراء عملائنا',
     title: 'ماذا يقول شركاؤنا',
-    description: 'آراء مباشرة من المؤسسات والمستثمرين الأفراد الذين نعمل معهم.',
-    institutional: {
-      quote: 'تُظهر القبا نهجًا منظمًا وشفافًا في إدارة الاستثمار. وضوح التنفيذ واتساق التواصل يعكسان إطار عمل تشغيليًا قويًا.',
-      name: 'Banger Financial Labs',
-      role: 'شريك مؤسسي',
-      logoSrc: '/banger-finlabs-logo.jpeg',
-    },
+    description: 'آراء مباشرة من المستثمرين الأفراد الذين نعمل معهم.',
     individual: [
       { quote: 'أكثر ما نقدّره هو الشفافية. تعرف دائمًا إلى أين تذهب أموالك وكيف تعمل.', name: 'سدرة عيديد', role: 'مستثمرة' },
       { quote: 'التزمت القبا دائمًا بما وعدت به. كانت العوائد قوية، وأعرف دائمًا بالضبط أين يقف رأس مالي.', name: 'بشير أياتالله', role: 'مستثمر' },
@@ -68,10 +55,6 @@ export function Testimonials() {
     <SectionContainer surface="muted" spacing="lg">
       <SectionHeading eyebrow={c.eyebrow} title={c.title} description={c.description} />
       <div className="mt-16 flex flex-col gap-12">
-        <FadeIn>
-          <InstitutionalTestimonial {...c.institutional} />
-        </FadeIn>
-
         <FadeIn
           dir="ltr"
           className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
